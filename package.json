@@ -1,0 +1,48 @@
+{
+  "homepage": "http://jdavidteki.github.io/africariyoki",
+  "name": "react-karaoke-challenge",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^4.11.2",
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.57",
+    "firebase": "^8.2.1",
+    "fs": "0.0.1-security",
+    "he": "^1.2.0",
+    "music-tempo": "^1.0.3",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-firebase-file-uploader": "^2.4.4",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^4.0.1",
+    "react-select": "^3.1.1",
+    "react-typing-effect": "^2.0.4",
+    "spleeter": "^0.1.0",
+    "web-audio-api": "^0.2.2",
+    "write-file-p": "^1.0.8"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "predeploy": "npm run start",
+    "deploy": "gh-pages -d web-build"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "gh-pages": "^3.1.0"
+  }
+}

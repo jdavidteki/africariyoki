@@ -1,0 +1,36 @@
+.Searcher-container
+{
+    display: flex;
+    flex-direction: column;
+    min-height: 400px;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background-color: #f5f5f5;
+    padding: 20px;
+}
+
+.song-list{
+    display: flex;
+    height: 500px;
+    overflow: scroll
+}
+
+.MuiButtonBase-root.MuiIconButton-root.MuiAutocomplete-clearIndicator.MuiAutocomplete-clearIndicatorDirty{
+    display: none;
+}
+
+.MuiAutocomplete-root.MuiAutocomplete-hasClearIcon.MuiAutocomplete-hasPopupIcon{
+    width: 420px;
+}
+
+.MuiInputBase-root.MuiOutlinedInput-root.MuiAutocomplete-inputRoot.MuiInputBase-fullWidth.MuiInputBase-formControl.MuiInputBase-adornedEnd.MuiOutlinedInput-adornedEnd{
+    border-radius: 100px;
+    background-color: white;
+}
+
+@media only screen and (max-width: 600px) {
+    .MuiAutocomplete-root.MuiAutocomplete-hasClearIcon.MuiAutocomplete-hasPopupIcon{
+        width: 280px;
+    }
+}

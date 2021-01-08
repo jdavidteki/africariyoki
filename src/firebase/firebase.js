@@ -1,0 +1,89 @@
+import firebase from "firebase";
+
+class Firebase {
+  getLyrics = () =>{
+    return new Promise(resolve => {
+      firebase.database()
+      .ref('/lyrics/')
+      .once('value')
+      .then(snapshot => {
+        if (snapshot.val()){
+          resolve(Object.values(snapshot.val()))
+        }else{
+          resolve({})
+        }
+      })
+    })
+  }
+
+  storage = () => {
+    return firebase.storage()
+  }
+
+  deleteRecp = (userId, recipientID) => {
+    return new Promise(resolve => {
+      firebase.database()
+      .ref('/recipients/' + userId)
+      .child(recipientID)
+      .remove()
+      .then(() => {
+        resolve(true)
+      })
+    })
+  }
+
+  addAfricariyoki = (item) => {
+    return new Promise(resolve => {
+      firebase.database()
+      .ref('/lyrics/' + item.id + '/')
+      .set(
+        {
+          id: item.id,
+          title: item.title,
+          lyricsurl: item.lyricsurl,
+          singer: item.singer,
+          audiourl: item.audiourl,
+          title: item.title,
+        },
+      )
+      .then((response) => {
+        resolve(true)
+      })
+      .catch(error => {
+        console.warn("error", error)
+      })
+    })
+  }
+
+  postTransaction = (userInfo, recpInfo, cardInfo, transInfo) =>{
+    return new Promise(resolve => {
+      firebase.database()
+      .ref('/userTransactions/' + userInfo.user.uid + '/' + transInfo.id + '/')
+      .set(
+        {
+          transactionId: transInfo.id,
+          accountNumber: recpInfo.accountNumber,
+          bankName: recpInfo.bankName,
+          recpFirstName: recpInfo.firstName,
+          recpLastName: recpInfo.lastName,
+          cardUsed: cardInfo.number,
+          recpAmt: transInfo.recpAmt,
+          sendAmt: transInfo.sendAmt,
+          recpCurrency: transInfo.recpCurrency,
+          sendCurrency: transInfo.sendCurrency,
+          rate: transInfo.rate,
+          isSuccessful: true,
+          time: '13:03'
+        },
+      )
+      .then((response) => {
+        resolve(true)
+      })
+      .catch(error => {
+        console.warn("error", error)
+      })
+    })
+  }
+}
+
+export default new Firebase();

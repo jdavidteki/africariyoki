@@ -1,0 +1,8 @@
+.lyrics-container{
+}
+
+.lyrics-container .unhighlighted{
+    scroll-behavior: smooth;
+    display: flex;
+    justify-content: space-between;
+}
