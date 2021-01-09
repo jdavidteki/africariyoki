@@ -22,8 +22,6 @@ class Lyrics extends Component {
       fetch(this.state.lyricsurl, requestOptions)
       .then(response => response.text())
       .then(result => {
-        alert("we correct")
-
         var newstr = "";
         var prevChar = '';
 
@@ -44,7 +42,6 @@ class Lyrics extends Component {
       })
       .catch(error => {
         console.log('error', error)
-        alert('we hereytrx', error.toString())
       });
     }
   }
