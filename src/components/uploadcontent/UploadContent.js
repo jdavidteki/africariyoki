@@ -4,7 +4,7 @@ import MusicNoteIcon from '@material-ui/icons/MusicNote';
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Firebase from "../../firebase/firebase.js";
-
+import MetaTags from 'react-meta-tags';
 import "./UploadContent.css"
 
 class UploadContent extends Component {
@@ -15,6 +15,7 @@ class UploadContent extends Component {
         title: "",
         lyrics: "",
         videoID: "",
+        addressID: "",
         isUploading: false,
         progress: 0,
     };
@@ -28,6 +29,13 @@ class UploadContent extends Component {
         if (this.state.videoID != ""){
             let audioUrl = `https://storage.googleapis.com/africariyoki.appspot.com/music/${this.state.videoID}.mp3`
             let lyricsTextUrl = `https://storage.googleapis.com/africariyoki.appspot.com/lyrics/${this.state.videoID}.txt`
+            let addressID = this.state.addressID
+            if(addressID == ''){
+                addressID = "http://0.0.0.0:5000"
+            }else{
+                addressID = "https://"+addressID+".ngrok.io"
+            }
+
             Firebase.addAfricariyoki({
                 title: this.state.title,
                 singer: this.state.singer,
@@ -42,7 +50,7 @@ class UploadContent extends Component {
                 method: 'GET',
                 redirect: 'follow'
             };
-            fetch(`https://spotty-starfish-68.serverless.social/vr/${this.state.videoID}`, requestOptions)
+            fetch(`${addressID}/vr/${this.state.videoID}`, requestOptions)
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
@@ -55,7 +63,7 @@ class UploadContent extends Component {
               redirect: 'follow'
             };
 
-            fetch(`https://spotty-starfish-68.serverless.social/lyrics/${this.state.videoID}`, requestOptions)
+            fetch(`${addressID}/lyrics/${this.state.videoID}`, requestOptions)
               .then(response => response.text())
               .then(result => console.log(result))
               .catch(error => console.log('error', error));
@@ -71,6 +79,9 @@ class UploadContent extends Component {
                     justifyContent: "center",
                     alignItems: "center",
                 }}>
+                    <MetaTags>
+                        {/* <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta> */}
+                    </MetaTags>
                     <div
                     style={{
                         width: 320,
@@ -121,6 +132,13 @@ class UploadContent extends Component {
                         placeholder="Youtube Video ID"
                         onChange={e => {
                         this.setState({ videoID: e.target.value });
+                        }}
+                    />
+                    <TextField
+                        value={this.state.addressID}
+                        placeholder="address ID"
+                        onChange={e => {
+                            this.setState({ addressID: e.target.value });
                         }}
                     />
                     <TextField

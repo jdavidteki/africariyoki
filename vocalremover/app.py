@@ -11,4 +11,4 @@ api.add_resource(VocalRemoverLaunch, "/vr/<string:path>")
 api.add_resource(LyricsUploader, "/lyrics/<string:path>")
 
 if __name__ == "__main__":
-  app.run()
+  app.run(host="0.0.0.0", port=5000)
