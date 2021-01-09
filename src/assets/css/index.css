@@ -67,10 +67,6 @@ div.karaoke-display h2 {
   text-align: center;
 }
 
-div.lyrics pre {
-  overflow: hidden;
-}
-
 div.vote-bar {
   display: flex;
 }

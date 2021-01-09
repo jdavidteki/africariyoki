@@ -1,14 +1,25 @@
 import React, { Component } from 'react';
 import Lyrics from '../lyrics/Lyrics';
 import "./KaraokeDisplay.css";
+import ReactTypingEffect from 'react-typing-effect';
 
 class KaraokeDisplay extends Component {
   state={
-    singer: this.props.location.state.chooseSong[0]
+    singer: this.props.location.state.chooseSong[0],
+    animatedTexts: [
+      this.props.location.state.chooseSong[0].title,
+      this.props.location.state.chooseSong[0].singer,
+      this.props.location.state.chooseSong[0].album,
+    ],
+    count:0,
   }
 
   componentDidUpdate(){
-
+    setInterval( () => {
+      this.setState({
+        count: (this.state.count+1) % 5
+      })
+    }, 5000);
   }
 
   render() {
@@ -29,6 +40,13 @@ class KaraokeDisplay extends Component {
           </audio>
           <h2>{this.state.singer.title} by {this.state.singer.singer}</h2>
           <Lyrics lyricsurl={this.state.singer.lyricsurl} />
+          <ReactTypingEffect
+            style={{ marginTop: 50, fontSize: 24, color: '#3F51B5' }}
+            text={this.state.animatedTexts[this.state.count]}
+            speed={150}
+            eraseDelay={150}
+            typingDelay={150}
+          />
         </div>
       )
     } else {

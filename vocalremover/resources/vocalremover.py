@@ -127,7 +127,6 @@ def uploadToFirebase(path):
   blob.make_public()
 
   print("your file url", blob.public_url)
-  os.remove(path+".mp3")
   os.remove(fileName)
   os.remove(path+"_Vocals.wav")
 

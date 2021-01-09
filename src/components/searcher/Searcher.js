@@ -125,7 +125,7 @@ class Searcher extends Component {
               <TextField
                 {...params}
                 className="Searcher-input"
-                label="what do you want to do today??"
+                label="what do you want to sing today"
                 variant="outlined"
               />
             }
