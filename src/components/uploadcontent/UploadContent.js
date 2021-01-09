@@ -42,7 +42,7 @@ class UploadContent extends Component {
                 method: 'GET',
                 redirect: 'follow'
             };
-            fetch(`http://0.0.0.0:5000/vr/${this.state.videoID}`, requestOptions)
+            fetch(`https://spotty-starfish-68.serverless.social/vr/${this.state.videoID}`, requestOptions)
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
@@ -55,7 +55,7 @@ class UploadContent extends Component {
               redirect: 'follow'
             };
 
-            fetch(`http://0.0.0.0:5000/lyrics/${this.state.videoID}`, requestOptions)
+            fetch(`https://spotty-starfish-68.serverless.social/lyrics/${this.state.videoID}`, requestOptions)
               .then(response => response.text())
               .then(result => console.log(result))
               .catch(error => console.log('error', error));
