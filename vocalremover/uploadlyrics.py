@@ -22,6 +22,7 @@ def uploadToFirebase(path, data):
     bucket = storage.bucket()
     blob = bucket.blob("lyrics/"+fileName)
     blob.upload_from_filename(fileName)
+    os.remove(fileName)
 
     # Opt : if you want to make public access from the URL
     blob.make_public()
