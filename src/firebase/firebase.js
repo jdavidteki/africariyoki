@@ -43,6 +43,7 @@ class Firebase {
           lyricsurl: item.lyricsurl,
           singer: item.singer,
           audiourl: item.audiourl,
+          lyrics: item.lyrics,
           title: item.title,
         },
       )

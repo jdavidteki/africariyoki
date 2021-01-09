@@ -14,10 +14,10 @@ class KaraokeDisplay extends Component {
     count:0,
   }
 
-  componentDidUpdate(){
+  async componentDidMount(){
     setInterval( () => {
       this.setState({
-        count: (this.state.count+1) % 5
+        count: (this.state.count+1) % 2
       })
     }, 5000);
   }
@@ -39,7 +39,7 @@ class KaraokeDisplay extends Component {
             Your browser does not support the audio element.
           </audio>
           <h2>{this.state.singer.title} by {this.state.singer.singer}</h2>
-          <Lyrics lyricsurl={this.state.singer.lyricsurl} />
+          <Lyrics lyrics={this.state.singer.lyrics} />
           <ReactTypingEffect
             style={{ marginTop: 50, fontSize: 24, color: '#3F51B5' }}
             text={this.state.animatedTexts[this.state.count]}

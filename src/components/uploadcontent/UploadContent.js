@@ -42,6 +42,7 @@ class UploadContent extends Component {
                 title: this.state.title,
                 audiourl: audioUrl,
                 lyricsurl: lyricsTextUrl,
+                lyrics: this.state.lyrics,
                 id: this.state.videoID,
             })
 
@@ -54,21 +55,6 @@ class UploadContent extends Component {
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
-
-            //upload lyrics file
-            if(this.state.lyrics != ""){
-                var requestOptions = {
-                    method: 'POST',
-                    headers: {"Content-Type": "text/plain"},
-                    body: this.state.lyrics,
-                    redirect: 'follow'
-                  };
-
-                  fetch(`${addressID}/lyrics/${this.state.videoID}`, requestOptions)
-                    .then(response => response.text())
-                    .then(result => console.log(result))
-                    .catch(error => console.log('error', error));
-            }
         }
     }
 

@@ -6,49 +6,34 @@ class Lyrics extends Component {
     super(props);
 
     this.state = {
-      lyricsurl: props.lyricsurl,
-      lyrics:""
+      lyrics: props.lyrics.replace("b\"", '')
     }
 
     this.scrollThreshold = 500
   }
 
-  componentDidMount() {
-    if (this.state.lyricsurl){
-      var requestOptions = {
-        method: 'GET',
-        redirect: 'follow'
-      };
-      fetch(this.state.lyricsurl, requestOptions)
-      .then(response => response.text())
-      .then(result => {
-        var newstr = "";
-        var prevChar = '';
-
-        for( var i = 0; i < result.length; i++ ){
-          if(result[i] == "\\"){
-            newstr += ' \n ';
-            prevChar = 't'
-          }else{
-            if (prevChar == 't'){
-              newstr += result[i+1];
-            }else{
-              newstr += result[i];
-              prevChar = ''
-            }
-          }
-        }
-        this.setState({lyrics:newstr.replace('b\"', '')})
-      })
-      .catch(error => {
-        console.log('error', error)
-      });
-    }
-  }
-
   displayLyrics(){
-    let firstPart = this.state.lyrics.slice(0, this.state.lyrics.length/2)
-    let secondPart = this.state.lyrics.slice(this.state.lyrics.length/2, -1)
+    let lyrics = this.state.lyrics
+    var newstr = "";
+    var prevChar = '';
+
+    for( var i = 0; i < lyrics.length; i++ ){
+      if(lyrics[i] == "\\"){
+        newstr += ' \n ';
+        prevChar = 't'
+      }else{
+        if (prevChar == 't'){
+          newstr += lyrics[i+1];
+        }else{
+          newstr += lyrics[i];
+          prevChar = ''
+        }
+      }
+    }
+
+    let firstPart = newstr.slice(0, newstr.length/2)
+    let secondPart = newstr.slice(newstr.length/2, -1)
+
     return(
       <span className="Lyrics-container">
         <span className="Lyrics-firstPart">{firstPart}</span>
