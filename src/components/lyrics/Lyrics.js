@@ -31,13 +31,9 @@ class Lyrics extends Component {
       }
     }
 
-    let firstPart = newstr.slice(0, newstr.length/2)
-    let secondPart = newstr.slice(newstr.length/2, -1)
-
     return(
       <span className="Lyrics-container">
-        <span className="Lyrics-firstPart">{firstPart}</span>
-        <span className="Lyrics-secondPart">{secondPart}</span>
+        {newstr}
       </span>
     )
   }
