@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Header from '../components/Header';
+import Header from '../components/header/Header';
 import Searcher from '../components/searcher/Searcher.js';
 import KaraokeDisplay from '../components/karaokedisplay/KaraokeDisplay.js'
 import UploadContent from '../components/uploadcontent/UploadContent.js'
