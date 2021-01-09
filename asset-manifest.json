@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/africariyoki/static/css/main.4c8e75ea.chunk.css",
-    "main.js": "/africariyoki/static/js/main.8137c4f3.chunk.js",
-    "main.js.map": "/africariyoki/static/js/main.8137c4f3.chunk.js.map",
+    "main.js": "/africariyoki/static/js/main.3a370e21.chunk.js",
+    "main.js.map": "/africariyoki/static/js/main.3a370e21.chunk.js.map",
     "runtime-main.js": "/africariyoki/static/js/runtime-main.9aba8e0f.js",
     "runtime-main.js.map": "/africariyoki/static/js/runtime-main.9aba8e0f.js.map",
     "static/js/2.dbcbafa7.chunk.js": "/africariyoki/static/js/2.dbcbafa7.chunk.js",
@@ -15,6 +15,6 @@
     "static/js/runtime-main.9aba8e0f.js",
     "static/js/2.dbcbafa7.chunk.js",
     "static/css/main.4c8e75ea.chunk.css",
-    "static/js/main.8137c4f3.chunk.js"
+    "static/js/main.3a370e21.chunk.js"
   ]
 }
