@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Lyrics from '../lyrics/Lyrics';
 import "./KaraokeDisplay.css";
 import ReactTypingEffect from 'react-typing-effect';
+import ReactAudioPlayer from 'react-audio-player';
 
 class KaraokeDisplay extends Component {
   state={
@@ -23,25 +24,19 @@ class KaraokeDisplay extends Component {
   }
 
   render() {
-    window.onload = function(e){
-      var myAudio = document.getElementById('audioPlay');
-      console.log("myAudio", myAudio.duration)
-      if (myAudio && myAudio.duration > 0 && myAudio.paused) {
-        alert("music paused")
-      }
-    }
-
     if (this.props) {
       return (
         <div className="KaraokeDisplay-container">
-          <audio id="audioPlay" className="KaraokeDisplay-audio" controls autoPlay>
-            <source src={this.state.singer.audiourl} type="audio/mpeg"></source>
-            Your browser does not support the audio element.
-          </audio>
+          <ReactAudioPlayer
+            src={this.state.singer.audiourl}
+            autoPlay
+            controls
+            className={"KaraokeDisplay-audio"}
+          />
           <h2>{this.state.singer.title} by {this.state.singer.singer}</h2>
           <Lyrics lyrics={this.state.singer.lyrics} />
           <ReactTypingEffect
-            style={{ marginTop: 50, fontSize: 24, color: '#3F51B5' }}
+            style={{ marginTop: 20, fontSize: 24, color: '#3F51B5' }}
             text={this.state.animatedTexts[this.state.count]}
             speed={150}
             eraseDelay={150}

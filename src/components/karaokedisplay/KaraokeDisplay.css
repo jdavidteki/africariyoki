@@ -5,3 +5,21 @@
 .KaraokeDisplay-container h2{
     text-align: center;
 }
+
+.KaraokeDisplay-container{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
+audio::-webkit-media-controls-play-button,
+audio::-webkit-media-controls-panel {
+    background-color: rgb(140, 226, 140);
+    color: #fff;
+    display: flex;
+    border-radius: 20px;
+}
+
+audio:focus{
+    outline: none;
+}

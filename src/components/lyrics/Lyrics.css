@@ -1,6 +1,9 @@
 .Lyrics{
     display: flex;
     color: blueviolet;
+    flex-grow: 1;
+    width: 100%;
+    max-height: calc(100% - 200px);
 }
 
 .Lyrics-container{
@@ -8,6 +11,7 @@
     justify-content: space-between;
     width: 100%;
     font-size: 20px;
+    height: 100%;
 }
 
 /* smaller screens */

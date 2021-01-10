@@ -19,24 +19,28 @@ from lib import dataset
 from lib import nets
 from lib import spec_utils
 
-def downloadMp3FromYoutube(videoId):
-  print('downloading song in mp3 format')
-  url = "https://www.yt-download.org/api/button/mp3/" + videoId
+#uploadtofirebase
+def uploadToFirebase(path):
+  print('uploading file to firebase')
+  # Init firebase with your credentials
+  if not firebase_admin._apps:
+    cred = credentials.Certificate("firebasecloudredentials.json")
+    initialize_app(cred, {'storageBucket': 'africariyoki.appspot.com'})
 
-  page = requests.get(url)
-  data = page.text
-  soup = BeautifulSoup(data, "html.parser")
-  links = []
+  # Put your local file path
+  fileName = path+"_Instruments.wav"
+  bucket = storage.bucket()
+  blob = bucket.blob("music/"+path+".mp3")
+  blob.upload_from_filename(fileName)
 
-  for link in soup.find_all('a'):
-      links.append(link.get('href'))
+  # Opt : if you want to make public access from the URL
+  blob.make_public()
 
-  r = requests.get(links[1])
-  with open(videoId+'.mp3',  'wb') as f:
-    f.write(r.content)
+  print("your file url", blob.public_url)
+  os.remove(fileName)
+  os.remove(path+"_Vocals.wav")
 
-    print('completed download in mp3 format')
-
+#execute
 def execute(path):
   gpu = 1
   pretrained_model = 'models/baseline.pth'
@@ -46,7 +50,7 @@ def execute(path):
   hop_length=1024
   window_size=512
   output_image=''
-  postprocess='store_true'
+  postprocess=''
   tta='store_true'
 
   print('loading model...')
@@ -65,6 +69,9 @@ def execute(path):
   )
   basename = os.path.splitext(os.path.basename(input))[0]
   print('done')
+
+  print('done with input file...deleting to save space on server')
+  os.remove(path+".mp3")
 
   if X.ndim == 1:
       X = np.asarray([X, X])
@@ -110,25 +117,27 @@ def execute(path):
 
   uploadToFirebase(path)
 
-def uploadToFirebase(path):
-  print('uploading file to firebase')
-  # Init firebase with your credentials
-  if not firebase_admin._apps:
-    cred = credentials.Certificate("firebasecloudredentials.json")
-    initialize_app(cred, {'storageBucket': 'africariyoki.appspot.com'})
 
-  # Put your local file path
-  fileName = path+"_Instruments.wav"
-  bucket = storage.bucket()
-  blob = bucket.blob("music/"+path+".mp3")
-  blob.upload_from_filename(fileName)
+#downloadmp3fromyoutube
+def downloadMp3FromYoutube(videoId):
+  print('downloading song in mp3 format')
+  url = "https://www.yt-download.org/api/button/mp3/" + videoId
 
-  # Opt : if you want to make public access from the URL
-  blob.make_public()
+  page = requests.get(url)
+  data = page.text
+  soup = BeautifulSoup(data, "html.parser")
+  links = []
 
-  print("your file url", blob.public_url)
-  os.remove(fileName)
-  os.remove(path+"_Vocals.wav")
+  for link in soup.find_all('a'):
+      links.append(link.get('href'))
+
+  r = requests.get(links[1])
+  with open(videoId+'.mp3',  'wb') as f:
+    f.write(r.content)
+
+  print('completed download in mp3 format')
+  execute(videoId)
+
 
 class VocalRemover(object):
     def __init__(self, model, device, window_size):
@@ -209,7 +218,6 @@ class VocalRemover(object):
 class VocalRemoverLaunch(Resource):
   def get(self, path):
     downloadMp3FromYoutube(path)
-    execute(path)
     return "Item not found for the id:", 200
 
     def put(self, path):

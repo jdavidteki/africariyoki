@@ -16,18 +16,8 @@ class Searcher extends Component {
       filteredSongs: '',
       currentSong: '',
       songsCopy:[],
-      animatedTexts: [
-        "if",
-        "onyeka onyewu",
-        "jowo",
-        "lala",
-        "ginger",
-        "monsters you made",
-        "jollof on the jet",
-        "beef",
-        "hustle",
-        "pepper soup",
-      ],
+      searchOptions: [],
+      typingEffectSongs: [''],
       count:0,
     }
 
@@ -37,16 +27,20 @@ class Searcher extends Component {
   componentDidMount () {
     Firebase.getLyrics().then(
       val => {
+        let shuffledSongs = shuffleArray(val.map(a => a.title))
         this.setState({
           songs: val,
           songsCopy: val,
+          searchOptions: shuffledSongs,
+          typingEffectSongs: shuffledSongs,
+          songIds: val.map(a => a.id),
         })
       }
     )
 
     setInterval( () => {
       this.setState({
-        count: (this.state.count+1) % 10
+        count: (this.state.count+1) % 20
       })
     }, 4000);
 
@@ -67,9 +61,9 @@ class Searcher extends Component {
   }
 
   filterSong = (song) => {
-    let typeSong = this.state.songs.filter(thisSong => song === thisSong.title.toLowerCase())
+    let typeSong = this.state.songsCopy.filter(thisSong => song.replace(' ', '').toLowerCase() === thisSong.title.replace(' ', '').toLowerCase())
 
-    if (song == '' || typeSong.length == 0){
+    if (song == ''){
       this.setState({
         songs: this.state.songsCopy
       })
@@ -85,7 +79,7 @@ class Searcher extends Component {
 
     this.props.history.push({
       pathname: "/africariyoki/karaokedisplay/" + songId,
-      state: { chooseSong: chooseSong}
+      state: { chooseSong: chooseSong, songIds: this.state.songIds}
     });
 
     this.setState({
@@ -120,7 +114,7 @@ class Searcher extends Component {
           <Autocomplete
             id="controllable-states-demo"
             value={this.searchTerm}
-            options={this.state.animatedTexts.slice(0,5)}
+            options={this.state.searchOptions}
             renderInput={(params) =>
               <TextField
                 {...params}
@@ -133,14 +127,11 @@ class Searcher extends Component {
               this.searchTerm = newInputValue
             }}
             onChange={(event, newValue) => {
-              this.searchTerm = newValue
-              this.filterSong(newValue)
+              this.filterSong(this.searchTerm)
             }}
             onKeyUp = {event => {
               if (event.key === 'Enter') {
                 this.filterSong(this.searchTerm)
-                console.log(document)
-                document.getElementsByClassName("MuiAutocomplete-popper").hide()
               }
             }}
           />
@@ -149,18 +140,12 @@ class Searcher extends Component {
 
           <ReactTypingEffect
             style={{ marginTop: 50, fontSize: 24, color: '#3F51B5' }}
-            text={this.state.animatedTexts[this.state.count]}
+            text={this.state.typingEffectSongs.slice(0, 20)[this.state.count]}
             speed={150}
             eraseDelay={150}
             typingDelay={150}
           />
         </div>
-
-        {/* <div className="sidebar">
-          <Filter songs={this.state.songs} filterSong= {this.filterSong}/>
-          <SongList songs={this.state.songs} filteredSongs={this.state.filteredSongs} playSong={this.playSong}/>
-        </div> */}
-        {/* <KaraokeDisplay playSong={this.state.currentSong} /> */}
       </div>
     );
   }
@@ -168,5 +153,15 @@ class Searcher extends Component {
 
 export default Searcher;
 
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array
+}
+
 //https://www.lalal.ai/?gclid=CjwKCAiArbv_BRA8EiwAYGs23LTomkIzDCGjHTkK-SQlhargxYyajraHsgux9WClyYvOXJnLQ7surhoCNbIQAvD_BwE
 //https://mp3downy.com/MP3-converter?apikey=1234567890
+
+//do  ./ngrok http 5000 in /vocalremover to run ngrok

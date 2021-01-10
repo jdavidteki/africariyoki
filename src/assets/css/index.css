@@ -43,7 +43,7 @@ table.song-list {
 
 table.song-list td,
 table.song-list th {
-  border: 1px solid #cbcbcb;
+  border-bottom: 1px solid #cbcbcb;
   padding: 15px;
 }
 
