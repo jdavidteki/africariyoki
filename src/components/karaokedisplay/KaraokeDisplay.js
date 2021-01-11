@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Lyrics from '../lyrics/Lyrics';
 import "./KaraokeDisplay.css";
 import ReactTypingEffect from 'react-typing-effect';
 import ReactAudioPlayer from 'react-audio-player';
+import moment from "moment"
 
 class KaraokeDisplay extends Component {
   state={
@@ -12,7 +12,46 @@ class KaraokeDisplay extends Component {
       this.props.location.state.chooseSong[0].singer,
       this.props.location.state.chooseSong[0].album,
     ],
+    showTimer: false,
     count:0,
+    eventDate: moment.duration().add({days:0,hours:0,minutes:0,seconds:5}), // add 9 full days, 3 hours, 40 minutes and 50 seconds
+    secs:0
+  }
+
+  updateTimer=()=>{
+    const x = setInterval(()=>{
+      let { eventDate} = this.state
+
+      if(eventDate <=0){
+        let randomSongIndex = randomNumber(0, this.props.location.state.songs.length)
+        this.setState({
+          singer: this.props.location.state.songs[randomSongIndex],
+          animatedTexts: [
+            this.props.location.state.songs[randomSongIndex].title,
+            this.props.location.state.songs[randomSongIndex].singer,
+            this.props.location.state.songs[randomSongIndex].album,
+          ],
+          count:0,
+          eventDate: moment.duration().add({days:0,hours:0,minutes:0,seconds:5}), // add 9 full days, 3 hours, 40 minutes and 50 seconds
+          secs:0,
+          showTimer: false
+        })
+        clearInterval(x)
+      }else {
+        eventDate = eventDate.subtract(1,"s")
+        const secs = eventDate.seconds()
+
+        this.setState({
+          secs,
+          eventDate,
+          showTimer: true
+        })
+      }
+    },1000)
+  }
+
+  playAnotherSong = () => {
+    this.updateTimer()
   }
 
   async componentDidMount(){
@@ -21,6 +60,33 @@ class KaraokeDisplay extends Component {
         count: (this.state.count+1) % 2
       })
     }, 5000);
+  }
+
+
+  displayLyrics(){
+    let lyrics = this.state.singer.lyrics.replace("b\"", '')
+    var newstr = "";
+    var prevChar = '';
+
+    for( var i = 0; i < lyrics.length; i++ ){
+      if(lyrics[i] == "\\"){
+        newstr += ' \n ';
+        prevChar = 't'
+      }else{
+        if (prevChar == 't'){
+          newstr += lyrics[i+1];
+        }else{
+          newstr += lyrics[i];
+          prevChar = ''
+        }
+      }
+    }
+
+    return(
+      <span className="Lyrics-container">
+        {newstr}
+      </span>
+    )
   }
 
   render() {
@@ -32,9 +98,19 @@ class KaraokeDisplay extends Component {
             autoPlay
             controls
             className={"KaraokeDisplay-audio"}
+            onEnded={this.playAnotherSong}
           />
+
+          {this.state.showTimer &&
+            <div className="KaraokeDisplay-showTimer">
+              <span>Playing next song in... {` ${this.state.secs}`} secs</span>
+            </div>
+          }
+
           <h2>{this.state.singer.title} by {this.state.singer.singer}</h2>
-          <Lyrics lyrics={this.state.singer.lyrics} />
+          <pre className="Lyrics">
+            {this.displayLyrics()}
+          </pre>
           <ReactTypingEffect
             style={{ marginTop: 20, fontSize: 24, color: '#3F51B5' }}
             text={this.state.animatedTexts[this.state.count]}
@@ -44,15 +120,13 @@ class KaraokeDisplay extends Component {
           />
         </div>
       )
-    } else {
-      return (
-        <div className="KaraokeDisplay-display">
-          <h2>Song Title</h2>
-          <Lyrics lyrics="example song lyrics"/>
-        </div>
-      )
     }
   }
 }
 
 export default KaraokeDisplay;
+
+function randomNumber(min, max){
+  const r = Math.random()*(max-min) + min
+  return Math.floor(r)
+}

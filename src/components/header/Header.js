@@ -6,7 +6,7 @@ class Header extends Component {
   render() {
     return (
       <div className="Header">
-          <Link style={{ fontWeight: 900, textDecoration: 'none', color: 'green' }} to = "/africariyoki">AFRICARIYOKI -</Link>
+          <Link style={{ fontWeight: 900, textDecoration: 'none', color: 'green' }} to = "/africariyoki">AFRICARIYOKI</Link>
           <div className="right-part">
             <Link
                 variant="outlined"

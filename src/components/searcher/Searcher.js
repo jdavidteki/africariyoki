@@ -79,7 +79,7 @@ class Searcher extends Component {
 
     this.props.history.push({
       pathname: "/africariyoki/karaokedisplay/" + songId,
-      state: { chooseSong: chooseSong, songIds: this.state.songIds}
+      state: { chooseSong: chooseSong, songs: this.state.songsCopy}
     });
 
     this.setState({
