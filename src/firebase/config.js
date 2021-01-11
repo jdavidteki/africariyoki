@@ -1,12 +1,12 @@
 const firebaseConfig = {
-  apiKey: "AIzaSyDyuKXjNCV1RowCqeWyAfffk0EJPPe2Vjg",
-  authDomain: "africariyoki.firebaseapp.com",
-  databaseURL: "https://africariyoki-default-rtdb.firebaseio.com",
-  projectId: "africariyoki",
-  storageBucket: "africariyoki.appspot.com",
-  messagingSenderId: "477946568761",
-  appId: "1:477946568761:web:bdc8f1110f36abdc732de8",
-  measurementId: "G-FQ0NXKV2ED"
+  apiKey: "AIzaSyCIg3Xc3yYNYgXL90XXwaW2cyMafnvusYE",
+  authDomain: "africariyoki-4b634.firebaseapp.com",
+  databaseURL: "https://africariyoki-4b634-default-rtdb.firebaseio.com",
+  projectId: "africariyoki-4b634",
+  storageBucket: "africariyoki-4b634.appspot.com",
+  messagingSenderId: "171492275085",
+  appId: "1:171492275085:web:f2c1364b0feee41e1083c4",
+  measurementId: "G-TSPVJ130EK"
 };
 
 export default firebaseConfig

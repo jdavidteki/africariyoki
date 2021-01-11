@@ -20,15 +20,11 @@ class UploadContent extends Component {
         progress: 0,
     };
 
-    componentDidMount(){
-
-    }
-
     uploadToFirebase(){
         //uZ-_HIoEBE8
         if (this.state.videoID != ""){
-            let audioUrl = `https://storage.googleapis.com/africariyoki.appspot.com/music/${this.state.videoID}.mp3`
-            let lyricsTextUrl = `https://storage.googleapis.com/africariyoki.appspot.com/lyrics/${this.state.videoID}.txt`
+            let audioUrl = `https://storage.googleapis.com/africariyoki-4b634.appspot.com/music/${this.state.videoID}.mp3`
+            let lyricsTextUrl = `https://storage.googleapis.com/africariyoki-4b634.appspot.com/lyrics/${this.state.videoID}.txt`
             let addressID = this.state.addressID
             if(addressID == ''){
                 addressID = "http://0.0.0.0:5000"

@@ -1,6 +1,5 @@
 import os
 import requests
-
 from flask_restful import Resource
 
 import cv2
@@ -8,12 +7,14 @@ import librosa
 import numpy as np
 import soundfile as sf
 import torch
-from tqdm import tqdm
-from bs4 import BeautifulSoup
 import urllib.request as urllib2
 import re
+
+from tqdm import tqdm
+from bs4 import BeautifulSoup
 from firebase_admin import credentials, initialize_app, storage
 import firebase_admin
+from pydub import AudioSegment
 
 from lib import dataset
 from lib import nets
@@ -25,10 +26,13 @@ def uploadToFirebase(path):
   # Init firebase with your credentials
   if not firebase_admin._apps:
     cred = credentials.Certificate("firebasecloudredentials.json")
-    initialize_app(cred, {'storageBucket': 'africariyoki.appspot.com'})
+    initialize_app(cred, {'storageBucket': 'africariyoki-4b634.appspot.com'})
+
+  #compress wav into mp3
+  AudioSegment.from_wav(path+"_Instruments.wav").export(path+"_Instruments.mp3", format="mp3")
 
   # Put your local file path
-  fileName = path+"_Instruments.wav"
+  fileName = path+"_Instruments.mp3"
   bucket = storage.bucket()
   blob = bucket.blob("music/"+path+".mp3")
   blob.upload_from_filename(fileName)
@@ -38,6 +42,7 @@ def uploadToFirebase(path):
 
   print("your file url", blob.public_url)
   os.remove(fileName)
+  os.remove(path+"_Instruments.wav")
   os.remove(path+"_Vocals.wav")
 
 #execute
