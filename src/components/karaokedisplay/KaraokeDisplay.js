@@ -94,7 +94,7 @@ class KaraokeDisplay extends Component {
       return (
         <div className="KaraokeDisplay-container">
           <ReactAudioPlayer
-            src={this.state.singer.audiourl.replace('africariyoki', 'africariyoki-4b634')} //because im cheap and im not paying for firebase
+            src={this.state.singer.audiourl.includes('africariyoki-4b634') ? this.state.singer.audiourl : this.state.singer.audiourl.replace('africariyoki', 'africariyoki-4b634')} //because im cheap and im not paying for firebase
             autoPlay
             controls
             className={"KaraokeDisplay-audio"}
