@@ -3,6 +3,7 @@ import "./KaraokeDisplay.css";
 import ReactTypingEffect from 'react-typing-effect';
 import ReactAudioPlayer from 'react-audio-player';
 import moment from "moment"
+import LRCParser from '../lrcParser/LRCParser';
 
 class KaraokeDisplay extends Component {
   state={
@@ -15,7 +16,8 @@ class KaraokeDisplay extends Component {
     showTimer: false,
     count:0,
     eventDate: moment.duration().add({days:0,hours:0,minutes:0,seconds:5}), // add 9 full days, 3 hours, 40 minutes and 50 seconds
-    secs:0
+    secs:0,
+    pauseSong: false
   }
 
   updateTimer=()=>{
@@ -82,11 +84,12 @@ class KaraokeDisplay extends Component {
       }
     }
 
-    return(
-      <span className="Lyrics-container">
-        {newstr}
-      </span>
-    )
+    return newstr
+  }
+
+  lrcFormat(){
+    let lyrics = this.state.singer.lyrics
+    return lyrics.includes("[00")
   }
 
   render() {
@@ -99,6 +102,8 @@ class KaraokeDisplay extends Component {
             controls
             className={"KaraokeDisplay-audio"}
             onEnded={this.playAnotherSong}
+            onPause={ () => {this.setState({pauseSong: true})}}
+            onPlay = {() => {this.setState({pauseSong: false})}}
           />
 
           {this.state.showTimer &&
@@ -109,7 +114,16 @@ class KaraokeDisplay extends Component {
 
           <h2>{this.state.singer.title} by {this.state.singer.singer}</h2>
           <pre className="Lyrics">
-            {this.displayLyrics()}
+            {this.lrcFormat() ?
+              <LRCParser
+                lyrics = {this.displayLyrics()}
+                pause = {this.state.pauseSong}
+              />
+                :
+              <span className="Lyrics-container">
+                {this.displayLyrics()}
+              </span>
+            }
           </pre>
           <ReactTypingEffect
             style={{ marginTop: 20, fontSize: 24, color: '#3F51B5' }}
