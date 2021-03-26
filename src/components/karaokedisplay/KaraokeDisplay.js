@@ -4,6 +4,8 @@ import ReactTypingEffect from 'react-typing-effect';
 import ReactAudioPlayer from 'react-audio-player';
 import moment from "moment"
 import LRCParser from '../lrcParser/LRCParser';
+import Button from "@material-ui/core/Button";
+import LRCFixer from '../lrcFixer/LRCFixer';
 
 class KaraokeDisplay extends Component {
   state={
@@ -17,7 +19,8 @@ class KaraokeDisplay extends Component {
     count:0,
     eventDate: moment.duration().add({days:0,hours:0,minutes:0,seconds:5}), // add 9 full days, 3 hours, 40 minutes and 50 seconds
     secs:0,
-    pauseSong: false
+    pauseSong: false,
+    lrcFixer: false,
   }
 
   updateTimer=()=>{
@@ -37,6 +40,8 @@ class KaraokeDisplay extends Component {
           eventDate: moment.duration().add({days:0,hours:0,minutes:0,seconds:5}), // add 9 full days, 3 hours, 40 minutes and 50 seconds
           secs:0,
           showTimer: false
+        }, ()=>{
+          window.history.pushState({}, 'update', `${this.state.singer.id}`);
         })
         clearInterval(x)
       }else {
@@ -92,6 +97,14 @@ class KaraokeDisplay extends Component {
     return lyrics.includes("[00")
   }
 
+  toggleLrcFixer(){
+    if (this.state.lrcFixer) {
+      this.setState({lrcFixer: false})
+    }else{
+      this.setState({lrcFixer: true})
+    }
+  }
+
   render() {
     if (this.props) {
       return (
@@ -113,18 +126,33 @@ class KaraokeDisplay extends Component {
           }
 
           <h2>{this.state.singer.title} by {this.state.singer.singer}</h2>
-          <pre className="Lyrics">
-            {this.lrcFormat() ?
-              <LRCParser
-                lyrics = {this.displayLyrics()}
-                pause = {this.state.pauseSong}
+          <Button
+            onClick={()=> this.toggleLrcFixer()}
+          >
+            toggle lyrics display
+          </Button>
+
+          {this.state.lrcFixer ?
+            <div className="Lyrics">
+              <LRCFixer
+                lyrics={this.displayLyrics()}
+                songId={this.state.singer.id}
               />
-                :
-              <span className="Lyrics-container">
-                {this.displayLyrics()}
-              </span>
-            }
-          </pre>
+            </div>
+            :
+            <pre className="Lyrics">
+              {this.lrcFormat() ?
+                <LRCParser
+                  lyrics = {this.displayLyrics()}
+                  pause = {this.state.pauseSong}
+                />
+                  :
+                <span className="Lyrics-container">
+                  {this.displayLyrics()}
+                </span>
+              }
+            </pre>
+          }
           <ReactTypingEffect
             style={{ marginTop: 20, fontSize: 24, color: '#3F51B5' }}
             text={this.state.animatedTexts[this.state.count]}

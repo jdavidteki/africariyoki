@@ -20,12 +20,10 @@
     justify-content: flex-end;
 }
 
-audio::-webkit-media-controls-play-button,
 audio::-webkit-media-controls-panel {
-    background-color: rgb(140, 226, 140);
+    background-image: linear-gradient(to right, white,rgb(140, 226, 140),white);
     color: #fff;
     display: flex;
-    border-radius: 20px;
 }
 
 audio:focus{

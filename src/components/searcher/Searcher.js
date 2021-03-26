@@ -136,7 +136,11 @@ class Searcher extends Component {
             }}
           />
 
-          <SongList songs={this.state.songs} filteredSongs={this.state.filteredSongs} playSong={this.playSong}/>
+          <SongList
+            songs={this.state.songs}
+            filteredSongs={this.state.filteredSongs}
+            playSong={this.playSong}
+          />
 
           <ReactTypingEffect
             style={{ marginTop: 50, fontSize: 24, color: '#3F51B5' }}

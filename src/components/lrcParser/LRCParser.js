@@ -10,53 +10,72 @@ class LRCParser extends Component {
 
     this.state= {
       title: "hersss",
-      line:"",
-      text:"",
+      lineNumber:1,
+      prevLine: "",
+      currentLine:"",
+      nextLine: "",
+      arrayLyrics: [],
       eventDate: moment.duration().add({days:0,hours:0,minutes:0,seconds:0}),
       lrc: new Lyric({
           onPlay: this.onPlayFunction,
-          onSetLyric: function (lines) {},
-          offset: 150
+          onSetLyric: this.onSetLyricFunction,
+          offset: 15000
       })
     }
   }
 
-  onPlayFunction = (line, text) => {
-    this.setState({line: line, text: text})
+  onPlayFunction = (lineNumber, currentLine) => {
+    this.setState({lineNumber: lineNumber, currentLine: currentLine})
+  }
+
+  onSetLyricFunction = (arrayLyrics) => {
+    this.setState({arrayLyrics: arrayLyrics})
   }
 
   updateTimer=()=>{
     const x = setInterval(()=>{
+
       let { eventDate} = this.state
 
       if (!this.props.pause){
-        console.log("either pause or play")
         eventDate = eventDate.add(1,"s")
         this.state.lrc.play((eventDate.minutes() * 60000) + (eventDate.seconds() * 1000))
 
         this.setState({
           eventDate
         })
+      }else{
+        this.state.lrc.pause()
       }
-
     },1000)
   }
 
   componentDidMount(){
     this.updateTimer()
 
-    console.log(this.props.lyrics)
-
     this.state.lrc.setLyric(this.props.lyrics)
+    this.state.lrc.play(0)
   }
 
   render() {
     return (
-      <div class="Lyrics-container LRCParser-container">
-        {this.state.text}
+      <div className="Lyrics-container LRCParser-container">
+        {this.state.arrayLyrics[this.state.lineNumber - 1] &&
+          <p>{cleanLine(this.state.arrayLyrics[this.state.lineNumber - 1].text)}</p>
+        }
+        <p className="LRCParser-currentLine">
+          {cleanLine(this.state.currentLine)}
+        </p>
+        {this.state.arrayLyrics[this.state.lineNumber + 1] &&
+          <p>{cleanLine(this.state.arrayLyrics[this.state.lineNumber + 1].text)}</p>
+        }
       </div>
     );
   }
+}
+
+function cleanLine(string){
+  return string.replace(/[^\w\s]/gi, '').toLowerCase().replace("by rentanadvisercom", '***')
 }
 
 export default LRCParser;

@@ -56,6 +56,25 @@ class Firebase {
     })
   }
 
+  updateLyrics = (songId, lyrics) => {
+    return new Promise(resolve => {
+      firebase.database()
+      .ref('/lyrics/' + songId + '/')
+      .update(
+        {
+          lyrics: lyrics,
+        },
+      )
+      .then((response) => {
+        console.log("reposne", response)
+        resolve(true)
+      })
+      .catch(error => {
+        console.log("error", error)
+      })
+    })
+  }
+
   postTransaction = (userInfo, recpInfo, cardInfo, transInfo) =>{
     return new Promise(resolve => {
       firebase.database()
