@@ -98,10 +98,17 @@ class KaraokeDisplay extends Component {
   }
 
   toggleLrcFixer(){
-    if (this.state.lrcFixer) {
-      this.setState({lrcFixer: false})
+
+    var tenure = prompt("Please enter master password", "");
+
+    if (tenure != null && tenure == "1226") {
+      if (this.state.lrcFixer) {
+        this.setState({lrcFixer: false})
+      }else{
+        this.setState({lrcFixer: true})
+      }
     }else{
-      this.setState({lrcFixer: true})
+      alert("sorry, invalid password")
     }
   }
 
@@ -109,16 +116,18 @@ class KaraokeDisplay extends Component {
     if (this.props) {
       return (
         <div className="KaraokeDisplay-container">
-          <ReactAudioPlayer
-            src={this.state.singer.audiourl.includes('africariyoki-4b634') ? this.state.singer.audiourl : this.state.singer.audiourl.replace('africariyoki', 'africariyoki-4b634')} //because im cheap and im not paying for firebase
-            autoPlay
-            controls
-            controlsList="nodownload"
-            className={"KaraokeDisplay-audio"}
-            onEnded={this.playAnotherSong}
-            onPause={ () => {this.setState({pauseSong: true})}}
-            onPlay = {() => {this.setState({pauseSong: false})}}
-          />
+          {!this.state.lrcFixer &&
+            <ReactAudioPlayer
+              src={this.state.singer.audiourl.includes('africariyoki-4b634') ? this.state.singer.audiourl : this.state.singer.audiourl.replace('africariyoki', 'africariyoki-4b634')} //because im cheap and im not paying for firebase
+              autoPlay
+              controls
+              controlsList="nodownload"
+              className={"KaraokeDisplay-audio"}
+              onEnded={this.playAnotherSong}
+              onPause={ () => {this.setState({pauseSong: true})}}
+              onPlay = {() => {this.setState({pauseSong: false})}}
+            />
+          }
 
           {this.state.showTimer &&
             <div className="KaraokeDisplay-showTimer">

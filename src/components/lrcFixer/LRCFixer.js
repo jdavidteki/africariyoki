@@ -24,7 +24,14 @@ class LRCFixer extends Component {
   }
 
   updateLyrics(){
-    Firebase.updateLyrics(this.state.songId, this.state.lyrics)
+    var userPreference;
+
+    if (confirm("are you sure?") == true) {
+        userPreference = "saving lrc to firebase...";
+        Firebase.updateLyrics(this.state.songId, this.state.lyrics)
+    } else {
+        userPreference = "save cancelled!";
+    }
   }
 
   componentDidMount(){
@@ -61,22 +68,24 @@ class LRCFixer extends Component {
     return (
       <div className="LRCFixer">
         <div id="video-placeholder" style={{width: "100%"}}></div>
-        <Button
-          onClick={()=> this.timeStamp()}
-        >
-          stamp!
-        </Button>
-
         <textarea
           className="Lyrics-container"
           onChange={this.handleChange}
           value={this.state.lyrics}
         />
-        <Button
-          onClick={()=> this.updateLyrics()}
-        >
-          update lyrics
-        </Button>
+        <div>
+          <Button
+            onClick={()=> this.timeStamp()}
+          >
+            time stamp!
+          </Button>
+
+          <Button
+            onClick={()=> this.updateLyrics()}
+          >
+            update lyrics
+          </Button>
+        </div>
       </div>
     );
   }
