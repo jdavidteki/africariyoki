@@ -1,11 +1,20 @@
+.Searcher{
+    width: 100%;
+}
+
+
+table.song-list td, table.song-list th{
+    border-bottom: none;
+}
+
 .Searcher-container
 {
     display: flex;
     flex-direction: column;
-    min-height: 400px;
+    height: 90%;
     align-items: center;
     justify-content: center;
-    background-color: #f5f5f5;
+    background-color: #fcfdfa;
     padding: 20px;
 }
 
@@ -15,17 +24,43 @@
     overflow-y: scroll;
 }
 
+.song{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #cbcbcb;
+}
+
+.song button{
+    width: auto;
+    margin-left: 50%;
+}
+
+
+.song td{
+    width: 30%;
+}
+
+.song-list tbody,
+.song{
+    width: 100%;
+}
+
+.song-list tbody{
+    display: flex;
+    flex-direction: column;
+}
+
 .MuiButtonBase-root.MuiIconButton-root.MuiAutocomplete-clearIndicator.MuiAutocomplete-clearIndicatorDirty{
     display: none;
 }
 
 .MuiAutocomplete-root.MuiAutocomplete-hasClearIcon.MuiAutocomplete-hasPopupIcon{
-    width: 420px;
+    width: 100%;
 }
 
 .MuiInputBase-root.MuiOutlinedInput-root.MuiAutocomplete-inputRoot.MuiInputBase-fullWidth.MuiInputBase-formControl.MuiInputBase-adornedEnd.MuiOutlinedInput-adornedEnd{
     border-radius: 100px;
-    background-color: white;
 }
 
 @media only screen and (max-width: 600px) {

@@ -45,6 +45,11 @@ audio:focus{
     height: 100%;
 }
 
+.Lyrics-lowerSection{
+    display: flex;
+    justify-content: space-between;
+}
+
 /* smaller screens */
 @media only screen and (max-width: 600px) {
     .Lyrics-container{

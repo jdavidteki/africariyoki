@@ -109,7 +109,7 @@ class Searcher extends Component {
 
   render() {
     return (
-      <div className="Searcher-container">
+      <div className="Searcher">
         <div className="Searcher-container">
           <Autocomplete
             id="controllable-states-demo"
