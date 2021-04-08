@@ -95,7 +95,7 @@ function onYouTubeIframeAPIReady(songId){
 
   player = new YT.Player('video-placeholder', {
       width: 600,
-      height: 400,
+      height: 100,
       videoId: songId,
       playerVars: {
           color: 'white',

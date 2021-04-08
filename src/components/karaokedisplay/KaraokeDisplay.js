@@ -6,6 +6,7 @@ import moment from "moment"
 import LRCParser from '../lrcParser/LRCParser';
 import Button from "@material-ui/core/Button";
 import LRCFixer from '../lrcFixer/LRCFixer';
+import Clouds from '../clouds/Clouds'
 
 class KaraokeDisplay extends Component {
   state={
@@ -135,29 +136,38 @@ class KaraokeDisplay extends Component {
             </div>
           }
 
-          <h2>{this.state.singer.title} by {this.state.singer.singer}</h2>
+          <h2 style={{ marginTop: 20, fontSize: 24, color: '#3F51B5', fontFamily: 'fantasy'}}>
+            {this.state.singer.title} by {this.state.singer.singer}
+          </h2>
 
-          {this.state.lrcFixer ?
-            <div className="Lyrics">
-              <LRCFixer
-                lyrics={this.displayLyrics()}
-                songId={this.state.singer.id}
-              />
-            </div>
-            :
-            <pre className="Lyrics">
-              {this.lrcFormat() ?
-                <LRCParser
-                  lyrics = {this.displayLyrics()}
-                  pause = {this.state.pauseSong}
+          <div className="KaraokeDisplay-cloudBackground">
+
+            <Clouds/>
+
+            {this.state.lrcFixer ?
+              <div className="Lyrics Lyrics-LRCFixercontainer">
+                <LRCFixer
+                  lyrics={this.displayLyrics()}
+                  songId={this.state.singer.id}
                 />
-                  :
-                <span className="Lyrics-container">
-                  {this.displayLyrics()}
-                </span>
-              }
-            </pre>
-          }
+              </div>
+              :
+              <pre className="Lyrics Lyrics-DisplayContainer">
+                {this.lrcFormat() ?
+                  <LRCParser
+                    lyrics = {this.displayLyrics()}
+                    pause = {this.state.pauseSong}
+                  />
+                    :
+                  <span className="Lyrics-container">
+                    {this.displayLyrics()}
+                  </span>
+                }
+              </pre>
+            }
+
+          </div>
+
           <div className="Lyrics-lowerSection">
             <ReactTypingEffect
               style={{ marginTop: 20, fontSize: 24, color: '#3F51B5' }}

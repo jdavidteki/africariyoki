@@ -5,9 +5,11 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: #fcfdfa;
+    font-family: fantasy;
+    font-size: 18px;
 }
 
 .LRCParser-currentLine{
     color: red;
+    font-weight: bold;
 }
