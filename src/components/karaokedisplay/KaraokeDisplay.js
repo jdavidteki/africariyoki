@@ -170,7 +170,7 @@ class KaraokeDisplay extends Component {
 
           <div className="Lyrics-lowerSection">
             <ReactTypingEffect
-              style={{ marginTop: 20, fontSize: 24, color: '#3F51B5' }}
+              style={{ marginTop: 20, fontSize: 12, color: '#3F51B5' }}
               text={this.state.animatedTexts[this.state.count]}
               speed={150}
               eraseDelay={150}

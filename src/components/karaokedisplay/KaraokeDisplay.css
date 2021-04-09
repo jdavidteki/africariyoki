@@ -73,6 +73,7 @@ audio:focus{
     display: flex;
     justify-content: space-between;
     font-family: fantasy;
+    font-size: 12px;
 }
 
 .Lyrics-LRCFixercontainer{

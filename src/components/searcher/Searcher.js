@@ -143,7 +143,7 @@ class Searcher extends Component {
           />
 
           <ReactTypingEffect
-            style={{ marginTop: 50, fontSize: 24, color: '#3F51B5' }}
+            style={{ marginTop: 50, fontSize: 12, color: '#3F51B5' }}
             text={this.state.typingEffectSongs.slice(0, 20)[this.state.count]}
             speed={150}
             eraseDelay={150}

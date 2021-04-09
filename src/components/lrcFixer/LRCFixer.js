@@ -20,6 +20,8 @@ class LRCFixer extends Component {
   handleChange = (event) => {
     this.setState({
         lyrics: event.target.value
+    }, ()=>{
+      this.prepareLyricsForFixing()
     });
   }
 
@@ -34,23 +36,26 @@ class LRCFixer extends Component {
     }
   }
 
-  componentDidMount(){
-    loadScript(this.state.songId)
-
+  prepareLyricsForFixing = () => {
     let lyrics = this.state.lyrics
     let timeStampRegex = /\d\d:\d\d.\d\d/gm
     lyrics = lyrics.replace(timeStampRegex, '').replace(/[^\w\s]/gi, '')
-    this.setState({lyrics: lyrics})
+    this.setState({lyrics: lyrics},
+      () =>{
+        let lyricsArray = lyrics.split("\n")
+        let lyricsArrayClean = []
+        for (var i = 0; i < lyricsArray.length; i++) {
+          if (lyricsArray[i] != " "){
+            lyricsArrayClean.push(lyricsArray[i].trim())
+          }
+        }
+        this.setState({lyricsArrayClean: lyricsArrayClean})
+      })
+  }
 
-    let lyricsArray = lyrics.split("\n")
-    let lyricsArrayClean = []
-    for (var i = 0; i < lyricsArray.length; i++) {
-      if (lyricsArray[i] != " "){
-        lyricsArrayClean.push(lyricsArray[i].trim())
-      }
-    }
-
-    this.setState({lyricsArrayClean: lyricsArrayClean})
+  componentDidMount(){
+    loadScript(this.state.songId)
+    this.prepareLyricsForFixing()
   }
 
   timeStamp(){
