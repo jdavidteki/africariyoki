@@ -72,7 +72,7 @@ audio:focus{
 .Lyrics-lowerSection{
     display: flex;
     justify-content: space-between;
-    font-family: fantasy;
+    font-family: 'fantasy';
     font-size: 12px;
 }
 

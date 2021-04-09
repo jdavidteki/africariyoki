@@ -152,7 +152,7 @@ class KaraokeDisplay extends Component {
                 />
               </div>
               :
-              <pre className="Lyrics Lyrics-DisplayContainer">
+              <div className="Lyrics Lyrics-DisplayContainer">
                 {this.lrcFormat() ?
                   <LRCParser
                     lyrics = {this.displayLyrics()}
@@ -163,7 +163,7 @@ class KaraokeDisplay extends Component {
                     {this.displayLyrics()}
                   </span>
                 }
-              </pre>
+              </div>
             }
 
           </div>
