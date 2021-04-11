@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Filter from '../Filter';
-import SongList from '../SongList';
+import SongList from '../songLIst/SongList';
 import Firebase from "../../firebase/firebase.js";
 import TextField from "@material-ui/core/TextField";
 import ReactTypingEffect from 'react-typing-effect';
@@ -13,12 +13,14 @@ class Searcher extends Component {
 
     this.state= {
       songs: [],
-      filteredSongs: '',
+      filteredSongs: [],
       currentSong: '',
       songsCopy:[],
       searchOptions: [],
       typingEffectSongs: [''],
       count:0,
+      query: '',
+      expandResults: false,
     }
 
     this.searchTerm=''
@@ -43,25 +45,20 @@ class Searcher extends Component {
         count: (this.state.count+1) % 20
       })
     }, 4000);
-
-    //TODO: extract bpm from mp3 file so we can those to play the lyrics
-    // var requestOptions = {
-    //   method: 'GET',
-    //   redirect: 'follow'
-    // };
-    // fetch("https://firebasestorage.googleapis.com/v0/b/africariyoki.appspot.com/o/preview_accompaniment_Davido%20-%20If%20(Official%20Music%20Video).mp3?alt=media&token=5e3883ef-468f-470c-b4ae-e5a117152c51", requestOptions)
-    //   .then(response => {
-    //     response.text()
-    //     console.log("response", response.body)
-    //     var context = new AudioContext();
-    //     // context.decodeAudioData(response.body, this.calcTempo);
-    //   })
-    //   .then(result => console.log(result))
-    //   .catch(error => console.log('error', error));
   }
 
   filterSong = (song) => {
-    let typeSong = this.state.songsCopy.filter(thisSong => song.replace(' ', '').toLowerCase() === thisSong.title.replace(' ', '').toLowerCase())
+    if (!this.state.expandResults){
+      this.setState({expandResults: true})
+    }
+
+    if (song==""){
+      this.setState({expandResults: false})
+    }
+
+    let typeSong = this.state.songsCopy.filter(thisSong =>
+      thisSong.title.replace(' ', '').toLowerCase().includes(song.replace(' ', '').toLowerCase())
+    )
 
     if (song == ''){
       this.setState({
@@ -69,7 +66,7 @@ class Searcher extends Component {
       })
     }else{
       this.setState({
-        songs: typeSong
+        filteredSongs: typeSong
       })
     }
   }
@@ -88,51 +85,18 @@ class Searcher extends Component {
     })
   }
 
-  // calcTempo = (buffer) => {
-  //   var audioData = [];
-  //   // Take the average of the two channels
-  //   if (buffer.numberOfChannels == 2) {
-  //     var channel1Data = buffer.getChannelData(0);
-  //     var channel2Data = buffer.getChannelData(1);
-  //     var length = channel1Data.length;
-  //     for (var i = 0; i < length; i++) {
-  //       audioData[i] = (channel1Data[i] + channel2Data[i]) / 2;
-  //     }
-  //   } else {
-  //     audioData = buffer.getChannelData(0);
-  //   }
-  //   var mt = new MusicTempo(audioData);
-
-  //   console.log(mt.tempo);
-  //   console.log(mt.beats);
-  // }
-
   render() {
     return (
       <div className="Searcher">
         <div className="Searcher-container">
-          <Autocomplete
-            id="controllable-states-demo"
-            value={this.searchTerm}
-            options={this.state.searchOptions}
-            renderInput={(params) =>
-              <TextField
-                {...params}
-                className="Searcher-input"
-                label="what do you want to sing today"
-                variant="outlined"
-              />
-            }
-            onInputChange={(event, newInputValue) => {
-              this.searchTerm = newInputValue
-            }}
-            onChange={(event, newValue) => {
-              this.filterSong(this.searchTerm)
-            }}
-            onKeyUp = {event => {
-              if (event.key === 'Enter') {
-                this.filterSong(this.searchTerm)
-              }
+          <TextField
+            className="Searcher-input"
+            label="what do you want to sing today"
+            variant="outlined"
+            onChange={event=>{
+              this.setState({query: event.target.value}, ()=> {
+                this.filterSong(this.state.query)
+              })
             }}
           />
 
@@ -140,6 +104,7 @@ class Searcher extends Component {
             songs={this.state.songs}
             filteredSongs={this.state.filteredSongs}
             playSong={this.playSong}
+            expandResults={this.state.expandResults}
           />
 
           <ReactTypingEffect

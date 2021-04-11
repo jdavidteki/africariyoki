@@ -18,37 +18,8 @@ table.song-list td, table.song-list th{
     padding: 20px;
 }
 
-.song-list{
-    display: flex;
-    height: 500px;
-    overflow-y: scroll;
-}
-
-.song{
+.Searcher-input{
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid #cbcbcb;
-}
-
-.song button{
-    width: auto;
-    margin-left: 50%;
-}
-
-
-.song td{
-    width: 30%;
-}
-
-.song-list tbody,
-.song{
-    width: 100%;
-}
-
-.song-list tbody{
-    display: flex;
-    flex-direction: column;
 }
 
 .MuiButtonBase-root.MuiIconButton-root.MuiAutocomplete-clearIndicator.MuiAutocomplete-clearIndicatorDirty{
@@ -59,7 +30,8 @@ table.song-list td, table.song-list th{
     width: 100%;
 }
 
-.MuiInputBase-root.MuiOutlinedInput-root.MuiAutocomplete-inputRoot.MuiInputBase-fullWidth.MuiInputBase-formControl.MuiInputBase-adornedEnd.MuiOutlinedInput-adornedEnd{
+
+.MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-formControl{
     border-radius: 100px;
 }
 

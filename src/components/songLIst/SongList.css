@@ -1,0 +1,34 @@
+.SongList{
+    width: 100%;
+    max-height: 0;
+    overflow-y: hidden;
+    transition: max-height 0.25s ease-in;
+}
+
+/* .SongList.SongList-collapse{
+    display: none;
+    width: 100%;
+    max-height: 0;
+} */
+
+.SongList.SongList-expandResults{
+    display: flex;
+    width: 100%;
+    max-height: 500px;
+    transition: max-height 0.25s ease-in;
+    padding: 10px 0;
+    /* min-height: 500px; */
+}
+
+.SongList-container{
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    min-height: 500px;
+    width: 100%;
+}
+
+.SongList-emptySearch{
+    margin: auto;
+    overflow-y: hidden;
+}

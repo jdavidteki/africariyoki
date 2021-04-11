@@ -56,7 +56,7 @@ class UploadContent extends Component {
 
     render() {
         return (
-            <div style={{height: "100%"}}>
+            <div className="UploadContent" style={{height: "100%"}}>
                 <div style={{
                     height: "100%",
                     display: "flex",

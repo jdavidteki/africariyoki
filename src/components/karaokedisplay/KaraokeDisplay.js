@@ -179,7 +179,7 @@ class KaraokeDisplay extends Component {
             <Button
               onClick={()=> this.toggleLrcFixer()}
             >
-              toggle lyrics display
+              toggle lyrics
             </Button>
           </div>
 
