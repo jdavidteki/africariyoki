@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/africariyoki/static/css/main.d5624aed.chunk.css",
-    "main.js": "/africariyoki/static/js/main.53ba8e37.chunk.js",
-    "main.js.map": "/africariyoki/static/js/main.53ba8e37.chunk.js.map",
+    "main.css": "/africariyoki/static/css/main.4da8e57c.chunk.css",
+    "main.js": "/africariyoki/static/js/main.ba9687da.chunk.js",
+    "main.js.map": "/africariyoki/static/js/main.ba9687da.chunk.js.map",
     "runtime-main.js": "/africariyoki/static/js/runtime-main.2c3bf051.js",
     "runtime-main.js.map": "/africariyoki/static/js/runtime-main.2c3bf051.js.map",
-    "static/js/2.d4c1a090.chunk.js": "/africariyoki/static/js/2.d4c1a090.chunk.js",
-    "static/js/2.d4c1a090.chunk.js.map": "/africariyoki/static/js/2.d4c1a090.chunk.js.map",
+    "static/js/2.420e22c0.chunk.js": "/africariyoki/static/js/2.420e22c0.chunk.js",
+    "static/js/2.420e22c0.chunk.js.map": "/africariyoki/static/js/2.420e22c0.chunk.js.map",
     "index.html": "/africariyoki/index.html",
-    "static/css/main.d5624aed.chunk.css.map": "/africariyoki/static/css/main.d5624aed.chunk.css.map",
-    "static/js/2.d4c1a090.chunk.js.LICENSE.txt": "/africariyoki/static/js/2.d4c1a090.chunk.js.LICENSE.txt"
+    "static/css/main.4da8e57c.chunk.css.map": "/africariyoki/static/css/main.4da8e57c.chunk.css.map",
+    "static/js/2.420e22c0.chunk.js.LICENSE.txt": "/africariyoki/static/js/2.420e22c0.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.2c3bf051.js",
-    "static/js/2.d4c1a090.chunk.js",
-    "static/css/main.d5624aed.chunk.css",
-    "static/js/main.53ba8e37.chunk.js"
+    "static/js/2.420e22c0.chunk.js",
+    "static/css/main.4da8e57c.chunk.css",
+    "static/js/main.ba9687da.chunk.js"
   ]
 }
