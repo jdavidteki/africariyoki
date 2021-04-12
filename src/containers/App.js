@@ -4,14 +4,14 @@ import Searcher from '../components/searcher/Searcher.js';
 import KaraokeDisplay from '../components/karaokedisplay/KaraokeDisplay.js'
 import UploadContent from '../components/uploadcontent/UploadContent.js'
 import { Switch, Route } from "react-router-dom";
-import "./App.css";
+import "./App.scss";
 
 class App extends Component {
   render() {
     return (
-      <div className="app">
+      <div className="App">
         <Header />
-        <div className="app-body">
+        <div className="App-body">
           <div className="content">
             <Switch>
               <Route path="/africariyoki" exact component={Searcher} />

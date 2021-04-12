@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import "./KaraokeDisplay.css";
 import ReactTypingEffect from 'react-typing-effect';
 import ReactAudioPlayer from 'react-audio-player';
 import moment from "moment"
@@ -7,6 +6,8 @@ import LRCParser from '../lrcParser/LRCParser';
 import Button from "@material-ui/core/Button";
 import LRCFixer from '../lrcFixer/LRCFixer';
 import Clouds from '../clouds/Clouds'
+
+import "./KaraokeDisplay.scss";
 
 class KaraokeDisplay extends Component {
   state={
@@ -116,7 +117,7 @@ class KaraokeDisplay extends Component {
   render() {
     if (this.props) {
       return (
-        <div className="KaraokeDisplay-container">
+        <div className="KaraokeDisplay KaraokeDisplay-container">
           {!this.state.lrcFixer &&
             <ReactAudioPlayer
               src={this.state.singer.audiourl.includes('africariyoki-4b634') ? this.state.singer.audiourl : this.state.singer.audiourl.replace('africariyoki', 'africariyoki-4b634')} //because im cheap and im not paying for firebase

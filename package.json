@@ -13,6 +13,7 @@
     "lrc-file-parser": "^1.0.7",
     "moment": "^2.29.1",
     "music-tempo": "^1.0.3",
+    "node-sass": "^5.0.0",
     "react": "^16.4.1",
     "react-audio-player": "^0.14.0",
     "react-dom": "^16.4.1",

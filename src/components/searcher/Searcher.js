@@ -5,7 +5,7 @@ import TextField from "@material-ui/core/TextField";
 import ReactTypingEffect from 'react-typing-effect';
 import Clouds from '../clouds/Clouds'
 
-import './Searcher.css';
+import './Searcher.scss';
 
 class Searcher extends Component {
   constructor(props){

@@ -7,15 +7,13 @@
     width: 80%;
     margin-left: auto;
     margin-right: auto;
-}
 
-.Header .MuiAvatar-img{
-    object-fit: fill;
-}
+    .MuiAvatar-img{
+        object-fit: fill;
+    }
 
-/* smaller screens */
-@media only screen and (max-width: 600px) {
-    .Header {
+    /* smaller screens */
+    @media only screen and (max-width: 600px) {
         font-size: 16px;
     }
 }

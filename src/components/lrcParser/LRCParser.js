@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Lyric from 'lrc-file-parser'
 import moment from "moment"
 
-import './LRCParser.css';
+import './LRCParser.scss';
 
 class LRCParser extends Component {
   constructor(props){

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Button from "@material-ui/core/Button";
 import Firebase from "../../firebase/firebase.js";
 
-import './LRCFixer.css';
+import './LRCFixer.scss';
 
 var player;
 

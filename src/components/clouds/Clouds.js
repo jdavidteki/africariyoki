@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import "./Clouds.css"
+import "./Clouds.scss"
 
 class Clouds extends Component {
 
