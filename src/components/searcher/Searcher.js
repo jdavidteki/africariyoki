@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Filter from '../Filter';
 import SongList from '../songLIst/SongList';
 import Firebase from "../../firebase/firebase.js";
 import TextField from "@material-ui/core/TextField";
 import ReactTypingEffect from 'react-typing-effect';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import Clouds from '../clouds/Clouds'
+
 import './Searcher.css';
 
 class Searcher extends Component {
@@ -88,10 +88,11 @@ class Searcher extends Component {
   render() {
     return (
       <div className="Searcher">
+        <Clouds/>
         <div className="Searcher-container">
           <TextField
             className="Searcher-input"
-            label="what do you want to sing today"
+            label="what do you want to sing today??"
             variant="outlined"
             onChange={event=>{
               this.setState({query: event.target.value}, ()=> {

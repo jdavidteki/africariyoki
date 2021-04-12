@@ -1,10 +1,20 @@
 .Searcher{
+    position: relative;
     width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    background-color: #091834;
+    display: flex;
+    border-radius: 5px;
 }
-
 
 table.song-list td, table.song-list th{
     border-bottom: none;
+}
+
+.Searcher .Clouds{
+    background-color: #f8f0f6;
 }
 
 .Searcher-container
@@ -16,6 +26,11 @@ table.song-list td, table.song-list th{
     justify-content: center;
     background-color: #fcfdfa;
     padding: 20px;
+    width: 100%;
+    z-index: 99;
+    background-color: transparent;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .Searcher-input{

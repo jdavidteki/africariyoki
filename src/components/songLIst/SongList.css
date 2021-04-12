@@ -32,3 +32,11 @@
     margin: auto;
     overflow-y: hidden;
 }
+
+@media only screen and (max-width: 600px) {
+    .SongList-container{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+}
