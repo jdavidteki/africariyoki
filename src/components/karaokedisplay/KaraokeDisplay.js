@@ -142,7 +142,6 @@ class KaraokeDisplay extends Component {
           </h2>
 
           <div className="KaraokeDisplay-cloudBackground">
-
             <Clouds/>
 
             {this.state.lrcFixer ?

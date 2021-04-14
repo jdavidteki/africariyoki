@@ -57,7 +57,8 @@ class Searcher extends Component {
     }
 
     let typeSong = this.state.songsCopy.filter(thisSong =>
-      thisSong.title.replace(' ', '').toLowerCase().includes(song.replace(' ', '').toLowerCase())
+      thisSong.title.replace(' ', '').toLowerCase().includes(song.replace(' ', '').toLowerCase()) ||
+      thisSong.singer.replace(' ', '').toLowerCase().includes(song.replace(' ', '').toLowerCase())
     )
 
     if (song == ''){
