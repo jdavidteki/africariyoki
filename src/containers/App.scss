@@ -7,11 +7,10 @@
 
     &-body{
         flex-grow: 1;
-        height: calc(100vh - 77px);
+        height: calc(100vh);
     }
 
     .content{
-        width: 80%;
         margin-left: auto;
         margin-right: auto;
         height: 100%;
@@ -42,8 +41,5 @@
 
 
     @media only screen and (max-width: 600px) {
-        .content{
-            width: 100%;
-        }
     }
 }

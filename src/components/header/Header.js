@@ -1,22 +1,47 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom'
+import logo from './assets/logo.png';
 
 import './Header.scss';
 class Header extends Component {
   render() {
     return (
       <div className="Header">
-          <Link style={{ fontFamily:'fantasy', fontWeight: 900, textDecoration: 'none', color: 'green' }} to = "/africariyoki">africariyoki!</Link>
-          <div className="right-part">
-            <Link
-              variant="outlined"
-              style={{ fontFamily:'fantasy', color: 'green', marginRight: 20, fontSize: 18, textDecoration: 'none' }}
-              color="primary"
-              to = "/africariyoki/upload"
-            >
-                upload
-            </Link>
-          </div>
+        <div className="Header-container">
+            <div className="Header-left">
+              <Link
+                to = "/africariyoki"
+              >
+                <img className="Header-logo" src={logo} alt="Logo" />
+              </Link>
+            </div>
+            <div className="Header-right">
+              <Link
+                    className="Header-navLink"
+                    variant="outlined"
+                    color="primary"
+                    to = "/africariyoki/about"
+                  >
+                      about
+              </Link>
+              <Link
+                    className="Header-navLink"
+                    variant="outlined"
+                    color="primary"
+                    to = "/africariyoki/contact"
+                  >
+                      contact
+              </Link>
+              <Link
+                  className="Header-navLink"
+                  variant="outlined"
+                  color="primary"
+                  to = "/africariyoki/upload"
+                >
+                    upload
+              </Link>
+            </div>
+        </div>
       </div>
     );
   }

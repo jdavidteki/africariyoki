@@ -25,6 +25,9 @@
     &-emptySearch{
         margin: auto;
         overflow-y: hidden;
+        padding: 5px;
+        background-color: #f4f5d7;
+        border-radius: 5px;
     }
 
     @media only screen and (max-width: 600px) {

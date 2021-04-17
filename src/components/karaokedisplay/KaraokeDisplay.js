@@ -120,7 +120,7 @@ class KaraokeDisplay extends Component {
         <div className="KaraokeDisplay KaraokeDisplay-container">
           {!this.state.lrcFixer &&
             <ReactAudioPlayer
-              src={this.state.singer.audiourl.includes('africariyoki-4b634') ? this.state.singer.audiourl : this.state.singer.audiourl.replace('africariyoki', 'africariyoki-4b634')} //because im cheap and im not paying for firebase
+              // src={this.state.singer.audiourl.includes('africariyoki-4b634') ? this.state.singer.audiourl : this.state.singer.audiourl.replace('africariyoki', 'africariyoki-4b634')} //because im cheap and im not paying for firebase
               autoPlay
               controls
               controlsList="nodownload"
@@ -137,12 +137,13 @@ class KaraokeDisplay extends Component {
             </div>
           }
 
-          <h2 style={{ marginTop: 20, fontSize: 24, color: '#3F51B5', fontFamily: 'fantasy'}}>
+          <h2 style={{ marginTop: 20, fontSize: 24, color: '#3F51B5'}}>
             {this.state.singer.title} by {this.state.singer.singer}
           </h2>
 
           <div className="KaraokeDisplay-cloudBackground">
             <Clouds/>
+            <div class="KaraokeDisplay-stars"></div>
 
             {this.state.lrcFixer ?
               <div className="Lyrics Lyrics-LRCFixercontainer">

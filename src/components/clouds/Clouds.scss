@@ -4,7 +4,6 @@
     right: 0;
     padding: 0;
     margin: 0;
-    background-color: #cbf7bd;
     height: 100%;
     width: 100%;
     opacity: 0.7;
@@ -93,11 +92,11 @@
       z-indeX: -1;
     }
 
-    .cloud.x1, .cloud.x1:after, .cloud.x1:before {background: #ddaeae;}
-    .cloud.x2, .cloud.x2:after, .cloud.x2:before {background: #8f2fe9}
-    .cloud.x3, .cloud.x3:after, .cloud.x3:before {background: #7adef0;}
-    .cloud.x4, .cloud.x4:after, .cloud.x4:before {background: #ee75e4;}
-    .cloud.x5, .cloud.x5:after, .cloud.x5:before {background: #0a337f;}
+    .cloud.x1, .cloud.x1:after, .cloud.x1:before {background: #ddaeae; background-image: url("cloudbck/cloudx1.png");}
+    .cloud.x2, .cloud.x2:after, .cloud.x2:before {background: #8f2fe9; background-image: url("cloudbck/cloudx2.png");}
+    .cloud.x3, .cloud.x3:after, .cloud.x3:before {background: #7adef0; background-image: url("cloudbck/cloudx3.png");}
+    .cloud.x4, .cloud.x4:after, .cloud.x4:before {background: #ee75e4; background-image: url("cloudbck/cloudx4.png");}
+    .cloud.x5, .cloud.x5:after, .cloud.x5:before {background: #0a337f; background-image: url("cloudbck/cloudx5.png");}
 
     .cloud:after {
       -webkit-border-radius: 100px;
@@ -129,13 +128,13 @@
       }
 
       .x1 {
-      -webkit-animation: animateCloud 35s linear infinite;
-      -moz-animation: animateCloud 35s linear infinite;
-      animation: animateCloud 35s linear infinite;
-      -webkit-transform: scale(0.1);
-      -moz-transform: scale(0.1);
-      transform: scale(0.1);
-    }
+        -webkit-animation: animateCloud 35s linear infinite;
+        -moz-animation: animateCloud 35s linear infinite;
+        animation: animateCloud 35s linear infinite;
+        -webkit-transform: scale(0.1);
+        -moz-transform: scale(0.1);
+        transform: scale(0.1);
+      }
     .x2 {
       -webkit-animation: animateCloud 20s linear infinite;
       -moz-animation: animateCloud 20s linear infinite;

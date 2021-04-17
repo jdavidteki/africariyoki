@@ -3,7 +3,17 @@ import SongList from '../songLIst/SongList';
 import Firebase from "../../firebase/firebase.js";
 import TextField from "@material-ui/core/TextField";
 import ReactTypingEffect from 'react-typing-effect';
-import Clouds from '../clouds/Clouds'
+import background1 from "./assets/ankarabck1.jpeg";
+import background2 from "./assets/ankarabck2.jpeg";
+import background3 from "./assets/ankarabck3.jpeg";
+import background4 from "./assets/ankarabck4.jpeg";
+import background5 from "./assets/ankarabck5.jpeg";
+import background6 from "./assets/ankarabck6.jpeg";
+import background7 from "./assets/ankarabck7.jpeg";
+import background8 from "./assets/ankarabck8.jpeg";
+import background9 from "./assets/ankarabck9.jpeg";
+import background10 from "./assets/ankarabck10.jpeg";
+import background11 from "./assets/ankarabck11.jpeg";
 
 import './Searcher.scss';
 
@@ -21,6 +31,7 @@ class Searcher extends Component {
       count:0,
       query: '',
       expandResults: false,
+      background: background1,
     }
 
     this.searchTerm=''
@@ -42,9 +53,10 @@ class Searcher extends Component {
 
     setInterval( () => {
       this.setState({
-        count: (this.state.count+1) % 20
+        count: (this.state.count+1) % 20,
+        background: getRandomBackground(),
       })
-    }, 4000);
+    }, 6000);
   }
 
   filterSong = (song) => {
@@ -89,18 +101,26 @@ class Searcher extends Component {
   render() {
     return (
       <div className="Searcher">
-        <Clouds/>
+        <div style={{ backgroundImage: `url(${this.state.background})` }}
+        className="Searcher-background">
+          <div className="Searcher-backgroundOverlay">
+
+          </div>
+        </div>
         <div className="Searcher-container">
-          <TextField
-            className="Searcher-input"
-            label="what do you want to sing today??"
-            variant="outlined"
-            onChange={event=>{
-              this.setState({query: event.target.value}, ()=> {
-                this.filterSong(this.state.query)
-              })
-            }}
-          />
+
+          <div className="Searcher-inputWrapper">
+            <TextField
+              className="Searcher-input"
+              label="what do you want to sing today??"
+              variant="outlined"
+              onChange={event=>{
+                this.setState({query: event.target.value}, ()=> {
+                  this.filterSong(this.state.query)
+                })
+              }}
+            />
+          </div>
 
           <SongList
             songs={this.state.songs}
@@ -109,13 +129,15 @@ class Searcher extends Component {
             expandResults={this.state.expandResults}
           />
 
-          <ReactTypingEffect
-            style={{ marginTop: 50, fontSize: 12, color: '#3F51B5' }}
-            text={this.state.typingEffectSongs.slice(0, 20)[this.state.count]}
-            speed={150}
-            eraseDelay={150}
-            typingDelay={150}
-          />
+          <div className="Searcher-typeEffectWrapper">
+            <ReactTypingEffect
+              style={{ marginTop: 50, fontSize: 12, color: '#3F51B5' }}
+              text={this.state.typingEffectSongs.slice(0, 20)[this.state.count]}
+              speed={150}
+              eraseDelay={150}
+              typingDelay={150}
+            />
+          </div>
         </div>
       </div>
     );
@@ -123,6 +145,35 @@ class Searcher extends Component {
 }
 
 export default Searcher;
+
+function getRandomBackground(){
+  let randomNumber =  Math.floor(Math.random() * 10);
+
+  switch(randomNumber) {
+    case 1:
+      return background1
+    case 2:
+      return background2
+    case 3:
+      return background3
+    case 4:
+      return background4
+    case 5:
+      return background5
+    case 6:
+      return background6
+    case 7:
+      return background7
+    case 8:
+      return background8
+    case 9:
+      return background9
+    case 10:
+      return background10
+    default:
+      return background11
+  }
+}
 
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -136,3 +187,6 @@ function shuffleArray(array) {
 //https://mp3downy.com/MP3-converter?apikey=1234567890
 
 //do  ./ngrok http 5000 in /vocalremover to run ngrok
+
+
+//for free images https://www.pexels.com/search/nigeira/
