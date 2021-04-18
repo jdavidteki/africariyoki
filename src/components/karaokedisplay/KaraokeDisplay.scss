@@ -3,11 +3,6 @@
     height: 100%;
     width: 100%;
 
-    &-audio{
-        width: 100%;
-        min-height: 30px;
-    }
-
     &-container h2{
         text-align: center;
     }
@@ -17,6 +12,28 @@
         width: 100%;
         flex-direction: column;
         height: 100%;
+    }
+
+    &-audio{
+        background-color: transparent;
+        color: white;
+
+        .rhap_total-time,
+        .rhap_current-time,
+        .rhap_play-pause-button{
+            color: white;
+        }
+
+        .rhap_progress-filled,{
+            background-color: white;
+        }
+
+        .rhap_rewind-button,
+        .rhap_forward-button,
+        .rhap_repeat-button
+        {
+            display: none;
+        }
     }
 
     &-showTimer{
@@ -48,10 +65,6 @@
         z-index: -1;
     }
 
-    audio:focus{
-        outline: none;
-    }
-
     .Lyrics{
         display: flex;
         color: blueviolet;
@@ -73,7 +86,6 @@
 
         &-container{
             display: flex;
-            justify-content: space-between;
             width: 100%;
             font-size: 20px;
             height: 100%;

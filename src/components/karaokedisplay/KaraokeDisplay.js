@@ -7,6 +7,9 @@ import Button from "@material-ui/core/Button";
 import LRCFixer from '../lrcFixer/LRCFixer';
 import Clouds from '../clouds/Clouds'
 
+import AudioPlayer from 'react-h5-audio-player';
+import 'react-h5-audio-player/lib/styles.css';
+
 import "./KaraokeDisplay.scss";
 
 class KaraokeDisplay extends Component {
@@ -125,7 +128,8 @@ class KaraokeDisplay extends Component {
 
           <div className="KaraokeDisplay-container">
             {!this.state.lrcFixer &&
-              <ReactAudioPlayer
+              <AudioPlayer
+                autoPlay
                 src={this.state.singer.audiourl.includes('africariyoki-4b634') ? this.state.singer.audiourl : this.state.singer.audiourl.replace('africariyoki', 'africariyoki-4b634')} //because im cheap and im not paying for firebase
                 autoPlay
                 controls
