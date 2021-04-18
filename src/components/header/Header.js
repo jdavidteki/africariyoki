@@ -20,17 +20,17 @@ class Header extends Component {
                     className="Header-navLink"
                     variant="outlined"
                     color="primary"
-                    to = "/africariyoki/about"
+                    to = "/africariyoki"
                   >
-                      about
+                      home
               </Link>
               <Link
                     className="Header-navLink"
                     variant="outlined"
                     color="primary"
-                    to = "/africariyoki/contact"
+                    to = "/africariyoki/about"
                   >
-                      contact
+                      about
               </Link>
               <Link
                   className="Header-navLink"

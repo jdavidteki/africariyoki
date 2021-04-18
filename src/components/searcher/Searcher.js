@@ -31,7 +31,7 @@ class Searcher extends Component {
       count:0,
       query: '',
       expandResults: false,
-      background: background1,
+      background: getRandomBackground(),
     }
 
     this.searchTerm=''
@@ -54,7 +54,6 @@ class Searcher extends Component {
     setInterval( () => {
       this.setState({
         count: (this.state.count+1) % 20,
-        background: getRandomBackground(),
       })
     }, 6000);
   }
@@ -73,11 +72,17 @@ class Searcher extends Component {
       thisSong.singer.replace(' ', '').toLowerCase().includes(song.replace(' ', '').toLowerCase())
     )
 
+
     if (song == ''){
       this.setState({
         songs: this.state.songsCopy
       })
     }else{
+
+      if (typeSong.length > 0){
+        //
+      }
+
       this.setState({
         filteredSongs: typeSong
       })
