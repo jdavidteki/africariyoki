@@ -117,73 +117,73 @@ class KaraokeDisplay extends Component {
   render() {
     if (this.props) {
       return (
-        <div className="KaraokeDisplay KaraokeDisplay-container">
-          {!this.state.lrcFixer &&
-            <ReactAudioPlayer
-              src={this.state.singer.audiourl.includes('africariyoki-4b634') ? this.state.singer.audiourl : this.state.singer.audiourl.replace('africariyoki', 'africariyoki-4b634')} //because im cheap and im not paying for firebase
-              autoPlay
-              controls
-              controlsList="nodownload"
-              className={"KaraokeDisplay-audio"}
-              onEnded={this.playAnotherSong}
-              onPause={ () => {this.setState({pauseSong: true})}}
-              onPlay = {() => {this.setState({pauseSong: false})}}
-            />
-          }
-
-          {this.state.showTimer &&
-            <div className="KaraokeDisplay-showTimer">
-              <span>Playing next song in... {` ${this.state.secs}`} secs</span>
-            </div>
-          }
-
-          <h2 style={{ marginTop: 20, fontSize: 24, color: '#3F51B5'}}>
-            {this.state.singer.title} by {this.state.singer.singer}
-          </h2>
-
+        <div className="KaraokeDisplay">
           <div className="KaraokeDisplay-cloudBackground">
             <Clouds/>
-            <div class="KaraokeDisplay-stars"></div>
+            <div className="KaraokeDisplay-stars"></div>
+          </div>
 
-            {this.state.lrcFixer ?
-              <div className="Lyrics Lyrics-LRCFixercontainer">
-                <LRCFixer
-                  lyrics={this.displayLyrics()}
-                  songId={this.state.singer.id}
-                />
-              </div>
-              :
-              <div className="Lyrics Lyrics-DisplayContainer">
-                {this.lrcFormat() ?
-                  <LRCParser
-                    lyrics = {this.displayLyrics()}
-                    pause = {this.state.pauseSong}
-                  />
-                    :
-                  <span className="Lyrics-container">
-                    {this.displayLyrics()}
-                  </span>
-                }
+          <div className="KaraokeDisplay-container">
+            {!this.state.lrcFixer &&
+              <ReactAudioPlayer
+                src={this.state.singer.audiourl.includes('africariyoki-4b634') ? this.state.singer.audiourl : this.state.singer.audiourl.replace('africariyoki', 'africariyoki-4b634')} //because im cheap and im not paying for firebase
+                autoPlay
+                controls
+                controlsList="nodownload"
+                className={"KaraokeDisplay-audio"}
+                onEnded={this.playAnotherSong}
+                onPause={ () => {this.setState({pauseSong: true})}}
+                onPlay = {() => {this.setState({pauseSong: false})}}
+              />
+            }
+
+            {this.state.showTimer &&
+              <div className="KaraokeDisplay-showTimer">
+                <span>Playing next song in... {` ${this.state.secs}`} secs</span>
               </div>
             }
 
-          </div>
+            <h2 style={{ marginTop: 20, fontSize: 24, color: 'white'}}>
+              {this.state.singer.title} by {this.state.singer.singer}
+            </h2>
 
-          <div className="Lyrics-lowerSection">
-            <ReactTypingEffect
-              style={{ marginTop: 20, fontSize: 12, color: '#3F51B5' }}
-              text={this.state.animatedTexts[this.state.count]}
-              speed={150}
-              eraseDelay={150}
-              typingDelay={150}
-            />
-            <Button
-              onClick={()=> this.toggleLrcFixer()}
-            >
-              toggle lyrics
-            </Button>
-          </div>
+            {this.state.lrcFixer ?
+                <div className="Lyrics Lyrics-LRCFixercontainer">
+                  <LRCFixer
+                    lyrics={this.displayLyrics()}
+                    songId={this.state.singer.id}
+                  />
+                </div>
+                :
+                <div className="Lyrics Lyrics-DisplayContainer">
+                  {this.lrcFormat() ?
+                    <LRCParser
+                      lyrics = {this.displayLyrics()}
+                      pause = {this.state.pauseSong}
+                    />
+                      :
+                    <span className="Lyrics-container">
+                      {this.displayLyrics()}
+                    </span>
+                  }
+                </div>
+            }
 
+            <div className="Lyrics-lowerSection">
+              <ReactTypingEffect
+                style={{ marginTop: 20, fontSize: 12, color: '#3F51B5' }}
+                text={this.state.animatedTexts[this.state.count]}
+                speed={150}
+                eraseDelay={150}
+                typingDelay={150}
+              />
+              <Button
+                onClick={()=> this.toggleLrcFixer()}
+              >
+                toggle lyrics
+              </Button>
+            </div>
+          </div>
         </div>
       )
     }

@@ -12,11 +12,11 @@ class Clouds extends Component {
     render() {
         return (
             <div className="Clouds" id="clouds">
-                <div class="cloud x1"></div>
-                <div class="cloud x2"></div>
-                <div class="cloud x3"></div>
-                <div class="cloud x4"></div>
-                <div class="cloud x5"></div>
+                <div className="cloud x1"></div>
+                <div className="cloud x2"></div>
+                <div className="cloud x3"></div>
+                <div className="cloud x4"></div>
+                <div className="cloud x5"></div>
             </div>
         )
     }
