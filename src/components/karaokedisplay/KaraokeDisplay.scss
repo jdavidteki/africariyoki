@@ -16,16 +16,16 @@
 
     &-audio{
         background-color: transparent;
-        color: white;
+        color: #f7f8e4;
 
         .rhap_total-time,
         .rhap_current-time,
         .rhap_play-pause-button{
-            color: white;
+            color: #f7f8e4;
         }
 
-        .rhap_progress-filled,{
-            background-color: white;
+        .rhap_progress-filled{
+            background-color: #f7f8e4;
         }
 
         .rhap_rewind-button,
@@ -37,11 +37,10 @@
     }
 
     &-showTimer{
-        flex: 1;
-        background-color: '#fff';
+        background-color: #f7f8e4;
         align-items: 'center';
         display: flex;
-        justify-content: flex-end;
+        justify-content: center;
     }
 
     &-cloudBackground{
@@ -102,11 +101,6 @@
         }
     }
 
-    .react-lock-screen {
-        // height: 0;
-    }
-
-
     /* smaller screens */
     @media only screen and (max-width: 600px) {
         .Lyrics-container{
@@ -116,6 +110,7 @@
 
         .Lyrics-DisplayContainer{
             max-width: 100%;
+            margin-top: 30%;
         }
     }
 }

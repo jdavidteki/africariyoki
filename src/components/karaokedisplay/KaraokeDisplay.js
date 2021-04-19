@@ -30,24 +30,16 @@ class KaraokeDisplay extends Component {
 
   updateTimer=()=>{
     const x = setInterval(()=>{
-      let { eventDate} = this.state
+      let { eventDate } = this.state
 
       if(eventDate <=0){
         let randomSongIndex = randomNumber(0, this.props.location.state.songs.length)
-        this.setState({
-          singer: this.props.location.state.songs[randomSongIndex],
-          animatedTexts: [
-            this.props.location.state.songs[randomSongIndex].title,
-            this.props.location.state.songs[randomSongIndex].singer,
-            this.props.location.state.songs[randomSongIndex].album,
-          ],
-          count:0,
-          eventDate: moment.duration().add({days:0,hours:0,minutes:0,seconds:5}), // add 9 full days, 3 hours, 40 minutes and 50 seconds
-          secs:0,
-          showTimer: false
-        }, ()=>{
-          window.history.pushState({}, 'update', `${this.state.singer.id}`);
-        })
+
+        this.props.history.push({
+          pathname: "/africariyoki/karaokedisplay/" + this.props.location.state.songs[randomSongIndex].id,
+          state: { chooseSong: [this.props.location.state.songs[randomSongIndex]], songs: this.props.location.state.songs}
+        });
+        window.location.reload(true);
         clearInterval(x)
       }else {
         eventDate = eventDate.subtract(1,"s")
@@ -74,7 +66,6 @@ class KaraokeDisplay extends Component {
     }, 5000);
   }
 
-
   displayLyrics(){
     let lyrics = this.state.singer.lyrics.replace("b\"", '')
     var newstr = "";
@@ -93,7 +84,6 @@ class KaraokeDisplay extends Component {
         }
       }
     }
-
     return cleanLine(newstr)
   }
 

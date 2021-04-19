@@ -17,9 +17,9 @@ class LRCParser extends Component {
       arrayLyrics: [],
       eventDate: moment.duration().add({days:0,hours:0,minutes:0,seconds:0}),
       lrc: new Lyric({
-          onPlay: this.onPlayFunction,
-          onSetLyric: this.onSetLyricFunction,
-          offset: 15000
+        onPlay: this.onPlayFunction,
+        onSetLyric: this.onSetLyricFunction,
+        offset: 15000
       })
     }
   }
