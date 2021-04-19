@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactTypingEffect from 'react-typing-effect';
-import ReactAudioPlayer from 'react-audio-player';
+import { connect } from "react-redux";
 import moment from "moment"
 import LRCParser from '../lrcParser/LRCParser';
 import Button from "@material-ui/core/Button";
@@ -14,7 +14,7 @@ import 'react-h5-audio-player/lib/styles.css';
 
 import "./KaraokeDisplay.scss";
 
-class KaraokeDisplay extends Component {
+class ConnectedKaraokeDisplay extends Component {
   state={
     singer: this.props.location.state.chooseSong[0],
     animatedTexts: [
@@ -186,7 +186,6 @@ class KaraokeDisplay extends Component {
   }
 }
 
-export default withRouter(KaraokeDisplay);
 
 function randomNumber(min, max){
   const r = Math.random()*(max-min) + min
@@ -196,3 +195,12 @@ function randomNumber(min, max){
 function cleanLine(string){
   return string.toLowerCase().replace("by rentanadvisercom", '***')
 }
+
+const mapStateToProps = state => {
+  return {
+    loggedInUser: state.loggedInUser,
+  };
+};
+
+let KaraokeDisplay = withRouter(connect(mapStateToProps)(ConnectedKaraokeDisplay));
+export default withRouter(KaraokeDisplay);

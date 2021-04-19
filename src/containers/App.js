@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Header from '../components/header/Header';
 import Searcher from '../components/searcher/Searcher.js';
-import KaraokeDisplay from '../components/karaokedisplay/KaraokeDisplay.js'
-import UploadContent from '../components/uploadcontent/UploadContent.js'
+import KaraokeDisplay from '../components/karaokedisplay/KaraokeDisplay'
+import UploadContent from '../components/uploadcontent/UploadContent'
 import { Switch, Route } from "react-router-dom";
 import "./App.scss";
 
