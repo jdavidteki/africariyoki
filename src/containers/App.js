@@ -15,8 +15,8 @@ class App extends Component {
           <div className="content">
             <Switch>
               <Route path="/africariyoki" exact component={Searcher} />
-              <Route path="/africariyoki/karaokedisplay/:id" exact component={KaraokeDisplay} />
-              <Route path="/africariyoki/upload" exact component={UploadContent} />
+              <Route path="/africariyoki/karaokedisplay/:id" component={KaraokeDisplay} />
+              <Route path="/africariyoki/upload" component={UploadContent} />
               <Route
                 component={() => (
                   <div style={{ padding: 20 }}>Page not found</div>
