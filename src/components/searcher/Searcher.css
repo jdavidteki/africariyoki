@@ -1,0 +1,64 @@
+.Searcher {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  display: flex; }
+  .Searcher table.song-list td, .Searcher table.song-list th {
+    border-bottom: none; }
+  .Searcher-inputWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f7f8e4;
+    border-radius: 15px;
+    padding: 15px;
+    width: 60%; }
+  .Searcher-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    width: 100%;
+    z-index: 99;
+    background-color: transparent;
+    margin-top: auto;
+    margin-bottom: auto;
+    height: auto; }
+  .Searcher-backgroundOverlay {
+    background-color: #0000008f;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1; }
+  .Searcher-background {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #f7f8e4; }
+  .Searcher-typeEffectWrapper {
+    background-color: #f7f8e4;
+    border-radius: 15px;
+    margin-top: 30px;
+    min-width: 50px;
+    padding: 10px; }
+  .Searcher-input {
+    width: 100%; }
+  .Searcher .MuiButtonBase-root.MuiIconButton-root.MuiAutocomplete-clearIndicator.MuiAutocomplete-clearIndicatorDirty {
+    display: none; }
+  .Searcher .MuiAutocomplete-root.MuiAutocomplete-hasClearIcon.MuiAutocomplete-hasPopupIcon {
+    width: 100%; }
+  .Searcher .MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-formControl {
+    border-radius: 100px; }
+  @media only screen and (max-width: 600px) {
+    .Searcher .MuiAutocomplete-root.MuiAutocomplete-hasClearIcon.MuiAutocomplete-hasPopupIcon {
+      width: 280px; }
+    .Searcher-inputWrapper {
+      width: 100%; } }

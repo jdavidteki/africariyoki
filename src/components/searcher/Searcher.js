@@ -15,7 +15,7 @@ import background9 from "./assets/ankarabck9.jpeg";
 import background10 from "./assets/ankarabck10.jpeg";
 import background11 from "./assets/ankarabck11.jpeg";
 
-import './Searcher.scss';
+import './Searcher.css';
 
 class Searcher extends Component {
   constructor(props){
@@ -40,6 +40,7 @@ class Searcher extends Component {
   componentDidMount () {
     Firebase.getLyrics().then(
       val => {
+        console.log(val)
         let shuffledSongs = shuffleArray(val.map(a => a.title))
         this.setState({
           songs: val,

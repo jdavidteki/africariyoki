@@ -1,6 +1,6 @@
 import React from 'react';
 import Song from '../song/Song'
-import './SongList.scss';
+import './SongList.css';
 
 const SongList = (props) => {
   let className = "SongList"

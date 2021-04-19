@@ -4,10 +4,12 @@ import MusicNoteIcon from '@material-ui/icons/MusicNote';
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Firebase from "../../firebase/firebase.js";
-import MetaTags from 'react-meta-tags';
-import "./UploadContent.scss"
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
-class UploadContent extends Component {
+import "./UploadContent.css"
+
+class ConnectedUploadContent extends Component {
 
     state = {
         albumName: "",
@@ -63,9 +65,6 @@ class UploadContent extends Component {
                     justifyContent: "center",
                     alignItems: "center",
                 }}>
-                    <MetaTags>
-                        {/* <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta> */}
-                    </MetaTags>
                     <div
                     style={{
                         width: 320,
@@ -156,6 +155,12 @@ class UploadContent extends Component {
     }
 }
 
+
+const mapStateToProps = state => {
+    return {};
+};
+
+const UploadContent = withRouter(connect(mapStateToProps)(ConnectedUploadContent));
 export default UploadContent;
 
 
