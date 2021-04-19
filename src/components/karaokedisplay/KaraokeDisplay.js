@@ -8,6 +8,8 @@ import LRCFixer from '../lrcFixer/LRCFixer';
 import Clouds from '../clouds/Clouds'
 
 import AudioPlayer from 'react-h5-audio-player';
+import { withRouter } from "react-router-dom";
+
 import 'react-h5-audio-player/lib/styles.css';
 
 import "./KaraokeDisplay.scss";
@@ -184,7 +186,7 @@ class KaraokeDisplay extends Component {
   }
 }
 
-export default KaraokeDisplay;
+export default withRouter(KaraokeDisplay);
 
 function randomNumber(min, max){
   const r = Math.random()*(max-min) + min
