@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/africariyoki/precache-manifest.ec2fc805707925c1aeb4116c187942c7.js"
+  "/africariyoki/precache-manifest.f683a1e8823600e497c088b25a66b1d7.js"
 );
 
 workbox.skipWaiting();
@@ -30,7 +30,7 @@ workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
 workbox.routing.registerNavigationRoute("/africariyoki/index.html", {
-
+  
   blacklist: [/^\/_/,/\/[^/]+\.[^/]+$/],
 });
 

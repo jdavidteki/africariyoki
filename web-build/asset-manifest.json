@@ -1,11 +1,11 @@
 {
   "files": {
-    "app.js": "/africariyoki/static/js/app.1813999e.chunk.js",
-    "app.js.map": "/africariyoki/static/js/app.1813999e.chunk.js.map",
-    "runtime~app.js": "/africariyoki/static/js/runtime~app.ed6c5bb0.js",
-    "runtime~app.js.map": "/africariyoki/static/js/runtime~app.ed6c5bb0.js.map",
-    "static/js/2.ee92e6b8.chunk.js": "/africariyoki/static/js/2.ee92e6b8.chunk.js",
-    "static/js/2.ee92e6b8.chunk.js.map": "/africariyoki/static/js/2.ee92e6b8.chunk.js.map",
+    "app.js": "/africariyoki/static/js/app.44095a10.chunk.js",
+    "app.js.map": "/africariyoki/static/js/app.44095a10.chunk.js.map",
+    "runtime~app.js": "/africariyoki/static/js/runtime~app.8eebc842.js",
+    "runtime~app.js.map": "/africariyoki/static/js/runtime~app.8eebc842.js.map",
+    "static/js/2.dd9ef322.chunk.js": "/africariyoki/static/js/2.dd9ef322.chunk.js",
+    "static/js/2.dd9ef322.chunk.js.map": "/africariyoki/static/js/2.dd9ef322.chunk.js.map",
     "favicon-16.png": "/africariyoki/favicon-16.png",
     "favicon-32.png": "/africariyoki/favicon-32.png",
     "favicon.ico": "/africariyoki/favicon.ico",
@@ -31,8 +31,8 @@
     "static/media/logo.png": "/africariyoki/static/media/logo.eb677ccc.png"
   },
   "entrypoints": [
-    "static/js/runtime~app.ed6c5bb0.js",
-    "static/js/2.ee92e6b8.chunk.js",
-    "static/js/app.1813999e.chunk.js"
+    "static/js/runtime~app.8eebc842.js",
+    "static/js/2.dd9ef322.chunk.js",
+    "static/js/app.44095a10.chunk.js"
   ]
 }
