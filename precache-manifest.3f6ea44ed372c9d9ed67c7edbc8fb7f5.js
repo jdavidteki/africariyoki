@@ -1,7 +1,7 @@
 self.__precacheManifest = [
   {
-    "revision": "243aba0352074676a545",
-    "url": "/africariyoki/static/js/app.44095a10.chunk.js"
+    "revision": "15f6a24e9f25d681af63",
+    "url": "/africariyoki/static/js/app.7df5ad78.chunk.js"
   },
   {
     "revision": "5a0eef172c07fc0bbd47",
@@ -100,7 +100,7 @@ self.__precacheManifest = [
     "url": "/africariyoki/favicon.ico"
   },
   {
-    "revision": "b46b6fa67f3ebf9c0cd256744ae742d8",
+    "revision": "d309ba9c89262f6c6524a19745802c06",
     "url": "/africariyoki/index.html"
   },
   {
