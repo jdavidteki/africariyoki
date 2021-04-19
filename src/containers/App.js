@@ -19,7 +19,7 @@ class App extends Component {
               <Route path="/africariyoki/upload" component={UploadContent} />
               <Route
                 component={() => (
-                  <div style={{ padding: 20 }}>Page not found</div>
+                  <div style={{ padding: 20 }}>Page not foundsss</div>
                 )}
               />
             </Switch>
