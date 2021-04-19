@@ -28,6 +28,7 @@ class ConnectedKaraokeDisplay extends Component {
     secs:0,
     pauseSong: false,
     lrcFixer: false,
+    currentTime: ''
   }
 
   updateTimer=()=>{
@@ -130,6 +131,8 @@ class ConnectedKaraokeDisplay extends Component {
                 onEnded={this.playAnotherSong}
                 onPause={ () => {this.setState({pauseSong: true})}}
                 onPlay = {() => {this.setState({pauseSong: false})}}
+                onListen = {(event) => {this.setState({currentTime: event.target.currentTime})}}
+                listenInterval = {250}
               />
             }
 
@@ -156,6 +159,7 @@ class ConnectedKaraokeDisplay extends Component {
                     <LRCParser
                       lyrics = {this.displayLyrics()}
                       pause = {this.state.pauseSong}
+                      currentTime = {this.state.currentTime}
                     />
                       :
                     <span className="Lyrics-container">

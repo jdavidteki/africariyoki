@@ -40,7 +40,6 @@ class Searcher extends Component {
   componentDidMount () {
     Firebase.getLyrics().then(
       val => {
-        console.log(val)
         let shuffledSongs = shuffleArray(val.map(a => a.title))
         this.setState({
           songs: val,

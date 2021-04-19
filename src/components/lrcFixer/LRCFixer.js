@@ -109,15 +109,21 @@ function onYouTubeIframeAPIReady(songId){
 }
 
 function formatTime(time){
-  time = Math.round(time);
+  time = time*1000
 
-  var minutes = Math.floor(time / 60),
-  seconds = time - minutes * 60;
+  var milliseconds = Math.floor((time % 1000) / 10),
+  seconds = Math.floor((time / 1000) % 60),
+  minutes = Math.floor((time / (1000 * 60)) % 60),
+  hours = Math.floor((time / (1000 * 60 * 60)) % 24);
 
-  seconds = seconds < 10 ? '0' + seconds : seconds;
+  hours = (hours < 10) ? "0" + hours : hours;
+  minutes = (minutes < 10) ? "0" + minutes : minutes;
+  seconds = (seconds < 10) ? "0" + seconds : seconds;
+  milliseconds = (milliseconds < 10) ? "0" + milliseconds : milliseconds;
 
-  return "0" + minutes + ":" + seconds + ".00";
+  return minutes + ":" + seconds + "." + milliseconds;
 }
+
 
 function loadScript(songId){
   if (typeof(YT) == 'undefined' || typeof(YT.Player) == 'undefined') {
