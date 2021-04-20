@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Lyric from 'lrc-file-parser'
 import moment from "moment"
 
 import './LRCParser.css';
@@ -9,50 +8,79 @@ class LRCParser extends Component {
     super(props);
 
     this.state= {
-      lineNumber:1,
       prevLine: "",
       currentLine:"",
       nextLine: "",
-      arrayLyrics: [],
-      lrc: new Lyric({
-        onPlay: this.onPlayFunction,
-        onSetLyric: this.onSetLyricFunction,
-      })
+      prevTimeStamp: "",
+      mapLyricsToMs: this.getLyricsArrayWithMs(this.props.lyrics.split("\n")),
+      copyMapLyricsToMs: this.getLyricsArrayWithMs(this.props.lyrics.split("\n")),
     }
   }
 
-  onPlayFunction = (lineNumber, currentLine) => {
-    this.setState({lineNumber: lineNumber, currentLine: currentLine})
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.currentTime !== this.props.currentTime) {
+      this.getCurrentLyricLine()
+    }
   }
 
-  onSetLyricFunction = (arrayLyrics) => {
-    this.setState({arrayLyrics: arrayLyrics})
+  getLyricsArrayWithMs(rawArray){
+    var msToLine = new Map()
+    for( var i = 0; i < rawArray.length; i++ ){
+      var lyricTimeMilliSec = hmsToSecondsOnly(rawArray[i].substring(1, 6)) + parseInt(rawArray[i].substring(7, 9), 10)
+      msToLine.set(lyricTimeMilliSec, rawArray[i])
+    }
+    return msToLine
   }
 
-  componentDidMount(){
-    this.state.lrc.setLyric(this.props.lyrics)
-    this.state.lrc.play(this.props.currentTime)
+  getCurrentLyricLine(){
+    let currentTime = this.props.currentTime * 1000
+    const copyMapLyricsToMs = this.state.copyMapLyricsToMs.keys()
+    let currentTimeStamp = copyMapLyricsToMs.next().value
+    let nextTimeStamp = copyMapLyricsToMs.next().value
+
+    if ( currentTimeStamp < currentTime){
+      if (this.state.prevTimeStamp != currentTimeStamp){
+        this.setState({prevLine: this.state.mapLyricsToMs.get(this.state.prevTimeStamp)})
+      }
+
+      this.setState(
+        {
+          currentLine: this.state.mapLyricsToMs.get(currentTimeStamp),
+          nextLine: this.state.mapLyricsToMs.get(nextTimeStamp),
+        },() => {
+        this.setState({prevTimeStamp: currentTimeStamp})
+        this.state.copyMapLyricsToMs.delete(currentTimeStamp)
+      });
+    }
   }
 
   render() {
     return (
       <div className="Lyrics-container LRCParser-container">
-        {this.state.arrayLyrics[this.state.lineNumber - 1] &&
-          <p>{cleanLine(this.state.arrayLyrics[this.state.lineNumber - 1].text)}</p>
-        }
+        <p>{this.state.prevLine ? cleanLine(this.state.prevLine) : ''}</p>
         <p className="LRCParser-currentLine">
-          {cleanLine(this.state.currentLine)}
+          {this.state.currentLine ? cleanLine(this.state.currentLine) : 'oya oooo****'}
         </p>
-        {this.state.arrayLyrics[this.state.lineNumber + 1] &&
-          <p>{cleanLine(this.state.arrayLyrics[this.state.lineNumber + 1].text)}</p>
-        }
+        <p>{this.state.nextLine ? cleanLine(this.state.nextLine) : ''}</p>
       </div>
     );
   }
 }
 
 function cleanLine(string){
-  return string.replace(/[^\w\s]/gi, '').toLowerCase().replace("by rentanadvisercom", '***')
+  return string.substr(10).toLowerCase().replace("by rentanadvisercom", '***')
+}
+
+function hmsToSecondsOnly(str) {
+  var p = str.split(':'),
+      s = 0, m = 1;
+
+  while (p.length > 0) {
+      s += m * parseInt(p.pop(), 10);
+      m *= 60;
+  }
+
+  return s*1000;
 }
 
 export default LRCParser;

@@ -23,6 +23,9 @@
     .KaraokeDisplay-audio .rhap_forward-button,
     .KaraokeDisplay-audio .rhap_repeat-button {
       display: none; }
+    .KaraokeDisplay-audio  .rhap_progress-container{
+      pointer-events: none;
+    }
   .KaraokeDisplay-showTimer {
     background-color: #f7f8e4;
     align-items: 'center';

@@ -22,7 +22,6 @@
     "express": "^4.17.1",
     "firebase": "^7.15.4",
     "gh-pages": "^2.2.0",
-    "lrc-file-parser": "^1.0.7",
     "node-sass": "^5.0.0",
     "query-string": "^6.1.0",
     "react": "^16.7.0-alpha.2",

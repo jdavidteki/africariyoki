@@ -125,14 +125,13 @@ class ConnectedKaraokeDisplay extends Component {
                 autoPlay
                 src={this.state.singer.audiourl.includes('africariyoki-4b634') ? this.state.singer.audiourl : this.state.singer.audiourl.replace('africariyoki', 'africariyoki-4b634')} //because im cheap and im not paying for firebase
                 autoPlay
-                controls
                 controlsList="nodownload"
                 className={"KaraokeDisplay-audio"}
                 onEnded={this.playAnotherSong}
                 onPause={ () => {this.setState({pauseSong: true})}}
                 onPlay = {() => {this.setState({pauseSong: false})}}
                 onListen = {(event) => {this.setState({currentTime: event.target.currentTime})}}
-                listenInterval = {250}
+                listenInterval = {50}
               />
             }
 
