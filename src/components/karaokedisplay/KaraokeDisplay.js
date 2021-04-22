@@ -131,7 +131,7 @@ class ConnectedKaraokeDisplay extends Component {
                 onPause={ () => {this.setState({pauseSong: true})}}
                 onPlay = {() => {this.setState({pauseSong: false})}}
                 onListen = {(event) => {this.setState({currentTime: event.target.currentTime})}}
-                listenInterval = {5}
+                listenInterval = {1}
               />
             }
 
