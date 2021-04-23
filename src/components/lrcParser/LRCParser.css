@@ -9,13 +9,13 @@
 }
 
 .LRCParser-currentLine {
-  color: red;
-  font-weight: bold;
-  font-size: 18px;
+  color: #3413f1;
+  font-weight: 600;
+  font-size: 22px;
   text-align: center;
 }
 
 .LRCParser-nextLine,
 .LRCParser-previousLine {
-  font-size: 11px;
+  font-size: 13px;
 }

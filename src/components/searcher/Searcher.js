@@ -51,12 +51,6 @@ class Searcher extends Component {
       }
     )
 
-    Firebase.getLyricsById("-BrqVZeLr0Q").then(
-      val => {
-        console.log(val)
-      }
-    )
-
     setInterval( () => {
       this.setState({
         count: (this.state.count+1) % 20,
@@ -84,11 +78,6 @@ class Searcher extends Component {
         songs: this.state.songsCopy
       })
     }else{
-
-      if (typeSong.length > 0){
-        //
-      }
-
       this.setState({
         filteredSongs: typeSong
       })

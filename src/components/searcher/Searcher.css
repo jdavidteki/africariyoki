@@ -4,7 +4,16 @@
   height: 100%;
   padding: 0;
   margin: 0;
-  display: flex; }
+  display: flex;
+}
+
+  .Searcher .MuiInputBase-input,
+  .Searcher .MuiFormLabel-root{
+    font-family: caveat;
+    font-size: 18px;
+  }
+
+
   .Searcher table.song-list td, .Searcher table.song-list th {
     border-bottom: none; }
   .Searcher-inputWrapper {
@@ -26,7 +35,11 @@
     background-color: transparent;
     margin-top: auto;
     margin-bottom: auto;
-    height: auto; }
+    height: auto;
+    padding-top: 85px;
+    padding-bottom: 85px;
+  }
+
   .Searcher-backgroundOverlay {
     background-color: #0000008f;
     top: 0;
@@ -57,8 +70,10 @@
     width: 100%; }
   .Searcher .MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-formControl {
     border-radius: 100px; }
+
   @media only screen and (max-width: 600px) {
     .Searcher .MuiAutocomplete-root.MuiAutocomplete-hasClearIcon.MuiAutocomplete-hasPopupIcon {
-      width: 280px; }
+      width: 280px;
+  }
     .Searcher-inputWrapper {
       width: 100%; } }

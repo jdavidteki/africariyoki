@@ -151,8 +151,13 @@ class ConnectedKaraokeDisplay extends Component {
               </div>
             }
 
-            <h2 style={{ marginTop: 20, fontSize: 24, color: 'white'}}>
-              {this.state.singer.title} by {this.state.singer.singer}
+            <h2 className="KaraokeDisplay-titleArist">
+              <span className="KaraokeDisplay-songTitle">
+                {this.state.singer.title}
+              </span>
+              <span className="KaraokeDisplay-songArtist">
+                {this.state.singer.singer}
+              </span>
             </h2>
 
             {this.state.lrcFixer ?

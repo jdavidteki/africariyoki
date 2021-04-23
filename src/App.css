@@ -9,9 +9,20 @@
   /* Handle on hover */
 }
 
+@font-face {
+  font-family: caveat;
+  src: url(./assets/Caveat/Caveat-VariableFont_wght.ttf);
+}
+
   .App-body {
     flex-grow: 1;
-    height: calc(100vh); }
+    height: calc(100vh);
+  }
+
+  .App{
+    font-family: caveat;
+  }
+
   .App .content {
     margin-left: auto;
     margin-right: auto;
