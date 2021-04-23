@@ -16,6 +16,21 @@ class Firebase {
     })
   }
 
+  getLyricsById = (id) =>{
+    return new Promise(resolve => {
+      firebase.database()
+      .ref('/lyrics/'+id)
+      .once('value')
+      .then(snapshot => {
+        if (snapshot.val()){
+          resolve(Object(snapshot.val()))
+        }else{
+          resolve({})
+        }
+      })
+    })
+  }
+
   storage = () => {
     return firebase.storage()
   }

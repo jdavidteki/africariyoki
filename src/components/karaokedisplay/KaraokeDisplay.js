@@ -6,6 +6,7 @@ import LRCParser from '../lrcParser/LRCParser';
 import Button from "@material-ui/core/Button";
 import LRCFixer from '../lrcFixer/LRCFixer';
 import Clouds from '../clouds/Clouds'
+import Firebase from "../../firebase/firebase.js";
 
 import AudioPlayer from 'react-h5-audio-player';
 import { withRouter } from "react-router-dom";
@@ -16,12 +17,6 @@ import "./KaraokeDisplay.css";
 
 class ConnectedKaraokeDisplay extends Component {
   state={
-    singer: this.props.location.state.chooseSong[0],
-    animatedTexts: [
-      this.props.location.state.chooseSong[0].title,
-      this.props.location.state.chooseSong[0].singer,
-      this.props.location.state.chooseSong[0].album,
-    ],
     showTimer: false,
     count:0,
     eventDate: moment.duration().add({days:0,hours:0,minutes:0,seconds:5}), // add 9 full days, 3 hours, 40 minutes and 50 seconds
@@ -61,12 +56,27 @@ class ConnectedKaraokeDisplay extends Component {
     this.updateTimer()
   }
 
-  async componentDidMount(){
+  componentDidMount(){
     setInterval( () => {
       this.setState({
         count: (this.state.count+1) % 2
       })
     }, 5000);
+
+    Firebase.getLyricsById(this.props.match.params.id).then(
+      val => {
+        this.setState(
+          {
+            singer: val,
+            animatedTexts: [
+              val.title,
+              val.singer,
+              val.album,
+            ],
+          }
+        )
+      }
+    )
   }
 
   displayLyrics(){
@@ -111,7 +121,7 @@ class ConnectedKaraokeDisplay extends Component {
   }
 
   render() {
-    if (this.props) {
+    if (this.props && this.state.singer) {
       return (
         <div className="KaraokeDisplay">
           <div className="KaraokeDisplay-cloudBackground">
@@ -186,6 +196,9 @@ class ConnectedKaraokeDisplay extends Component {
         </div>
       )
     }
+    return(
+      <div></div>
+    )
   }
 }
 

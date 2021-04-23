@@ -51,6 +51,12 @@ class Searcher extends Component {
       }
     )
 
+    Firebase.getLyricsById("-BrqVZeLr0Q").then(
+      val => {
+        console.log(val)
+      }
+    )
+
     setInterval( () => {
       this.setState({
         count: (this.state.count+1) % 20,
