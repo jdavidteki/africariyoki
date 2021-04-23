@@ -6,10 +6,12 @@
   width: 100%;
   /* Track */
   /* Handle */
-  /* Handle on hover */ }
+  /* Handle on hover */
+}
+
   .App-body {
     flex-grow: 1;
-    height: calc(100vh - 75px); }
+    height: calc(100vh); }
   .App .content {
     margin-left: auto;
     margin-right: auto;

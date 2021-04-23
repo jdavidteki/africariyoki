@@ -2,14 +2,19 @@
   position: relative;
   height: 100%;
   width: 100%;
-  /* smaller screens */ }
+  /* smaller screens */
+}
   .KaraokeDisplay-container h2 {
     text-align: center; }
-  .KaraokeDisplay-container {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    height: 100%; }
+
+.KaraokeDisplay-container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  height: calc(100vh - 80px);
+  margin-top: 80px;
+}
+
   .KaraokeDisplay-audio {
     background-color: transparent;
     color: #f7f8e4; }
@@ -64,11 +69,16 @@
       margin: auto;
       max-height: 80px;
       max-width: 80%; }
+
     .KaraokeDisplay .Lyrics-container {
       display: flex;
       width: 100%;
       font-size: 20px;
-      height: 100%; }
+      height: 100%;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+
     .KaraokeDisplay .Lyrics-lowerSection {
       display: flex;
       justify-content: space-between;

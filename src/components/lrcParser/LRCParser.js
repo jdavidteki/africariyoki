@@ -57,11 +57,15 @@ class LRCParser extends Component {
   render() {
     return (
       <div className="Lyrics-container LRCParser-container">
-        <p>{this.state.prevLine ? cleanLine(this.state.prevLine) : ''}</p>
+        <p className="LRCParser-previousLine">
+          {this.state.prevLine ? cleanLine(this.state.prevLine) : ''}
+        </p>
         <p className="LRCParser-currentLine">
           {this.state.currentLine ? cleanLine(this.state.currentLine) : 'oya oooo****'}
         </p>
-        <p>{this.state.nextLine ? cleanLine(this.state.nextLine) : ''}</p>
+        <p className="LRCParser-nextLine">
+          {this.state.nextLine ? cleanLine(this.state.nextLine) : ''}
+        </p>
       </div>
     );
   }
