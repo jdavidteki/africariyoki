@@ -1,11 +1,12 @@
 {
   "files": {
-    "app.js": "/africariyoki/static/js/app.fe7ec2cc.chunk.js",
-    "app.js.map": "/africariyoki/static/js/app.fe7ec2cc.chunk.js.map",
+    "app.js": "/africariyoki/static/js/app.8647cd4d.chunk.js",
+    "app.js.map": "/africariyoki/static/js/app.8647cd4d.chunk.js.map",
     "runtime~app.js": "/africariyoki/static/js/runtime~app.8eebc842.js",
     "runtime~app.js.map": "/africariyoki/static/js/runtime~app.8eebc842.js.map",
-    "static/js/2.2bc662d4.chunk.js": "/africariyoki/static/js/2.2bc662d4.chunk.js",
-    "static/js/2.2bc662d4.chunk.js.map": "/africariyoki/static/js/2.2bc662d4.chunk.js.map",
+    "static/js/2.4e822b30.chunk.js": "/africariyoki/static/js/2.4e822b30.chunk.js",
+    "static/js/2.4e822b30.chunk.js.map": "/africariyoki/static/js/2.4e822b30.chunk.js.map",
+    "fonts/Caveat-VariableFont_wght.ttf": "/africariyoki/./fonts/Caveat-VariableFont_wght.ttf",
     "favicon-16.png": "/africariyoki/favicon-16.png",
     "favicon-32.png": "/africariyoki/favicon-32.png",
     "favicon.ico": "/africariyoki/favicon.ico",
@@ -32,7 +33,7 @@
   },
   "entrypoints": [
     "static/js/runtime~app.8eebc842.js",
-    "static/js/2.2bc662d4.chunk.js",
-    "static/js/app.fe7ec2cc.chunk.js"
+    "static/js/2.4e822b30.chunk.js",
+    "static/js/app.8647cd4d.chunk.js"
   ]
 }
