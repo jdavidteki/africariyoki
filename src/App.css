@@ -10,7 +10,7 @@
 }
 
 @font-face {
-  font-family: caveat;
+  font-family: Caveat;
   src: url(./assets/Caveat/Caveat-VariableFont_wght.ttf);
 }
 
@@ -20,7 +20,7 @@
   }
 
   .App{
-    font-family: caveat;
+    font-family: Caveat;
   }
 
   .App .content {

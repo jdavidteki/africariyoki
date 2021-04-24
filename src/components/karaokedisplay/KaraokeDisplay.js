@@ -7,14 +7,14 @@ import Button from "@material-ui/core/Button";
 import LRCFixer from '../lrcFixer/LRCFixer';
 import Clouds from '../clouds/Clouds'
 import Firebase from "../../firebase/firebase.js";
-
+import NoSleep from 'nosleep.js';
 import AudioPlayer from 'react-h5-audio-player';
 import { withRouter } from "react-router-dom";
 
 import 'react-h5-audio-player/lib/styles.css';
-
 import "./KaraokeDisplay.css";
 
+var noSleep = new NoSleep();
 class ConnectedKaraokeDisplay extends Component {
   state={
     showTimer: false,
@@ -57,6 +57,8 @@ class ConnectedKaraokeDisplay extends Component {
   }
 
   componentDidMount(){
+    noSleep.enable();
+
     setInterval( () => {
       this.setState({
         count: (this.state.count+1) % 2
@@ -77,6 +79,10 @@ class ConnectedKaraokeDisplay extends Component {
         )
       }
     )
+  }
+
+  componentDidUnmount(){
+    noSleep.enable();
   }
 
   displayLyrics(){
