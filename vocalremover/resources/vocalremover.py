@@ -125,7 +125,7 @@ def execute(path):
 
 #downloadmp3fromyoutube
 def downloadMp3FromYoutube(videoId):
-  print('downloading song in mp3 format')
+  print('downloading song in mp3 format', videoId)
   url = "https://www.yt-download.org/api/button/mp3/" + videoId
 
   page = requests.get(url)

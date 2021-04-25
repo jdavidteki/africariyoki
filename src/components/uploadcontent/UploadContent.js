@@ -42,6 +42,7 @@ class ConnectedUploadContent extends Component {
                 lyricsurl: lyricsTextUrl,
                 lyrics: this.state.lyrics,
                 id: this.state.videoID,
+                albumName: this.state.albumName,
             })
 
             //use ai to extract vocall from music and upload instrumental

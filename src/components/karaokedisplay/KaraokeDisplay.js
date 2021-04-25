@@ -10,6 +10,7 @@ import Firebase from "../../firebase/firebase.js";
 import NoSleep from 'nosleep.js';
 import AudioPlayer from 'react-h5-audio-player';
 import { withRouter } from "react-router-dom";
+import PopularSongs from "../popularSongs/popularSongs.js";
 
 import 'react-h5-audio-player/lib/styles.css';
 import "./KaraokeDisplay.css";
@@ -188,6 +189,8 @@ class ConnectedKaraokeDisplay extends Component {
                   }
                 </div>
             }
+
+            {/* <PopularSongs/> */}
 
             <div className="Lyrics-lowerSection">
               <ReactTypingEffect
