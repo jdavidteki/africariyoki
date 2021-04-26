@@ -10,7 +10,7 @@ import Firebase from "../../firebase/firebase.js";
 import NoSleep from 'nosleep.js';
 import AudioPlayer from 'react-h5-audio-player';
 import { withRouter } from "react-router-dom";
-import PopularSongs from "../popularSongs/popularSongs.js";
+import PopularSongs from "../popularSongs/PopularSongs.js";
 
 import 'react-h5-audio-player/lib/styles.css';
 import "./KaraokeDisplay.css";
@@ -24,7 +24,8 @@ class ConnectedKaraokeDisplay extends Component {
     secs:0,
     pauseSong: false,
     lrcFixer: false,
-    currentTime: ''
+    currentTime: '',
+    popularSongs:[],
   }
 
   updateTimer=()=>{
@@ -80,9 +81,15 @@ class ConnectedKaraokeDisplay extends Component {
         )
       }
     )
+
+    Firebase.getLyrics().then(
+      val => {
+        this.setState({popularSongs: val})
+      }
+    )
   }
 
-  componentDidUnmount(){
+  componentWillUnmount(){
     noSleep.enable();
   }
 
@@ -125,6 +132,10 @@ class ConnectedKaraokeDisplay extends Component {
     }else{
       alert("sorry, invalid password")
     }
+  }
+
+  playSong(songId) {
+    window.location.href = "/africariyoki/karaokedisplay/" + songId;
   }
 
   render() {
@@ -183,14 +194,21 @@ class ConnectedKaraokeDisplay extends Component {
                       currentTime = {this.state.currentTime}
                     />
                       :
-                    <span className="Lyrics-container">
+                    <span className="Lyrics-container Lyrics-nonParsedLyrics">
                       {this.displayLyrics()}
                     </span>
                   }
                 </div>
             }
 
-            {/* <PopularSongs/> */}
+            {
+              this.state.popularSongs.length &&
+              <PopularSongs
+                cards = {this.state.popularSongs.slice(0, 30)}
+                playSong = {this.playSong}
+                thisSongId = {this.props.match.params.id}
+              />
+            }
 
             <div className="Lyrics-lowerSection">
               <ReactTypingEffect

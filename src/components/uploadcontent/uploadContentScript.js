@@ -40,7 +40,7 @@ function uploadToFirebase(song){
   let audioUrl = `https://storage.googleapis.com/africariyoki-4b634.appspot.com/music/${song.videoID}.mp3`
   let lyricsTextUrl = `https://storage.googleapis.com/africariyoki-4b634.appspot.com/lyrics/${song.videoID}.txt`
   // let addressID = 'http://0.0.0.0:5000'
-  let addressID = "https://a588b312f36d.ngrok.io"
+  let addressID = "http://a28129554cd3.ngrok.io"
   // if(song.addressID){
   //     addressID = "http://0.0.0.0:5000"
   // }else{

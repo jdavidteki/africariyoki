@@ -1,26 +1,26 @@
 @import url("https://fonts.googleapis.com/css?family=Space+Mono");
 .wrapper {
   display: flex;
-  height: 100vh;
   align-items: center;
   box-sizing: border-box;
   z-index: 999;
-  overflow: scroll;
+  overflow-y: hidden;
+  overflow-x: scroll;
 }
 .card {
-  margin: 0 3vw;
-  width: 25vw;
+  margin: 0 1vw;
   flex-shrink: 0;
-  padding: 2vw;
+  padding: 1px;
   box-sizing: border-box;
   position: relative;
   border-radius: 3px;
-  border: 2px solid #000;
+  border: 1px solid #f7f8e4;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
   box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.1);
 }
+
 .card-title {
   transition: 0.3s;
   text-align: center;
@@ -38,20 +38,7 @@
   right: -6vw;
   top: 0;
 }
-.card img {
-  max-width: 70%;
-  max-height: 50vh;
-  opacity: 0;
-  margin: auto;
-  display: block;
-  transition: 0.35s;
-  transform: rotate(6deg) translate(0, 40px) scaleY(0.6);
-}
-.card.isVisible img {
-  max-width: 100%;
-  opacity: 1;
-  transform: none;
-}
+
 .card.isVisible .card-title {
   opacity: 1;
   transform: none;
@@ -59,4 +46,31 @@
 }
 .card:first-child {
   margin-left: 6vw;
+}
+.PopularSongs{
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  scrollbar-width: none;
+}
+
+.PopularSongs::-webkit-scrollbar-track {
+  -webkit-box-shadow: none !important;
+  background-color: transparent;
+}
+.PopularSongs::-webkit-scrollbar {
+  width: 3px !important;
+  background-color: transparent;
+}
+.PopularSongs::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  background: none !important;
+}
+
+
+@media only screen and (max-width: 600px) {
+  .PopularSongs {
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
 }

@@ -8,6 +8,7 @@
   margin: 5px;
   height: 50px;
   font-weight: 600;
+  transition: background-color 0.25s ease-in;
 }
 .Song-list {
   display: flex;
@@ -18,6 +19,10 @@
   background-color: #0f750f;
   cursor: pointer;
   color: white;
+  transition: background-color 0.25s ease-in;
+}
+.Song-title{
+  text-transform: uppercase;
 }
 @media only screen and (max-width: 600px) {
   .Song {

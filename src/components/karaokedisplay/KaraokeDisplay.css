@@ -60,6 +60,13 @@
       display: none;
     }
 
+    .KaraokeDisplay-audio .rhap_progress-bar .rhap_progress-bar-show-download,
+    .KaraokeDisplay-audio .rhap_progress-indicator,
+    .KaraokeDisplay-audio .rhap_progress-filled,
+    .KaraokeDisplay-audio .rhap_download-progress{
+      height: 3px;
+    }
+
 
     .KaraokeDisplay-audio .rhap_controls-section{
       justify-content: center;
@@ -114,6 +121,10 @@
       height: 100%;
       padding-left: 10px;
       padding-right: 10px;
+    }
+
+    .KaraokeDisplay .Lyrics-nonParsedLyrics{
+      overflow: scroll;
     }
 
     .KaraokeDisplay .Lyrics-lowerSection {

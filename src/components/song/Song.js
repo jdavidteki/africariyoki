@@ -7,8 +7,8 @@ const Song = (props) => {
       className="Song"
       onClick={() => props.playSong(props.song.id)}
     >
-      <span>{props.song.title}</span>
-      <span>{props.song.singer}</span>
+      <span className="Song-title">{props.song.title}</span>
+      <span className="Song-singer">{props.song.singer}</span>
     </div>
   )
 }
