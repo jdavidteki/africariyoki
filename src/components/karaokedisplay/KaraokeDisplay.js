@@ -204,7 +204,7 @@ class ConnectedKaraokeDisplay extends Component {
             {
               this.state.popularSongs.length &&
               <PopularSongs
-                cards = {this.state.popularSongs.slice(0, 30)}
+                cards = {this.state.popularSongs.slice(0, 50).sort(( )=> Math.random() - 0.5)}
                 playSong = {this.playSong}
                 thisSongId = {this.props.match.params.id}
               />
