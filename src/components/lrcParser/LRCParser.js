@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import moment from "moment"
+import Recorder from '../recorder/Recorder.js'
 
 import './LRCParser.css';
 
@@ -14,6 +14,16 @@ class LRCParser extends Component {
       prevTimeStamp: "",
       mapLyricsToMs: this.getLyricsArrayWithMs(this.props.lyrics.split("\n")),
       copyMapLyricsToMs: this.getLyricsArrayWithMs(this.props.lyrics.split("\n")),
+      audioDetails: {
+        url: null,
+        blob: null,
+        chunks: null,
+        duration: {
+          h: 0,
+          m: 0,
+          s: 0
+        }
+      }
     }
   }
 
@@ -57,15 +67,23 @@ class LRCParser extends Component {
   render() {
     return (
       <div className="Lyrics-container LRCParser-container">
-        <p className="LRCParser-previousLine">
-          {this.state.prevLine ? cleanLine(this.state.prevLine) : ''}
-        </p>
-        <p className="LRCParser-currentLine">
-          {this.state.currentLine ? cleanLine(this.state.currentLine) : 'oya oooo****'}
-        </p>
-        <p className="LRCParser-nextLine">
-          {this.state.nextLine ? cleanLine(this.state.nextLine) : ''}
-        </p>
+        <div className="LRCParser-containerWrapper">
+          <p className="LRCParser-previousLine">
+            {this.state.prevLine ? cleanLine(this.state.prevLine) : ''}
+          </p>
+          <p className="LRCParser-currentLine">
+            {this.state.currentLine ? cleanLine(this.state.currentLine) : 'oya oooo****'}
+          </p>
+          <p className="LRCParser-nextLine">
+            {this.state.nextLine ? cleanLine(this.state.nextLine) : ''}
+          </p>
+        </div>
+        <div className="LRCParser-recorder">
+          <Recorder
+            singer={this.props.singer}
+            title={this.props.title}
+          />
+        </div>
       </div>
     );
   }

@@ -1,0 +1,48 @@
+#msg {
+    visibility: hidden;
+    color: red;
+    font-weight: bold;
+    font-size: 22px;
+    font-family: Verdana;
+  }
+  .Record-controls {
+    padding: 5px 10px;
+    border: 1px solid #f7f8e4;
+    font-size: 18px;
+    background: #f7f8e4;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+
+  .Record-controls:hover{
+    background: #c0f0c0;
+  }
+
+  .audio-controls {
+    display: flex;
+    align-items: center;
+    padding-top: 20px;
+    justify-content: center;
+  }
+  .audio-controls button {
+    margin: 0px 5px;
+  }
+  canvas {
+    background-color: #f7f8e4;
+  }
+  select {
+    height: 25px;
+    margin: 0px 5px;
+  }
+  .Recorder {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .Recorder-upperLevel {
+    display: flex;
+    height: 50px;
+    width: 70%;
+  }

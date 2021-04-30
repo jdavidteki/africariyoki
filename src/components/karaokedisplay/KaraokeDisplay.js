@@ -143,7 +143,7 @@ class ConnectedKaraokeDisplay extends Component {
       return (
         <div className="KaraokeDisplay">
           <div className="KaraokeDisplay-cloudBackground">
-            <Clouds/>
+            {/* <Clouds/> */}
             <div className="KaraokeDisplay-stars"></div>
           </div>
 
@@ -179,32 +179,34 @@ class ConnectedKaraokeDisplay extends Component {
             </h2>
 
             {this.state.lrcFixer ?
-                <div className="Lyrics Lyrics-LRCFixercontainer">
-                  <LRCFixer
-                    lyrics={this.displayLyrics()}
-                    songId={this.state.singer.id}
+              <div className="Lyrics Lyrics-LRCFixercontainer">
+                <LRCFixer
+                  lyrics={this.displayLyrics()}
+                  songId={this.state.singer.id}
+                />
+              </div>
+              :
+              <div className="Lyrics Lyrics-DisplayContainer">
+                {this.lrcFormat() ?
+                  <LRCParser
+                    lyrics = {this.displayLyrics()}
+                    pause = {this.state.pauseSong}
+                    currentTime = {this.state.currentTime}
+                    singer={this.state.singer.singer}
+                    title={this.state.singer.title}
                   />
-                </div>
-                :
-                <div className="Lyrics Lyrics-DisplayContainer">
-                  {this.lrcFormat() ?
-                    <LRCParser
-                      lyrics = {this.displayLyrics()}
-                      pause = {this.state.pauseSong}
-                      currentTime = {this.state.currentTime}
-                    />
-                      :
-                    <span className="Lyrics-container Lyrics-nonParsedLyrics">
-                      {this.displayLyrics()}
-                    </span>
-                  }
-                </div>
+                    :
+                  <span className="Lyrics-container Lyrics-nonParsedLyrics">
+                    {this.displayLyrics()}
+                  </span>
+                }
+              </div>
             }
 
             {
               this.state.popularSongs.length &&
               <PopularSongs
-                cards = {this.state.popularSongs.slice(0, 50).sort(( )=> Math.random() - 0.5)}
+                cards = {this.state.popularSongs.sort(( )=> Math.random() - 0.5).slice(0, 50)}
                 playSong = {this.playSong}
                 thisSongId = {this.props.match.params.id}
               />
