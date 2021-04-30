@@ -143,7 +143,7 @@ class ConnectedKaraokeDisplay extends Component {
       return (
         <div className="KaraokeDisplay">
           <div className="KaraokeDisplay-cloudBackground">
-            {/* <Clouds/> */}
+            <Clouds/>
             <div className="KaraokeDisplay-stars"></div>
           </div>
 
