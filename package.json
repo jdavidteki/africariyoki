@@ -19,6 +19,7 @@
     "babel-register": "^6.26.0",
     "cors": "^2.8.5",
     "csv-parser": "^3.0.0",
+    "emoji-mart": "^3.0.1",
     "expo": "~37.0.3",
     "express": "^4.17.1",
     "firebase": "^7.15.4",
