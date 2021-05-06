@@ -12,7 +12,8 @@
   width: 100%;
   flex-direction: column;
   height: calc(100vh - 80px);
-  margin-top: 80px;
+  position: fixed;
+  top: 80px;
 }
 
 .KaraokeDisplay-songArtist{
