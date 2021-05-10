@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/africariyoki/precache-manifest.200b764509ef68d554ccf746bce603b2.js"
+  "/africariyoki/precache-manifest.5183b0731a333d919992baee7bda9bfb.js"
 );
 
 workbox.skipWaiting();

@@ -59,7 +59,7 @@ class ConnectedUploadContent extends Component {
 
     render() {
         return (
-            <div className="UploadContent" style={{height: "100%"}}>
+            <div className="UploadContent">
                 <div style={{
                     height: "100%",
                     display: "flex",

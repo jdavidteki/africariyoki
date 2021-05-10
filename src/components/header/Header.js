@@ -36,9 +36,9 @@ class Header extends Component {
                   className="Header-navLink"
                   variant="outlined"
                   color="primary"
-                  to = "/africariyoki/upload"
+                  to = "/africariyoki/admin"
                 >
-                    upload
+                    admin
               </Link>
             </div>
         </div>

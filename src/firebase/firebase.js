@@ -35,14 +35,16 @@ class Firebase {
     return firebase.storage()
   }
 
-  deleteRecp = (userId, recipientID) => {
+  deleteRecp = (songId) => {
+    console.log("songId", songId)
     return new Promise(resolve => {
       firebase.database()
-      .ref('/recipients/' + userId)
-      .child(recipientID)
+      .ref('/lyrics/'+songId)
       .remove()
       .then(() => {
         resolve(true)
+      }).catch( (error) =>{
+        console.log("error", error)
       })
     })
   }

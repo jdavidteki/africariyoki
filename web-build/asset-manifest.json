@@ -1,7 +1,7 @@
 {
   "files": {
-    "app.js": "/africariyoki/static/js/app.f2b83d2e.chunk.js",
-    "app.js.map": "/africariyoki/static/js/app.f2b83d2e.chunk.js.map",
+    "app.js": "/africariyoki/static/js/app.76073552.chunk.js",
+    "app.js.map": "/africariyoki/static/js/app.76073552.chunk.js.map",
     "runtime~app.js": "/africariyoki/static/js/runtime~app.8eebc842.js",
     "runtime~app.js.map": "/africariyoki/static/js/runtime~app.8eebc842.js.map",
     "static/js/2.0eadc584.chunk.js": "/africariyoki/static/js/2.0eadc584.chunk.js",
@@ -34,6 +34,6 @@
   "entrypoints": [
     "static/js/runtime~app.8eebc842.js",
     "static/js/2.0eadc584.chunk.js",
-    "static/js/app.f2b83d2e.chunk.js"
+    "static/js/app.76073552.chunk.js"
   ]
 }

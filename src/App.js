@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from './components/header/Header';
 import Searcher from './components/searcher/Searcher.js';
 import KaraokeDisplay from './components/karaokedisplay/KaraokeDisplay.js'
-import UploadContent from './components/uploadcontent/UploadContent.js'
+import Admin from './components/admin/Admin.js'
 import { Switch, Route } from "react-router-dom";
 import "./App.css";
 
@@ -16,7 +16,7 @@ class App extends Component {
             <Switch>
               <Route path="/africariyoki/" exact component={Searcher} />
               <Route path="/africariyoki/karaokedisplay/:id" component={KaraokeDisplay} />
-              <Route path="/africariyoki/upload" exact component={UploadContent} />
+              <Route path="/africariyoki/admin" exact component={Admin} />
               <Route
                 component={() => (
                   <div style={{ padding: 20 }}>Page coming soon...</div>
