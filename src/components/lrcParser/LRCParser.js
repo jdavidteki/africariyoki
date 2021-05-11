@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Recorder from '../recorder/Recorder.js'
+import { Emoji } from 'emoji-mart'
 
 import './LRCParser.css';
 
@@ -72,7 +73,20 @@ class LRCParser extends Component {
             {this.state.prevLine ? cleanLine(this.state.prevLine) : ''}
           </p>
           <p className="LRCParser-currentLine">
-            {this.state.currentLine ? cleanLine(this.state.currentLine) : 'oya oooo****'}
+            {this.state.currentLine ?
+
+             cleanLine(this.state.currentLine)
+
+            :
+            <span>
+              loading din din...
+              <Emoji
+                emoji={'stuck_out_tongue_winking_eye'}
+                set='apple'
+                size={18}
+              />
+            </span>
+            }
           </p>
           <p className="LRCParser-nextLine">
             {this.state.nextLine ? cleanLine(this.state.nextLine) : ''}

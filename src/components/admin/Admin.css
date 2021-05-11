@@ -1,8 +1,9 @@
 .Admin{
-    margin-top: 80px;
+    padding-top: 80px;
     width: 100%;
     display: flex;
     flex-direction: column;
+    background-color: gray;
 }
 
 .Admin-table{
@@ -12,26 +13,3 @@
 .MuiButton-label{
     font-family: Caveat;
 }
-
-/* .react-grid-Container{
-    display: flex;
-    flex-direction: column;
-}
-
-.react-grid-Canvas,
-.react-grid-Container{
-    width: 100% !important;
-}
-
-.react-grid-Cell{
-    background-color: #fff;
-    padding-left: 8px;
-    padding-right: 8px;
-    border-right: 1px solid #eee;
-    border-bottom: 1px solid #ddd;
-}
-
-.react-grid-HeaderCell,
-.react-grid-Cell{
-    min-width: 200px !important;
-} */

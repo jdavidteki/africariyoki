@@ -10,8 +10,8 @@ class LRCFixer extends Component {
   constructor(props){
     super(props);
     this.state= {
-        songId: props.songId,
-        lyrics: props.lyrics,
+        songId: this.props.location.state.songId,
+        lyrics: this.props.location.state.lyrics,
         lyricsArrayClean: [],
         noTimeStamp: 0,
     }

@@ -3,8 +3,6 @@ import ReactTypingEffect from 'react-typing-effect';
 import { connect } from "react-redux";
 import moment from "moment"
 import LRCParser from '../lrcParser/LRCParser';
-import Button from "@material-ui/core/Button";
-import LRCFixer from '../lrcFixer/LRCFixer';
 import Clouds from '../clouds/Clouds'
 import Firebase from "../../firebase/firebase.js";
 import NoSleep from 'nosleep.js';
@@ -23,9 +21,15 @@ class ConnectedKaraokeDisplay extends Component {
     eventDate: moment.duration().add({days:0,hours:0,minutes:0,seconds:5}), // add 9 full days, 3 hours, 40 minutes and 50 seconds
     secs:0,
     pauseSong: false,
-    lrcFixer: false,
     currentTime: '',
     popularSongs:[],
+    singer: {
+      audiourl: '',
+      singer: '',
+      title: '',
+      lyrics: '',
+    },
+    animatedTexts: [],
   }
 
   updateTimer=()=>{
@@ -90,7 +94,7 @@ class ConnectedKaraokeDisplay extends Component {
   }
 
   componentWillUnmount(){
-    noSleep.enable();
+    noSleep.disable();
   }
 
   displayLyrics(){
@@ -119,21 +123,6 @@ class ConnectedKaraokeDisplay extends Component {
     return lyrics.includes("[00")
   }
 
-  toggleLrcFixer(){
-
-    var tenure = prompt("Please enter master password", "");
-
-    if (tenure != null && tenure == "1226") {
-      if (this.state.lrcFixer) {
-        this.setState({lrcFixer: false})
-      }else{
-        this.setState({lrcFixer: true})
-      }
-    }else{
-      alert("sorry, invalid password")
-    }
-  }
-
   playSong(songId) {
     window.location.href = "/africariyoki/karaokedisplay/" + songId;
   }
@@ -148,20 +137,18 @@ class ConnectedKaraokeDisplay extends Component {
           </div>
 
           <div className="KaraokeDisplay-container">
-            {!this.state.lrcFixer &&
-              <AudioPlayer
-                autoPlay
-                src={this.state.singer.audiourl.includes('africariyoki-4b634') ? this.state.singer.audiourl : this.state.singer.audiourl.replace('africariyoki', 'africariyoki-4b634')} //because im cheap and im not paying for firebase
-                autoPlay
-                controlsList="nodownload"
-                className={"KaraokeDisplay-audio"}
-                onEnded={this.playAnotherSong}
-                onPause={ () => {this.setState({pauseSong: true})}}
-                onPlay = {() => {this.setState({pauseSong: false})}}
-                onListen = {(event) => {this.setState({currentTime: event.target.currentTime})}}
-                listenInterval = {1}
-              />
-            }
+            <AudioPlayer
+              autoPlay
+              src={this.state.singer.audiourl.includes('africariyoki-4b634') ? this.state.singer.audiourl : this.state.singer.audiourl.replace('africariyoki', 'africariyoki-4b634')} //because im cheap and im not paying for firebase
+              autoPlay
+              controlsList="nodownload"
+              className={"KaraokeDisplay-audio"}
+              onEnded={this.playAnotherSong}
+              onPause={ () => {this.setState({pauseSong: true})}}
+              onPlay = {() => {this.setState({pauseSong: false})}}
+              onListen = {(event) => {this.setState({currentTime: event.target.currentTime})}}
+              listenInterval = {1}
+            />
 
             {this.state.showTimer &&
               <div className="KaraokeDisplay-showTimer">
@@ -178,31 +165,21 @@ class ConnectedKaraokeDisplay extends Component {
               </span>
             </h2>
 
-            {this.state.lrcFixer ?
-              <div className="Lyrics Lyrics-LRCFixercontainer">
-                <LRCFixer
-                  lyrics={this.displayLyrics()}
-                  songId={this.state.singer.id}
+            <div className="Lyrics Lyrics-DisplayContainer">
+              {this.lrcFormat() ?
+                <LRCParser
+                  lyrics = {this.displayLyrics()}
+                  pause = {this.state.pauseSong}
+                  currentTime = {this.state.currentTime}
+                  singer={this.state.singer.singer}
+                  title={this.state.singer.title}
                 />
-              </div>
-              :
-              <div className="Lyrics Lyrics-DisplayContainer">
-                {this.lrcFormat() ?
-                  <LRCParser
-                    lyrics = {this.displayLyrics()}
-                    pause = {this.state.pauseSong}
-                    currentTime = {this.state.currentTime}
-                    singer={this.state.singer.singer}
-                    title={this.state.singer.title}
-                  />
-                    :
-                  <span className="Lyrics-container Lyrics-nonParsedLyrics">
-                    {this.displayLyrics()}
-                  </span>
-                }
-              </div>
-            }
-
+                  :
+                <span className="Lyrics-container Lyrics-nonParsedLyrics">
+                  {this.displayLyrics()}
+                </span>
+              }
+            </div>
             {
               this.state.popularSongs.length &&
               <PopularSongs
@@ -220,11 +197,6 @@ class ConnectedKaraokeDisplay extends Component {
                 eraseDelay={150}
                 typingDelay={150}
               />
-              <Button
-                onClick={()=> this.toggleLrcFixer()}
-              >
-                toggle lyrics
-              </Button>
             </div>
           </div>
         </div>

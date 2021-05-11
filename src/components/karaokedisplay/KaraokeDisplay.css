@@ -138,9 +138,8 @@
     .KaraokeDisplay .Lyrics-lowerSection {
       display: flex;
       justify-content: space-between;
-      font-size: 14px; }
-    .KaraokeDisplay .Lyrics-LRCFixercontainer {
-      height: 100%; }
+      font-size: 14px;
+    }
 
   @media only screen and (max-width: 600px) {
     .KaraokeDisplay .Lyrics-container {

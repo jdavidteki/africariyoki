@@ -24,14 +24,14 @@ class Header extends Component {
                   >
                       home
               </Link>
-              <Link
+              {/* <Link
                     className="Header-navLink"
                     variant="outlined"
                     color="primary"
                     to = "/africariyoki/about"
                   >
                       about
-              </Link>
+              </Link> */}
               <Link
                   className="Header-navLink"
                   variant="outlined"

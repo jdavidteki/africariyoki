@@ -44,6 +44,7 @@ class ConnectedAdmin extends Component {
         selectedIndexes: [],
         rows:[],
         selectedSongIds: [],
+        selectedSongLyrics: '',
     };
 
     componentDidMount(){
@@ -84,7 +85,8 @@ class ConnectedAdmin extends Component {
           ),
           selectedIndexes: this.state.selectedIndexes.concat(
             rows.map(r => r.rowIdx)
-          )
+          ),
+          selectedSongLyrics: rows[0].row.lyrics
         });
     };
 
@@ -129,10 +131,23 @@ class ConnectedAdmin extends Component {
         }
     }
 
+    updateSong(){
+        this.props.history.push({
+            pathname: "/africariyoki/lrcfixer/" + this.state.selectedSongIds[0],
+            state: {
+                lyrics: this.state.selectedSongLyrics,
+                songId: this.state.selectedSongIds[0],
+            }
+        });
+        window.location.reload(true);
+    }
+
     render() {
         if (!this.state.adminLoggedIn){
             return (
-                <div>unauthorized access to this page!</div>
+                <div lassName="Admin">
+                    unauthorized access to this page!
+                </div>
             )
         }
         return (
@@ -169,6 +184,21 @@ class ConnectedAdmin extends Component {
                     >
                         ({this.state.selectedIndexes.length}) Delete
                     </Button>
+                    {" "}
+                    {
+                        this.state.selectedIndexes.length == 1 && (
+                            <Button
+                                style={{ marginTop: 20, width: 200 }}
+                                variant="outlined"
+                                color="primary"
+                                onClick={() => {
+                                    this.updateSong()
+                                }}
+                            >
+                             Update Lyrics
+                            </Button>
+                        )
+                    }
                     <UploadContent />
                 </div>
             </div>

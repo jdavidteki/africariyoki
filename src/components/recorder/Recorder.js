@@ -38,47 +38,49 @@ class Recorder extends Component {
     totalFreq=0
 
     async componentDidMount(){
-      this.canvasCtx = this.canvas.getContext("2d")
+      if( this.canvas != undefined){
+        this.canvasCtx = this.canvas.getContext("2d")
 
-      try {
-          window.stream = this.stream = await this.getStream();
-          console.log('Got stream');
+        try {
+            window.stream = this.stream = await this.getStream();
+            console.log('Got stream');
 
-          this.setUpRecording()
+            this.setUpRecording()
 
-          this.startRecord.onclick = (e) => {
-              console.log('Start recording')
-              this.start();
-          }
-
-          this.stopRecord.onclick = (e) => {
-              this.stop();
-          }
-
-          setInterval(() =>{
-            var dataArrayN = new Float32Array(this.analyser.frequencyBinCount)
-            this.analyser.getFloatFrequencyData(dataArrayN)
-            var freq = Math.abs(dataArrayN.reduce((a, b) => a + b, 0))
-
-            this.totalFreq += freq
-            this.summation += 1
-            if( this.summation %40 == 0){
-              this.averagefreq = this.totalFreq/40
-              this.totalFreq = 0
+            this.startRecord.onclick = (e) => {
+                console.log('Start recording')
+                this.start();
             }
 
-            if(freq >= this.averagefreq ){
-              this.setState({motivator: 'wonderful sturvs', smileyToSet: 'confetti_ball'})
-            }else{
-              if (freq < this.averagefreq - 5000){
-                this.setState({motivator: 'ko bad naa', smileyToSet: 'hugging_face'})
-              }else{
-                this.setState({motivator: 'singing in the nonsense', smileyToSet: 'zipper_mouth_face'})
+            this.stopRecord.onclick = (e) => {
+                this.stop();
+            }
+
+            setInterval(() =>{
+              var dataArrayN = new Float32Array(this.analyser.frequencyBinCount)
+              this.analyser.getFloatFrequencyData(dataArrayN)
+              var freq = Math.abs(dataArrayN.reduce((a, b) => a + b, 0))
+
+              this.totalFreq += freq
+              this.summation += 1
+              if( this.summation %40 == 0){
+                this.averagefreq = this.totalFreq/40
+                this.totalFreq = 0
               }
-            }
-          }, 100)
-      } catch(err) {
-          this.setState({cantGetMic: true})
+
+              if(freq >= this.averagefreq ){
+                this.setState({motivator: 'wonderful sturvs', smileyToSet: 'confetti_ball'})
+              }else{
+                if (freq < this.averagefreq - 5000){
+                  this.setState({motivator: 'ko bad naa', smileyToSet: 'hugging_face'})
+                }else{
+                  this.setState({motivator: 'singing in the nonsense', smileyToSet: 'zipper_mouth_face'})
+                }
+              }
+            }, 100)
+        } catch(err) {
+            this.setState({cantGetMic: true})
+        }
       }
     }
 
@@ -310,8 +312,10 @@ class Recorder extends Component {
               x += sliceWidth;
             }
 
-            this.canvasCtx.lineTo(this.canvas.width, this.canvas.height/2);
-            this.canvasCtx.stroke();
+            if (this.canvas != undefined){
+              this.canvasCtx.lineTo(this.canvas.width, this.canvas.height/2);
+              this.canvasCtx.stroke();
+            }
           };
 
           draw();
