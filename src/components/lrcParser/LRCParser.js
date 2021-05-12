@@ -97,12 +97,15 @@ class LRCParser extends Component {
             {this.state.nextLine ? cleanLine(this.state.nextLine) : ''}
           </p>
         </div>
-        <div className="LRCParser-recorder">
-          <Recorder
-            singer={this.props.singer}
-            title={this.props.title}
-          />
-        </div>
+        {
+          window.innerWidth > 600 &&
+            <div className="LRCParser-recorder">
+              <Recorder
+                singer={this.props.singer}
+                title={this.props.title}
+              />
+            </div>
+        }
       </div>
     );
   }

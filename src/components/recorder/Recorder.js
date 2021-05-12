@@ -145,7 +145,6 @@ class Recorder extends Component {
 
     start() {
       this.recording = true;
-      this.msg.style.display = 'flex'
       this.micIcon = 'red'
       // reset the buffers for the new recording
       this.leftchannel.length = this.rightchannel.length = 0;
@@ -157,7 +156,6 @@ class Recorder extends Component {
     stop() {
       console.log('Stop')
       this.recording = false;
-      this.msg.style.display = 'none'
       this.micIcon="#3413f1";
 
       // we flat the left and right channels down
@@ -331,11 +329,8 @@ class Recorder extends Component {
           <div className="Recorder-upperLevel">
             <button className="Record-controls" ref={ref => this.startRecord = ref} id="record"><MicIcon style={{color: this.micIcon}}/></button>
             <button className="Record-controls" ref={ref => this.stopRecord = ref} id="stop"><StopIcon MicIcon style={{color: "#3413f1"}} /></button>
-            <canvas ref={ref => this.canvas = ref} height="50" width="280" ></canvas>
+            <canvas ref={ref => this.canvas = ref} height="40" width="280" ></canvas>
             <a className="Record-controls" id="download" ref={ref => this.download = ref}><GetAppIcon MicIcon style={{color: "#3413f1"}} /></a>
-          </div>
-          <div id="msg" style={{display: "none"}} ref={ref => this.msg = ref}>
-            Recording...
           </div>
         </div>
       );

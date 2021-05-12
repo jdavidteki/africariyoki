@@ -39,21 +39,8 @@
     text-align: center;
     display: flex;
     justify-content: center;
-    flex-direction: column;
   }
   .Recorder-upperLevel {
     display: flex;
     height: 50px;
-    width: 70%;
   }
-
-@media only screen and (max-width: 600px) {
-  canvas{
-    flex-grow: 1;
-  }
-
-  .Recorder-upperLevel,
-  .Recorder{
-    width: 100%;
-  }
-}

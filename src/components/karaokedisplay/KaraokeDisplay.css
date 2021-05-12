@@ -2,7 +2,6 @@
   position: relative;
   height: 100%;
   width: 100%;
-  /* smaller screens */
 }
   .KaraokeDisplay-container h2 {
     text-align: center; }
@@ -14,6 +13,7 @@
   height: calc(100vh - 80px);
   position: fixed;
   top: 80px;
+  justify-content: space-between;
 }
 
 .KaraokeDisplay-songArtist{
@@ -29,13 +29,13 @@
   text-transform: lowercase;
 }
 
-.KaraokeDisplay-titleArist{
-  background-color: #f7f8e4;
-  margin-right: auto;
-  margin-left: auto;
-  padding: 10px;
-  border-radius: 5px;
-}
+  .KaraokeDisplay-titleArist{
+    margin: 15px 0;
+    background-color: #f7f8e4;
+    padding: 10px;
+    border-radius: 5px;
+    max-width: 300px;
+  }
 
   .KaraokeDisplay-audio {
     background-color: transparent;
@@ -105,18 +105,14 @@
     color: blueviolet;
     flex-grow: 1;
     width: 100%;
-    margin-top: auto;
-    margin-bottom: auto;
     z-index: 99;
     background-color: #f7f8e4;
-    min-height: 200px;
+    min-height: 230px;
     align-items: center; }
 
     .KaraokeDisplay .Lyrics-DisplayContainer {
-      margin: auto;
-      max-height: 80px;
-      max-width: 80%;
-      margin-top: 50px;
+      max-height: 150px;
+      flex-grow: 1;
     }
 
     .KaraokeDisplay .Lyrics-container {
@@ -138,16 +134,25 @@
       font-size: 14px;
     }
 
+    .KaraokeDisplay-topContainer{
+      flex-grow: 1;
+      width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+    }
+
     .KaraokeDisplay-motivator{
-      position: relative;
+      margin: 15px 0;
       width: 100%;
       display: flex;
       justify-content: center;
     }
 
     .KaraokeDisplay-motivator-container{
-      top: -160px;
-      position: absolute;
       background-color: #f7f8e4;
       padding: 15px;
       min-width: 200px;

@@ -24,7 +24,7 @@ class ConnectedKaraokeDisplay extends Component {
     pauseSong: false,
     currentTime: '',
     popularSongs:[],
-    motivator: '',
+    motivator: 'less gerriiitt',
     smileyToSet: 'smiley',
     singer: {
       audiourl: '',
@@ -40,8 +40,6 @@ class ConnectedKaraokeDisplay extends Component {
       let { eventDate } = this.state
 
       if(eventDate <=0){
-        let randomSongIndex = randomNumber(0, this.props.location.state.songs.length)
-
         this.props.history.push({
           pathname: "/africariyoki/karaokedisplay/" + this.state.popularSongs[0].id
         });
@@ -194,100 +192,106 @@ class ConnectedKaraokeDisplay extends Component {
           </div>
 
           <div className="KaraokeDisplay-container">
-            <AudioPlayer
-              autoPlay
-              src={this.state.singer.audiourl.includes('africariyoki-4b634') ? this.state.singer.audiourl : this.state.singer.audiourl.replace('africariyoki', 'africariyoki-4b634')} //because im cheap and im not paying for firebase
-              autoPlay
-              controlsList="nodownload"
-              className={"KaraokeDisplay-audio"}
-              onEnded={this.playAnotherSong}
-              onPause={ () => {this.setState({pauseSong: true})}}
-              onPlay = {() => {this.setState({pauseSong: false})}}
-              onListen = {(event) => {this.setState({currentTime: event.target.currentTime})}}
-              listenInterval = {1}
-            />
 
-            {this.state.showTimer &&
-              <div className="KaraokeDisplay-showTimer">
-                <span>Playing next song in... {` ${this.state.secs}`} secs</span>
-              </div>
-            }
+            <div className="KaraokeDisplay-topContainer">
+              <AudioPlayer
+                autoPlay
+                src={this.state.singer.audiourl.includes('africariyoki-4b634') ? this.state.singer.audiourl : this.state.singer.audiourl.replace('africariyoki', 'africariyoki-4b634')} //because im cheap and im not paying for firebase
+                autoPlay
+                controlsList="nodownload"
+                className={"KaraokeDisplay-audio"}
+                onEnded={this.playAnotherSong}
+                onPause={ () => {this.setState({pauseSong: true})}}
+                onPlay = {() => {this.setState({pauseSong: false})}}
+                onListen = {(event) => {this.setState({currentTime: event.target.currentTime})}}
+                listenInterval = {1}
+              />
 
-            <h2 className="KaraokeDisplay-titleArist">
-              <span className="KaraokeDisplay-songTitle">
-                {this.state.singer.title}
-              </span>
-              <span className="KaraokeDisplay-songArtist">
-                {this.state.singer.singer}
-              </span>
-            </h2>
+              {this.state.showTimer &&
+                <div className="KaraokeDisplay-showTimer">
+                  <span>Playing next song in... {` ${this.state.secs}`} secs</span>
+                </div>
+              }
 
-            <div className="Lyrics Lyrics-DisplayContainer">
-              {this.lrcFormat() ?
-                <LRCParser
-                  lyrics = {this.displayLyrics()}
-                  pause = {this.state.pauseSong}
-                  currentTime = {this.state.currentTime}
-                  singer={this.state.singer.singer}
-                  title={this.state.singer.title}
-                />
-                  :
-                <span className="Lyrics-container Lyrics-nonParsedLyrics">
-                  {this.displayLyrics()}
+              <h2 className="KaraokeDisplay-titleArist">
+                <span className="KaraokeDisplay-songTitle">
+                  {this.state.singer.title}
                 </span>
+                <span className="KaraokeDisplay-songArtist">
+                  {this.state.singer.singer}
+                </span>
+              </h2>
+
+              <div className="Lyrics Lyrics-DisplayContainer">
+                {this.lrcFormat() ?
+                  <LRCParser
+                    lyrics = {this.displayLyrics()}
+                    pause = {this.state.pauseSong}
+                    currentTime = {this.state.currentTime}
+                    singer={this.state.singer.singer}
+                    title={this.state.singer.title}
+                  />
+                    :
+                  <span className="Lyrics-container Lyrics-nonParsedLyrics">
+                    {this.displayLyrics()}
+                  </span>
+                }
+              </div>
+
+              <div className="KaraokeDisplay-motivator">
+                { this.state.pauseSong ?
+                  <div className="KaraokeDisplay-motivator-container">
+                    <Emoji
+                      emoji={'clock1230'}
+                      set='apple'
+                      size={18}
+                    />
+                    song paused
+                    <Emoji
+                      emoji={'clock1230'}
+                      set='apple'
+                      size={18}
+                    />
+                  </div>
+                :
+                  <div className="KaraokeDisplay-motivator-container">
+                    <Emoji
+                      emoji={this.state.smileyToSet ? this.state.smileyToSet : 'smiley'}
+                      set='apple'
+                      size={18}
+                    />
+                    {this.state.motivator}
+                    <Emoji
+                      emoji={this.state.smileyToSet ? this.state.smileyToSet : 'smiley'}
+                      set='apple'
+                      size={18}
+                    />
+                  </div>
+                }
+              </div>
+
+            </div>
+            <div className="KaraokeDisplay-bottomContainer">
+              {
+                this.state.popularSongs.length &&
+                <PopularSongs
+                  cards = {this.state.popularSongs.sort(( )=> Math.random() - 0.5).slice(0, 50)}
+                  playSong = {this.playSong}
+                  thisSongId = {this.props.match.params.id}
+                />
               }
+
+              <div className="Lyrics-lowerSection">
+                <ReactTypingEffect
+                  style={{ marginTop: 20, fontSize: 12, color: '#3F51B5' }}
+                  text={this.state.animatedTexts[this.state.count]}
+                  speed={150}
+                  eraseDelay={150}
+                  typingDelay={150}
+                />
+              </div>
             </div>
 
-            <div className="KaraokeDisplay-motivator">
-              { this.state.pauseSong ?
-                <div className="KaraokeDisplay-motivator-container">
-                  <Emoji
-                    emoji={'clock1230'}
-                    set='apple'
-                    size={18}
-                  />
-                  song paused
-                  <Emoji
-                    emoji={'clock1230'}
-                    set='apple'
-                    size={18}
-                  />
-                </div>
-              :
-                <div className="KaraokeDisplay-motivator-container">
-                  <Emoji
-                    emoji={this.state.smileyToSet ? this.state.smileyToSet : 'smiley'}
-                    set='apple'
-                    size={18}
-                  />
-                  {this.state.motivator}
-                  <Emoji
-                    emoji={this.state.smileyToSet ? this.state.smileyToSet : 'smiley'}
-                    set='apple'
-                    size={18}
-                  />
-                </div>
-              }
-            </div>
-
-            {
-              this.state.popularSongs.length &&
-              <PopularSongs
-                cards = {this.state.popularSongs.sort(( )=> Math.random() - 0.5).slice(0, 50)}
-                playSong = {this.playSong}
-                thisSongId = {this.props.match.params.id}
-              />
-            }
-
-            <div className="Lyrics-lowerSection">
-              <ReactTypingEffect
-                style={{ marginTop: 20, fontSize: 12, color: '#3F51B5' }}
-                text={this.state.animatedTexts[this.state.count]}
-                speed={150}
-                eraseDelay={150}
-                typingDelay={150}
-              />
-            </div>
           </div>
         </div>
       )
