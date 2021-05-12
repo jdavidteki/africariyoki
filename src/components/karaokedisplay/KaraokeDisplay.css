@@ -43,7 +43,8 @@
     .KaraokeDisplay-audio .rhap_total-time,
     .KaraokeDisplay-audio .rhap_current-time,
     .KaraokeDisplay-audio .rhap_play-pause-button {
-      color: #f7f8e4; }
+      color: #f7f8e4;
+    }
     .KaraokeDisplay-audio .rhap_progress-filled {
       background-color: #f7f8e4;
     }
@@ -71,10 +72,6 @@
 
   .KaraokeDisplay-audio .rhap_controls-section{
     justify-content: center;
-  }
-
-  .KaraokeDisplay-audio  .rhap_progress-container{
-    pointer-events: none;
   }
 
   .KaraokeDisplay-showTimer {
@@ -139,6 +136,25 @@
       display: flex;
       justify-content: space-between;
       font-size: 14px;
+    }
+
+    .KaraokeDisplay-motivator{
+      position: relative;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .KaraokeDisplay-motivator-container{
+      top: -160px;
+      position: absolute;
+      background-color: #f7f8e4;
+      padding: 15px;
+      min-width: 200px;
+      border-radius: 5px;
+      font-size: 18px;
+      display: flex;
+      justify-content: space-between;
     }
 
   @media only screen and (max-width: 600px) {

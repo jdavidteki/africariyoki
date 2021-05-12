@@ -14,7 +14,7 @@ class LRCParser extends Component {
       nextLine: "",
       prevTimeStamp: "",
       mapLyricsToMs: this.getLyricsArrayWithMs(this.props.lyrics.split("\n")),
-      copyMapLyricsToMs: this.getLyricsArrayWithMs(this.props.lyrics.split("\n")),
+      keysOfMapLyrics: Array.from( this.getLyricsArrayWithMs(this.props.lyrics.split("\n")).keys()),
       audioDetails: {
         url: null,
         blob: null,
@@ -45,24 +45,29 @@ class LRCParser extends Component {
 
   getCurrentLyricLine(){
     let currentTime = this.props.currentTime * 1000
-    const copyMapLyricsToMs = this.state.copyMapLyricsToMs.keys()
-    let currentTimeStamp = copyMapLyricsToMs.next().value
-    let nextTimeStamp = copyMapLyricsToMs.next().value
 
-    if ( currentTimeStamp < currentTime){
-      if (this.state.prevTimeStamp != currentTimeStamp){
-        this.setState({prevLine: this.state.mapLyricsToMs.get(this.state.prevTimeStamp)})
+    let closest = this.state.keysOfMapLyrics.reduce((a, b) => {
+      let aDiff = Math.abs(a - currentTime);
+      let bDiff = Math.abs(b - currentTime);
+      if (aDiff == bDiff) {
+          return a < b ? a : b;
+      } else {
+          return bDiff < aDiff ? b : a;
       }
+    });
 
-      this.setState(
-        {
-          currentLine: this.state.mapLyricsToMs.get(currentTimeStamp),
-          nextLine: this.state.mapLyricsToMs.get(nextTimeStamp),
-        },() => {
-        this.setState({prevTimeStamp: currentTimeStamp})
-        this.state.copyMapLyricsToMs.delete(currentTimeStamp)
-      });
+    if (closest > 0 && closest > currentTime){
+      closest = this.state.keysOfMapLyrics[this.state.keysOfMapLyrics.indexOf(closest) - 1]
     }
+
+    let prevLine = this.state.keysOfMapLyrics[this.state.keysOfMapLyrics.indexOf(closest) - 1]
+    let nextLine = this.state.keysOfMapLyrics[this.state.keysOfMapLyrics.indexOf(closest) + 1]
+
+    this.setState({
+      prevLine:  this.state.mapLyricsToMs.get(prevLine),
+      currentLine: this.state.mapLyricsToMs.get(closest),
+      nextLine:  this.state.mapLyricsToMs.get(nextLine),
+    })
   }
 
   render() {

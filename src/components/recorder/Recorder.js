@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import MicIcon from '@material-ui/icons/Mic';
 import StopIcon from '@material-ui/icons/Stop';
 import GetAppIcon from '@material-ui/icons/GetApp';
-import { Emoji } from 'emoji-mart'
 
 import './Recorder.css'
 
@@ -13,8 +12,6 @@ class Recorder extends Component {
 
     state={
       freq: 0,
-      motivator: '',
-      smileyToSet: 'smiley',
       cantGetMic: false,
     }
 
@@ -56,28 +53,31 @@ class Recorder extends Component {
                 this.stop();
             }
 
-            setInterval(() =>{
-              var dataArrayN = new Float32Array(this.analyser.frequencyBinCount)
-              this.analyser.getFloatFrequencyData(dataArrayN)
-              var freq = Math.abs(dataArrayN.reduce((a, b) => a + b, 0))
+            setInterval(
+              this.updateMotivator
+              //TODO: use some machine learning to implement this later
+              // var dataArrayN = new Float32Array(this.analyser.frequencyBinCount)
+              // this.analyser.getFloatFrequencyData(dataArrayN)
+              // var freq = Math.abs(dataArrayN.reduce((a, b) => a + b, 0))
 
-              this.totalFreq += freq
-              this.summation += 1
-              if( this.summation %40 == 0){
-                this.averagefreq = this.totalFreq/40
-                this.totalFreq = 0
-              }
+              // this.totalFreq += freq
+              // this.summation += 1
+              // if( this.summation %40 == 0){
+              //   this.averagefreq = this.totalFreq/40
+              //   this.totalFreq = 0
+              // }
 
-              if(freq >= this.averagefreq ){
-                this.setState({motivator: 'wonderful sturvs', smileyToSet: 'confetti_ball'})
-              }else{
-                if (freq < this.averagefreq - 5000){
-                  this.setState({motivator: 'ko bad naa', smileyToSet: 'hugging_face'})
-                }else{
-                  this.setState({motivator: 'singing in the nonsense', smileyToSet: 'zipper_mouth_face'})
-                }
-              }
-            }, 100)
+              // if(freq >= this.averagefreq ){
+              //   this.setState({motivator: 'wonderful sturvs', smileyToSet: 'confetti_ball'})
+              // }else{
+              //   if (freq < this.averagefreq - 5000){
+              //     this.setState({motivator: 'ko bad naa', smileyToSet: 'hugging_face'})
+              //   }else{
+              //     this.setState({motivator: 'singing in the nonsense', smileyToSet: 'zipper_mouth_face'})
+              //   }
+              // }
+            , 3000)
+
         } catch(err) {
             this.setState({cantGetMic: true})
         }
@@ -336,21 +336,6 @@ class Recorder extends Component {
           </div>
           <div id="msg" style={{display: "none"}} ref={ref => this.msg = ref}>
             Recording...
-          </div>
-          <div className="Recorder-motivator">
-            <div className="Recorder-motivator-container">
-              <Emoji
-                emoji={this.state.smileyToSet ? this.state.smileyToSet : 'smiley'}
-                set='apple'
-                size={18}
-              />
-              {this.state.motivator}
-              <Emoji
-                emoji={this.state.smileyToSet ? this.state.smileyToSet : 'smiley'}
-                set='apple'
-                size={18}
-              />
-            </div>
           </div>
         </div>
       );

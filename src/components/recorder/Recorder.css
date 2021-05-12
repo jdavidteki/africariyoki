@@ -47,23 +47,6 @@
     width: 70%;
   }
 
-  .Recorder-motivator{
-    position: absolute;
-    bottom: -75px;
-    width: 100%;
-    left: 0;
-    display: flex;
-    justify-content: center;
-  }
-
-.Recorder-motivator-container{
-  background-color: #f7f8e4;
-  padding: 15px;
-  min-width: 200px;
-  border-radius: 5px;
-  font-size: 18px;
-}
-
 @media only screen and (max-width: 600px) {
   canvas{
     flex-grow: 1;

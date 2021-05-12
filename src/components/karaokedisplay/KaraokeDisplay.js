@@ -9,6 +9,7 @@ import NoSleep from 'nosleep.js';
 import AudioPlayer from 'react-h5-audio-player';
 import { withRouter } from "react-router-dom";
 import PopularSongs from "../popularSongs/PopularSongs.js";
+import { Emoji } from 'emoji-mart'
 
 import 'react-h5-audio-player/lib/styles.css';
 import "./KaraokeDisplay.css";
@@ -23,6 +24,8 @@ class ConnectedKaraokeDisplay extends Component {
     pauseSong: false,
     currentTime: '',
     popularSongs:[],
+    motivator: '',
+    smileyToSet: 'smiley',
     singer: {
       audiourl: '',
       singer: '',
@@ -40,8 +43,7 @@ class ConnectedKaraokeDisplay extends Component {
         let randomSongIndex = randomNumber(0, this.props.location.state.songs.length)
 
         this.props.history.push({
-          pathname: "/africariyoki/karaokedisplay/" + this.props.location.state.songs[randomSongIndex].id,
-          state: { chooseSong: [this.props.location.state.songs[randomSongIndex]], songs: this.props.location.state.songs}
+          pathname: "/africariyoki/karaokedisplay/" + this.state.popularSongs[0].id
         });
         window.location.reload(true);
         clearInterval(x)
@@ -91,6 +93,8 @@ class ConnectedKaraokeDisplay extends Component {
         this.setState({popularSongs: val})
       }
     )
+
+    setInterval(this.updateMotivator, 3000)
   }
 
   componentWillUnmount(){
@@ -127,8 +131,61 @@ class ConnectedKaraokeDisplay extends Component {
     window.location.href = "/africariyoki/karaokedisplay/" + songId;
   }
 
+  updateMotivator = () => {
+    let randomNumber =  Math.floor(Math.random() * 10);
+    let motivator = ''
+    let smileyToSet = ''
+
+    switch(randomNumber) {
+      case 1:
+        motivator = 'wonderful sturvs'
+        smileyToSet = 'confetti_ball'
+        break;
+      case 2:
+        motivator = 'ko bad naa'
+        smileyToSet = 'hugging_face'
+        break;
+      case 3:
+        motivator = 'you are singing in the nonsense'
+        smileyToSet = 'zipper_mouth_face'
+        break;
+      case 4:
+        motivator = 'ko shi lo ko shurup!!!'
+        smileyToSet = 'joy'
+        break;
+      case 5:
+        motivator = 'woowww i lof eeettt'
+        smileyToSet = 'bikini'
+        break;
+      case 6:
+        motivator = 'this one sabiiii'
+        smileyToSet = '100'
+        break;
+      case 7:
+        motivator = 'noiceeee'
+        smileyToSet = 'dart'
+        break;
+      case 8:
+        motivator = 'sing it for me bbyyyy'
+        smileyToSet = 'microphone'
+        break;
+      case 9:
+        motivator = 'omoooo!!!'
+        smileyToSet = 'chart_with_upwards_trend'
+        break;
+      case 10:
+        motivator = 'na desmond cos am lol'
+        smileyToSet = 'weary'
+        break;
+      default:
+        motivator = 'lmaoooooo'
+        smileyToSet = 'woozy_face'
+    }
+    this.setState({motivator: motivator, smileyToSet: smileyToSet})
+  }
+
   render() {
-    if (this.props && this.state.singer) {
+    if (this.state.singer.title != "") {
       return (
         <div className="KaraokeDisplay">
           <div className="KaraokeDisplay-cloudBackground">
@@ -180,6 +237,39 @@ class ConnectedKaraokeDisplay extends Component {
                 </span>
               }
             </div>
+
+            <div className="KaraokeDisplay-motivator">
+              { this.state.pauseSong ?
+                <div className="KaraokeDisplay-motivator-container">
+                  <Emoji
+                    emoji={'clock1230'}
+                    set='apple'
+                    size={18}
+                  />
+                  song paused
+                  <Emoji
+                    emoji={'clock1230'}
+                    set='apple'
+                    size={18}
+                  />
+                </div>
+              :
+                <div className="KaraokeDisplay-motivator-container">
+                  <Emoji
+                    emoji={this.state.smileyToSet ? this.state.smileyToSet : 'smiley'}
+                    set='apple'
+                    size={18}
+                  />
+                  {this.state.motivator}
+                  <Emoji
+                    emoji={this.state.smileyToSet ? this.state.smileyToSet : 'smiley'}
+                    set='apple'
+                    size={18}
+                  />
+                </div>
+              }
+            </div>
+
             {
               this.state.popularSongs.length &&
               <PopularSongs

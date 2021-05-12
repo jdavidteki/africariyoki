@@ -1,6 +1,7 @@
 import React from 'react';
 import Song from '../song/Song'
 import './SongList.css';
+import { Emoji } from 'emoji-mart'
 
 const SongList = (props) => {
   let className = "SongList"
@@ -16,9 +17,19 @@ const SongList = (props) => {
             {props.filteredSongs.map(song => <Song key= {song.id} song={song} playSong={props.playSong}/>)}
           </div>
         :
-          <div className="SongList-emptySearch">
+          <span className="SongList-emptySearch">
             you too search something we have, mtchewww
-          </div>
+            <Emoji
+              emoji={'face_with_rolling_eyes'}
+              set='apple'
+              size={18}
+            />
+            <Emoji
+              emoji={'unamused'}
+              set='apple'
+              size={18}
+            />
+          </span>
       }
     </div>
   )
