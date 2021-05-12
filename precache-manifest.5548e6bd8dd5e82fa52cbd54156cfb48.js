@@ -1,7 +1,7 @@
 self.__precacheManifest = [
   {
-    "revision": "f9e8bf853a717732d85c",
-    "url": "/africariyoki/static/js/app.2b6f2e91.chunk.js"
+    "revision": "5fc0d0cf39945e07d055",
+    "url": "/africariyoki/static/js/app.3e57fb37.chunk.js"
   },
   {
     "revision": "5a0eef172c07fc0bbd47",
@@ -84,12 +84,12 @@ self.__precacheManifest = [
     "url": "/africariyoki/./fonts/Caveat-VariableFont_wght.ttf"
   },
   {
-    "revision": "48c7ed4e7da9792af288a60d7242d615",
-    "url": "/africariyoki/expo-service-worker.js"
-  },
-  {
     "revision": "ec543248d7b23864564429fc03837190",
     "url": "/africariyoki/serve.json"
+  },
+  {
+    "revision": "48c7ed4e7da9792af288a60d7242d615",
+    "url": "/africariyoki/expo-service-worker.js"
   },
   {
     "revision": "cd4bf354f7d4a6bf36fa1a52c7dac4ac",
@@ -104,7 +104,7 @@ self.__precacheManifest = [
     "url": "/africariyoki/favicon.ico"
   },
   {
-    "revision": "06050841f0f8c493bcf3e2bd3a7f5067",
+    "revision": "57431ab71a1609a6398ba15aa1f61a92",
     "url": "/africariyoki/index.html"
   },
   {
