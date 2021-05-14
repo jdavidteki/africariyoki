@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import SongList from '../songLIst/SongList';
+import ReactFlagsSelect from 'react-flags-select';
 import Firebase from "../../firebase/firebase.js";
 import TextField from "@material-ui/core/TextField";
 import ReactTypingEffect from 'react-typing-effect';
+import codeToCountries from "./codeToCountry.js";
+import Button from "@material-ui/core/Button";
+import countryToBackgroundImage from "./countryToBackgroundImage.js";
+import CloseIcon from '@material-ui/icons/Close';
+import blankBack from "./assets/blankBack.jpeg"
 import background1 from "./assets/ankarabck1.jpeg";
 import background2 from "./assets/ankarabck2.jpeg";
 import background3 from "./assets/ankarabck3.jpeg";
@@ -10,13 +16,12 @@ import background4 from "./assets/ankarabck4.jpeg";
 import background5 from "./assets/ankarabck5.jpeg";
 import background6 from "./assets/ankarabck6.jpeg";
 import background7 from "./assets/ankarabck7.jpeg";
-import background8 from "./assets/ankarabck8.jpeg";
+import background8 from "./assets/ankarabck7.jpeg";
 import background9 from "./assets/ankarabck9.jpeg";
 import background10 from "./assets/ankarabck10.jpeg";
 import background11 from "./assets/ankarabck11.jpeg";
 
 import './Searcher.css';
-
 class Searcher extends Component {
   constructor(props){
     super(props);
@@ -31,10 +36,9 @@ class Searcher extends Component {
       count:0,
       query: '',
       expandResults: false,
-      background: getRandomBackground(),
+      background: blankBack,
+      selectedCode: '',
     }
-
-    this.searchTerm=''
   }
 
   componentDidMount () {
@@ -50,6 +54,12 @@ class Searcher extends Component {
         })
       }
     )
+
+    setTimeout( () => {
+      this.setState({
+        background: getRandomBackground(""),
+      })
+    }, 500);
 
     setInterval( () => {
       this.setState({
@@ -67,10 +77,21 @@ class Searcher extends Component {
       this.setState({expandResults: false})
     }
 
+    let selectedCountry = ""
+    if(codeToCountries[this.state.selectedCode] != undefined){
+      selectedCountry = codeToCountries[this.state.selectedCode]
+    }
+
     let typeSong = this.state.songsCopy.filter(thisSong =>
       thisSong.title != undefined && thisSong.singer != undefined ?
-        thisSong.title.replace(' ', '').toLowerCase().includes(song.replace(' ', '').toLowerCase()) ||
-        thisSong.singer.replace(' ', '').toLowerCase().includes(song.replace(' ', '').toLowerCase())
+        (
+          thisSong.title.replace(' ', '').toLowerCase().includes(song.replace(' ', '').toLowerCase()) ||
+          thisSong.singer.replace(' ', '').toLowerCase().includes(song.replace(' ', '').toLowerCase())
+        )
+        &&
+        (
+          thisSong.countries.replace(' ', '').toLowerCase().includes(selectedCountry.replace(' ', '').toLowerCase())
+        )
       :
       false
     )
@@ -100,6 +121,13 @@ class Searcher extends Component {
     })
   }
 
+  selectCountryFlag(code){
+    this.setState({
+      selectedCode: code,
+      background: getRandomBackground(code),
+    })
+  }
+
   render() {
     return (
       <div className="Searcher">
@@ -110,11 +138,10 @@ class Searcher extends Component {
           </div>
         </div>
         <div className="Searcher-container">
-
           <div className="Searcher-inputWrapper">
             <TextField
               className="Searcher-input"
-              label="what do you want to sing today??"
+              label={`${this.state.selectedCode != '' ? ' what do you want to sing from ' + codeToCountries[this.state.selectedCode] + ' today??': 'what do you want to sing today'}???`}
               variant="outlined"
               onChange={event=>{
                 this.setState({query: event.target.value}, ()=> {
@@ -122,6 +149,29 @@ class Searcher extends Component {
                 })
               }}
             />
+
+            <div className="Searcher-flagClose">
+              { this.state.selectedCode != "" &&
+
+                <Button
+                  onClick={() => this.setState({selectedCode: ""})}
+                >
+                  <CloseIcon/>
+                </Button>
+
+              }
+
+              <ReactFlagsSelect
+                selected={this.state.selectedCode}
+                onSelect={code => this.selectCountryFlag(code)}
+                searchable
+                fullWidth={false}
+                placeholder=" "
+                searchPlaceholder="search countries"
+                showSelectedLabel={false}
+                countries={["DZ","AO","SH","BJ","BW","BF","BI","CM","CV","CF","TD","KM","CG","CD","DJ","EG","GQ","ER","SZ","ET","GA","GM","GH","GN","GW","CI","KE","LS","LR","LY","MG","MW","ML","MR","MU","YT","MA","MZ","NA","NE","NG","ST","RE","RW","ST","SN","SC","SL","SO","ZA","SS","SH","SD","SZ","TZ","TG","TN","UG","CD","ZM","TZ","ZW"]}
+              />
+            </div>
           </div>
 
           <SongList
@@ -148,33 +198,53 @@ class Searcher extends Component {
 
 export default Searcher;
 
-function getRandomBackground(){
+function getRandomBackground(selectedCountry){
   let randomNumber =  Math.floor(Math.random() * 10);
+  let backgroundToReturn = ""
 
   switch(randomNumber) {
     case 1:
-      return background1
+      backgroundToReturn = background1
+      break
     case 2:
-      return background2
+      backgroundToReturn =  background2
+      break
     case 3:
-      return background3
+      backgroundToReturn =  background3
+      break
     case 4:
-      return background4
+      backgroundToReturn =  background4
+      break
     case 5:
-      return background5
+      backgroundToReturn =  background5
+      break
     case 6:
-      return background6
+      backgroundToReturn =  background6
+      break
     case 7:
-      return background7
+      backgroundToReturn =  background7
+      break
     case 8:
-      return background8
-    case 9:
-      return background9
+      backgroundToReturn =  background8
+      break
+    case  9:
+      backgroundToReturn =  background9
+      break
     case 10:
-      return background10
+      backgroundToReturn =  background10
+      break
     default:
-      return background11
+      backgroundToReturn =  background11
+      break
   }
+
+  if( selectedCountry != ""){
+    if (countryToBackgroundImage[selectedCountry] != ""){
+      backgroundToReturn =  countryToBackgroundImage[selectedCountry]
+    }
+  }
+
+  return backgroundToReturn
 }
 
 function shuffleArray(array) {
