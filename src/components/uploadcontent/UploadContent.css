@@ -1,3 +1,7 @@
+.UploadContent{
+  background-color: #e8f7d0;
+}
+
 .UploadContent-categories {
   width: 100%; }
   .UploadContent-categories .MuiFormControl-root.MuiTextField-root {

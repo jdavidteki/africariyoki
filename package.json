@@ -37,6 +37,7 @@
     "react-data-grid": "5.0.1",
     "react-data-grid-addons": "5.0.4-2",
     "react-dom": "^16.7.0-alpha.2",
+    "react-firebase-file-uploader": "^2.4.4",
     "react-flags-select": "^2.1.2",
     "react-h5-audio-player": "^3.7.0",
     "react-native": "^0.62.2",

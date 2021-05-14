@@ -73,6 +73,36 @@ class Firebase {
     })
   }
 
+  bckMappings = () => {
+    return new Promise(resolve => {
+      firebase.database()
+      .ref('/searcherBackgrounds/')
+      .once('value')
+      .then(snapshot => {
+        if (snapshot.val()){
+          resolve(Object(snapshot.val()))
+        }else{
+          resolve({})
+        }
+      })
+    })
+  }
+
+  updateSearcherBck = (country, bckUrl) => {
+    return new Promise(resolve => {
+      firebase.database()
+      .ref('/searcherBackgrounds/' + country + '/')
+      .update({bckUrl})
+      .then((response) => {
+        console.log("reposne", response)
+        resolve(true)
+      })
+      .catch(error => {
+        console.log("error", error)
+      })
+    })
+  }
+
   updateLyrics = (songId, lyrics) => {
     return new Promise(resolve => {
       firebase.database()

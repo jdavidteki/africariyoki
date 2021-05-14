@@ -1,20 +1,10 @@
-import ghanabck from "./assets/ghanabck.jpeg"
-import kenyabck from "./assets/ankarabck5.jpeg";
-import angolabck from "./assets/angolabck.jpeg";
-import egyptbck from "./assets/egyptbck.jpeg";
-import southafricabck from "./assets/southafricabck.jpeg";
-import morocobck from "./assets/morocobck.jpeg";
-import tanzaniabck from "./assets/tanzaniabck.jpeg";
-import nigeriabck from "./assets/nigeriabck.jpeg";
-import malibck from "./assets/malibck.jpeg";
-
-const CountryToBackgroundImage = {
+{
     "AF":"",
     "AL":"",
     "DZ":"",
     "AS":"",
     "AD":"",
-    "AO":angolabck,
+    "AO":"https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/searchBackgrounds%2Fangolabck.jpeg?alt=media",
     "AI":"",
     "AG":"",
     "AR":"",
@@ -45,7 +35,7 @@ const CountryToBackgroundImage = {
     "CM":"",
     "CA":"",
     "CV":"",
-    "KY":kenyabck,
+    "KY":"https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/searchBackgrounds%2Fkenyabck.jpeg?alt=media",
     "CF":"",
     "TD":"",
     "CL":"",
@@ -67,7 +57,7 @@ const CountryToBackgroundImage = {
     "DM":"",
     "DO":"",
     "EC":"",
-    "EG":egyptbck,
+    "EG":"https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/searchBackgrounds%2Fegyptbck.jpeg?alt=media",
     "SV":"",
     "GQ":"",
     "ER":"",
@@ -83,7 +73,7 @@ const CountryToBackgroundImage = {
     "GM":"",
     "GE":"",
     "DE":"",
-    "GH":ghanabck,
+    "GH":"https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/searchBackgrounds%2Fghanabck.jpeg?alt=media",
     "GI":"",
     "GR":"",
     "GL":"",
@@ -132,7 +122,7 @@ const CountryToBackgroundImage = {
     "MW":"",
     "MY":"",
     "MV":"",
-    "ML":malibck,
+    "ML":"https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/searchBackgrounds%2Fmalibck.jpeg?alt=media",
     "MT":"",
     "MH":"",
     "MQ":"",
@@ -145,7 +135,7 @@ const CountryToBackgroundImage = {
     "MN":"",
     "ME":"",
     "MS":"",
-    "MA":morocobck,
+    "MA":"https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/searchBackgrounds%2Fmorocobck.jpeg?alt=media",
     "MZ":"",
     "MM":"",
     "NA":"",
@@ -155,7 +145,7 @@ const CountryToBackgroundImage = {
     "NZ":"",
     "NI":"",
     "NE":"",
-    "NG":nigeriabck,
+    "NG":"https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/searchBackgrounds%2Fnigeriabck.jpeg?alt=media",
     "NU":"",
     "NF":"",
     "MP":"",
@@ -193,7 +183,7 @@ const CountryToBackgroundImage = {
     "SI":"",
     "SB":"",
     "SO":"",
-    "ZA":southafricabck,
+    "ZA":"https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/searchBackgrounds%2Fsouthafricabck.jpeg?alt=media",
     "SS":"",
     "ES":"",
     "LK":"",
@@ -205,7 +195,7 @@ const CountryToBackgroundImage = {
     "SY":"",
     "TW":"",
     "TJ":"",
-    "TZ":tanzaniabck,
+    "TZ":"https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/searchBackgrounds%2Ftanzaniabck.jpeg?alt=media",
     "TH":"",
     "TG":"",
     "TK":"",
@@ -229,7 +219,5 @@ const CountryToBackgroundImage = {
     "VI":"",
     "YE":"",
     "ZM":"",
-    "ZW":"",
-  };
-
-export default CountryToBackgroundImage;
+    "ZW":""
+  }

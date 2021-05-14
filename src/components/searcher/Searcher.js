@@ -6,7 +6,6 @@ import TextField from "@material-ui/core/TextField";
 import ReactTypingEffect from 'react-typing-effect';
 import codeToCountries from "./codeToCountry.js";
 import Button from "@material-ui/core/Button";
-import countryToBackgroundImage from "./countryToBackgroundImage.js";
 import CloseIcon from '@material-ui/icons/Close';
 import blankBack from "./assets/blankBack.jpeg"
 import background1 from "./assets/ankarabck1.jpeg";
@@ -38,6 +37,7 @@ class Searcher extends Component {
       expandResults: false,
       background: blankBack,
       selectedCode: '',
+      countryToBackgroundImage: {},
     }
   }
 
@@ -55,9 +55,17 @@ class Searcher extends Component {
       }
     )
 
+    Firebase.bckMappings().then(
+      val => {
+        this.setState({
+          countryToBackgroundImage: val,
+        })
+      }
+    )
+
     setTimeout( () => {
       this.setState({
-        background: getRandomBackground(""),
+        background: this.getRandomBackground(""),
       })
     }, 500);
 
@@ -66,6 +74,57 @@ class Searcher extends Component {
         count: (this.state.count+1) % 20,
       })
     }, 6000);
+  }
+
+
+  getRandomBackground(selectedCountry){
+    let randomNumber =  Math.floor(Math.random() * 10);
+    let backgroundToReturn = ""
+
+    switch(randomNumber) {
+      case 1:
+        backgroundToReturn = background1
+        break
+      case 2:
+        backgroundToReturn =  background2
+        break
+      case 3:
+        backgroundToReturn =  background3
+        break
+      case 4:
+        backgroundToReturn =  background4
+        break
+      case 5:
+        backgroundToReturn =  background5
+        break
+      case 6:
+        backgroundToReturn =  background6
+        break
+      case 7:
+        backgroundToReturn =  background7
+        break
+      case 8:
+        backgroundToReturn =  background8
+        break
+      case  9:
+        backgroundToReturn =  background9
+        break
+      case 10:
+        backgroundToReturn =  background10
+        break
+      default:
+        backgroundToReturn =  background11
+        break
+    }
+
+    if( selectedCountry != ""){
+      if (this.state.countryToBackgroundImage[selectedCountry].bckUrl != undefined &&
+          this.state.countryToBackgroundImage[selectedCountry].bckUrl != ""){
+        backgroundToReturn =  this.state.countryToBackgroundImage[selectedCountry].bckUrl
+      }
+    }
+
+    return backgroundToReturn
   }
 
   filterSong = (song) => {
@@ -124,7 +183,7 @@ class Searcher extends Component {
   selectCountryFlag(code){
     this.setState({
       selectedCode: code,
-      background: getRandomBackground(code),
+      background: this.getRandomBackground(code),
     })
   }
 
@@ -197,55 +256,6 @@ class Searcher extends Component {
 }
 
 export default Searcher;
-
-function getRandomBackground(selectedCountry){
-  let randomNumber =  Math.floor(Math.random() * 10);
-  let backgroundToReturn = ""
-
-  switch(randomNumber) {
-    case 1:
-      backgroundToReturn = background1
-      break
-    case 2:
-      backgroundToReturn =  background2
-      break
-    case 3:
-      backgroundToReturn =  background3
-      break
-    case 4:
-      backgroundToReturn =  background4
-      break
-    case 5:
-      backgroundToReturn =  background5
-      break
-    case 6:
-      backgroundToReturn =  background6
-      break
-    case 7:
-      backgroundToReturn =  background7
-      break
-    case 8:
-      backgroundToReturn =  background8
-      break
-    case  9:
-      backgroundToReturn =  background9
-      break
-    case 10:
-      backgroundToReturn =  background10
-      break
-    default:
-      backgroundToReturn =  background11
-      break
-  }
-
-  if( selectedCountry != ""){
-    if (countryToBackgroundImage[selectedCountry] != ""){
-      backgroundToReturn =  countryToBackgroundImage[selectedCountry]
-    }
-  }
-
-  return backgroundToReturn
-}
 
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {

@@ -1,11 +1,11 @@
 {
   "files": {
-    "app.js": "/africariyoki/static/js/app.3e57fb37.chunk.js",
-    "app.js.map": "/africariyoki/static/js/app.3e57fb37.chunk.js.map",
+    "app.js": "/africariyoki/static/js/app.677d6f62.chunk.js",
+    "app.js.map": "/africariyoki/static/js/app.677d6f62.chunk.js.map",
     "runtime~app.js": "/africariyoki/static/js/runtime~app.8eebc842.js",
     "runtime~app.js.map": "/africariyoki/static/js/runtime~app.8eebc842.js.map",
-    "static/js/2.0a3b7908.chunk.js": "/africariyoki/static/js/2.0a3b7908.chunk.js",
-    "static/js/2.0a3b7908.chunk.js.map": "/africariyoki/static/js/2.0a3b7908.chunk.js.map",
+    "static/js/2.897fec6c.chunk.js": "/africariyoki/static/js/2.897fec6c.chunk.js",
+    "static/js/2.897fec6c.chunk.js.map": "/africariyoki/static/js/2.897fec6c.chunk.js.map",
     "fonts/Caveat-VariableFont_wght.ttf": "/africariyoki/./fonts/Caveat-VariableFont_wght.ttf",
     "favicon-16.png": "/africariyoki/favicon-16.png",
     "favicon-32.png": "/africariyoki/favicon-32.png",
@@ -13,6 +13,7 @@
     "index.html": "/africariyoki/index.html",
     "manifest.json": "/africariyoki/manifest.json",
     "serve.json": "/africariyoki/serve.json",
+    "static/media/angolabck.jpeg": "/africariyoki/static/media/angolabck.754610e6.jpeg",
     "static/media/ankarabck1.jpeg": "/africariyoki/static/media/ankarabck1.537efa90.jpeg",
     "static/media/ankarabck10.jpeg": "/africariyoki/static/media/ankarabck10.abb3477d.jpeg",
     "static/media/ankarabck11.jpeg": "/africariyoki/static/media/ankarabck11.cb2fd633.jpeg",
@@ -22,18 +23,25 @@
     "static/media/ankarabck5.jpeg": "/africariyoki/static/media/ankarabck5.c23fc870.jpeg",
     "static/media/ankarabck6.jpeg": "/africariyoki/static/media/ankarabck6.118d67d8.jpeg",
     "static/media/ankarabck7.jpeg": "/africariyoki/static/media/ankarabck7.2f59b8f6.jpeg",
-    "static/media/ankarabck8.jpeg": "/africariyoki/static/media/ankarabck8.ad010f45.jpeg",
     "static/media/ankarabck9.jpeg": "/africariyoki/static/media/ankarabck9.3c536059.jpeg",
+    "static/media/blankBack.jpeg": "/africariyoki/static/media/blankBack.ac0b83ee.jpeg",
     "static/media/cloudx1.png": "/africariyoki/static/media/cloudx1.4aa88d02.png",
     "static/media/cloudx2.png": "/africariyoki/static/media/cloudx2.fedbdd78.png",
     "static/media/cloudx3.png": "/africariyoki/static/media/cloudx3.3b47e00d.png",
     "static/media/cloudx4.png": "/africariyoki/static/media/cloudx4.87c467e6.png",
     "static/media/cloudx5.png": "/africariyoki/static/media/cloudx5.dadbcb03.png",
-    "static/media/logo.png": "/africariyoki/static/media/logo.eb677ccc.png"
+    "static/media/egyptbck.jpeg": "/africariyoki/static/media/egyptbck.09d24530.jpeg",
+    "static/media/ghanabck.jpeg": "/africariyoki/static/media/ghanabck.18bb1e9a.jpeg",
+    "static/media/logo.png": "/africariyoki/static/media/logo.eb677ccc.png",
+    "static/media/malibck.jpeg": "/africariyoki/static/media/malibck.ab2e5894.jpeg",
+    "static/media/morocobck.jpeg": "/africariyoki/static/media/morocobck.f822c636.jpeg",
+    "static/media/nigeriabck.jpeg": "/africariyoki/static/media/nigeriabck.cb31603f.jpeg",
+    "static/media/southafricabck.jpeg": "/africariyoki/static/media/southafricabck.a7d58966.jpeg",
+    "static/media/tanzaniabck.jpeg": "/africariyoki/static/media/tanzaniabck.a4cff74d.jpeg"
   },
   "entrypoints": [
     "static/js/runtime~app.8eebc842.js",
-    "static/js/2.0a3b7908.chunk.js",
-    "static/js/app.3e57fb37.chunk.js"
+    "static/js/2.897fec6c.chunk.js",
+    "static/js/app.677d6f62.chunk.js"
   ]
 }

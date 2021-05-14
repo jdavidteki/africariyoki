@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import UploadContent from '../uploadcontent/UploadContent.js'
+import UploadSearcherBck from '../uploadSearcherBck/UploadSearcherBck.js'
 
 import 'bootstrap/dist/css/bootstrap.css';
 import "./Admin.css"
@@ -33,6 +34,12 @@ const columns = [{
 },{
     key: 'title',
     name: 'Title',
+},{
+    key: 'countries',
+    name: 'Countries',
+},{
+    key: 'dateAdded',
+    name: 'Date Added',
 }].map(c => ({ ...c, ...defaultColumnProperties }));
 
 class ConnectedAdmin extends Component {
@@ -195,12 +202,13 @@ class ConnectedAdmin extends Component {
                                     this.updateSong()
                                 }}
                             >
-                             Update Lyrics
+                                Update Lyrics
                             </Button>
                         )
                     }
-                    <UploadContent />
                 </div>
+                <UploadContent />
+                <UploadSearcherBck />
             </div>
         )
     }
