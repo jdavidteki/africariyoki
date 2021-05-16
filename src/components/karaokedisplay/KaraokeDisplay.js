@@ -188,6 +188,7 @@ class ConnectedKaraokeDisplay extends Component {
         <div className="KaraokeDisplay">
           <div className="KaraokeDisplay-cloudBackground">
             <Clouds/>
+            <div className="KaraokeDisplay-twinkling"></div>
             <div className="KaraokeDisplay-stars"></div>
           </div>
 

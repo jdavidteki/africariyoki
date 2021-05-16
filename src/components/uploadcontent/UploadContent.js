@@ -20,10 +20,18 @@ class ConnectedUploadContent extends Component {
         addressID: "",
         isUploading: false,
         progress: 0,
+        countries: ""
     };
 
     uploadToFirebase(){
         //uZ-_HIoEBE8
+        let today = new Date();
+        let dd = String(today.getDate()).padStart(2, '0');
+        let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        let yyyy = today.getFullYear();
+
+        today = yyyy+mm+dd
+
         if (this.state.videoID != ""){
             let audioUrl = `https://storage.googleapis.com/africariyoki-4b634.appspot.com/music/${this.state.videoID}.mp3`
             let lyricsTextUrl = `https://storage.googleapis.com/africariyoki-4b634.appspot.com/lyrics/${this.state.videoID}.txt`
@@ -43,6 +51,8 @@ class ConnectedUploadContent extends Component {
                 lyrics: this.state.lyrics,
                 id: this.state.videoID,
                 albumName: this.state.albumName,
+                countries: this.state.countries,
+                dateAdded: today,
             })
 
             //use ai to extract vocall from music and upload instrumental
@@ -123,6 +133,13 @@ class ConnectedUploadContent extends Component {
                         placeholder="address ID"
                         onChange={e => {
                             this.setState({ addressID: e.target.value });
+                        }}
+                    />
+                    <TextField
+                        value={this.state.countries}
+                        placeholder="Countries - seperate with comma"
+                        onChange={e => {
+                            this.setState({ countries: e.target.value });
                         }}
                     />
                     <TextField

@@ -14,6 +14,7 @@
   position: fixed;
   top: 80px;
   justify-content: space-between;
+  z-index: 4;
 }
 
 .KaraokeDisplay-songArtist{
@@ -92,14 +93,47 @@
   }
 
   .KaraokeDisplay-stars {
-    background: #081b5a url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/stars.png) repeat;
+    background: black url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/stars.png) repeat;
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     display: block;
-    z-index: -1; }
+    z-index: 0;
+  }
+
+  @keyframes move-twink-back {
+    from {background-position:0 0;}
+    to {background-position:-10000px 5000px;}
+  }
+  @-webkit-keyframes move-twink-back {
+      from {background-position:0 0;}
+      to {background-position:-10000px 5000px;}
+  }
+  @-moz-keyframes move-twink-back {
+      from {background-position:0 0;}
+      to {background-position:-10000px 5000px;}
+  }
+  @-ms-keyframes move-twink-back {
+      from {background-position:0 0;}
+      to {background-position:-10000px 5000px;}
+  }
+
+
+  .KaraokeDisplay-twinkling{
+    background:transparent url(http://www.script-tutorials.com/demos/360/images/twinkling.png) repeat top center;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+
+    -moz-animation:move-twink-back 200s linear infinite;
+    -ms-animation:move-twink-back 200s linear infinite;
+    -o-animation:move-twink-back 200s linear infinite;
+    -webkit-animation:move-twink-back 200s linear infinite;
+    animation:move-twink-back 200s linear infinite;
+  }
+
   .KaraokeDisplay .Lyrics {
     display: flex;
     color: blueviolet;

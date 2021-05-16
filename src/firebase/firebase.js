@@ -62,6 +62,8 @@ class Firebase {
           audiourl: item.audiourl,
           lyrics: item.lyrics,
           title: item.title,
+          countries: item.countries,
+          dateAdded: item.today,
         },
       )
       .then((response) => {
