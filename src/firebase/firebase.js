@@ -63,7 +63,7 @@ class Firebase {
           lyrics: item.lyrics,
           title: item.title,
           countries: item.countries,
-          dateAdded: item.today,
+          dateAdded: item.dateAdded,
         },
       )
       .then((response) => {
