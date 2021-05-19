@@ -64,6 +64,7 @@ class Firebase {
           title: item.title,
           countries: item.countries,
           dateAdded: item.dateAdded,
+          albumName: item.albumName,
         },
       )
       .then((response) => {
@@ -95,6 +96,34 @@ class Firebase {
       firebase.database()
       .ref('/searcherBackgrounds/' + country + '/')
       .update({bckUrl})
+      .then((response) => {
+        console.log("reposne", response)
+        resolve(true)
+      })
+      .catch(error => {
+        console.log("error", error)
+      })
+    })
+  }
+
+  updateSongInfo = (songId, detailsToUpdate) =>{
+    return new Promise(resolve => {
+      firebase.database()
+      .ref('/lyrics/' + songId + '/')
+      .update(
+        {
+          id: detailsToUpdate.id,
+          title: detailsToUpdate.title,
+          lyricsurl: detailsToUpdate.lyricsurl,
+          singer: detailsToUpdate.singer,
+          audiourl: detailsToUpdate.audiourl,
+          lyrics: detailsToUpdate.lyrics,
+          title: detailsToUpdate.title,
+          countries: detailsToUpdate.countries,
+          dateAdded: detailsToUpdate.dateAdded,
+          albumName: detailsToUpdate.albumName,
+        },
+      )
       .then((response) => {
         console.log("reposne", response)
         resolve(true)

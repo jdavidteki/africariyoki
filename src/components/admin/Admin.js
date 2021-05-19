@@ -16,7 +16,6 @@ const defaultColumnProperties = {
     width: 200,
     resizable: true,
     editable: true,
-    adminLoggedIn: false,
 };
 
 const selectors = Data.Selectors;
@@ -24,6 +23,7 @@ const selectors = Data.Selectors;
 const columns = [{
     key: 'id',
     name: 'Song ID',
+    sort: true,
   }, {
     key: 'lyrics',
     name: 'Lyrics',
@@ -31,6 +31,9 @@ const columns = [{
     key: 'singer',
     name: 'Singer',
     sort: true,
+}, {
+    key: 'albumName',
+    name: 'Album Name',
 },{
     key: 'title',
     name: 'Title',
@@ -52,6 +55,8 @@ class ConnectedAdmin extends Component {
         rows:[],
         selectedSongIds: [],
         selectedSongLyrics: '',
+        adminLoggedIn: false,
+        updatingRow: {},
     };
 
     componentDidMount(){
@@ -106,16 +111,6 @@ class ConnectedAdmin extends Component {
         });
     };
 
-    onGridRowsUpdated = ({ fromRow, toRow, updated }) => {
-        this.setState(state => {
-          const rows = state.rows.slice();
-          for (let i = fromRow; i <= toRow; i++) {
-            rows[i] = { ...rows[i], ...updated };
-          }
-          return { rows };
-        });
-    };
-
     adminLogIn(){
         var tenure = prompt("Please enter master password to continue", "");
         if (tenure != null && tenure == "1226") {
@@ -149,6 +144,22 @@ class ConnectedAdmin extends Component {
         window.location.reload(true);
     }
 
+    onGridRowsUpdated = ({ fromRow, toRow, updated }) => {
+        this.setState(state => {
+          const filteredRows = state.filteredRows.slice();
+          const rows = state.rows.slice();
+          let updatingRow = {}
+
+          for (let i = fromRow; i <= toRow; i++) {
+            filteredRows[i] = { ...filteredRows[i], ...updated };
+            rows[i] = { ...rows[i], ...updated };
+            updatingRow = { ...filteredRows[i], ...updated }
+          }
+
+          return { filteredRows, rows, updatingRow };
+        });
+    };
+
     render() {
         if (!this.state.adminLoggedIn){
             return (
@@ -166,11 +177,11 @@ class ConnectedAdmin extends Component {
                         rowGetter={i => this.state.filteredRows[i]}
                         rowsCount={this.state.filteredRows.length}
                         minHeight={500}
-                        onRowsUpdate={this.onGridRowsUpdated}
                         enableCellSelect={true}
                         toolbar={<Toolbar enableFilter={true} />}
                         onAddFilter={filter => this.handleFilterChange(filter)}
                         onClearFilters={() => this.setState({filters: []})}
+                        onGridRowsUpdated={this.onGridRowsUpdated}
                         rowSelection={{
                             showCheckbox: true,
                             enableShiftSelect: true,
@@ -194,16 +205,29 @@ class ConnectedAdmin extends Component {
                     {" "}
                     {
                         this.state.selectedIndexes.length == 1 && (
-                            <Button
-                                style={{ marginTop: 20, width: 200 }}
-                                variant="outlined"
-                                color="primary"
-                                onClick={() => {
-                                    this.updateSong()
-                                }}
-                            >
-                                Update Lyrics
-                            </Button>
+                            <div>
+                                <Button
+                                    style={{ marginTop: 20, width: 200 }}
+                                    variant="outlined"
+                                    color="primary"
+                                    onClick={() => {
+                                        this.updateSong()
+                                    }}
+                                >
+                                    Update Lyrics - ({this.state.selectedSongIds[0]})
+                                </Button>
+                                {" "}
+                                <Button
+                                    style={{ marginTop: 20, width: 200 }}
+                                    variant="outlined"
+                                    color="primary"
+                                    onClick={() => {
+                                        Firebase.updateSongInfo(this.state.selectedSongIds[0], this.state.updatingRow)
+                                    }}
+                                >
+                                    Save Update - ({this.state.selectedSongIds[0]})
+                                </Button>
+                            </div>
                         )
                     }
                 </div>
