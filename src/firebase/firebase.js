@@ -36,7 +36,6 @@ class Firebase {
   }
 
   deleteRecp = (songId) => {
-    console.log("songId", songId)
     return new Promise(resolve => {
       firebase.database()
       .ref('/lyrics/'+songId)
@@ -44,6 +43,25 @@ class Firebase {
       .then(() => {
         resolve(true)
       }).catch( (error) =>{
+        console.log("error", error)
+      })
+    })
+  }
+
+  updateNumPlays = (songId, numPlays) =>{
+    return new Promise(resolve => {
+      firebase.database()
+      .ref('/lyrics/' + songId + '/')
+      .update(
+        {
+          numPlays: numPlays,
+        },
+      )
+      .then((response) => {
+        console.log("reposne", response)
+        resolve(true)
+      })
+      .catch(error => {
         console.log("error", error)
       })
     })

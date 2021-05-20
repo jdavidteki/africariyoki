@@ -15,7 +15,6 @@ const defaultColumnProperties = {
     filterable: true,
     width: 200,
     resizable: true,
-    editable: true,
 };
 
 const selectors = Data.Selectors;
@@ -27,22 +26,30 @@ const columns = [{
   }, {
     key: 'lyrics',
     name: 'Lyrics',
+    editable: true,
   }, {
     key: 'singer',
     name: 'Singer',
     sort: true,
+    editable: true,
 }, {
     key: 'albumName',
     name: 'Album Name',
+    editable: true,
 },{
     key: 'title',
     name: 'Title',
+    editable: true,
 },{
     key: 'countries',
     name: 'Countries',
+    editable: true,
 },{
     key: 'dateAdded',
     name: 'Date Added',
+},{
+    key: 'numPlays',
+    name: 'Number of Plays',
 }].map(c => ({ ...c, ...defaultColumnProperties }));
 
 class ConnectedAdmin extends Component {

@@ -125,4 +125,8 @@
     .Searcher-inputWrapper {
       width: 100%;
     }
+
+    .Searcher-container {
+      height: 100%;
+    }
   }

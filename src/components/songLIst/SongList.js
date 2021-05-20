@@ -14,7 +14,7 @@ const SongList = (props) => {
         props.filteredSongs.length > 0
         ?
           <div className="SongList-container">
-            {props.filteredSongs.map(song => <Song key= {song.id} song={song} playSong={props.playSong}/>)}
+            {props.filteredSongs.map(song => <Song key= {song.id} song={song} playSong={props.playSong} countries={song.countries}/>)}
           </div>
         :
           <span className="SongList-emptySearch">

@@ -169,6 +169,8 @@ class Searcher extends Component {
   playSong= (songId) => {
     let chooseSong = this.state.songs.filter(song => songId === song.id)
 
+    Firebase.updateNumPlays(songId, chooseSong[0].numPlays +=1)
+
     this.props.history.push({
       pathname: "/africariyoki/karaokedisplay/" + songId,
       state: { chooseSong: chooseSong, songs: this.state.songsCopy}
@@ -240,15 +242,17 @@ class Searcher extends Component {
             expandResults={this.state.expandResults}
           />
 
-          <div className="Searcher-typeEffectWrapper">
-            <ReactTypingEffect
-              style={{ marginTop: 50, fontSize: 12, color: '#3F51B5' }}
-              text={this.state.typingEffectSongs.slice(0, 20)[this.state.count]}
-              speed={150}
-              eraseDelay={150}
-              typingDelay={150}
-            />
-          </div>
+          {this.state.typingEffectSongs.length > 20 &&
+            <div className="Searcher-typeEffectWrapper">
+              <ReactTypingEffect
+                style={{ marginTop: 50, fontSize: 12, color: '#3F51B5' }}
+                text={this.state.typingEffectSongs.slice(0, 20)[this.state.count]}
+                speed={150}
+                eraseDelay={150}
+                typingDelay={150}
+              />
+            </div>
+          }
         </div>
       </div>
     );

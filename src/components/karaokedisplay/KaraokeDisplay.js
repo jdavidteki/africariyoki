@@ -231,6 +231,8 @@ class ConnectedKaraokeDisplay extends Component {
                     currentTime = {this.state.currentTime}
                     singer={this.state.singer.singer}
                     title={this.state.singer.title}
+                    numPlays={this.state.singer.numPlays}
+                    countries={this.state.singer.countries}
                   />
                     :
                   <span className="Lyrics-container Lyrics-nonParsedLyrics">

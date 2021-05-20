@@ -20,6 +20,22 @@
   font-size: 13px;
 }
 
+.LRCParser-countryFlagsNumPlays{
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 15px;
+  bottom: 0;
+}
+
+.LRCParser-countryFlags{
+  display: flex;
+}
+
+.LRCParser-numPlays{
+  font-size: 18px;
+}
+
 .LRCParser-containerWrapper{
   padding: 20px;
   text-align: center;
