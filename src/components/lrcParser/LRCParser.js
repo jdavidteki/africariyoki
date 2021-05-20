@@ -78,11 +78,7 @@ class LRCParser extends Component {
     return (
       <div className="Lyrics-container LRCParser-container">
         <div className="LRCParser-countryFlagsNumPlays">
-          <div className="LRCParser-numPlays">
-            <PlayArrowIcon />
-            {numberWithCommas(this.state.numPlays)}
-          </div>
-          <div className="LRCParser-countryFlags">
+         <div className="LRCParser-countryFlags">
             {this.state.countries.split(",").map((country) =>
               <Emoji
                 key={country}
@@ -90,6 +86,10 @@ class LRCParser extends Component {
                 size={18}
               />
             )}
+          </div>
+          <div className="LRCParser-numPlays">
+            <PlayArrowIcon />
+            {numberWithCommas(this.state.numPlays)}
           </div>
         </div>
         <div className="LRCParser-containerWrapper">
