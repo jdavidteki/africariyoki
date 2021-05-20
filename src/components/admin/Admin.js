@@ -118,6 +118,12 @@ class ConnectedAdmin extends Component {
         });
     };
 
+    refreshTable(){
+        Firebase.getLyrics().then( val => {
+            this.setState({songs: val, filteredRows: this.getRows(val)})
+        })
+    }
+
     adminLogIn(){
         var tenure = prompt("Please enter master password to continue", "");
         if (tenure != null && tenure == "1226") {
@@ -208,6 +214,17 @@ class ConnectedAdmin extends Component {
                         }}
                     >
                         ({this.state.selectedIndexes.length}) Delete
+                    </Button>
+                    {" "}
+                    <Button
+                        style={{ marginTop: 20, width: 200 }}
+                        variant="outlined"
+                        color="primary"
+                        onClick={() => {
+                            this.refreshTable()
+                        }}
+                    >
+                        Table Refresh
                     </Button>
                     {" "}
                     {

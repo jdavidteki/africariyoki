@@ -20,61 +20,70 @@ if (!firebase.apps.length) {
 getLyrics().then( val => {
   let idsArray = Object.keys(val)
   let titlesArray = Object.values(val).map(a => a.title.toLowerCase().replace(/\s/g, ''))
+  let countriesArray = Object.values(val).map(a => a.countries.toLowerCase().replace(/\s/g, ''))
+  let songs = Object.values(val)
 
-
-  fs.createReadStream('AfricariyokiPlaylist.csv')
-  .pipe(csv())
-  .on('data', (row) => {
-    if (!(idsArray.includes(row.videoID) || titlesArray.includes(row.title.toLowerCase().replace(/\s/g, '')))){
-      console.log(row)
-      uploadToFirebase(row)
+  for (let i =0; i<songs.length; i++){
+    if (songs[i].countries.includes("no mp3")){
+      // console.log(songs[i].countries, songs[i].countries.replace("no mp3", ""))
+      // uploadToFirebase(songs[i])
+      updateNoMp3InCountryName(songs[i].id, songs[i].countries.replace("no mp3", ""))
     }
-  })
-  .on('end', () => {
-    console.log('CSV file successfully processed');
-  });
+  }
+
+  // fs.createReadStream('AfricariyokiPlaylist.csv')
+  // .pipe(csv())
+  // .on('data', (row) => {
+  //   if (!(idsArray.includes(row.videoID) || titlesArray.includes(row.title.toLowerCase().replace(/\s/g, '')))){
+  //     console.log(row)
+  //     uploadToFirebase(row)
+  //   }
+  // })
+  // .on('end', () => {
+  //   console.log('CSV file successfully processed');
+  // });
 })
 
 
 function uploadToFirebase(song){
-  let audioUrl = `https://storage.googleapis.com/africariyoki-4b634.appspot.com/music/${song.videoID}.mp3`
-  let lyricsTextUrl = `https://storage.googleapis.com/africariyoki-4b634.appspot.com/lyrics/${song.videoID}.txt`
+  let audioUrl = `https://storage.googleapis.com/africariyoki-4b634.appspot.com/music/${song.id}.mp3`
+  let lyricsTextUrl = `https://storage.googleapis.com/africariyoki-4b634.appspot.com/lyrics/${song.id}.txt`
   // let addressID = 'http://0.0.0.0:5000'
-  let addressID = "http://a28129554cd3.ngrok.io"
+  let addressID = "http://4b9ecffd57b1.ngrok.io"
   // if(song.addressID){
   //     addressID = "http://0.0.0.0:5000"
   // }else{
   //     addressID = "https://"+addressID+".ngrok.io"
   // }
 
-  new Promise(resolve => {
-    firebase.database()
-    .ref('/lyrics/' + song.videoID + '/')
-    .set(
-      {
-        id: song.videoID,
-        title: song.title,
-        lyricsurl: lyricsTextUrl,
-        singer: song.singer,
-        audiourl: audioUrl,
-        lyrics: song.lyrics,
-        albumName: song.albumName,
-      },
-    )
-    .then((response) => {
-      resolve(true)
-    })
-    .catch(error => {
-      console.log("error", error)
-    })
-  })
+  // new Promise(resolve => {
+  //   firebase.database()
+  //   .ref('/lyrics/' + song.id + '/')
+  //   .set(
+  //     {
+  //       id: song.id,
+  //       title: song.title,
+  //       lyricsurl: lyricsTextUrl,
+  //       singer: song.singer,
+  //       audiourl: audioUrl,
+  //       lyrics: song.lyrics,
+  //       albumName: song.albumName,
+  //     },
+  //   )
+  //   .then((response) => {
+  //     resolve(true)
+  //   })
+  //   .catch(error => {
+  //     console.log("error", error)
+  //   })
+  // })
 
   // use ai to extract vocall from music and upload instrumental
   var requestOptions = {
       method: 'GET',
       redirect: 'follow'
   };
-  fetch(`${addressID}/vr/${song.videoID}`, requestOptions)
+  fetch(`${addressID}/vr/${song.id}`, requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -91,6 +100,26 @@ async function getLyrics(){
       }else{
         resolve({})
       }
+    })
+  })
+}
+
+async function updateNoMp3InCountryName(songId, countries){
+  console.log("songId, countries)", songId, countries)
+  return new Promise(resolve => {
+    firebase.database()
+    .ref('/lyrics/' + songId + '/')
+    .update(
+      {
+        countries: countries,
+      },
+    )
+    .then((response) => {
+      console.log("reposne", response)
+      resolve(true)
+    })
+    .catch(error => {
+      console.log("error", error)
     })
   })
 }
