@@ -83,6 +83,7 @@ class Firebase {
           countries: item.countries,
           dateAdded: item.dateAdded,
           albumName: item.albumName,
+          numPlays: 2000,
         },
       )
       .then((response) => {
