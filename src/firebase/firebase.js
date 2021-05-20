@@ -84,7 +84,7 @@ class Firebase {
           dateAdded: item.dateAdded,
           albumName: item.albumName,
           numPlays: 2000,
-          lrcDone: "false",
+          lrcDone: 0,
         },
       )
       .then((response) => {
@@ -161,7 +161,7 @@ class Firebase {
       .update(
         {
           lyrics: lyrics,
-          lrcDone: "true",
+          lrcDone: 1,
         },
       )
       .then((response) => {
