@@ -169,8 +169,6 @@ class Searcher extends Component {
   playSong= (songId) => {
     let chooseSong = this.state.songs.filter(song => songId === song.id)
 
-    Firebase.updateNumPlays(songId, chooseSong[0].numPlays +=1)
-
     this.props.history.push({
       pathname: "/africariyoki/karaokedisplay/" + songId,
       state: { chooseSong: chooseSong, songs: this.state.songsCopy}

@@ -73,6 +73,8 @@ class ConnectedKaraokeDisplay extends Component {
 
     Firebase.getLyricsById(this.props.match.params.id).then(
       val => {
+        Firebase.updateNumPlays(this.props.match.params.id, val.numPlays +=1)
+
         this.setState(
           {
             singer: val,
