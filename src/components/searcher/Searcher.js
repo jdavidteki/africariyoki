@@ -45,6 +45,7 @@ class Searcher extends Component {
   componentDidMount () {
     Firebase.getLyrics().then(
       val => {
+        console.log("val", val)
         this.setState({
           songs: val,
           songsCopy: val,
