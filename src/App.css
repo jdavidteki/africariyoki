@@ -41,6 +41,10 @@
   .App ::-webkit-scrollbar-thumb:hover {
     background: #3413f1; }
 
+  .Dots{
+    margin: auto;
+  }
+
 html, #root, body {
   height: 100%;
   margin: 0px; }

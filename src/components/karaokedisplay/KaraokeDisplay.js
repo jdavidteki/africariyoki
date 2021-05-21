@@ -6,6 +6,7 @@ import LRCParser from '../lrcParser/LRCParser';
 import Clouds from '../clouds/Clouds'
 import Firebase from "../../firebase/firebase.js";
 import NoSleep from 'nosleep.js';
+import { Dots } from "react-activity";
 import AudioPlayer from 'react-h5-audio-player';
 import { withRouter } from "react-router-dom";
 import PopularSongs from "../popularSongs/PopularSongs.js";
@@ -301,8 +302,12 @@ class ConnectedKaraokeDisplay extends Component {
         </div>
       )
     }
-    return(
-      <div></div>
+    return (
+      <div className="Dots">
+        <Dots
+          color={'#3F51B5'}
+        />
+      </div>
     )
   }
 }

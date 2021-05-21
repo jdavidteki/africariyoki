@@ -8,6 +8,7 @@ import codeToCountries from "./codeToCountry.js";
 import Button from "@material-ui/core/Button";
 import CloseIcon from '@material-ui/icons/Close';
 import blankBack from "./assets/blankBack.jpeg"
+import { Dots } from "react-activity";
 import background1 from "./assets/ankarabck1.jpeg";
 import background2 from "./assets/ankarabck2.jpeg";
 import background3 from "./assets/ankarabck3.jpeg";
@@ -44,12 +45,11 @@ class Searcher extends Component {
   componentDidMount () {
     Firebase.getLyrics().then(
       val => {
-        let shuffledSongs = shuffleArray(val.map(a => a.title))
         this.setState({
           songs: val,
           songsCopy: val,
-          searchOptions: shuffledSongs,
-          typingEffectSongs: shuffledSongs,
+          searchOptions: shuffleArray(val.map(a => a.title)),
+          typingEffectSongs: shuffleArray(val.map(a => a.title)),
           songIds: val.map(a => a.id),
         })
       }
@@ -188,72 +188,80 @@ class Searcher extends Component {
   }
 
   render() {
-    return (
-      <div className="Searcher">
-        <div style={{ backgroundImage: `url(${this.state.background})` }}
-        className="Searcher-background">
-          <div className="Searcher-backgroundOverlay">
-
+    if(this.state.songs.length > 0){
+      return (
+        <div className="Searcher">
+          <div
+            style={{ backgroundImage: `url(${this.state.background})` }}
+            className="Searcher-background">
+              <div className="Searcher-backgroundOverlay"></div>
           </div>
-        </div>
-        <div className="Searcher-container">
-          <div className="Searcher-inputWrapper">
-            <TextField
-              className="Searcher-input"
-              label={`${this.state.selectedCode != '' ? ' what do you want to sing from ' + codeToCountries[this.state.selectedCode] + ' today??': 'what do you want to sing today'}???`}
-              variant="outlined"
-              onChange={event=>{
-                this.setState({query: event.target.value}, ()=> {
-                  this.filterSong(this.state.query)
-                })
-              }}
+          <div className="Searcher-container">
+            <div className="Searcher-inputWrapper">
+              <TextField
+                className="Searcher-input"
+                label={`${this.state.selectedCode != '' ? ' what do you want to sing from ' + codeToCountries[this.state.selectedCode] + ' today??': 'what do you want to sing today'}???`}
+                variant="outlined"
+                onChange={event=>{
+                  this.setState({query: event.target.value}, ()=> {
+                    this.filterSong(this.state.query)
+                  })
+                }}
+              />
+
+              <div className="Searcher-flagClose">
+                { this.state.selectedCode != "" &&
+
+                  <Button
+                    onClick={() => this.setState({selectedCode: ""})}
+                  >
+                    <CloseIcon/>
+                  </Button>
+
+                }
+
+                <ReactFlagsSelect
+                  selected={this.state.selectedCode}
+                  onSelect={code => this.selectCountryFlag(code)}
+                  searchable
+                  fullWidth={false}
+                  placeholder=" "
+                  searchPlaceholder="search countries"
+                  showSelectedLabel={false}
+                  countries={["DZ","AO","SH","BJ","BW","BF","BI","CM","CV","CF","TD","KM","CG","CD","DJ","EG","GQ","ER","SZ","ET","GA","GM","GH","GN","GW","CI","KE","LS","LR","LY","MG","MW","ML","MR","MU","YT","MA","MZ","NA","NE","NG","ST","RE","RW","ST","SN","SC","SL","SO","ZA","SS","SH","SD","SZ","TZ","TG","TN","UG","CD","ZM","TZ","ZW"]}
+                />
+              </div>
+            </div>
+
+            <SongList
+              songs={this.state.songs}
+              filteredSongs={this.state.filteredSongs}
+              playSong={this.playSong}
+              expandResults={this.state.expandResults}
             />
 
-            <div className="Searcher-flagClose">
-              { this.state.selectedCode != "" &&
-
-                <Button
-                  onClick={() => this.setState({selectedCode: ""})}
-                >
-                  <CloseIcon/>
-                </Button>
-
-              }
-
-              <ReactFlagsSelect
-                selected={this.state.selectedCode}
-                onSelect={code => this.selectCountryFlag(code)}
-                searchable
-                fullWidth={false}
-                placeholder=" "
-                searchPlaceholder="search countries"
-                showSelectedLabel={false}
-                countries={["DZ","AO","SH","BJ","BW","BF","BI","CM","CV","CF","TD","KM","CG","CD","DJ","EG","GQ","ER","SZ","ET","GA","GM","GH","GN","GW","CI","KE","LS","LR","LY","MG","MW","ML","MR","MU","YT","MA","MZ","NA","NE","NG","ST","RE","RW","ST","SN","SC","SL","SO","ZA","SS","SH","SD","SZ","TZ","TG","TN","UG","CD","ZM","TZ","ZW"]}
-              />
-            </div>
+            {this.state.typingEffectSongs.length > 20 &&
+              <div className="Searcher-typeEffectWrapper">
+                <ReactTypingEffect
+                  style={{ marginTop: 50, fontSize: 12, color: '#3F51B5' }}
+                  text={this.state.typingEffectSongs.slice(0, 20)[this.state.count]}
+                  speed={150}
+                  eraseDelay={150}
+                  typingDelay={150}
+                />
+              </div>
+            }
           </div>
-
-          <SongList
-            songs={this.state.songs}
-            filteredSongs={this.state.filteredSongs}
-            playSong={this.playSong}
-            expandResults={this.state.expandResults}
-          />
-
-          {this.state.typingEffectSongs.length > 20 &&
-            <div className="Searcher-typeEffectWrapper">
-              <ReactTypingEffect
-                style={{ marginTop: 50, fontSize: 12, color: '#3F51B5' }}
-                text={this.state.typingEffectSongs.slice(0, 20)[this.state.count]}
-                speed={150}
-                eraseDelay={150}
-                typingDelay={150}
-              />
-            </div>
-          }
         </div>
+      );
+    }
+    return (
+      <div className="Dots">
+        <Dots
+          color={'#3F51B5'}
+        />
       </div>
-    );
+    )
   }
 }
 
