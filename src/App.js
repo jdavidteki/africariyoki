@@ -16,9 +16,10 @@ class App extends Component {
           <div className="content">
             <Switch>
               <Route path="/" exact component={Searcher} />
-              <Route path="/africariyoki/admin" exact component={Admin} />
-              <Route path="/africariyoki/karaokedisplay/:id" component={KaraokeDisplay} />
-              <Route path="/africariyoki/lrcfixer/:id" component={LRCFixer} />
+              <Route path="/africariyoki" exact component={Searcher} />
+              <Route path="/admin" exact component={Admin} />
+              <Route path="/karaokedisplay/:id" component={KaraokeDisplay} />
+              <Route path="/lrcfixer/:id" component={LRCFixer} />
               <Route
                 component={() => (
                   <div style={{ padding: 20 }}>Page coming soon...</div>

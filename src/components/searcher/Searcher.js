@@ -172,7 +172,7 @@ class Searcher extends Component {
     let chooseSong = this.state.songs.filter(song => songId === song.id)
 
     this.props.history.push({
-      pathname: "/africariyoki/karaokedisplay/" + songId,
+      pathname: "/karaokedisplay/" + songId,
       state: { chooseSong: chooseSong, songs: this.state.songsCopy}
     });
 

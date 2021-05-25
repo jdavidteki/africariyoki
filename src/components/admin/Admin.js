@@ -151,7 +151,7 @@ class ConnectedAdmin extends Component {
 
     updateSong(){
         this.props.history.push({
-            pathname: "/africariyoki/lrcfixer/" + this.state.selectedSongIds[0],
+            pathname: "/lrcfixer/" + this.state.selectedSongIds[0],
             state: {
                 lyrics: this.state.selectedSongLyrics,
                 songId: this.state.selectedSongIds[0],

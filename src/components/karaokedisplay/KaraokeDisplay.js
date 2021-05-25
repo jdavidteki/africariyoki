@@ -43,7 +43,7 @@ class ConnectedKaraokeDisplay extends Component {
 
       if(eventDate <=0){
         this.props.history.push({
-          pathname: "/africariyoki/karaokedisplay/" + this.state.popularSongs[0].id
+          pathname: "/karaokedisplay/" + this.state.popularSongs[0].id
         });
         window.location.reload(true);
         clearInterval(x)
@@ -130,7 +130,7 @@ class ConnectedKaraokeDisplay extends Component {
   }
 
   playSong(songId) {
-    window.location.href = "/africariyoki/karaokedisplay/" + songId;
+    window.location.href = "/karaokedisplay/" + songId;
   }
 
   updateMotivator = () => {

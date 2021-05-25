@@ -10,7 +10,7 @@ class Header extends Component {
         <div className="Header-container">
             <div className="Header-left">
               <Link
-                to = "/africariyoki"
+                to = "/"
               >
                 <img className="Header-logo" src={logo} alt="Logo" />
               </Link>
@@ -20,7 +20,7 @@ class Header extends Component {
                     className="Header-navLink"
                     variant="outlined"
                     color="primary"
-                    to = "/africariyoki"
+                    to = "/"
                   >
                       home
               </Link>
@@ -28,7 +28,7 @@ class Header extends Component {
                     className="Header-navLink"
                     variant="outlined"
                     color="primary"
-                    to = "/africariyoki/about"
+                    to = "/about"
                   >
                       about
               </Link> */}
@@ -36,7 +36,7 @@ class Header extends Component {
                   className="Header-navLink"
                   variant="outlined"
                   color="primary"
-                  to = "/africariyoki/admin"
+                  to = "/admin"
                 >
                     admin
               </Link>
