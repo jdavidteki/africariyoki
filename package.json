@@ -22,6 +22,7 @@
     "csv-parser": "^3.0.0",
     "emoji-mart": "^3.0.1",
     "expo": "~37.0.3",
+    "expo-analytics": "^1.0.16",
     "express": "^4.17.1",
     "firebase": "^7.15.4",
     "gh-pages": "^2.2.0",

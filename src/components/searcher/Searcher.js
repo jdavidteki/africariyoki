@@ -194,7 +194,7 @@ class Searcher extends Component {
       return (
         <div className="Searcher">
           <MetaTags>
-            <title>africariyoki - sing with us!</title>
+            <title>africariyoki - sing with africa!</title>
             <meta name="description" content="sing along to your favourite afro beat songs" />
             <meta property="og:title" content="africariyoki" />
           </MetaTags>
