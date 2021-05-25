@@ -15,7 +15,7 @@ class App extends Component {
         <div className="App-body">
           <div className="content">
             <Switch>
-              <Route path="/africariyoki/" exact component={Searcher} />
+              <Route path="/" exact component={Searcher} />
               <Route path="/africariyoki/admin" exact component={Admin} />
               <Route path="/africariyoki/karaokedisplay/:id" component={KaraokeDisplay} />
               <Route path="/africariyoki/lrcfixer/:id" component={LRCFixer} />
