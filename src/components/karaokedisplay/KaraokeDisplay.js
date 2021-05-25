@@ -10,6 +10,7 @@ import { Dots } from "react-activity";
 import AudioPlayer from 'react-h5-audio-player';
 import { withRouter } from "react-router-dom";
 import PopularSongs from "../popularSongs/PopularSongs.js";
+import MetaTags from 'react-meta-tags';
 import { Emoji } from 'emoji-mart'
 
 import 'react-h5-audio-player/lib/styles.css';
@@ -189,6 +190,11 @@ class ConnectedKaraokeDisplay extends Component {
     if (this.state.singer.title != "") {
       return (
         <div className="KaraokeDisplay">
+          <MetaTags>
+            <title>{this.state.singer.title} - {this.state.singer.singer}</title>
+            <meta name="description" content={`sing with us, sing along to your favourite african songs! -- ${this.state.singer.title}, ${this.state.singer.singer}, ${this.state.singer.countries}`} />
+            <meta property="og:title" content="africariyoki" />
+          </MetaTags>
           <div className="KaraokeDisplay-cloudBackground">
             <Clouds/>
             <div className="KaraokeDisplay-twinkling"></div>

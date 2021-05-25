@@ -9,6 +9,7 @@ import Button from "@material-ui/core/Button";
 import CloseIcon from '@material-ui/icons/Close';
 import blankBack from "./assets/blankBack.jpeg"
 import { Dots } from "react-activity";
+import MetaTags from 'react-meta-tags';
 import background1 from "./assets/ankarabck1.jpeg";
 import background2 from "./assets/ankarabck2.jpeg";
 import background3 from "./assets/ankarabck3.jpeg";
@@ -192,6 +193,11 @@ class Searcher extends Component {
     if(this.state.songs.length > 0){
       return (
         <div className="Searcher">
+          <MetaTags>
+            <title>africariyoki - sing with us!</title>
+            <meta name="description" content="sing along to your favourite afro beat songs" />
+            <meta property="og:title" content="africariyoki" />
+          </MetaTags>
           <div
             style={{ backgroundImage: `url(${this.state.background})` }}
             className="Searcher-background">
