@@ -259,7 +259,7 @@ class ConnectedKaraokeDisplay extends Component {
                       size={18}
                     />
                   </div>
-                :
+                  :
                   <div className="KaraokeDisplay-motivator-container">
                     <Emoji
                       emoji={this.state.smileyToSet ? this.state.smileyToSet : 'smiley'}

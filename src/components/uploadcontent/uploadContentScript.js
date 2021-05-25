@@ -23,33 +23,41 @@ getLyrics().then( val => {
   let countriesArray = Object.values(val).map(a => a.countries.toLowerCase().replace(/\s/g, ''))
   let songs = Object.values(val)
 
-  for (let i =0; i<songs.length; i++){
-    if (songs[i].countries.includes("no mp3")){
-      // console.log(songs[i].countries, songs[i].countries.replace("no mp3", ""))
-      // uploadToFirebase(songs[i])
-      updateNoMp3InCountryName(songs[i].id, songs[i].countries.replace("no mp3", ""))
-    }
+  let allSongIds = [
+    '7DxG33tEJKE', 'Qtfslc-VAhA',
+    'XkP3dHiJ0dI', 'mV_zjss2nlY',
+    'mZKwbR1Kjr4', 'n3hSeu2NYXU',
+    'oAcWCGgF-tY', 'qm-8MuocmVY',
+    'rO49fDRz-3k', 's5xiYjLF5Uo',
+    'sRS8Afj3dOM', 'ssvZdVkYg3I',
+    'sz5EhyESHR8', 'uZ-_HIoEBE8',
+    'x9a6kz1-mgo', 'z3hZrOu-FTo'
+  ]
+
+
+  for (let i=0; i<allSongIds.length; i++){
+    uploadToFirebase(allSongIds[i])
   }
 
   // fs.createReadStream('AfricariyokiPlaylist.csv')
   // .pipe(csv())
-  // .on('data', (row) => {
+  // .on('data',(row) => {
   //   if (!(idsArray.includes(row.videoID) || titlesArray.includes(row.title.toLowerCase().replace(/\s/g, '')))){
   //     console.log(row)
   //     uploadToFirebase(row)
   //   }
   // })
-  // .on('end', () => {
+  // .on('end',() => {
   //   console.log('CSV file successfully processed');
   // });
 })
 
 
 function uploadToFirebase(song){
-  let audioUrl = `https://storage.googleapis.com/africariyoki-4b634.appspot.com/music/${song.id}.mp3`
-  let lyricsTextUrl = `https://storage.googleapis.com/africariyoki-4b634.appspot.com/lyrics/${song.id}.txt`
+  let audioUrl = `https://storage.googleapis.com/africariyoki-4b634.appspot.com/music/${song}.mp3`
+  let lyricsTextUrl = `https://storage.googleapis.com/africariyoki-4b634.appspot.com/lyrics/${song}.txt`
   // let addressID = 'http://0.0.0.0:5000'
-  let addressID = "http://4b9ecffd57b1.ngrok.io"
+  let addressID = "http://3927183ba8ff.ngrok.io"
   // if(song.addressID){
   //     addressID = "http://0.0.0.0:5000"
   // }else{
@@ -80,13 +88,12 @@ function uploadToFirebase(song){
 
   // use ai to extract vocall from music and upload instrumental
   var requestOptions = {
-      method: 'GET',
-      redirect: 'follow'
+      method: 'GET',      redirect: 'follow'
   };
-  fetch(`${addressID}/vr/${song.id}`, requestOptions)
+  fetch(`${addressID}/vr/${song}`, requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
-  .catch(error => console.log('error', error));
+  .catch(error => console.log('error',error));
 }
 
 async function getLyrics(){
