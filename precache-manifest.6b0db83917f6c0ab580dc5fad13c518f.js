@@ -84,12 +84,12 @@ self.__precacheManifest = [
     "url": "/./fonts/Caveat-VariableFont_wght.ttf"
   },
   {
-    "revision": "48c7ed4e7da9792af288a60d7242d615",
-    "url": "/expo-service-worker.js"
-  },
-  {
     "revision": "ec543248d7b23864564429fc03837190",
     "url": "/serve.json"
+  },
+  {
+    "revision": "48c7ed4e7da9792af288a60d7242d615",
+    "url": "/expo-service-worker.js"
   },
   {
     "revision": "cd4bf354f7d4a6bf36fa1a52c7dac4ac",
