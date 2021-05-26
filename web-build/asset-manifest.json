@@ -1,11 +1,11 @@
 {
   "files": {
-    "app.js": "/static/js/app.93fc1832.chunk.js",
-    "app.js.map": "/static/js/app.93fc1832.chunk.js.map",
+    "app.js": "/static/js/app.a834f230.chunk.js",
+    "app.js.map": "/static/js/app.a834f230.chunk.js.map",
     "runtime~app.js": "/static/js/runtime~app.34c76111.js",
     "runtime~app.js.map": "/static/js/runtime~app.34c76111.js.map",
-    "static/js/2.26e9e88f.chunk.js": "/static/js/2.26e9e88f.chunk.js",
-    "static/js/2.26e9e88f.chunk.js.map": "/static/js/2.26e9e88f.chunk.js.map",
+    "static/js/2.377465c9.chunk.js": "/static/js/2.377465c9.chunk.js",
+    "static/js/2.377465c9.chunk.js.map": "/static/js/2.377465c9.chunk.js.map",
     "fonts/Caveat-VariableFont_wght.ttf": "/./fonts/Caveat-VariableFont_wght.ttf",
     "favicon-16.png": "/favicon-16.png",
     "favicon-32.png": "/favicon-32.png",
@@ -29,11 +29,11 @@
     "static/media/cloudx3.png": "/static/media/cloudx3.3b47e00d.png",
     "static/media/cloudx4.png": "/static/media/cloudx4.87c467e6.png",
     "static/media/cloudx5.png": "/static/media/cloudx5.dadbcb03.png",
-    "static/media/logo.png": "/static/media/logo.eb677ccc.png"
+    "static/media/logo.png": "/static/media/logo.631fe257.png"
   },
   "entrypoints": [
     "static/js/runtime~app.34c76111.js",
-    "static/js/2.26e9e88f.chunk.js",
-    "static/js/app.93fc1832.chunk.js"
+    "static/js/2.377465c9.chunk.js",
+    "static/js/app.a834f230.chunk.js"
   ]
 }

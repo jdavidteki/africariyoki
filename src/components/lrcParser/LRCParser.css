@@ -20,29 +20,6 @@
   font-size: 13px;
 }
 
-.LRCParser-countryFlagsNumPlays{
-  display: flex;
-  position: absolute;
-  right: 15px;
-  bottom: 0;
-}
-
-.LRCParser-countryFlags{
-  display: flex;
-  margin-right: 5px;
-  align-items: center;
-}
-
-.LRCParser-countryFlags
-.emoji-mart-emoji{
-  display: flex;
-  align-items: center;
-}
-
-.LRCParser-numPlays{
-  font-size: 18px;
-}
-
 .LRCParser-containerWrapper{
   padding: 20px;
   text-align: center;
@@ -51,6 +28,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.LRCParser-motivator-container{
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
 }
 
 .LRCParser-recorder{

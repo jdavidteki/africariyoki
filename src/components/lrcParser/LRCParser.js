@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Recorder from '../recorder/Recorder.js'
 import { Emoji } from 'emoji-mart'
-import codeToCountries from "../searcher/codeToCountry.js";
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 
 import './LRCParser.css';
 
@@ -15,8 +13,7 @@ class LRCParser extends Component {
       currentLine:"",
       nextLine: "",
       prevTimeStamp: "",
-      numPlays: this.props.numPlays,
-      countries: this.props.countries,
+      smileyToSet: '',
       mapLyricsToMs: this.getLyricsArrayWithMs(this.props.lyrics.split("\n")),
       keysOfMapLyrics: Array.from( this.getLyricsArrayWithMs(this.props.lyrics.split("\n")).keys()),
       audioDetails: {
@@ -35,6 +32,10 @@ class LRCParser extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.currentTime !== this.props.currentTime) {
       this.getCurrentLyricLine()
+    }
+
+    if (prevProps.smileyToSet !== this.props.smileyToSet) {
+      this.setState({smileyToSet: this.props.smileyToSet})
     }
   }
 
@@ -77,21 +78,6 @@ class LRCParser extends Component {
   render() {
     return (
       <div className="Lyrics-container LRCParser-container">
-        <div className="LRCParser-countryFlagsNumPlays">
-         <div className="LRCParser-countryFlags">
-            {this.state.countries.split(",").map((country) =>
-              <Emoji
-                key={country}
-                emoji={"flag-" + getCodeFromCountryName(country.trim()).toLowerCase()}
-                size={18}
-              />
-            )}
-          </div>
-          <div className="LRCParser-numPlays">
-            <PlayArrowIcon />
-            {numberWithCommas(this.state.numPlays)}
-          </div>
-        </div>
         <div className="LRCParser-containerWrapper">
           <p className="LRCParser-previousLine">
             {this.state.prevLine ? cleanLine(this.state.prevLine) : ''}
@@ -125,21 +111,27 @@ class LRCParser extends Component {
               />
             </div>
         }
+
+        { this.state.pauseSong ?
+          <div className="LRCParser-motivator-container">
+            <Emoji
+              emoji={'clock1230'}
+              set='double_vertical_bar'
+              size={18}
+            />
+          </div>
+          :
+          <div className="LRCParser-motivator-container">
+            <Emoji
+              emoji={this.state.smileyToSet ? this.state.smileyToSet : 'smiley'}
+              set='apple'
+              size={18}
+            />
+          </div>
+        }
       </div>
     );
   }
-}
-
-function getCodeFromCountryName(value) {
-  let val = Object.keys(codeToCountries).find(key => codeToCountries[key] === value)
-  if (val == undefined){
-    return ""
-  }
-  return val
-}
-
-function numberWithCommas(x) {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 function cleanLine(string){

@@ -6,6 +6,7 @@ import Admin from './components/admin/Admin.js'
 import LRCFixer from './components/lrcFixer/LRCFixer.js'
 import { Switch, Route } from "react-router-dom";
 import { Analytics, PageHit } from 'expo-analytics';
+import MetaTags from 'react-meta-tags';
 
 import "./App.css";
 
@@ -30,7 +31,17 @@ class App extends Component {
               <Route path="/lrcfixer/:id" component={LRCFixer} />
               <Route
                 component={() => (
-                  <div style={{ padding: 20 }}>Page coming soon...</div>
+                  <div>
+                    <MetaTags>
+                      <title>africariyoki - sing with africa! 404</title>
+                      <meta name="description" content="sing along to your favourite afro beat songs" />
+                      <meta property="og:title" content="africariyoki" />
+                    </MetaTags>
+                    <div style={{ padding: 20 }}>
+                      404 Page Not Found
+                    </div>
+                  </div>
+
                 )}
               />
             </Switch>

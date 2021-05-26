@@ -3,6 +3,7 @@ import ReactTypingEffect from 'react-typing-effect';
 import { connect } from "react-redux";
 import moment from "moment"
 import LRCParser from '../lrcParser/LRCParser';
+import SearchIcon from '@material-ui/icons/Search';
 import Clouds from '../clouds/Clouds'
 import Firebase from "../../firebase/firebase.js";
 import NoSleep from 'nosleep.js';
@@ -12,29 +13,38 @@ import { withRouter } from "react-router-dom";
 import PopularSongs from "../popularSongs/PopularSongs.js";
 import MetaTags from 'react-meta-tags';
 import { Emoji } from 'emoji-mart'
+import codeToCountries from "../searcher/codeToCountry.js";
+import Searcher from "../searcher/Searcher";
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import CloseIcon from '@material-ui/icons/Close';
 
 import 'react-h5-audio-player/lib/styles.css';
 import "./KaraokeDisplay.css";
 
 var noSleep = new NoSleep();
 class ConnectedKaraokeDisplay extends Component {
-  state={
-    showTimer: false,
-    count:0,
-    eventDate: moment.duration().add({days:0,hours:0,minutes:0,seconds:5}), // add 9 full days, 3 hours, 40 minutes and 50 seconds
-    secs:0,
-    pauseSong: false,
-    currentTime: '',
-    popularSongs:[],
-    motivator: 'less gerriiitt',
-    smileyToSet: 'smiley',
-    singer: {
-      audiourl: '',
-      singer: '',
-      title: '',
-      lyrics: '',
-    },
-    animatedTexts: [],
+  constructor(props){
+    super(props);
+
+    this.state={
+      showTimer: false,
+      count:0,
+      eventDate: moment.duration().add({days:0,hours:0,minutes:0,seconds:5}), // add 9 full days, 3 hours, 40 minutes and 50 seconds
+      secs:0,
+      pauseSong: false,
+      currentTime: '',
+      popularSongs:[],
+      motivator: 'less gerriiitt',
+      openSearcherModel: false,
+      smileyToSet: 'smiley',
+      singer: {
+        audiourl: '',
+        singer: '',
+        title: '',
+        lyrics: '',
+      },
+      animatedTexts: [],
+    }
   }
 
   updateTimer=()=>{
@@ -195,6 +205,17 @@ class ConnectedKaraokeDisplay extends Component {
             <meta name="description" content={`sing with us, sing along to your favourite african songs! -- ${this.state.singer.title}, ${this.state.singer.singer}, ${this.state.singer.countries}`} />
             <meta property="og:title" content="africariyoki" />
           </MetaTags>
+          {this.state.openSearcherModel &&
+            <div className="KaraokeDisplay-openSearcherModel">
+              <CloseIcon
+                fontSize={'large'}
+                className={"KaraokeDisplay-openSearcherModel-close"}
+                style={{ color: '#f7f8e4' }}
+                onClick={()=>{this.setState({openSearcherModel: false})}}
+              />
+              <Searcher />
+            </div>
+          }
           <div className="KaraokeDisplay-cloudBackground">
             <Clouds/>
             <div className="KaraokeDisplay-twinkling"></div>
@@ -219,7 +240,7 @@ class ConnectedKaraokeDisplay extends Component {
 
               {this.state.showTimer &&
                 <div className="KaraokeDisplay-showTimer">
-                  <span>Playing next song in... {` ${this.state.secs}`} secs</span>
+                  <span>i'm playing something you will like in... {` ${this.state.secs}`} secs</span>
                 </div>
               }
 
@@ -240,8 +261,7 @@ class ConnectedKaraokeDisplay extends Component {
                     currentTime = {this.state.currentTime}
                     singer={this.state.singer.singer}
                     title={this.state.singer.title}
-                    numPlays={this.state.singer.numPlays}
-                    countries={this.state.singer.countries}
+                    smileyToSet={this.state.smileyToSet}
                   />
                     :
                   <span className="Lyrics-container Lyrics-nonParsedLyrics">
@@ -250,38 +270,20 @@ class ConnectedKaraokeDisplay extends Component {
                 }
               </div>
 
-              <div className="KaraokeDisplay-motivator">
-                { this.state.pauseSong ?
-                  <div className="KaraokeDisplay-motivator-container">
-                    <Emoji
-                      emoji={'clock1230'}
-                      set='apple'
-                      size={18}
-                    />
-                    song paused
-                    <Emoji
-                      emoji={'clock1230'}
-                      set='apple'
-                      size={18}
-                    />
-                  </div>
-                  :
-                  <div className="KaraokeDisplay-motivator-container">
-                    <Emoji
-                      emoji={this.state.smileyToSet ? this.state.smileyToSet : 'smiley'}
-                      set='apple'
-                      size={18}
-                    />
-                    {this.state.motivator}
-                    <Emoji
-                      emoji={this.state.smileyToSet ? this.state.smileyToSet : 'smiley'}
-                      set='apple'
-                      size={18}
-                    />
-                  </div>
-                }
+              <div className="KaraokeDisplay-lowerPane">
+              <div className="KaraokeDisplay-countryFlags">
+                {this.state.singer.countries.split(",").map((country) =>
+                  <Emoji
+                    key={country}
+                    emoji={"flag-" + getCodeFromCountryName(country.trim()).toLowerCase()}
+                    size={18}
+                  />
+                )}
+                </div>
+                <PlayArrowIcon className={"KaraokeDisplay-lowerPaneIcon"} style={{ color: '#3413f1' }} />
+                {numberWithCommas(this.state.singer.numPlays)}
+                <SearchIcon className={"KaraokeDisplay-lowerPaneIcon"} style={{ color: '#3413f1' }} onClick={()=>{this.setState({openSearcherModel: true})}} />
               </div>
-
             </div>
             <div className="KaraokeDisplay-bottomContainer">
               {
@@ -319,11 +321,17 @@ class ConnectedKaraokeDisplay extends Component {
 }
 
 
-function randomNumber(min, max){
-  const r = Math.random()*(max-min) + min
-  return Math.floor(r)
+function getCodeFromCountryName(value) {
+  let val = Object.keys(codeToCountries).find(key => codeToCountries[key] === value)
+  if (val == undefined){
+    return ""
+  }
+  return val
 }
 
+function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 function cleanLine(string){
   return string.toLowerCase().replace("by rentanadvisercom", '***')
 }

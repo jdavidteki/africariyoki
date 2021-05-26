@@ -171,10 +171,15 @@ class Searcher extends Component {
   playSong= (songId) => {
     let chooseSong = this.state.songs.filter(song => songId === song.id)
 
-    this.props.history.push({
-      pathname: "/karaokedisplay/" + songId,
-      state: { chooseSong: chooseSong, songs: this.state.songsCopy}
-    });
+    if(this.props.history == undefined){
+      //TODO: figure out if it's possible to not have to do this
+      window.location.href = "/karaokedisplay/" + songId
+    }else{
+      this.props.history.push({
+        pathname: "/karaokedisplay/" + songId,
+        state: { chooseSong: chooseSong, songs: this.state.songsCopy}
+      });
+    }
 
     this.setState({
       songs: chooseSong,
