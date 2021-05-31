@@ -10,17 +10,6 @@ import CloseIcon from '@material-ui/icons/Close';
 import blankBack from "./assets/blankBack.jpeg"
 import { Dots } from "react-activity";
 import MetaTags from 'react-meta-tags';
-import background1 from "./assets/ankarabck1.jpeg";
-import background2 from "./assets/ankarabck2.jpeg";
-import background3 from "./assets/ankarabck3.jpeg";
-import background4 from "./assets/ankarabck4.jpeg";
-import background5 from "./assets/ankarabck5.jpeg";
-import background6 from "./assets/ankarabck6.jpeg";
-import background7 from "./assets/ankarabck7.jpeg";
-import background8 from "./assets/ankarabck7.jpeg";
-import background9 from "./assets/ankarabck9.jpeg";
-import background10 from "./assets/ankarabck10.jpeg";
-import background11 from "./assets/ankarabck11.jpeg";
 
 import './Searcher.css';
 class Searcher extends Component {
@@ -85,37 +74,37 @@ class Searcher extends Component {
 
     switch(randomNumber) {
       case 1:
-        backgroundToReturn = background1
+        backgroundToReturn = "https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/searchBackgrounds%2Fbck1bck.jpeg?alt=media"
         break
       case 2:
-        backgroundToReturn =  background2
+        backgroundToReturn =  "https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/searchBackgrounds%2Fbck2bck.jpeg?alt=media"
         break
       case 3:
-        backgroundToReturn =  background3
+        backgroundToReturn =  "https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/searchBackgrounds%2Fbck3bck.jpeg?alt=media"
         break
       case 4:
-        backgroundToReturn =  background4
+        backgroundToReturn =  "https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/searchBackgrounds%2Fbck4bck.jpeg?alt=media"
         break
       case 5:
-        backgroundToReturn =  background5
+        backgroundToReturn =  "https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/searchBackgrounds%2Fbck5bck.jpeg?alt=media"
         break
       case 6:
-        backgroundToReturn =  background6
+        backgroundToReturn =  "https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/searchBackgrounds%2Fbck6bck.jpeg?alt=media"
         break
       case 7:
-        backgroundToReturn =  background7
+        backgroundToReturn =  "https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/searchBackgrounds%2Fbck7bck.jpeg?alt=media"
         break
       case 8:
-        backgroundToReturn =  background8
+        backgroundToReturn =  "https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/searchBackgrounds%2Fbck8bck.jpeg?alt=media"
         break
       case  9:
-        backgroundToReturn =  background9
+        backgroundToReturn =  "https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/searchBackgrounds%2Fbck9bck.jpeg?alt=media"
         break
       case 10:
-        backgroundToReturn =  background10
+        backgroundToReturn =  "https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/searchBackgrounds%2Fbck10bck.jpeg?alt=media"
         break
       default:
-        backgroundToReturn =  background11
+        backgroundToReturn =  "https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/searchBackgrounds%2Fbck11bck.jpeg?alt=media"
         break
     }
 

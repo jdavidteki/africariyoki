@@ -86,6 +86,7 @@ class ConnectedUploadSeacherBck extends Component {
                         placeholder="Country name in order to upload fil"
                         onChange={e => {
                             this.setState({ countryName: e.target.value, countryCode: getCodeFromCountryName(e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1)) });
+                            console.log(this.state.countryName, this.state.countryCode)
                         }}
                     />
 
@@ -125,6 +126,32 @@ class ConnectedUploadSeacherBck extends Component {
 }
 
 function getCodeFromCountryName(value) {
+
+    switch(value) {
+      case "Bck1":
+        return"Bck1"
+      case "Bck2":
+        return"Bck2"
+      case "Bck3":
+        return"Bck3"
+      case "Bck4":
+        return"Bck4"
+      case "Bck5":
+        return"Bck5"
+      case "Bck6":
+        return"Bck6"
+      case "Bck7":
+        return"Bck7"
+      case "Bck8":
+        return"Bck8"
+      case  "Bck9":
+        return"Bck9"
+      case "Bck10":
+        return"Bck10"
+      case "Bck11":
+        return"Bck11"
+    }
+
     let val = Object.keys(codeToCountries).find(key => codeToCountries[key] === value)
     if (val == undefined){
         return ""
