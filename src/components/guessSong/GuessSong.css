@@ -1,0 +1,152 @@
+.GuessSong{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #1edada;
+}
+
+.GuessSong-wrapper{
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 80px);
+    width: 80%;
+    position: fixed;
+    top: 80px;
+    z-index: 4;
+    align-items: center;
+    border: 4px;
+}
+
+.GuessSong-setGameModel{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.GuessSong-comment{
+    font-weight: bold;
+}
+
+.GuessSong-setGameModel-close{
+    display: flex;
+    justify-self: right;
+    max-height: 40px;
+    margin-left: auto;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.GuessSong-results,
+.GuessSong-setGameModel-container{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #f0ffff;
+}
+
+.GuessSong-results{
+    margin: auto;
+    width: 320px;
+}
+
+.GuessSong-results-title{
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.GuessSong-gameOption{
+    padding: 15px 0;
+}
+
+.GuessSong-controlMenuInfoChild{
+    padding: 0 10px;
+}
+
+.GuessSong-controlMenuInfo{
+    display: flex;
+}
+
+.GuessSong-controlMenu{
+    font-weight: bold;
+    padding: 15px 5px;
+    display: flex;
+}
+
+.GuessSong-controlMenu
+.css-2b097c-container{
+    width: 100px;
+}
+
+.GuessSong-lowerMenu{
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+.GuessSong-options{
+    display: flex;
+    flex-direction: column;
+}
+
+.GuessSong-options .Song{
+    width: 50%;
+}
+
+.GuessSong-title{
+    font-weight: bold;
+    font-size: 36px;
+    text-transform: uppercase;
+    padding-bottom: 50px;
+}
+
+.GuessSong-display{
+    width: 100%;
+    background-color: #c2f1f1;
+    padding: 20px;
+    border-radius: 4px;
+}
+
+.GuessSong .rhap_progress-section{
+    pointer-events: none;
+}
+
+.GuessSong .rhap_time.rhap_total-time,
+.GuessSong .rhap_current-time{
+    display: none;
+}
+
+.GuessSong-table{
+    padding: 20px;
+}
+
+.MuiButton-label{
+    font-family: Caveat;
+}
+
+@media only screen and (max-width: 600px) {
+    .GuessSong-options .Song{
+        width: 100%;
+    }
+
+    .GuessSong-controlMenu{
+        flex-direction: column;
+        order: -1;
+    }
+
+    .GuessSong-controlMenuInfo{
+        flex-wrap: wrap;
+    }
+
+    .GuessSong-wrapper,
+    .GuessSong-results{
+        width: 100%;
+    }
+
+    .GuessSong-controlMenuInfoChild{
+        flex-grow: 1;
+        width: 50%;
+    }
+}

@@ -43,14 +43,14 @@ class Header extends Component {
                   >
                       home
               </Link>
-              {/* <Link
+              <Link
                     className="Header-navLink"
                     variant="outlined"
                     color="primary"
-                    to = "/about"
+                    to = "/game"
                   >
-                      about
-              </Link> */}
+                      game
+              </Link>
               <Link
                   className="Header-navLink"
                   variant="outlined"

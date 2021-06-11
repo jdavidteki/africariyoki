@@ -86,7 +86,6 @@ class ConnectedUploadSeacherBck extends Component {
                         placeholder="Country name in order to upload fil"
                         onChange={e => {
                             this.setState({ countryName: e.target.value, countryCode: getCodeFromCountryName(e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1)) });
-                            console.log(this.state.countryName, this.state.countryCode)
                         }}
                     />
 

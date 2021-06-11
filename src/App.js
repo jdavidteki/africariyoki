@@ -3,6 +3,7 @@ import Header from './components/header/Header';
 import Searcher from './components/searcher/Searcher.js';
 import KaraokeDisplay from './components/karaokedisplay/KaraokeDisplay.js'
 import Admin from './components/admin/Admin.js'
+import GuessSong from './components/guessSong/GuessSong.js'
 import LRCFixer from './components/lrcFixer/LRCFixer.js'
 import { Switch, Route } from "react-router-dom";
 import { Analytics, PageHit } from 'expo-analytics';
@@ -27,8 +28,10 @@ class App extends Component {
               <Route path="/" exact component={Searcher} />
               <Route path="/africariyoki" exact component={Searcher} />
               <Route path="/admin" exact component={Admin} />
+              <Route path="/guesssong" exact component={GuessSong} />
               <Route path="/karaokedisplay/:id" component={KaraokeDisplay} />
               <Route path="/lrcfixer/:id" component={LRCFixer} />
+              <Route path="/game" exact component={GuessSong} />
               <Route
                 component={() => (
                   <div>
