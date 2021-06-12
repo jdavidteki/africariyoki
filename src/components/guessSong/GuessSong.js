@@ -12,6 +12,7 @@ import ReplayIcon from '@material-ui/icons/Replay';
 import CheckIcon from '@material-ui/icons/Check';
 import Select  from 'react-select';
 import ArrowForward from '@material-ui/icons/ArrowForward'
+import PersonIcon from '@material-ui/icons/Person';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import "./GuessSong.css"
@@ -273,7 +274,7 @@ class ConnectedGuessSong extends Component {
                                 ?
                                     <div className="GuessSong-results">
                                         <div className="GuessSong-results-title">Result:</div>
-                                        <div className="GuessSong-gameOption"> <CheckIcon /> {this.state.selectedOptionPlayerName == "" ? 'anonimo' : this.state.selectedOptionPlayerName}</div>
+                                        <div className="GuessSong-gameOption"> <PersonIcon /> {this.state.selectedOptionPlayerName == "" ? 'anonimo' : this.state.selectedOptionPlayerName}</div>
                                         <div className="GuessSong-gameOption">difficulty: {this.state.selectedOptionDifficulty.label}</div>
                                         <div className="GuessSong-gameOption"> <CheckIcon /> {this.state.score}</div>
                                         <div className="GuessSong-gameOption">{this.state.selectedOptionDuration.label}</div>
@@ -291,7 +292,7 @@ class ConnectedGuessSong extends Component {
                                                 <PlayArrowIcon />
                                             </Button>
                                             <div className="GuessSong-controlMenuInfo">
-                                                <div className="GuessSong-controlMenuInfoChild"> <CheckIcon /> {this.state.selectedOptionPlayerName == "" ? 'anonimo' : this.state.selectedOptionPlayerName}</div>
+                                                <div className="GuessSong-controlMenuInfoChild"> <PersonIcon /> {this.state.selectedOptionPlayerName == "" ? 'anonimo' : this.state.selectedOptionPlayerName}</div>
                                                 <div className="GuessSong-controlMenuInfoChild">high score: {this.state.highestscore}</div>
                                                 <div className="GuessSong-controlMenuInfoChild">difficulty: {this.state.selectedOptionDifficulty.label}</div>
                                                 <div className="GuessSong-controlMenuInfoChild"> <CheckIcon /> {this.state.score}</div>
