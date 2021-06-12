@@ -1,7 +1,7 @@
 self.__precacheManifest = [
   {
-    "revision": "006c08d3b1610103c98d",
-    "url": "/static/js/app.63af3d89.chunk.js"
+    "revision": "fb93d05e7ea35010dd06",
+    "url": "/static/js/app.a79b70d1.chunk.js"
   },
   {
     "revision": "e91487e8c8aa62ce91ce",
@@ -44,12 +44,12 @@ self.__precacheManifest = [
     "url": "/./fonts/Caveat-VariableFont_wght.ttf"
   },
   {
-    "revision": "ec543248d7b23864564429fc03837190",
-    "url": "/serve.json"
-  },
-  {
     "revision": "48c7ed4e7da9792af288a60d7242d615",
     "url": "/expo-service-worker.js"
+  },
+  {
+    "revision": "ec543248d7b23864564429fc03837190",
+    "url": "/serve.json"
   },
   {
     "revision": "cd4bf354f7d4a6bf36fa1a52c7dac4ac",
@@ -64,7 +64,7 @@ self.__precacheManifest = [
     "url": "/favicon.ico"
   },
   {
-    "revision": "1d9a688bc4a078cfd2905f1b36ec891b",
+    "revision": "806254bdfa66ba87bebb1777b695527f",
     "url": "/index.html"
   },
   {
