@@ -32,10 +32,10 @@ const DurationOptions = [
 ];
 
 const levelToPlaySec = {
-    "beginner": 3,
-    "amatuer": 2,
-    "professional": 1.5,
-    "master": 1,
+    "beginner": 5,
+    "amatuer": 4,
+    "professional": 3,
+    "master": 2.5,
 }
 
 class ConnectedGuessSong extends Component {
