@@ -10,7 +10,7 @@
   display: flex;
   width: 100%;
   flex-direction: column;
-  height: calc(100vh - 80px);
+  height: calc(100% - 80px);
   position: fixed;
   top: 80px;
   justify-content: space-between;
@@ -31,7 +31,7 @@
 }
 
   .KaraokeDisplay-titleArist{
-    margin: 15px 0;
+    margin: 5px 0;
     background-color: #f7f8e4;
     padding: 10px;
     border-radius: 5px;
@@ -107,6 +107,7 @@
   }
 
   .KaraokeDisplay-lowerPane{
+    margin-top: 5px;
     background-color: #f7f8e4;
     padding: 15px;
     border-radius: 5px;

@@ -15,8 +15,8 @@ import MetaTags from 'react-meta-tags';
 import { Emoji } from 'emoji-mart'
 import codeToCountries from "../searcher/codeToCountry.js";
 import Searcher from "../searcher/Searcher";
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import CloseIcon from '@material-ui/icons/Close';
+import AlbumIcon from '@material-ui/icons/Album';
 
 import 'react-h5-audio-player/lib/styles.css';
 import "./KaraokeDisplay.css";
@@ -204,6 +204,9 @@ class ConnectedKaraokeDisplay extends Component {
             <title>{this.state.singer.title} - {this.state.singer.singer}</title>
             <meta name="description" content={`sing with us, sing along to your favourite african songs! -- ${this.state.singer.title}, ${this.state.singer.singer}, ${this.state.singer.countries}`} />
             <meta property="og:title" content="africariyoki" />
+            <meta http-equiv='cache-control' content='no-cache' />
+            <meta http-equiv='expires' content='0' />
+            <meta http-equiv='pragma' content='no-cache' />
           </MetaTags>
           {this.state.openSearcherModel &&
             <div className="KaraokeDisplay-openSearcherModel">
@@ -280,7 +283,7 @@ class ConnectedKaraokeDisplay extends Component {
                   />
                 )}
                 </div>
-                <PlayArrowIcon className={"KaraokeDisplay-lowerPaneIcon"} style={{ color: '#3413f1' }} />
+                <AlbumIcon className={"KaraokeDisplay-lowerPaneIcon"} style={{ color: '#3413f1' }} />
                 {numberWithCommas(this.state.singer.numPlays)}
                 <SearchIcon className={"KaraokeDisplay-lowerPaneIcon"} style={{ color: '#3413f1' }} onClick={()=>{this.setState({openSearcherModel: true})}} />
               </div>

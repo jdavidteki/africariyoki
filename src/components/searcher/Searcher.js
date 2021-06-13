@@ -191,6 +191,9 @@ class Searcher extends Component {
             <title>africariyoki - sing with africa!</title>
             <meta name="description" content="sing along to your favourite afro beat songs" />
             <meta property="og:title" content="africariyoki" />
+            <meta http-equiv='cache-control' content='no-cache' />
+            <meta http-equiv='expires' content='0' />
+            <meta http-equiv='pragma' content='no-cache' />
           </MetaTags>
           <div
             style={{ backgroundImage: `url(${this.state.background})` }}

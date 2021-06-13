@@ -1,12 +1,8 @@
 .App {
-  height: calc(100vh);
   display: flex;
   flex-direction: column;
   min-width: 320px;
   width: 100%;
-  /* Track */
-  /* Handle */
-  /* Handle on hover */
 }
 
 @font-face {
@@ -16,7 +12,7 @@
 
   .App-body {
     flex-grow: 1;
-    height: calc(100vh);
+    height: 100%;
   }
 
   .App{
@@ -52,5 +48,5 @@
   }
 
 html, #root, body {
-  height: 100%;
-  margin: 0px; }
+  margin: 0px;
+}

@@ -17,6 +17,11 @@ analytics.hit(new PageHit('Home'))
   .then(() => console.log("Google analyytics setup"))
   .catch(e => console.log(e.message));
 
+window.onresize = function() {
+  document.getElementsByClassName("App").height = window.innerHeight;
+}
+window.onresize();
+
 class App extends Component {
   render() {
     return (
@@ -39,6 +44,9 @@ class App extends Component {
                       <title>africariyoki - sing with africa! 404</title>
                       <meta name="description" content="sing along to your favourite afro beat songs" />
                       <meta property="og:title" content="africariyoki" />
+                      <meta http-equiv='cache-control' content='no-cache' />
+                      <meta http-equiv='expires' content='0' />
+                      <meta http-equiv='pragma' content='no-cache' />
                     </MetaTags>
                     <div style={{ padding: 20 }}>
                       404 Page Not Found

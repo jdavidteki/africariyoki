@@ -16,10 +16,10 @@
   border-radius: 3px;
   border: 1px solid #f7f8e4;
   display: flex;
-  background-color: #f7f8e4;
   justify-content: space-between;
   flex-direction: column;
   box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.1);
+  background-color: transparent !important;
 }
 
 .card-title {

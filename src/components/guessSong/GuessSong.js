@@ -13,6 +13,7 @@ import CheckIcon from '@material-ui/icons/Check';
 import Select  from 'react-select';
 import ArrowForward from '@material-ui/icons/ArrowForward'
 import PersonIcon from '@material-ui/icons/Person';
+import MetaTags from 'react-meta-tags';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import "./GuessSong.css"
@@ -145,11 +146,13 @@ class ConnectedGuessSong extends Component {
     generateSongsInOptions(allSongs, songInQuestion){
         let songsInOptions = [songInQuestion]
 
-        for(var i=0; i<5; i++){
+        for(var i=0; i<3; i++){
             let random = Math.floor(Math.random() * (allSongs.length - 0) + 0);
 
             if(!songsInOptions.includes(allSongs[random])){
                 songsInOptions.push(allSongs[random])
+            }else{
+                i-=1
             }
         }
         return shuffleArray(songsInOptions)
@@ -230,10 +233,18 @@ class ConnectedGuessSong extends Component {
         if (this.state.songInQuestion.title != "") {
             return (
                 <div className="GuessSong">
+                    <MetaTags>
+                      <title>africariyoki - sing with africa!</title>
+                      <meta name="description" content="sing along to your favourite afro beat songs - guess the song" />
+                      <meta property="og:title" content="africariyoki" />
+                      <meta http-equiv='cache-control' content='no-cache' />
+                      <meta http-equiv='expires' content='0' />
+                      <meta http-equiv='pragma' content='no-cache' />
+                    </MetaTags>
                     {this.state.setGameModel
                     ?
                         <div className="GuessSong-setGameModel">
-                            <div className="GuessSong-setGameModel-container">
+                            <div className="GuessSong-setGameModel-container pulse">
                                 <TextField
                                     value={this.state.selectedOptionPlayerName}
                                     className="GuessSong-input GuessSong-gameOption"
@@ -272,7 +283,7 @@ class ConnectedGuessSong extends Component {
                         <div className="GuessSong-wrapper" >
                             {this.state.printResult
                                 ?
-                                    <div className="GuessSong-results">
+                                    <div className="GuessSong-results pulse">
                                         <div className="GuessSong-results-title">Result:</div>
                                         <div className="GuessSong-gameOption"> <PersonIcon /> {this.state.selectedOptionPlayerName == "" ? 'anonimo' : this.state.selectedOptionPlayerName}</div>
                                         <div className="GuessSong-gameOption">difficulty: {this.state.selectedOptionDifficulty.label}</div>
