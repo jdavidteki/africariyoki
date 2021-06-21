@@ -362,12 +362,11 @@ class ConnectedGuessSong extends Component {
                                             ref={ref => this.audio = ref}
                                             id="sample"
                                             controls
-                                            src=""
-                                            // src={
-                                            //     this.state.songInQuestion.audiourl.includes('africariyoki-4b634') ?
-                                            //     this.state.songInQuestion.audiourl :
-                                            //     this.state.songInQuestion.audiourl.replace('africariyoki', 'africariyoki-4b634')
-                                            // } //because im cheap and im not paying for firebase
+                                            src={
+                                                this.state.songInQuestion.audiourl.includes('africariyoki-4b634') ?
+                                                this.state.songInQuestion.audiourl :
+                                                this.state.songInQuestion.audiourl.replace('africariyoki', 'africariyoki-4b634')
+                                            } //because im cheap and im not paying for firebase
                                         />
                                     </div>
                                     <div className="GuessSong-options">
