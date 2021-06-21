@@ -14,6 +14,9 @@ import Select  from 'react-select';
 import ArrowForward from '@material-ui/icons/ArrowForward'
 import PersonIcon from '@material-ui/icons/Person';
 import MetaTags from 'react-meta-tags';
+import TweenOne from 'rc-tween-one';
+import SvgMorphPlugin from 'rc-tween-one/lib/plugin/SvgMorphPlugin';
+TweenOne.plugins.push(SvgMorphPlugin);
 
 import 'bootstrap/dist/css/bootstrap.css';
 import "./GuessSong.css"
@@ -51,6 +54,9 @@ class ConnectedGuessSong extends Component {
         highestscore:1000,
         setGameModel: true,
         selectedOptionPlayerName: "",
+        pauseSetGameModal: true,
+        moment: null,
+        reverse: false,
         selectedOptionDuration: {value: 1, label: '1min'},
         selectedOptionDifficulty: {value: 'Beginner', label: 'beginner'},
         printResult: false,
@@ -175,12 +181,25 @@ class ConnectedGuessSong extends Component {
     }
 
     startGame(){
-        this.updateTimer()
         this.setState({
-            setGameModel: false,
-            printResult: false,
-            eventDate: moment.duration().add({days:0,hours:0,minutes:this.state.selectedOptionDuration.value,seconds:0}),
-        })
+            pauseSetGameModal: false,
+            reverse: false,
+            moment: 0,
+        }, () => {
+            this.setState({
+              moment: null,
+            });
+        });
+
+        //actually start game
+        setTimeout(()=>{
+            this.updateTimer()
+            this.setState({
+                setGameModel: false,
+                printResult: false,
+                eventDate: moment.duration().add({days:0,hours:0,minutes:this.state.selectedOptionDuration.value,seconds:0}),
+            })
+        }, 900)
     }
 
     restartGame(){
@@ -191,6 +210,7 @@ class ConnectedGuessSong extends Component {
             secs:0,
             mins:0,
             score: 0,
+            pauseSetGameModal: true,
             setGameModel: true,
             printResult: false,
             songInQuestionIndex: songInQuestionIndex,
@@ -243,7 +263,20 @@ class ConnectedGuessSong extends Component {
                     </MetaTags>
                     {this.state.setGameModel
                     ?
-                        <div className="GuessSong-setGameModel">
+                        <TweenOne
+                            animation={{
+                                x: 80,
+                                scale: 0.5,
+                                rotate: 120,
+                                yoyo: false,
+                                repeat: 0,
+                                duration: 1000
+                            }}
+                            paused={this.state.pauseSetGameModal}
+                            reverse={this.state.reverse}
+                            moment={this.state.moment}
+                            className="GuessSong-setGameModel"
+                        >
                             <div className="GuessSong-setGameModel-container pulse">
                                 <TextField
                                     value={this.state.selectedOptionPlayerName}
@@ -278,69 +311,81 @@ class ConnectedGuessSong extends Component {
                                     this.startGame()
                                 }}
                             />
-                        </div>
+
+                        </TweenOne>
                     :
-                        <div className="GuessSong-wrapper" >
+                        <div className="GuessSong-wrapper">
                             {this.state.printResult
-                                ?
-                                    <div className="GuessSong-results pulse">
-                                        <div className="GuessSong-results-title">Result:</div>
-                                        <div className="GuessSong-gameOption"> <PersonIcon /> {this.state.selectedOptionPlayerName == "" ? 'anonimo' : this.state.selectedOptionPlayerName}</div>
-                                        <div className="GuessSong-gameOption">difficulty: {this.state.selectedOptionDifficulty.label}</div>
-                                        <div className="GuessSong-gameOption"> <CheckIcon /> {this.state.score}</div>
-                                        <div className="GuessSong-gameOption">{this.state.selectedOptionDuration.label}</div>
-                                        <div className="GuessSong-gameOption GuessSong-comment">comment: {this.getComment()}</div>
-                                        <Button style={{backgroundColor: '#0f750f', color: 'white', marginTop: '30px'}} variant="contained" color="primary" onClick={() => this.restartGame()}>
-                                            play again
+                            ?
+                                <div className="GuessSong-results pulse">
+                                    <div className="GuessSong-results-title">Result:</div>
+                                    <div className="GuessSong-gameOption"> <PersonIcon /> {this.state.selectedOptionPlayerName == "" ? 'anonimo' : this.state.selectedOptionPlayerName}</div>
+                                    <div className="GuessSong-gameOption">difficulty: {this.state.selectedOptionDifficulty.label}</div>
+                                    <div className="GuessSong-gameOption"> <CheckIcon /> {this.state.score}</div>
+                                    <div className="GuessSong-gameOption">{this.state.selectedOptionDuration.label}</div>
+                                    <div className="GuessSong-gameOption GuessSong-comment">comment: {this.getComment()}</div>
+                                    <Button style={{backgroundColor: '#0f750f', color: 'white', marginTop: '30px'}} variant="contained" color="primary" onClick={() => this.restartGame()}>
+                                        play again
+                                    </Button>
+                                </div>
+                            :
+                                <TweenOne
+                                    animation={
+                                        [
+                                            { right: '-10px', duration: 2000 },
+                                            { right: '0', duration: 2000 }
+                                        ]
+                                    }
+                                    paused={false}
+                                    className="GuessSong-display"
+                                    style={{ margin: 'auto' }}
+                                >
+
+                                    <div className="GuessSong-title">guess the song...</div>
+                                    <div>press play to listen to snippet</div>
+                                    <div className="GuessSong-controlMenu">
+                                        <Button style={{backgroundColor: '#0f750f', color: 'white'}} variant="contained" color="primary" onClick={() => this.play()}>
+                                            <PlayArrowIcon />
+                                        </Button>
+                                        <div className="GuessSong-controlMenuInfo">
+                                            <div className="GuessSong-controlMenuInfoChild"> <PersonIcon /> {this.state.selectedOptionPlayerName == "" ? 'anonimo' : this.state.selectedOptionPlayerName}</div>
+                                            <div className="GuessSong-controlMenuInfoChild">high score: {this.state.highestscore}</div>
+                                            <div className="GuessSong-controlMenuInfoChild">difficulty: {this.state.selectedOptionDifficulty.label}</div>
+                                            <div className="GuessSong-controlMenuInfoChild"> <CheckIcon /> {this.state.score}</div>
+                                            <div className="GuessSong-controlMenuInfoChild">{`${this.state.mins} : ${this.state.secs}`}</div>
+                                        </div>
+                                    </div>
+                                    <div className="GuessSong-audioPlayer">
+                                        <audio
+                                            style={{display:"none"}}
+                                            className={"KaraokeDisplay-audio"}
+                                            ref={ref => this.audio = ref}
+                                            id="sample"
+                                            controls
+                                            src=""
+                                            // src={
+                                            //     this.state.songInQuestion.audiourl.includes('africariyoki-4b634') ?
+                                            //     this.state.songInQuestion.audiourl :
+                                            //     this.state.songInQuestion.audiourl.replace('africariyoki', 'africariyoki-4b634')
+                                            // } //because im cheap and im not paying for firebase
+                                        />
+                                    </div>
+                                    <div className="GuessSong-options">
+                                        {this.state.songsInOption.map((song) =>
+                                            <Song
+                                                key={song.id}
+                                                song={song}
+                                                playSong={() => this.checkAnswer(song)}
+                                                countries={song.countries}
+                                            />
+                                        )}
+                                    </div>
+                                    <div className="GuessSong-lowerMenu">
+                                        <Button variant="contained" style={{backgroundColor: '#0f750f', color: 'white'}} onClick={() => this.restartGame()}>
+                                            <ReplayIcon />
                                         </Button>
                                     </div>
-                                :
-                                    <div className="GuessSong-display">
-                                        <div className="GuessSong-title">guess the song...</div>
-                                        <div>press play to listen to snippet</div>
-                                        <div className="GuessSong-controlMenu">
-                                            <Button style={{backgroundColor: '#0f750f', color: 'white'}} variant="contained" color="primary" onClick={() => this.play()}>
-                                                <PlayArrowIcon />
-                                            </Button>
-                                            <div className="GuessSong-controlMenuInfo">
-                                                <div className="GuessSong-controlMenuInfoChild"> <PersonIcon /> {this.state.selectedOptionPlayerName == "" ? 'anonimo' : this.state.selectedOptionPlayerName}</div>
-                                                <div className="GuessSong-controlMenuInfoChild">high score: {this.state.highestscore}</div>
-                                                <div className="GuessSong-controlMenuInfoChild">difficulty: {this.state.selectedOptionDifficulty.label}</div>
-                                                <div className="GuessSong-controlMenuInfoChild"> <CheckIcon /> {this.state.score}</div>
-                                                <div className="GuessSong-controlMenuInfoChild">{`${this.state.mins} : ${this.state.secs}`}</div>
-                                            </div>
-                                        </div>
-
-                                        <div className="GuessSong-audioPlayer">
-                                            <audio
-                                                style={{display:"none"}}
-                                                className={"KaraokeDisplay-audio"}
-                                                ref={ref => this.audio = ref}
-                                                id="sample"
-                                                controls
-                                                src={
-                                                    this.state.songInQuestion.audiourl.includes('africariyoki-4b634') ?
-                                                    this.state.songInQuestion.audiourl :
-                                                    this.state.songInQuestion.audiourl.replace('africariyoki', 'africariyoki-4b634')
-                                                } //because im cheap and im not paying for firebase
-                                            />
-                                        </div>
-                                        <div className="GuessSong-options">
-                                            {this.state.songsInOption.map((song) =>
-                                                <Song
-                                                    key={song.id}
-                                                    song={song}
-                                                    playSong={() => this.checkAnswer(song)}
-                                                    countries={song.countries}
-                                                />
-                                            )}
-                                        </div>
-                                        <div className="GuessSong-lowerMenu">
-                                            <Button variant="contained" style={{backgroundColor: '#0f750f', color: 'white'}} onClick={() => this.restartGame()}>
-                                                <ReplayIcon />
-                                            </Button>
-                                        </div>
-                                    </div>
+                                </TweenOne>
                             }
                         </div>
                     }

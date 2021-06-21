@@ -201,7 +201,7 @@ class ConnectedKaraokeDisplay extends Component {
       return (
         <div className="KaraokeDisplay">
           <MetaTags>
-            <title>{this.state.singer.title} - {this.state.singer.singer}</title>
+            <title>{this.state.singer.title} - {this.state.singer.singer} ::: africariyoki</title>
             <meta name="description" content={`sing with us, sing along to your favourite african songs! -- ${this.state.singer.title}, ${this.state.singer.singer}, ${this.state.singer.countries}`} />
             <meta property="og:title" content="africariyoki" />
             <meta http-equiv='cache-control' content='no-cache' />

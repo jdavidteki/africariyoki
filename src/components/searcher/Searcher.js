@@ -33,18 +33,6 @@ class Searcher extends Component {
   }
 
   componentDidMount () {
-    Firebase.getLyrics().then(
-      val => {
-        console.log("val[10]", val[10])
-        this.setState({
-          songs: val,
-          songsCopy: val,
-          searchOptions: shuffleArray(val.map(a => a.title)),
-          typingEffectSongs: shuffleArray(val.map(a => a.title)),
-          songIds: val.map(a => a.id),
-        })
-      }
-    )
 
     Firebase.bckMappings().then(
       val => {
@@ -59,6 +47,18 @@ class Searcher extends Component {
         background: this.getRandomBackground(""),
       })
     }, 500);
+
+    Firebase.getLyrics().then(
+      val => {
+        this.setState({
+          songs: val,
+          songsCopy: val,
+          searchOptions: shuffleArray(val.map(a => a.title)),
+          typingEffectSongs: shuffleArray(val.map(a => a.title)),
+          songIds: val.map(a => a.id),
+        })
+      }
+    )
 
     setInterval( () => {
       this.setState({
@@ -184,59 +184,61 @@ class Searcher extends Component {
   }
 
   render() {
-    if(this.state.songs.length > 0){
-      return (
-        <div className="Searcher">
-          <MetaTags>
-            <title>africariyoki - sing with africa!</title>
-            <meta name="description" content="sing along to your favourite afro beat songs" />
-            <meta property="og:title" content="africariyoki" />
-            <meta http-equiv='cache-control' content='no-cache' />
-            <meta http-equiv='expires' content='0' />
-            <meta http-equiv='pragma' content='no-cache' />
-          </MetaTags>
-          <div
-            style={{ backgroundImage: `url(${this.state.background})` }}
-            className="Searcher-background">
-              <div className="Searcher-backgroundOverlay"></div>
-          </div>
-          <div className="Searcher-container">
-            <div className="Searcher-inputWrapper">
-              <TextField
-                className="Searcher-input"
-                label={`${this.state.selectedCode != '' ? ' what do you want to sing from ' + codeToCountries[this.state.selectedCode] + ' today??': 'what do you want to sing today'}???`}
-                variant="outlined"
-                onChange={event=>{
-                  this.setState({query: event.target.value}, ()=> {
-                    this.filterSong(this.state.query)
-                  })
-                }}
+    return (
+      <div className="Searcher">
+        <MetaTags>
+          <title>africariyoki - sing with africa!</title>
+          <meta name="description" content="sing along to your favourite afro beat songs" />
+          <meta property="og:title" content="africariyoki" />
+          <meta http-equiv='cache-control' content='no-cache' />
+          <meta http-equiv='expires' content='0' />
+          <meta http-equiv='pragma' content='no-cache' />
+        </MetaTags>
+        <div
+          style={{ backgroundImage: `url(${this.state.background})` }}
+          className="Searcher-background">
+            <div className="Searcher-backgroundOverlay"></div>
+        </div>
+        <div className="Searcher-container">
+          <div className="Searcher-inputWrapper">
+            <TextField
+              className="Searcher-input"
+              label={`${this.state.selectedCode != '' ? ' what do you want to sing from ' + codeToCountries[this.state.selectedCode] + ' today??': 'what do you want to sing today'}???`}
+              variant="outlined"
+              onChange={event=>{
+                this.setState({query: event.target.value}, ()=> {
+                  this.filterSong(this.state.query)
+                })
+              }}
+            />
+
+            <div className="Searcher-flagClose">
+              { this.state.selectedCode != "" &&
+
+                <Button
+                  onClick={() => this.setState({selectedCode: ""})}
+                >
+                  <CloseIcon/>
+                </Button>
+
+              }
+
+              <ReactFlagsSelect
+                selected={this.state.selectedCode}
+                onSelect={code => this.selectCountryFlag(code)}
+                searchable
+                fullWidth={false}
+                placeholder=" "
+                searchPlaceholder="search countries"
+                showSelectedLabel={false}
+                countries={["DZ","AO","SH","BJ","BW","BF","BI","CM","CV","CF","TD","KM","CG","CD","DJ","EG","GQ","ER","SZ","ET","GA","GM","GH","GN","GW","CI","KE","LS","LR","LY","MG","MW","ML","MR","MU","YT","MA","MZ","NA","NE","NG","ST","RE","RW","ST","SN","SC","SL","SO","ZA","SS","SH","SD","SZ","TZ","TG","TN","UG","CD","ZM","TZ","ZW"]}
               />
-
-              <div className="Searcher-flagClose">
-                { this.state.selectedCode != "" &&
-
-                  <Button
-                    onClick={() => this.setState({selectedCode: ""})}
-                  >
-                    <CloseIcon/>
-                  </Button>
-
-                }
-
-                <ReactFlagsSelect
-                  selected={this.state.selectedCode}
-                  onSelect={code => this.selectCountryFlag(code)}
-                  searchable
-                  fullWidth={false}
-                  placeholder=" "
-                  searchPlaceholder="search countries"
-                  showSelectedLabel={false}
-                  countries={["DZ","AO","SH","BJ","BW","BF","BI","CM","CV","CF","TD","KM","CG","CD","DJ","EG","GQ","ER","SZ","ET","GA","GM","GH","GN","GW","CI","KE","LS","LR","LY","MG","MW","ML","MR","MU","YT","MA","MZ","NA","NE","NG","ST","RE","RW","ST","SN","SC","SL","SO","ZA","SS","SH","SD","SZ","TZ","TG","TN","UG","CD","ZM","TZ","ZW"]}
-                />
-              </div>
             </div>
+          </div>
 
+
+          {this.state.songs.length > 0
+          ?
             <SongList
               songs={this.state.songs}
               filteredSongs={this.state.filteredSongs}
@@ -244,26 +246,22 @@ class Searcher extends Component {
               expandResults={this.state.expandResults}
             />
 
-            {this.state.typingEffectSongs.length > 20 &&
-              <div className="Searcher-typeEffectWrapper">
-                <ReactTypingEffect
-                  style={{ marginTop: 50, fontSize: 12, color: '#3F51B5' }}
-                  text={this.state.typingEffectSongs.slice(0, 20)[this.state.count]}
-                  speed={150}
-                  eraseDelay={150}
-                  typingDelay={150}
-                />
-              </div>
-            }
-          </div>
+          :
+            <div></div>
+          }
+
+          {this.state.typingEffectSongs.length > 20 &&
+            <div className="Searcher-typeEffectWrapper">
+              <ReactTypingEffect
+                style={{ marginTop: 50, fontSize: 12, color: '#3F51B5' }}
+                text={this.state.typingEffectSongs.slice(0, 20)[this.state.count]}
+                speed={150}
+                eraseDelay={150}
+                typingDelay={150}
+              />
+            </div>
+          }
         </div>
-      );
-    }
-    return (
-      <div className="Dots">
-        <Dots
-          color={'#3F51B5'}
-        />
       </div>
     )
   }
@@ -286,3 +284,5 @@ function shuffleArray(array) {
 
 
 //for free images https://www.pexels.com/search/nigeira/
+
+// https://unsplash.com/s/photos/south-africa

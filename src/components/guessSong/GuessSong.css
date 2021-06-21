@@ -12,10 +12,11 @@
     display: flex;
     flex-direction: column;
     width: 80%;
-    margin: auto 0;
+    height: 100%;
     z-index: 4;
     align-items: center;
     border: 4px;
+    position: relative;
 }
 
 .GuessSong-setGameModel{
@@ -53,7 +54,7 @@
 
 .GuessSong-results-title{
     font-weight: bold;
-    font-size: 24px;
+    font-size: 18px;
 }
 
 .GuessSong-gameOption{
@@ -122,7 +123,7 @@
 }
 
 .MuiButton-label{
-    font-family: Caveat;
+    font-family: JosefinSans;
 }
 
 @media only screen and (max-width: 600px) {
@@ -152,6 +153,15 @@
     .GuessSong-controlMenuInfoChild{
         flex-grow: 1;
         width: 50%;
+    }
+}
+
+/* bigger screen */
+@media only screen and (min-width: 601px) {
+    .GuessSong-display{
+        position: absolute;
+        top: 20%;
+        right: 0;
     }
 }
 

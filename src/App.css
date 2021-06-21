@@ -6,8 +6,8 @@
 }
 
 @font-face {
-  font-family: Caveat;
-  src: url(./assets/Caveat/Caveat-VariableFont_wght.ttf);
+  font-family: JosefinSans;
+  src: url(./assets/Josefin_Sans/JosefinSans-VariableFont_wght.ttf);
 }
 
   .App-body {
@@ -16,7 +16,7 @@
   }
 
   .App{
-    font-family: Caveat;
+    font-family: JosefinSans;
   }
 
   .App .content {
