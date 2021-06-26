@@ -102,11 +102,32 @@ class ConnectedKaraokeDisplay extends Component {
 
     Firebase.getLyrics().then(
       val => {
-        this.setState({popularSongs: val})
+        this.setState({popularSongs: val, highestNumPlays: this.getHighestNumberOfPlays(val)})
       }
     )
-
     setInterval(this.updateMotivator, 3000)
+  }
+
+  getHighestNumberOfPlays(val){
+    return Math.max.apply(Math, val.map(function(o) { return o.numPlays; }))
+  }
+
+  getColorFromNumPlays(numPlays){
+    let highestNumPlays = this.state.highestNumPlays
+    let playRatio = (numPlays/highestNumPlays)
+
+    if (playRatio < 0.2) {
+      return '#f1a892'
+    }else if(playRatio > 0.2 && playRatio < 0.4){
+      return '#f0c49b'
+    }else if(playRatio > 0.4 && playRatio < 0.6){
+      return '#e6da77'
+    }else if(playRatio > 0.6 && playRatio < 0.8){
+      return '#ccee6e'
+    }else if(playRatio > 0.8 && playRatio < 0.9){
+      return '#065818'
+    }
+    return '#0640bd'
   }
 
   componentWillUnmount(){
@@ -247,14 +268,14 @@ class ConnectedKaraokeDisplay extends Component {
                 </div>
               }
 
-              <h2 className="KaraokeDisplay-titleArist">
+              <h1 className="KaraokeDisplay-titleArist">
                 <span className="KaraokeDisplay-songTitle">
                   {this.state.singer.title}
                 </span>
                 <span className="KaraokeDisplay-songArtist">
                   {this.state.singer.singer}
                 </span>
-              </h2>
+              </h1>
 
               <div className="Lyrics Lyrics-DisplayContainer">
                 {this.lrcFormat() ?
@@ -283,8 +304,7 @@ class ConnectedKaraokeDisplay extends Component {
                   />
                 )}
                 </div>
-                <AlbumIcon className={"KaraokeDisplay-lowerPaneIcon"} style={{ color: '#3413f1' }} />
-                {numberWithCommas(this.state.singer.numPlays)}
+                <AlbumIcon className={"KaraokeDisplay-lowerPaneIcon"} style={{ color: this.getColorFromNumPlays(this.state.singer.numPlays) }} />
                 <SearchIcon className={"KaraokeDisplay-lowerPaneIcon"} style={{ color: '#3413f1' }} onClick={()=>{this.setState({openSearcherModel: true})}} />
               </div>
             </div>
@@ -332,9 +352,6 @@ function getCodeFromCountryName(value) {
   return val
 }
 
-function numberWithCommas(x) {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
 function cleanLine(string){
   return string.toLowerCase().replace("by rentanadvisercom", '***')
 }
