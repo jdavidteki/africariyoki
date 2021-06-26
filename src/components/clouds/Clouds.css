@@ -11,6 +11,7 @@
   flex-direction: column;
   justify-content: center;
   z-index: 2;
+  overflow: hidden;
 }
   .Clouds * {
     -webkit-box-sizing: border-box;
@@ -27,52 +28,62 @@
 
     @-webkit-keyframes animateCloud {
       0% {
-        margin-left: -100px; }
+        left: -250px;
+      }
       100% {
-        margin-left: 40%; } }
+        left: 100%;
+      }
+    }
     @keyframes animateCloud {
       0% {
-        margin-left: -100px; }
+        left: -250px;
+      }
       100% {
-        margin-left: 40%; } }
-
+        left: 100%;
+      }
+    }
 
   .Clouds .x1 {
-
-    -webkit-animation: animateCloud 35s linear infinite;
-    -moz-animation: animateCloud 35s linear infinite;
-    animation: animateCloud 35s linear infinite;
+    -webkit-animation: animateCloud 45s linear infinite;
+    -moz-animation: animateCloud 45s linear infinite;
+    animation: animateCloud 45s linear infinite;
     -webkit-transform: scale(0.1);
     -moz-transform: scale(0.1);
-    transform: scale(0.1); }
+    transform: scale(0.1);
+    top: 20%;
+  }
   .Clouds .x2 {
     -webkit-animation: animateCloud 20s linear infinite;
     -moz-animation: animateCloud 20s linear infinite;
     animation: animateCloud 20s linear infinite;
     -webkit-transform: scale(0.3);
     -moz-transform: scale(0.3);
-    transform: scale(0.3);  }
+    transform: scale(0.3);
+    top: 30%;}
   .Clouds .x3 {
     -webkit-animation: animateCloud 30s linear infinite;
     -moz-animation: animateCloud 30s linear infinite;
     animation: animateCloud 30s linear infinite;
     -webkit-transform: scale(0.2);
     -moz-transform: scale(0.2);
-    transform: scale(0.2); }
+    transform: scale(0.2);
+    top: 50%;}
   .Clouds .x4 {
     -webkit-animation: animateCloud 18s linear infinite;
     -moz-animation: animateCloud 18s linear infinite;
     animation: animateCloud 18s linear infinite;
     -webkit-transform: scale(0.1);
     -moz-transform: scale(0.1);
-    transform: scale(0.1); }
+    transform: scale(0.1);
+    top: 65%;}
   .Clouds .x5 {
     -webkit-animation: animateCloud 25s linear infinite;
     -moz-animation: animateCloud 25s linear infinite;
     animation: animateCloud 25s linear infinite;
     -webkit-transform: scale(0.25);
     -moz-transform: scale(0.25);
-    transform: scale(0.25);}
+    transform: scale(0.25);
+    top: 80%;}
   .Clouds .cloud {
     -webkit-border-radius: 100px;
     -moz-border-radius: 100px;
@@ -81,7 +92,7 @@
     -moz-box-shadow: 0 8px 5px rgba(0, 0, 0, 0.1);
     box-shadow: 0 8px 5px rgba(0, 0, 0, 0.1);
     height: 120px;
-    position: relative;
+    position: absolute;
     width: 350px; }
   .Clouds .cloud:after, .Clouds .cloud:before {
     content: '';
