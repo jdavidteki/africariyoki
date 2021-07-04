@@ -128,20 +128,21 @@ class Firebase {
 
   updateSongInfo = (songId, detailsToUpdate) =>{
     return new Promise(resolve => {
+      console.log("detailsToUpdate", detailsToUpdate)
       firebase.database()
       .ref('/lyrics/' + songId + '/')
       .update(
         {
-          id: detailsToUpdate.id,
-          title: detailsToUpdate.title,
-          lyricsurl: detailsToUpdate.lyricsurl,
-          singer: detailsToUpdate.singer,
-          audiourl: detailsToUpdate.audiourl,
-          lyrics: detailsToUpdate.lyrics,
-          title: detailsToUpdate.title,
-          countries: detailsToUpdate.countries,
-          dateAdded: detailsToUpdate.dateAdded,
-          albumName: detailsToUpdate.albumName,
+          title: detailsToUpdate?.title?.length > 0 ? detailsToUpdate.title : '',
+          lyricsurl: detailsToUpdate?.lyricsurl?.length > 0 ? detailsToUpdate.lyricsurl : '',
+          singer: detailsToUpdate?.singer?.length > 0 ? detailsToUpdate.singer : '',
+          audiourl: detailsToUpdate?.audiourl?.length > 0 ? detailsToUpdate.audiourl : '',
+          lyrics: detailsToUpdate?.lyrics?.length > 0 ? detailsToUpdate.lyrics : '',
+          title: detailsToUpdate?.title?.length > 0 ? detailsToUpdate.title : '',
+          countries: detailsToUpdate?.countries?.length > 0 ? detailsToUpdate.countries : '',
+          dateAdded: detailsToUpdate?.dateAdded?.length > 0 ? detailsToUpdate.dateAdded : '',
+          albumName: detailsToUpdate?.albumName?.length > 0 ? detailsToUpdate.albumName : '',
+          turnedOn: detailsToUpdate?.turnedOn?.length > 0 ? detailsToUpdate.turnedOn : 0
         },
       )
       .then((response) => {

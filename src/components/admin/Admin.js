@@ -53,6 +53,10 @@ const columns = [{
 },{
     key: 'lrcDone',
     name: 'LRC Done',
+},{
+    key: 'turnedOn',
+    name: 'Turned On',
+    editable: true,
 }].map(c => ({ ...c, ...defaultColumnProperties }));
 
 class ConnectedAdmin extends Component {
@@ -114,9 +118,14 @@ class ConnectedAdmin extends Component {
 
     onRowsDeselected = rows => {
         let rowIndexes = rows.map(r => r.rowIdx);
+        let rowIds = rows.map(r => r.row.id)
+
         this.setState({
+            selectedSongIds: this.state.selectedSongIds.filter(
+                i => rowIds.indexOf(i) === -1
+            ),
             selectedIndexes: this.state.selectedIndexes.filter(
-            i => rowIndexes.indexOf(i) === -1
+                i => rowIndexes.indexOf(i) === -1
             )
         });
     };

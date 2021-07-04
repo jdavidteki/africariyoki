@@ -32,6 +32,7 @@ class PopularSongs extends Component {
     return (
         <div className="PopularSongs wrapper">
             {this.state.cards.map((song) =>
+                song.turnedOn == 1 &&
                 song.id != this.state.thisSongId &&
                     <div className="card" key={song.id}>
                         <Song

@@ -8,8 +8,8 @@ import codeToCountries from "./codeToCountry.js";
 import Button from "@material-ui/core/Button";
 import CloseIcon from '@material-ui/icons/Close';
 import blankBack from "./assets/blankBack.jpeg"
-import { Dots } from "react-activity";
 import MetaTags from 'react-meta-tags';
+
 
 import './Searcher.css';
 class Searcher extends Component {
@@ -141,6 +141,10 @@ class Searcher extends Component {
         &&
         (
           thisSong.countries.replace(' ', '').toLowerCase().includes(selectedCountry.replace(' ', '').toLowerCase())
+        )
+        &&
+        (
+          thisSong.turnedOn == 1
         )
       :
       false
