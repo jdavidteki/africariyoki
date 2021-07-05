@@ -7,6 +7,7 @@ import { withRouter } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import UploadContent from '../uploadcontent/UploadContent.js'
 import UploadSearcherBck from '../uploadSearcherBck/UploadSearcherBck.js'
+import UploadImgStory from '../uploadImgStory/UploadImgStory.js'
 
 import 'bootstrap/dist/css/bootstrap.css';
 import "./Admin.css"
@@ -269,6 +270,7 @@ class ConnectedAdmin extends Component {
                 </div>
                 <UploadContent />
                 <UploadSearcherBck />
+                <UploadImgStory />
             </div>
         )
     }

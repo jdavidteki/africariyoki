@@ -9,7 +9,7 @@ import Button from "@material-ui/core/Button";
 import CloseIcon from '@material-ui/icons/Close';
 import blankBack from "./assets/blankBack.jpeg"
 import MetaTags from 'react-meta-tags';
-
+import Sbta from '../sbta/Sbta.js'
 
 import './Searcher.css';
 class Searcher extends Component {
@@ -21,7 +21,6 @@ class Searcher extends Component {
       filteredSongs: [],
       currentSong: '',
       songsCopy:[],
-      searchOptions: [],
       typingEffectSongs: [''],
       count:0,
       query: '',
@@ -29,6 +28,7 @@ class Searcher extends Component {
       background: blankBack,
       selectedCode: '',
       countryToBackgroundImage: {},
+      bckImageNum: '',
     }
   }
 
@@ -53,8 +53,7 @@ class Searcher extends Component {
         this.setState({
           songs: val,
           songsCopy: val,
-          searchOptions: shuffleArray(val.map(a => a.title)),
-          typingEffectSongs: shuffleArray(val.map(a => a.title)),
+          typingEffectSongs: shuffleArray(val.map(a => a.turnedOn == 1 ? a.title : '').filter(a => a != '')),
           songIds: val.map(a => a.id),
         })
       }
@@ -71,39 +70,51 @@ class Searcher extends Component {
   getRandomBackground(selectedCountry){
     let randomNumber =  Math.floor(Math.random() * 10);
     let backgroundToReturn = ""
+    let bckImageNum = ""
 
     switch(randomNumber) {
       case 1:
+        bckImageNum = 1
         backgroundToReturn = "https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/searchBackgrounds%2Fbck1bck.jpeg?alt=media"
         break
       case 2:
+        bckImageNum = 2
         backgroundToReturn =  "https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/searchBackgrounds%2Fbck2bck.jpeg?alt=media"
         break
       case 3:
+        bckImageNum = 3
         backgroundToReturn =  "https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/searchBackgrounds%2Fbck3bck.jpeg?alt=media"
         break
       case 4:
+        bckImageNum = 4
         backgroundToReturn =  "https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/searchBackgrounds%2Fbck4bck.jpeg?alt=media"
         break
       case 5:
+        bckImageNum = 5
         backgroundToReturn =  "https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/searchBackgrounds%2Fbck5bck.jpeg?alt=media"
         break
       case 6:
+        bckImageNum = 6
         backgroundToReturn =  "https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/searchBackgrounds%2Fbck6bck.jpeg?alt=media"
         break
       case 7:
+        bckImageNum = 7
         backgroundToReturn =  "https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/searchBackgrounds%2Fbck7bck.jpeg?alt=media"
         break
       case 8:
+        bckImageNum = 8
         backgroundToReturn =  "https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/searchBackgrounds%2Fbck8bck.jpeg?alt=media"
         break
       case  9:
+        bckImageNum = 9
         backgroundToReturn =  "https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/searchBackgrounds%2Fbck9bck.jpeg?alt=media"
         break
       case 10:
+        bckImageNum = 10
         backgroundToReturn =  "https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/searchBackgrounds%2Fbck10bck.jpeg?alt=media"
         break
       default:
+        bckImageNum = 11
         backgroundToReturn =  "https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/searchBackgrounds%2Fbck11bck.jpeg?alt=media"
         break
     }
@@ -114,6 +125,8 @@ class Searcher extends Component {
         backgroundToReturn =  this.state.countryToBackgroundImage[selectedCountry].bckUrl
       }
     }
+
+    this.setState({bckImageNum: bckImageNum})
 
     return backgroundToReturn
   }
@@ -266,6 +279,7 @@ class Searcher extends Component {
             </div>
           }
         </div>
+        <Sbta imageBckNum={this.state.bckImageNum} />
       </div>
     )
   }

@@ -1,11 +1,11 @@
 {
   "files": {
-    "app.js": "/static/js/app.e1f69cfc.chunk.js",
-    "app.js.map": "/static/js/app.e1f69cfc.chunk.js.map",
+    "app.js": "/static/js/app.a524652a.chunk.js",
+    "app.js.map": "/static/js/app.a524652a.chunk.js.map",
     "runtime~app.js": "/static/js/runtime~app.34c76111.js",
     "runtime~app.js.map": "/static/js/runtime~app.34c76111.js.map",
-    "static/js/2.51dd2337.chunk.js": "/static/js/2.51dd2337.chunk.js",
-    "static/js/2.51dd2337.chunk.js.map": "/static/js/2.51dd2337.chunk.js.map",
+    "static/js/2.031c50bb.chunk.js": "/static/js/2.031c50bb.chunk.js",
+    "static/js/2.031c50bb.chunk.js.map": "/static/js/2.031c50bb.chunk.js.map",
     "fonts/JosefinSans-VariableFont_wght.ttf": "/./fonts/JosefinSans-VariableFont_wght.ttf",
     "favicon-16.png": "/favicon-16.png",
     "favicon-32.png": "/favicon-32.png",
@@ -23,7 +23,7 @@
   },
   "entrypoints": [
     "static/js/runtime~app.34c76111.js",
-    "static/js/2.51dd2337.chunk.js",
-    "static/js/app.e1f69cfc.chunk.js"
+    "static/js/2.031c50bb.chunk.js",
+    "static/js/app.a524652a.chunk.js"
   ]
 }

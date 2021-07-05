@@ -31,6 +31,44 @@ class Firebase {
     })
   }
 
+  getStoryFromID = (id) =>{
+    return new Promise(resolve => {
+      firebase.database()
+      .ref('/bckStory/bck'+id)
+      .once('value')
+      .then(snapshot => {
+        if (snapshot.val()){
+          resolve(Object(snapshot.val()))
+        }else{
+          resolve({})
+        }
+      })
+    })
+  }
+
+  addStoryFromID = (item) => {
+    return new Promise(resolve => {
+      console.log("item", item)
+      firebase.database()
+      .ref('/bckStory/bck'+item.id)
+      .update(
+        {
+          title: item.title,
+          author: item.author,
+          content: item.content,
+          dateCreated: item.dateCreated,
+        }
+      )
+      .then((response) => {
+        console.log("response", response)
+        resolve(true)
+      })
+      .catch(error => {
+        console.log("error", error)
+      })
+    })
+  }
+
   storage = () => {
     return firebase.storage()
   }
@@ -58,7 +96,7 @@ class Firebase {
         },
       )
       .then((response) => {
-        console.log("reposne", response)
+        console.log("response", response)
         resolve(true)
       })
       .catch(error => {
@@ -117,7 +155,7 @@ class Firebase {
       .ref('/searcherBackgrounds/' + country + '/')
       .update({bckUrl})
       .then((response) => {
-        console.log("reposne", response)
+        console.log("response", response)
         resolve(true)
       })
       .catch(error => {
@@ -146,7 +184,7 @@ class Firebase {
         },
       )
       .then((response) => {
-        console.log("reposne", response)
+        console.log("response", response)
         resolve(true)
       })
       .catch(error => {
@@ -166,7 +204,7 @@ class Firebase {
         },
       )
       .then((response) => {
-        console.log("reposne", response)
+        console.log("response", response)
         resolve(true)
       })
       .catch(error => {

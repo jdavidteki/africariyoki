@@ -30,6 +30,8 @@ class ConnectedUploadContent extends Component {
         let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
         let yyyy = today.getFullYear();
 
+        // 05fa60b49afa -- use amazon ec2 to do downaloda
+
         today = yyyy+mm+dd
 
         if (this.state.videoID != ""){

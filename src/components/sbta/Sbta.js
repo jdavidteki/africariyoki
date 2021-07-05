@@ -1,38 +1,77 @@
 import React, { Component } from 'react';
 import CloseIcon from '@material-ui/icons/Close';
 import Button from "@material-ui/core/Button";
+import Firebase from "../../firebase/firebase.js";
 
+import "./Sbta.css";
 
 class Sbta extends Component {
-  constructor(props){
-    super(props);
-    this.state= {
-        showArtDesc: false,
+    constructor(props){
+        super(props);
+        this.state= {
+            showArtDesc: false,
+            storyId: this.props.imageBckNum,
+            storyContent: '',
+            imageBck: '',
+            storyTitle: '',
+            dateCreated: ''
+        }
     }
-  }
 
-    componentDidMount(){
+    componentDidUpdate(prevProps, prevState){
+        if (prevProps.imageBckNum !== this.props.imageBckNum) {
 
+            Firebase.getStoryFromID(this.props.imageBckNum).then(val => {
+                this.setState({
+                    storyContent: val.content,
+                    storyTitle: val.title,
+                    storyAuthor: val.author,
+                    dateCreated: val.dateCreated,
+                })
+            })
+
+            this.setState({
+                imageBck: `https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/searchBackgrounds%2Fbck${this.props.imageBckNum}bck.jpeg?alt=media`,
+            })
+        }
     }
 
     render() {
         return (
             <div className="Sbta">
                 <div className="Sbta-wrapper">
-                    <div className="Sbta-bulb">
-                        <input type="checkbox" />
-                        <div></div>
+                    <div className="Sbta-icon" onClick={()=>this.setState({showArtDesc: true})}>
+                        <span className="Sbta-cta">SBTA</span>
                     </div>
                     {this.state.showArtDesc &&
                         <div className="Sbta-artDesc">
-                            <Button
-                                onClick={() => this.setState({selectedCode: ""})}
-                                >
-                                <CloseIcon/>
-                            </Button>
-                            <img className="Sbta-image" src={this.props.imageBck} />
-                            <div className="Sbta-Desc">
-                                text
+                            <div className="Sbta-artDescWrapper">
+                                <div className="Sbta-closeIcon">
+                                    <Button onClick={() => this.setState({showArtDesc: false})}>
+                                        <CloseIcon style={{ color: '#f7c99e'}} />
+                                    </Button>
+                                </div>
+                                <div className="Sbta-imageStory">
+                                    <div className="Sbta-ImageDescWrapper">
+                                        <div className="Sbta-imageWrapper">
+                                            <img className="Sbta-image" src={this.state.imageBck} />
+                                        </div>
+                                    </div>
+                                    <div className="Sbta-DescWrapper">
+                                        <h2 className="Sbta-DescWrapper-title">{this.state.storyTitle}</h2>
+                                        <div className="Sbta-DescWrapper-content">
+                                            <pre>{this.state.storyContent}</pre>
+                                            {
+                                                this.state.storyAuthor &&
+                                                <span className="Sbta-DescWrapper-author"> <br></br> written by - {this.state.storyAuthor}</span>
+                                            }
+                                            {
+                                                this.state.dateCreated &&
+                                                <span className="Sbta-DescWrapper-dateCreated"> <br></br> created on - {this.state.dateCreated}</span>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     }
