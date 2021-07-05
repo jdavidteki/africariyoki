@@ -111,7 +111,8 @@
 	.Sbta-DescWrapper
 	{
 		flex-direction: column;
-		height: auto;
+		height: 50%;
+		padding-bottom: 10px;
 	}
 
 	.Sbta-artDesc
