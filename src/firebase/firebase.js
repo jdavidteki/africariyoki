@@ -42,6 +42,8 @@ class Firebase {
         }else{
           resolve({})
         }
+      }).catch(error => {
+        console.log("error", error)
       })
     })
   }

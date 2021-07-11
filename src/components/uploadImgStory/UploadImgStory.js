@@ -18,8 +18,18 @@ class ConnectedUploadImgStory extends Component {
         author: "",
         showStoryDetails: false,
         idToUpdate: "",
-        errorMsg: ''
+        errorMsg: '',
+        bckImages: bckImages,
     };
+
+    componentDidMount(){
+        Firebase.getLyrics().
+        then(val =>{
+            this.setState({
+                bckImages: this.state.bckImages.concat(val.map(a => a.id))
+            })
+        })
+    }
 
     uploadStoryToFirebase(){
         //uZ-_HIoEBE8
@@ -140,8 +150,8 @@ class ConnectedUploadImgStory extends Component {
                         :
                             <div className="UploadImgStory-ChooseBck">
                                 {
-                                    bckImages.map((value, index) => {
-                                        return <div key={index} className={"UploadImgStory-" + value} onClick={()=>{this.editStoryFromId(index+1)}}>{value}</div>
+                                    this.state.bckImages.map((value, index) => {
+                                        return <div key={index} className={"UploadImgStory-" + value + " UploadImgStory-thisStory"} onClick={()=>{this.editStoryFromId(value)}}>{value}</div>
                                     })
                                 }
                             </div>

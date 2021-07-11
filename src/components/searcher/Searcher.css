@@ -92,6 +92,16 @@
     padding-left: 0;
   }
 
+  .Searcher
+  .Sbta
+  {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-weight: bold;
+    z-index: 999;
+  }
+
   .Searcher-typeEffectWrapper {
     background-color: #f7f8e4;
     border-radius: 15px;

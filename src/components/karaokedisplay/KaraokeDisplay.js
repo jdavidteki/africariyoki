@@ -17,6 +17,8 @@ import codeToCountries from "../searcher/codeToCountry.js";
 import Searcher from "../searcher/Searcher";
 import CloseIcon from '@material-ui/icons/Close';
 import AlbumIcon from '@material-ui/icons/Album';
+import { SocialIcon } from 'react-social-icons';
+import Sbta from '../sbta/Sbta.js'
 
 import 'react-h5-audio-player/lib/styles.css';
 import "./KaraokeDisplay.css";
@@ -295,16 +297,19 @@ class ConnectedKaraokeDisplay extends Component {
               </div>
 
               <div className="KaraokeDisplay-lowerPane">
-              <div className="KaraokeDisplay-countryFlags">
-                {this.state.singer.countries.split(",").map((country) =>
-                  <Emoji
-                    key={country}
-                    emoji={"flag-" + getCodeFromCountryName(country.trim()).toLowerCase()}
-                    size={18}
-                  />
-                )}
+                <div className="KaraokeDisplay-countryFlags">
+                  {this.state.singer.countries.split(",").map((country) =>
+                    <Emoji
+                      key={country}
+                      emoji={"flag-" + getCodeFromCountryName(country.trim()).toLowerCase()}
+                      size={18}
+                    />
+                  )}
                 </div>
                 <AlbumIcon className={"KaraokeDisplay-lowerPaneIcon"} style={{ color: this.getColorFromNumPlays(this.state.singer.numPlays) }} />
+                <SocialIcon bgColor={"#3413f1"} fgColor={"white"} className={"KaraokeDisplay-socialMedia KaraokeDisplay-instagram KaraokeDisplay-lowerPaneIcon"}  url="https://www.instagram.com/africariyoki" />
+                <SocialIcon bgColor={"#3413f1"} fgColor={"white"} className={"KaraokeDisplay-socialMedia KaraokeDisplay-twitter KaraokeDisplay-lowerPaneIcon" }  url="https://www.twitter.com/africariyoki" />
+                <Sbta useDefaultImage={true} useIcon={true} imageBckNum={this.props.match.params.id} />
                 <SearchIcon className={"KaraokeDisplay-lowerPaneIcon"} style={{ color: '#3413f1' }} onClick={()=>{this.setState({openSearcherModel: true})}} />
               </div>
             </div>

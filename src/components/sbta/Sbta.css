@@ -1,12 +1,3 @@
-.Sbta
-{
-	position: fixed;
-	bottom: 20px;
-	right: 20px;
-	font-weight: bold;
-	z-index: 999;
-}
-
 .Sbta-cta
 {
 	cursor: pointer;
@@ -33,6 +24,7 @@
 	background-color: #f7f8e4;
 	width: 80%;
 	border-radius: 5px;
+	z-index: 9999;
 }
 
 .Sbta-closeIcon
@@ -89,6 +81,13 @@
 	font-size: 48px;
 	margin-right: 8px;
 	margin-left: -30px;
+}
+
+.Sbta-insertCommentIcon{
+	margin-left: 10px;
+	height: 18px !important;
+	width: 18px !important;
+	cursor: pointer;
 }
 
 @media only screen and (max-width: 600px) {

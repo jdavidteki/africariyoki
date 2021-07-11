@@ -279,7 +279,7 @@ class Searcher extends Component {
             </div>
           }
         </div>
-        <Sbta imageBckNum={this.state.bckImageNum} />
+        <Sbta useDefaultImage={false} imageBckNum={this.state.bckImageNum} />
       </div>
     )
   }
