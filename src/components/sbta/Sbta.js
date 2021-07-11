@@ -33,6 +33,7 @@ class Sbta extends Component {
 
     grabStoryFromFirebase(storyID){
         Firebase.getStoryFromID(storyID).then(val => {
+            console.log("val.title", val.title)
             this.setState({
                 storyContent: val.content,
                 storyTitle: val.title,
@@ -52,7 +53,7 @@ class Sbta extends Component {
     }
 
     render() {
-        if (this.state.storyAvailable && this.state.storyContent != ''){
+        if (this.state.storyAvailable && this.state.storyContent != undefined){
             return (
                 <div className="Sbta">
                     <div className="Sbta-wrapper">
