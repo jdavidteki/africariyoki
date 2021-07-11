@@ -52,7 +52,7 @@ class Sbta extends Component {
     }
 
     render() {
-        if (this.state.storyAvailable && this.state.storyContent){
+        if (this.state.storyAvailable && this.state.storyContent != ''){
             return (
                 <div className="Sbta">
                     <div className="Sbta-wrapper">
