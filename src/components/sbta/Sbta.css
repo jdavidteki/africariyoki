@@ -46,7 +46,7 @@
 	display: flex;
 	height: 100%;
 	width: 100%;
-	padding: 15px;
+	padding: 35px;
 }
 
 .Sbta-imageWrapper,
@@ -90,6 +90,25 @@
 	cursor: pointer;
 }
 
+.Sbta-insertCommentIcon:hover{
+	fill: #8a2be2;
+}
+
+.Sbta-DescWrapper-content{
+	height: 100%;
+	width: 100%;
+}
+
+.Sbta-DescWrapper-content pre{
+	height: 80%;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	white-space: -moz-pre-wrap;
+	white-space: -pre-wrap;
+	white-space: -o-pre-wrap;
+	word-wrap: break-word;
+}
+
 @media only screen and (max-width: 600px) {
 	.Sbta-DescWrapper,
 	.Sbta-ImageDescWrapper
@@ -100,6 +119,7 @@
 	.Sbta-imageStory
 	{
 		flex-direction: column;
+		padding: 15px;
 	}
 
 	.Sbta-image
@@ -123,6 +143,10 @@
 	{
 		max-height: 400px;
 		overflow-y: auto;
+	}
+
+	.Sbta-DescWrapper-content pre{
+		height: auto;
 	}
 
 	.Sbta-DescWrapper-title
