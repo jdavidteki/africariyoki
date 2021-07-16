@@ -7,7 +7,6 @@ import SearchIcon from '@material-ui/icons/Search';
 import Clouds from '../clouds/Clouds'
 import Firebase from "../../firebase/firebase.js";
 import NoSleep from 'nosleep.js';
-import { Dots } from "react-activity";
 import AudioPlayer from 'react-h5-audio-player';
 import { withRouter } from "react-router-dom";
 import PopularSongs from "../popularSongs/PopularSongs.js";
@@ -19,6 +18,11 @@ import CloseIcon from '@material-ui/icons/Close';
 import AlbumIcon from '@material-ui/icons/Album';
 import { SocialIcon } from 'react-social-icons';
 import Sbta from '../sbta/Sbta.js'
+
+import TweenOne from 'rc-tween-one';
+import SvgMorphPlugin from 'rc-tween-one/lib/plugin/SvgMorphPlugin';
+import PropTypes from 'prop-types';
+TweenOne.plugins.push(SvgMorphPlugin);
 
 import 'react-h5-audio-player/lib/styles.css';
 import "./KaraokeDisplay.css";
@@ -36,6 +40,7 @@ class ConnectedKaraokeDisplay extends Component {
       pauseSong: false,
       currentTime: '',
       popularSongs:[],
+      nextSongOptions: ['1qgiNdSGx-c'],
       motivator: 'less gerriiitt',
       openSearcherModel: false,
       smileyToSet: 'smiley',
@@ -55,7 +60,7 @@ class ConnectedKaraokeDisplay extends Component {
 
       if(eventDate <=0){
         this.props.history.push({
-          pathname: "/karaokedisplay/" + this.state.popularSongs[0].id
+          pathname: "/karaokedisplay/" + this.state.nextSongOptions[0].id
         });
         window.location.reload(true);
         clearInterval(x)
@@ -104,7 +109,11 @@ class ConnectedKaraokeDisplay extends Component {
 
     Firebase.getLyrics().then(
       val => {
-        this.setState({popularSongs: val, highestNumPlays: this.getHighestNumberOfPlays(val)})
+        this.setState({
+          popularSongs: val,
+          nextSongOptions: val.filter(v => v.turnedOn == 1),
+          highestNumPlays: this.getHighestNumberOfPlays(val)
+        })
       }
     )
     setInterval(this.updateMotivator, 3000)
@@ -340,9 +349,25 @@ class ConnectedKaraokeDisplay extends Component {
     }
     return (
       <div className="Dots">
-        <Dots
-          color={'#3F51B5'}
-        />
+        <div style={{ textAlign: 'center', marginTop: 40 }}>
+          <svg width="200" height="130" version="1.2"
+            style={{ display: 'block', margin: 'auto' }}
+          >
+            <TweenOne
+              animation={{
+                d: 'M60,10L60,90L140,90L140,10Z',
+                yoyo: true,
+                repeat: -1,
+                duration: 1000,
+              }}
+              style={{ fill: '#c0f0c0'}}
+              paused={false}
+              component="path"
+              d="M60,50 a40,40 0 1,0 80,0a40,40 0 1,0 -80,0z"
+              attr="attr"
+            />
+          </svg>
+        </div>
       </div>
     )
   }

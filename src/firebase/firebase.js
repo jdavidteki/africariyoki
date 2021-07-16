@@ -123,7 +123,7 @@ class Firebase {
           countries: item.countries,
           dateAdded: item.dateAdded,
           albumName: item.albumName,
-          numPlays: 2000,
+          numPlays: 20,
           lrcDone: 0,
         },
       )
@@ -168,7 +168,6 @@ class Firebase {
 
   updateSongInfo = (songId, detailsToUpdate) =>{
     return new Promise(resolve => {
-      console.log("detailsToUpdate", detailsToUpdate)
       firebase.database()
       .ref('/lyrics/' + songId + '/')
       .update(

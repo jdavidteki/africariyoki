@@ -36,7 +36,7 @@
     "query-string": "^6.1.0",
     "rc-tween-one": "^2.7.3",
     "react": "^16.7.0-alpha.2",
-    "react-activity": "^2.0.1",
+    "react-activity": "^2.1.1",
     "react-bootstrap": "^0.32.4",
     "react-credit-cards": "^0.8.2",
     "react-data-grid": "5.0.1",

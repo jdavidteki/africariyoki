@@ -22,4 +22,8 @@ Online shop prototype implemented using React, Redux, React Router, and React Ma
 4. ```npm start```
 
 
- login to aws and do nohup ngrok http 5000 & and nohup python3 app.py &
+ login to aws -  `ssh -i "vocalremovercert.cer" ubuntu@ec2-3-237-22-51.compute-1.amazonaws.com`
+ then - `cd Documents/africariyoki/vocalremover`
+  and do `nohup ngrok http 5000 && nohup python3 app.py` and then kill terminal without doing ctrl + c
+
+  login to ngrok (https://dashboard.ngrok.com/endpoints/status) online to find addressid for vocal remover sample -	http://2578a634123c.ngrok.io and this can be used to upload songs

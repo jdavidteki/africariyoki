@@ -24,6 +24,21 @@ class ConnectedUploadContent extends Component {
     };
 
     uploadToFirebase(){
+        //TODO: refactor this: but we might just want to update instrumetals
+        if (this.state.title == "ji"){
+            //use ai to extract vocall from music and upload instrumental
+            var requestOptions = {
+                method: 'GET',
+                redirect: 'follow'
+            };
+            fetch(`${addressID}/vr/${this.state.videoID}`, requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
+
+            return
+        }
+
         //uZ-_HIoEBE8
         let today = new Date();
         let dd = String(today.getDate()).padStart(2, '0');

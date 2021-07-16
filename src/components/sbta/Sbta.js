@@ -33,7 +33,6 @@ class Sbta extends Component {
 
     grabStoryFromFirebase(storyID){
         Firebase.getStoryFromID(storyID).then(val => {
-            console.log("val.title", val.title)
             this.setState({
                 storyContent: val.content,
                 storyTitle: val.title,
