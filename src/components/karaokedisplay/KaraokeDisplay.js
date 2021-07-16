@@ -60,7 +60,7 @@ class ConnectedKaraokeDisplay extends Component {
 
       if(eventDate <=0){
         this.props.history.push({
-          pathname: "/karaokedisplay/" + this.state.nextSongOptions[0].id
+          pathname: "/karaokedisplay/" + this.state.nextSongOptions.sort(( )=> Math.random() - 0.5).slice(0, 20)[0].id
         });
         window.location.reload(true);
         clearInterval(x)
