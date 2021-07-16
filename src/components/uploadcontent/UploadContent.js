@@ -24,6 +24,7 @@ class ConnectedUploadContent extends Component {
     };
 
     uploadToFirebase(){
+        let addressID = this.state.addressID
         //TODO: refactor this: but we might just want to update instrumetals
         if (this.state.title == "ji"){
             //use ai to extract vocall from music and upload instrumental
@@ -36,6 +37,7 @@ class ConnectedUploadContent extends Component {
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
 
+            console.log("updating only instruments", addressID, this.state.videoID)
             return
         }
 
@@ -52,7 +54,6 @@ class ConnectedUploadContent extends Component {
         if (this.state.videoID != ""){
             let audioUrl = `https://storage.googleapis.com/africariyoki-4b634.appspot.com/music/${this.state.videoID}.mp3`
             let lyricsTextUrl = `https://storage.googleapis.com/africariyoki-4b634.appspot.com/lyrics/${this.state.videoID}.txt`
-            let addressID = this.state.addressID
             if(addressID == ''){
                 addressID = "http://0.0.0.0:5000"
             }else{
