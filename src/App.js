@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from './components/header/Header';
 import Searcher from './components/searcher/Searcher.js';
 import KaraokeDisplay from './components/karaokedisplay/KaraokeDisplay.js'
+import Sessions from './components/sessions/Sessions.js'
 import Admin from './components/admin/Admin.js'
 import GuessSong from './components/guessSong/GuessSong.js'
 import AnnotationFixer from './components/annotationFixer/AnnotationFixer.js'
@@ -36,6 +37,7 @@ class App extends Component {
               <Route path="/admin" exact component={Admin} />
               <Route path="/guesssong" exact component={GuessSong} />
               <Route path="/karaokedisplay/:id" component={KaraokeDisplay} />
+              <Route path="/sessions/:id" component={Sessions} />
               <Route path="/lrcfixer/:id" component={LRCFixer} />
               <Route path="/game" exact component={GuessSong} />
               <Route path="/annotationfixer/:id" component={AnnotationFixer} />

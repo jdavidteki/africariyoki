@@ -31,6 +31,21 @@ class Firebase {
     })
   }
 
+  getAllRooms = () => {
+    return new Promise(resolve => {
+      firebase.database()
+      .ref('/yokirooms/')
+      .once('value')
+      .then(snapshot => {
+        if (snapshot.val()){
+          resolve(Object.values(snapshot.val()))
+        }else{
+          resolve({})
+        }
+      })
+    })
+  }
+
   getAnnotationBySongId = (id) =>{
     return new Promise(resolve => {
       firebase.database()
@@ -151,6 +166,61 @@ class Firebase {
     })
   }
 
+  postChats = (chatId, senderID, message) =>{
+    return new Promise((resolve, reject) => {
+      this.db().
+      ref('/chats/' + chatId + '/messages').
+      push({
+        content: message,
+        timestamp: Date.now(),
+        uid: senderID,
+      }).
+      then(() => {
+        resolve(true)
+      }).catch(error =>{
+        reject(error)
+      })
+    })
+  }
+
+  addNewSession = (chatId, ownerId, nowPlaying) => {
+    firebase.database()
+    .ref('/chats/' + chatId + '/')
+    .set(
+      {
+        members: {
+          id: ownerId,
+          name: 'owner',
+        },
+        numMember: 1,
+        onMic: ownerId,
+        sessionOwnerId: ownerId,
+        nowPlaying: nowPlaying,
+      },
+    )
+    .then((response) => {
+      resolve(true)
+    })
+    .catch(error => {
+      console.warn("error", error)
+    })
+  }
+
+  updateNowPlaying =  (chatId, nowPlaying) => {
+    return new Promise(resolve => {
+      firebase.database()
+      .ref('/chats/' + chatId + '/')
+      .update({nowPlaying})
+      .then((response) => {
+        console.log("response", response)
+        resolve(true)
+      })
+      .catch(error => {
+        console.log("error", error)
+      })
+    })
+  }
+
   bckMappings = () => {
     return new Promise(resolve => {
       firebase.database()
@@ -246,6 +316,10 @@ class Firebase {
         console.log("error", error)
       })
     })
+  }
+
+  db = () => {
+    return firebase.database()
   }
 
   postTransaction = (userInfo, recpInfo, cardInfo, transInfo) =>{

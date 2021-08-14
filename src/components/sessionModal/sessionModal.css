@@ -1,0 +1,46 @@
+.SessionModal-openSessionModel{
+  z-index: 99;
+  position: fixed;
+  display: flex;
+  padding: 10% 20px;
+  flex-direction: column;
+
+  background:
+    /* top, transparent black, faked with gradient */
+    linear-gradient(
+      rgba(0, 0, 0, 0.7),
+      rgba(0, 0, 0, 0.7)
+    );
+
+  height: 100%;
+  width: 100%;
+}
+
+.SessionModal-openSessionModel-container
+{
+  background-color: #f7f8e4;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.SessionModal-openSessionModel-close{
+  display: flex;
+  justify-self: left;
+  max-height: 40px;
+  margin-left: auto;
+  margin-bottom: 5px;
+}
+
+.SessionModal-openSessionModel-close:hover{
+    fill: #3413f1;
+    cursor: pointer ;
+}
+
+@media only screen and (max-width: 600px) {
+    .SessionModal-openSessionModel{
+      padding-top: 20%;
+    }
+}

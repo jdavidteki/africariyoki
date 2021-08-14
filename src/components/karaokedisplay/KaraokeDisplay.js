@@ -14,10 +14,12 @@ import MetaTags from 'react-meta-tags';
 import { Emoji } from 'emoji-mart'
 import codeToCountries from "../searcher/codeToCountry.js";
 import Searcher from "../searcher/Searcher";
+import SessionModal from "../sessionModal/SessionModal";
 import CloseIcon from '@material-ui/icons/Close';
 import AlbumIcon from '@material-ui/icons/Album';
 import { SocialIcon } from 'react-social-icons';
 import Sbta from '../sbta/Sbta.js'
+import GroupIcon from '@material-ui/icons/Group';
 
 import TweenOne from 'rc-tween-one';
 import SvgMorphPlugin from 'rc-tween-one/lib/plugin/SvgMorphPlugin';
@@ -43,6 +45,8 @@ class ConnectedKaraokeDisplay extends Component {
       nextSongOptions: ['1qgiNdSGx-c'],
       motivator: 'less gerriiitt',
       openSearcherModel: false,
+      openSessionModel: false,
+      chatId: '',
       smileyToSet: 'smiley',
       singer: {
         audiourl: '',
@@ -62,8 +66,14 @@ class ConnectedKaraokeDisplay extends Component {
       let { eventDate } = this.state
 
       if(eventDate <=0){
+        let chatQueryParam = ''
+
+        if(this.state.chatId){
+          chatQueryParam = `?chatid=${this.state.chatId}`
+        }
+
         this.props.history.push({
-          pathname: "/karaokedisplay/" + this.state.nextSongOptions.sort(( )=> Math.random() - 0.5).slice(0, 20)[0].id
+          pathname: "/karaokedisplay/" + this.state.nextSongOptions.sort(( )=> Math.random() - 0.5).slice(0, 20)[0].id + chatQueryParam
         });
         window.location.reload(true);
         clearInterval(x)
@@ -107,6 +117,14 @@ class ConnectedKaraokeDisplay extends Component {
             ],
           }
         )
+
+        //update session chat id incase someone is singing
+        const query = new URLSearchParams(this.props.location.search);
+        const chatId = query.get('chatid')
+        if(chatId){
+          this.setState({chatId: chatId})
+          Firebase.updateNowPlaying(chatId, val.title)
+        }
       }
     )
 
@@ -130,7 +148,6 @@ class ConnectedKaraokeDisplay extends Component {
         }
       }
     )
-
   }
 
   getHighestNumberOfPlays(val){
@@ -254,6 +271,8 @@ class ConnectedKaraokeDisplay extends Component {
             <meta http-equiv='expires' content='0' />
             <meta http-equiv='pragma' content='no-cache' />
           </MetaTags>
+
+          {/* searcher model */}
           {this.state.openSearcherModel &&
             <div className="KaraokeDisplay-openSearcherModel">
               <CloseIcon
@@ -265,6 +284,15 @@ class ConnectedKaraokeDisplay extends Component {
               <Searcher />
             </div>
           }
+
+          {/* open session start model */}
+          {this.state.openSessionModel &&
+            <SessionModal
+              singer={this.state.singer}
+              closeSession={() => this.setState({openSessionModel: false})}
+            />
+          }
+
           <div className="KaraokeDisplay-cloudBackground">
             <Clouds/>
             <div className="KaraokeDisplay-twinkling"></div>
@@ -336,6 +364,7 @@ class ConnectedKaraokeDisplay extends Component {
                 <SocialIcon bgColor={"#3413f1"} fgColor={"white"} className={"KaraokeDisplay-socialMedia KaraokeDisplay-instagram KaraokeDisplay-lowerPaneIcon"}  url="https://www.instagram.com/africariyoki" />
                 <SocialIcon bgColor={"#3413f1"} fgColor={"white"} className={"KaraokeDisplay-socialMedia KaraokeDisplay-twitter KaraokeDisplay-lowerPaneIcon" }  url="https://www.twitter.com/africariyoki" />
                 <Sbta useDefaultImage={true} useIcon={true} imageBckNum={this.props.match.params.id} />
+                <GroupIcon className={"KaraokeDisplay-lowerPaneIcon"} style={{ color: '#3413f1' }} onClick={()=>{this.setState({openSessionModel: true})}} />
                 <SearchIcon className={"KaraokeDisplay-lowerPaneIcon"} style={{ color: '#3413f1' }} onClick={()=>{this.setState({openSearcherModel: true})}} />
               </div>
             </div>
