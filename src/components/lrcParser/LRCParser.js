@@ -103,7 +103,7 @@ class LRCParser extends Component {
         <div className="LRCParser-containerWrapper">
           <div className={this.state.openAnotationModel ? "LRCParser-openAnotationModel LRCParser-openAnotationModel-open" : "LRCParser-openAnotationModel"}>
             <KeyboardBackspaceIcon
-              fontSize={'large'}
+              fontSize={'medium'}
               className={"LRCParser-openAnotationModel-back"}
               style={{ color: '#3413f1' }}
               onClick={()=>{this.props.playThisSong(); this.setState({openAnotationModel: false})}}
