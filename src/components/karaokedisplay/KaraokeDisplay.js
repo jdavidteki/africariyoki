@@ -51,8 +51,11 @@ class ConnectedKaraokeDisplay extends Component {
         lyrics: '',
       },
       animatedTexts: [],
-    }
+      annotationObj: {},
+    };
   }
+
+  player = null
 
   updateTimer=()=>{
     const x = setInterval(()=>{
@@ -117,6 +120,17 @@ class ConnectedKaraokeDisplay extends Component {
       }
     )
     setInterval(this.updateMotivator, 3000)
+
+    //fetch annotation from firebase
+    Firebase.getAnnotationBySongId(this.props.match.params.id).then(
+      val => {
+        if (val.content != undefined){
+          const obj = JSON.parse(val.content.replaceAll("'", ""));
+          this.setState({annotationObj: obj})
+        }
+      }
+    )
+
   }
 
   getHighestNumberOfPlays(val){
@@ -263,7 +277,6 @@ class ConnectedKaraokeDisplay extends Component {
               <AudioPlayer
                 autoPlay
                 src={this.state.singer.audiourl.includes('africariyoki-4b634') ? this.state.singer.audiourl : this.state.singer.audiourl.replace('africariyoki', 'africariyoki-4b634')} //because im cheap and im not paying for firebase
-                autoPlay
                 controlsList="nodownload"
                 className={"KaraokeDisplay-audio"}
                 onEnded={this.playAnotherSong}
@@ -271,6 +284,7 @@ class ConnectedKaraokeDisplay extends Component {
                 onPlay = {() => {this.setState({pauseSong: false})}}
                 onListen = {(event) => {this.setState({currentTime: event.target.currentTime})}}
                 listenInterval = {1}
+                ref={ref => this.player = ref}
               />
 
               {this.state.showTimer &&
@@ -293,10 +307,13 @@ class ConnectedKaraokeDisplay extends Component {
                   <LRCParser
                     lyrics = {this.displayLyrics()}
                     pause = {this.state.pauseSong}
+                    pauseThisSong = {() => this.player.audio.current.pause()}
+                    playThisSong = {() => this.player.audio.current.play()}
                     currentTime = {this.state.currentTime}
                     singer={this.state.singer.singer}
                     title={this.state.singer.title}
                     smileyToSet={this.state.smileyToSet}
+                    annotationObj={this.state.annotationObj}
                   />
                     :
                   <span className="Lyrics-container Lyrics-nonParsedLyrics">

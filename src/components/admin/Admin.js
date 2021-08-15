@@ -170,6 +170,17 @@ class ConnectedAdmin extends Component {
         window.location.reload(true);
     }
 
+    updateAnnotation(){
+        this.props.history.push({
+            pathname: "/annotationfixer/" + this.state.selectedSongIds[0],
+            state: {
+                lyrics: this.state.selectedSongLyrics,
+                songId: this.state.selectedSongIds[0],
+            }
+        });
+        window.location.reload(true);
+    }
+
     onGridRowsUpdated = ({ fromRow, toRow, updated }) => {
         this.setState(state => {
           const filteredRows = state.filteredRows.slice();
@@ -263,6 +274,17 @@ class ConnectedAdmin extends Component {
                                     }}
                                 >
                                     Save Update - ({this.state.selectedSongIds[0]})
+                                </Button>
+                                {" "}
+                                <Button
+                                    style={{ marginTop: 20, width: 200 }}
+                                    variant="outlined"
+                                    color="primary"
+                                    onClick={() => {
+                                        this.updateAnnotation()
+                                    }}
+                                >
+                                    Update Annotation - ({this.state.selectedSongIds[0]})
                                 </Button>
                             </div>
                         )

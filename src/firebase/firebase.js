@@ -31,6 +31,21 @@ class Firebase {
     })
   }
 
+  getAnnotationBySongId = (id) =>{
+    return new Promise(resolve => {
+      firebase.database()
+      .ref('/annotations/'+id)
+      .once('value')
+      .then(snapshot => {
+        if (snapshot.val()){
+          resolve(snapshot.val())
+        }else{
+          resolve({})
+        }
+      })
+    })
+  }
+
   getStoryFromID = (id) =>{
     return new Promise(resolve => {
       firebase.database()
@@ -202,6 +217,25 @@ class Firebase {
         {
           lyrics: lyrics,
           lrcDone: 1,
+        },
+      )
+      .then((response) => {
+        console.log("response", response)
+        resolve(true)
+      })
+      .catch(error => {
+        console.log("error", error)
+      })
+    })
+  }
+
+  updateAnnotation = (songId, content) => {
+    return new Promise(resolve => {
+      firebase.database()
+      .ref('/annotations/' + songId + '/')
+      .update(
+        {
+          content: content,
         },
       )
       .then((response) => {

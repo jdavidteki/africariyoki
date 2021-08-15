@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Recorder from '../recorder/Recorder.js'
 import { Emoji } from 'emoji-mart'
+import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 
 import './LRCParser.css';
 
@@ -14,6 +15,7 @@ class LRCParser extends Component {
       nextLine: "",
       prevTimeStamp: "",
       smileyToSet: '',
+      openAnotationModel: false,
       mapLyricsToMs: this.getLyricsArrayWithMs(this.props.lyrics.split("\n")),
       keysOfMapLyrics: Array.from( this.getLyricsArrayWithMs(this.props.lyrics.split("\n")).keys()),
       audioDetails: {
@@ -25,11 +27,17 @@ class LRCParser extends Component {
           m: 0,
           s: 0
         }
-      }
+      },
+      currentLineAnotation: "",
+      lyricsAnotation: this.props.annotationObj
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
+    if (prevProps.annotationObj !== this.props.annotationObj) {
+      this.setState({lyricsAnotation: this.props.annotationObj})
+    }
+
     if (prevProps.currentTime !== this.props.currentTime) {
       this.getCurrentLyricLine()
     }
@@ -46,6 +54,20 @@ class LRCParser extends Component {
       msToLine.set(lyricTimeMilliSec, rawArray[i])
     }
     return msToLine
+  }
+
+  hasAnotation(line){
+    if(this.state.lyricsAnotation[line.trim()] != undefined){
+      return true
+    }
+    return false
+  }
+
+  showAnotation(line){
+    if (this.hasAnotation(line.trim())){
+      this.props.pauseThisSong()
+      this.setState({openAnotationModel: true, currentLineAnotation: this.state.lyricsAnotation[line.trim()]})
+    }
   }
 
   getCurrentLyricLine(){
@@ -79,23 +101,32 @@ class LRCParser extends Component {
     return (
       <div className="Lyrics-container LRCParser-container">
         <div className="LRCParser-containerWrapper">
+          <div className={this.state.openAnotationModel ? "LRCParser-openAnotationModel LRCParser-openAnotationModel-open" : "LRCParser-openAnotationModel"}>
+            <KeyboardBackspaceIcon
+              fontSize={'large'}
+              className={"LRCParser-openAnotationModel-back"}
+              style={{ color: '#3413f1' }}
+              onClick={()=>{this.props.playThisSong(); this.setState({openAnotationModel: false})}}
+            />
+            <div className={"LRCParser-annotationText"}>{this.state.currentLineAnotation}</div>
+          </div>
+
           <p className="LRCParser-previousLine">
             {this.state.prevLine ? cleanLine(this.state.prevLine) : ''}
           </p>
           <p className="LRCParser-currentLine">
-            {this.state.currentLine ?
-
-             cleanLine(this.state.currentLine)
-
+            {this.state.currentLine
+            ?
+             <span onClick={()=>{this.showAnotation(cleanLine(this.state.currentLine))}} className={this.hasAnotation(cleanLine(this.state.currentLine)) ? "LRCParser-hasAnotation" : ""}>{cleanLine(this.state.currentLine)}</span>
             :
-            <span>
-              loading din din...
-              <Emoji
-                emoji={'stuck_out_tongue_winking_eye'}
-                set='apple'
-                size={18}
-              />
-            </span>
+              <span>
+                loading din din...
+                <Emoji
+                  emoji={'stuck_out_tongue_winking_eye'}
+                  set='apple'
+                  size={18}
+                />
+              </span>
             }
           </p>
           <p className="LRCParser-nextLine">
