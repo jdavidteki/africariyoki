@@ -63,7 +63,7 @@ class AnnotationFixer extends Component {
         let lyricsArrayClean = []
         for (var i = 0; i < lyricsArray.length; i++) {
           if (lyricsArray[i] != " "){
-            lyricsArrayClean.push(lyricsArray[i].trim())
+            lyricsArrayClean.push(lyricsArray[i].toLowerCase().trim())
           }
         }
         this.setState({lyricsArrayClean: lyricsArrayClean})
