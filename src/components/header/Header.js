@@ -51,14 +51,6 @@ class Header extends Component {
                   >
                       game
               </Link>
-              <Link
-                  className="Header-navLink"
-                  variant="outlined"
-                  color="primary"
-                  to = "/admin"
-                >
-                    admin
-              </Link>
             </div>
         </div>
       </div>

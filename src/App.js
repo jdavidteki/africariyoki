@@ -8,7 +8,7 @@ import AnnotationFixer from './components/annotationFixer/AnnotationFixer.js'
 import LRCFixer from './components/lrcFixer/LRCFixer.js'
 import { Switch, Route } from "react-router-dom";
 import { Analytics, PageHit } from 'expo-analytics';
-import MetaTags from 'react-meta-tags';
+import ForOFor from './components/forofor/ForOFor.js'
 
 import "./App.css";
 
@@ -39,24 +39,7 @@ class App extends Component {
               <Route path="/lrcfixer/:id" component={LRCFixer} />
               <Route path="/game" exact component={GuessSong} />
               <Route path="/annotationfixer/:id" component={AnnotationFixer} />
-              <Route
-                component={() => (
-                  <div>
-                    <MetaTags>
-                      <title>africariyoki - sing with africa! 404</title>
-                      <meta name="description" content="sing along to your favourite afro beat songs" />
-                      <meta property="og:title" content="africariyoki" />
-                      <meta http-equiv='cache-control' content='no-cache' />
-                      <meta http-equiv='expires' content='0' />
-                      <meta http-equiv='pragma' content='no-cache' />
-                    </MetaTags>
-                    <div style={{ padding: 20 }}>
-                      404 Page Not Found
-                    </div>
-                  </div>
-
-                )}
-              />
+              <Route component={ForOFor}/>
             </Switch>
           </div>
         </div>
