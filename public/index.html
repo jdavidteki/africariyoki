@@ -26,7 +26,9 @@
       // When the single page app is loaded further down in this file,
       // the correct url will be waiting in the browser's history for
       // the single page app to route accordingly.
+      console.log("we in indexhtml before")
       (function(l) {
+        console.log("we in indexhtml before")
         if (l.search[1] === '/' ) {
           console.log("we in indexhtml")
           var decoded = l.search.slice(1).split('&').map(function(s) {
