@@ -30,7 +30,7 @@ import "../karaokedisplay/KaraokeDisplay.css"
 
 const DifficultyOptions = [
     { value: 'Beginner', label: 'beginner' },
-    { value: 'Amateur', label: 'amatuer' },
+    { value: 'Amateur', label: 'amateur' },
     { value: 'Professional,', label: 'professional' },
     { value: 'Master', label: 'master' },
 ];
@@ -43,7 +43,7 @@ const DurationOptions = [
 
 const levelToPlaySec = {
     "beginner": 5,
-    "amatuer": 4,
+    "amateur": 4,
     "professional": 3,
     "master": 2.5,
 }
@@ -57,7 +57,7 @@ class ConnectedGuessSong extends Component {
         songInQuestionIndex: 0,
         songsInOption: [],
         score: 0,
-        highestscore:1000,
+        highestscore:0,
         setGameModel: true,
         selectedOptionPlayerName: "",
         pauseSetGameModal: true,
@@ -81,8 +81,8 @@ class ConnectedGuessSong extends Component {
           let { eventDate} = this.state
 
         if(eventDate <=0){
-            if(this.state.highestscore < this.state.score){
-                Firebase.updateHighestScore(this.state.highestscore, this.state.selectedOptionDifficulty.label)
+            if(this.state.score > this.state.highestscore){
+                Firebase.updateHighestScore(this.state.score, this.state.selectedOptionDifficulty.label)
             }
 
             this.setState({
