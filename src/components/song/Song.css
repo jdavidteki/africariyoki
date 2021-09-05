@@ -36,4 +36,10 @@
   .Song {
     flex: 0 0 0;
   }
+
+  .Song-title,
+  .Song-singer{
+    max-height: 20px;
+    overflow: hidden;
+  }
 }

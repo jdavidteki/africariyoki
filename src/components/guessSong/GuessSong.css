@@ -27,7 +27,7 @@
 }
 
 .GuessSong-comment{
-    font-weight: bold;
+    font-style: italic;
 }
 
 .GuessSong-setGameModel-close{
@@ -137,6 +137,7 @@
     }
 
     .GuessSong-controlMenuInfo{
+        margin-top: 16px;
         flex-wrap: wrap;
     }
 

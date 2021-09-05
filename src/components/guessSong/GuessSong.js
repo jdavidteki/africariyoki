@@ -9,14 +9,18 @@ import Song from '../song/Song'
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import Button from "@material-ui/core/Button";
 import ReplayIcon from '@material-ui/icons/Replay';
-import CheckIcon from '@material-ui/icons/Check';
+import CheckBoxOutlinedIcon from '@material-ui/icons/CheckBoxOutlined';
 import Select  from 'react-select';
 import ArrowForward from '@material-ui/icons/ArrowForward'
+import TrendingUpOutlinedIcon from '@material-ui/icons/TrendingUpOutlined';
+import BarChartOutlinedIcon from '@material-ui/icons/BarChartOutlined';
 import PersonIcon from '@material-ui/icons/Person';
 import MetaTags from 'react-meta-tags';
 import TweenOne from 'rc-tween-one';
 import SvgMorphPlugin from 'rc-tween-one/lib/plugin/SvgMorphPlugin';
+import AccessAlarmOutlinedIcon from '@material-ui/icons/AccessAlarmOutlined';
 import { Analytics, PageHit } from 'expo-analytics';
+import { Emoji } from 'emoji-mart'
 
 TweenOne.plugins.push(SvgMorphPlugin);
 
@@ -76,36 +80,38 @@ class ConnectedGuessSong extends Component {
         const x = setInterval(()=>{
           let { eventDate} = this.state
 
-          if(eventDate <=0){
+        if(eventDate <=0){
+            if(this.state.highestscore < this.state.score){
+                Firebase.updateHighestScore(this.state.highestscore, this.state.selectedOptionDifficulty.label)
+            }
+
             this.setState({
-              count:0,
-              eventDate: moment.duration().add({days:0,hours:0,minutes:this.state.selectedOptionDuration.value,seconds:0}),
-              secs:0,
-              mins:1,
-              printResult: true,
+                count:0,
+                eventDate: moment.duration().add({days:0,hours:0,minutes:this.state.selectedOptionDuration.value,seconds:0}),
+                secs:0,
+                mins:1,
+                printResult: true,
             })
             clearInterval(x)
-          }else {
+        }else {
             eventDate = eventDate.subtract(1,"s")
             const secs = eventDate.seconds()
             const mins = eventDate.minutes()
             this.setState({
-              secs,
-              mins,
-              eventDate,
-              showTimer: true
+                secs,
+                mins,
+                eventDate,
+                showTimer: true
             })
-          }
+        }
         },1000)
     }
 
     componentDidMount(){
-
         const analytics = new Analytics('UA-187038287-1');
         analytics.hit(new PageHit('Game'))
             .then(() => console.log("google analytics on game"))
             .catch(e => console.log(e.message));
-
 
         Firebase.getLyrics().then(
             val => {
@@ -202,6 +208,12 @@ class ConnectedGuessSong extends Component {
 
         //actually start game
         setTimeout(()=>{
+            Firebase.getHighestScore().then(
+                val=> {
+                    this.setState({highestscore: val[this.state.selectedOptionDifficulty.label].score})
+                }
+            )
+
             this.updateTimer()
             this.setState({
                 setGameModel: false,
@@ -274,7 +286,7 @@ class ConnectedGuessSong extends Component {
                     ?
                         <TweenOne
                             animation={{
-                                x: 80,
+                                x: 0,
                                 scale: 0.5,
                                 rotate: 120,
                                 yoyo: false,
@@ -328,11 +340,18 @@ class ConnectedGuessSong extends Component {
                             ?
                                 <div className="GuessSong-results pulse">
                                     <div className="GuessSong-results-title">Result:</div>
-                                    <div className="GuessSong-gameOption"> <PersonIcon /> {this.state.selectedOptionPlayerName == "" ? 'anonimo' : this.state.selectedOptionPlayerName}</div>
-                                    <div className="GuessSong-gameOption">difficulty: {this.state.selectedOptionDifficulty.label}</div>
-                                    <div className="GuessSong-gameOption"> <CheckIcon /> {this.state.score}</div>
-                                    <div className="GuessSong-gameOption">{this.state.selectedOptionDuration.label}</div>
-                                    <div className="GuessSong-gameOption GuessSong-comment">comment: {this.getComment()}</div>
+                                    <div className="GuessSong-gameOption"><PersonIcon /> {this.state.selectedOptionPlayerName == "" ? 'anonimo' : this.state.selectedOptionPlayerName}</div>
+                                    <div className="GuessSong-gameOption"><BarChartOutlinedIcon /> {this.state.selectedOptionDifficulty.label}</div>
+                                    <div className="GuessSong-gameOption"><TrendingUpOutlinedIcon /> {this.state.score}</div>
+                                    <div className="GuessSong-gameOption"><AccessAlarmOutlinedIcon /> {this.state.selectedOptionDuration.label}</div>
+                                    <div className="GuessSong-gameOption GuessSong-comment">
+                                        {this.getComment()}
+                                        <Emoji
+                                            emoji={'grapes'}
+                                            set='apple'
+                                            size={18}
+                                        />
+                                    </div>
                                     <Button style={{backgroundColor: '#0f750f', color: 'white', marginTop: '30px'}} variant="contained" color="primary" onClick={() => this.restartGame()}>
                                         play again
                                     </Button>
@@ -358,10 +377,10 @@ class ConnectedGuessSong extends Component {
                                         </Button>
                                         <div className="GuessSong-controlMenuInfo">
                                             <div className="GuessSong-controlMenuInfoChild"> <PersonIcon /> {this.state.selectedOptionPlayerName == "" ? 'anonimo' : this.state.selectedOptionPlayerName}</div>
-                                            <div className="GuessSong-controlMenuInfoChild">high score: {this.state.highestscore}</div>
-                                            <div className="GuessSong-controlMenuInfoChild">difficulty: {this.state.selectedOptionDifficulty.label}</div>
-                                            <div className="GuessSong-controlMenuInfoChild"> <CheckIcon /> {this.state.score}</div>
-                                            <div className="GuessSong-controlMenuInfoChild">{`${this.state.mins} : ${this.state.secs}`}</div>
+                                            <div className="GuessSong-controlMenuInfoChild">highest score: {this.state.highestscore}</div>
+                                            <div className="GuessSong-controlMenuInfoChild"><BarChartOutlinedIcon /> {this.state.selectedOptionDifficulty.label}</div>
+                                            <div className="GuessSong-controlMenuInfoChild"><CheckBoxOutlinedIcon /> {this.state.score}</div>
+                                            <div className="GuessSong-controlMenuInfoChild"><AccessAlarmOutlinedIcon /> {`${this.state.mins} : ${this.state.secs}`}</div>
                                         </div>
                                     </div>
                                     <div className="GuessSong-audioPlayer">

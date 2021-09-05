@@ -31,6 +31,40 @@ class Firebase {
     })
   }
 
+  updateHighestScore = (highestscore, difficultyLevel) => {
+    return new Promise(resolve => {
+      firebase.database()
+      .ref('/highestscore/' + difficultyLevel + '/')
+      .update(
+        {
+          score: highestscore,
+        },
+      )
+      .then((response) => {
+        console.log("response", response)
+        resolve(true)
+      })
+      .catch(error => {
+        console.log("error", error)
+      })
+    })
+  }
+
+  getHighestScore = () => {
+    return new Promise(resolve => {
+      firebase.database()
+      .ref('/highestscore/')
+      .once('value')
+      .then(snapshot => {
+        if (snapshot.val()){
+          resolve(Object(snapshot.val()))
+        }else{
+          resolve({})
+        }
+      })
+    })
+  }
+
   getAnnotationBySongId = (id) =>{
     return new Promise(resolve => {
       firebase.database()
