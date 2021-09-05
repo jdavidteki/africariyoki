@@ -16,6 +16,8 @@ import PersonIcon from '@material-ui/icons/Person';
 import MetaTags from 'react-meta-tags';
 import TweenOne from 'rc-tween-one';
 import SvgMorphPlugin from 'rc-tween-one/lib/plugin/SvgMorphPlugin';
+import { Analytics, PageHit } from 'expo-analytics';
+
 TweenOne.plugins.push(SvgMorphPlugin);
 
 import 'bootstrap/dist/css/bootstrap.css';
@@ -98,6 +100,13 @@ class ConnectedGuessSong extends Component {
     }
 
     componentDidMount(){
+
+        const analytics = new Analytics('UA-187038287-1');
+        analytics.hit(new PageHit('Game'))
+            .then(() => console.log("google analytics on game"))
+            .catch(e => console.log(e.message));
+
+
         Firebase.getLyrics().then(
             val => {
                 let songInQuestionIndex = Math.floor(Math.random() * (val.length - 0) + 0);

@@ -108,7 +108,7 @@ class LRCParser extends Component {
               style={{ color: '#3413f1' }}
               onClick={()=>{this.props.playThisSong(); this.setState({openAnotationModel: false})}}
             />
-            <div className={"LRCParser-annotationText"}>{this.state.currentLineAnotation}</div>
+            <pre className={"LRCParser-annotationText"}>{this.state.currentLineAnotation}</pre>
           </div>
 
           <p className="LRCParser-previousLine">

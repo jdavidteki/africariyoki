@@ -18,6 +18,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import AlbumIcon from '@material-ui/icons/Album';
 import { SocialIcon } from 'react-social-icons';
 import Sbta from '../sbta/Sbta.js'
+import { Analytics, PageHit } from 'expo-analytics';
 
 import TweenOne from 'rc-tween-one';
 import SvgMorphPlugin from 'rc-tween-one/lib/plugin/SvgMorphPlugin';
@@ -85,6 +86,11 @@ class ConnectedKaraokeDisplay extends Component {
   }
 
   componentDidMount(){
+    const analytics = new Analytics('UA-187038287-1');
+    analytics.hit(new PageHit('KaraokeDisplay'))
+      .then(() => console.log("karaokeDisplay analytics setup"))
+      .catch(e => console.log(e.message));
+
     noSleep.enable();
 
     setInterval( () => {

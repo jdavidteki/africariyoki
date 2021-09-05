@@ -30,8 +30,6 @@ class AnnotationFixer extends Component {
         if (val.content != undefined){
           const obj = JSON.parse(val.content.replaceAll("'", ""));
           this.setState({annotationObj: obj})
-
-          console.log(JSON.stringify(this.state.annotationObj))
         }
       }
     )

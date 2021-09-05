@@ -7,16 +7,10 @@ import GuessSong from './components/guessSong/GuessSong.js'
 import AnnotationFixer from './components/annotationFixer/AnnotationFixer.js'
 import LRCFixer from './components/lrcFixer/LRCFixer.js'
 import { Switch, Route } from "react-router-dom";
-import { Analytics, PageHit } from 'expo-analytics';
 import ForOFor from './components/forofor/ForOFor.js'
 
 import "./App.css";
 
-
-const analytics = new Analytics('UA-187038287-1');
-analytics.hit(new PageHit('Home'))
-  .then(() => console.log("Google analyytics setup"))
-  .catch(e => console.log(e.message));
 
 window.onresize = function() {
   document.getElementsByClassName("App").height = window.innerHeight;

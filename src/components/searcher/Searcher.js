@@ -10,6 +10,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import blankBack from "./assets/blankBack.jpeg"
 import MetaTags from 'react-meta-tags';
 import Sbta from '../sbta/Sbta.js'
+import { Analytics, PageHit } from 'expo-analytics';
 
 import './Searcher.css';
 class Searcher extends Component {
@@ -33,6 +34,12 @@ class Searcher extends Component {
   }
 
   componentDidMount () {
+
+    const analytics = new Analytics('UA-187038287-1');
+    analytics.hit(new PageHit('Searcher'))
+      .then(() => console.log("google analytics on searcher"))
+      .catch(e => console.log(e.message));
+
 
     Firebase.bckMappings().then(
       val => {
