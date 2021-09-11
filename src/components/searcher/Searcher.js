@@ -11,6 +11,7 @@ import blankBack from "./assets/blankBack.jpeg"
 import MetaTags from 'react-meta-tags';
 import Sbta from '../sbta/Sbta.js'
 import { Analytics, PageHit } from 'expo-analytics';
+import PWAPrompt from 'react-ios-pwa-prompt'
 
 import './Searcher.css';
 class Searcher extends Component {
@@ -210,6 +211,7 @@ class Searcher extends Component {
   render() {
     return (
       <div className="Searcher">
+        <PWAPrompt />
         <MetaTags>
           <title>africariyoki - sing with africa!</title>
           <meta name="description" content="sing along to your favourite afro beat songs" />
