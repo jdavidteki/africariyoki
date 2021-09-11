@@ -25,7 +25,7 @@ import { Emoji } from 'emoji-mart'
 TweenOne.plugins.push(SvgMorphPlugin);
 
 import 'bootstrap/dist/css/bootstrap.css';
-import "./GuessSong.css"
+import "./CompleteLyrics.css"
 import "../karaokedisplay/KaraokeDisplay.css"
 
 const DifficultyOptions = [
@@ -48,7 +48,7 @@ const levelToPlaySec = {
     "master": 2.5,
 }
 
-class ConnectedGuessSong extends Component {
+class ConnectedCompleteLyric extends Component {
 
     state = {
         secs:0,
@@ -273,7 +273,7 @@ class ConnectedGuessSong extends Component {
     render() {
         if (this.state.songInQuestion.title != "") {
             return (
-                <div className="GuessSong">
+                <div className="CompleteLyric">
                     <MetaTags>
                       <title>africariyoki - sing with africa!</title>
                       <meta name="description" content="sing along to your favourite afro beat songs - guess the song" />
@@ -296,19 +296,19 @@ class ConnectedGuessSong extends Component {
                             paused={this.state.pauseSetGameModal}
                             reverse={this.state.reverse}
                             moment={this.state.moment}
-                            className="GuessSong-setGameModel"
+                            className="CompleteLyric-setGameModel"
                         >
-                            <div className="GuessSong-setGameModel-container pulse">
+                            <div className="CompleteLyric-setGameModel-container pulse">
                                 <TextField
                                     value={this.state.selectedOptionPlayerName}
-                                    className="GuessSong-input GuessSong-gameOption"
+                                    className="CompleteLyric-input CompleteLyric-gameOption"
                                     label={"enter player name"}
                                     onChange={this.handleChangePlayerName}
                                 />
 
                                 <Select
                                     value={this.state.selectedOptionDifficulty}
-                                    className="GuessSong-gameOption"
+                                    className="CompleteLyric-gameOption"
                                     onChange={this.handleChangeDifficulty}
                                     options={DifficultyOptions}
                                     isSearchable={false}
@@ -317,7 +317,7 @@ class ConnectedGuessSong extends Component {
 
                                 <Select
                                     value={this.state.selectedOptionDuration}
-                                    className="GuessSong-gameOption"
+                                    className="CompleteLyric-gameOption"
                                     onChange={this.handleChangeDuration}
                                     options={DurationOptions}
                                     isSearchable={false}
@@ -326,7 +326,7 @@ class ConnectedGuessSong extends Component {
                             </div>
                             <ArrowForward
                                 fontSize={'large'}
-                                className={"GuessSong-setGameModel-close"}
+                                className={"CompleteLyric-setGameModel-close"}
                                 style={{ color: '#f7f8e4' }}
                                 onClick={()=>{
                                     this.startGame()
@@ -335,16 +335,16 @@ class ConnectedGuessSong extends Component {
 
                         </TweenOne>
                     :
-                        <div className="GuessSong-wrapper">
+                        <div className="CompleteLyric-wrapper">
                             {this.state.printResult
                             ?
-                                <div className="GuessSong-results pulse">
-                                    <div className="GuessSong-results-title">Result:</div>
-                                    <div className="GuessSong-gameOption"><PersonIcon /> {this.state.selectedOptionPlayerName == "" ? 'anonimo' : this.state.selectedOptionPlayerName}</div>
-                                    <div className="GuessSong-gameOption"><BarChartOutlinedIcon /> {this.state.selectedOptionDifficulty.label}</div>
-                                    <div className="GuessSong-gameOption"><TrendingUpOutlinedIcon /> {this.state.score}</div>
-                                    <div className="GuessSong-gameOption"><AccessAlarmOutlinedIcon /> {this.state.selectedOptionDuration.label}</div>
-                                    <div className="GuessSong-gameOption GuessSong-comment">
+                                <div className="CompleteLyric-results pulse">
+                                    <div className="CompleteLyric-results-title">Result:</div>
+                                    <div className="CompleteLyric-gameOption"><PersonIcon /> {this.state.selectedOptionPlayerName == "" ? 'anonimo' : this.state.selectedOptionPlayerName}</div>
+                                    <div className="CompleteLyric-gameOption"><BarChartOutlinedIcon /> {this.state.selectedOptionDifficulty.label}</div>
+                                    <div className="CompleteLyric-gameOption"><TrendingUpOutlinedIcon /> {this.state.score}</div>
+                                    <div className="CompleteLyric-gameOption"><AccessAlarmOutlinedIcon /> {this.state.selectedOptionDuration.label}</div>
+                                    <div className="CompleteLyric-gameOption CompleteLyric-comment">
                                         {this.getComment()}
                                         <Emoji
                                             emoji={'grapes'}
@@ -365,25 +365,25 @@ class ConnectedGuessSong extends Component {
                                         ]
                                     }
                                     paused={false}
-                                    className="GuessSong-display"
+                                    className="CompleteLyric-display"
                                     style={{ margin: 'auto' }}
                                 >
 
-                                    <div className="GuessSong-title">guess the song</div>
+                                    <div className="CompleteLyric-title">complete the lyric</div>
                                     <div>press play to listen to snippet</div>
-                                    <div className="GuessSong-controlMenu">
+                                    <div className="CompleteLyric-controlMenu">
                                         <Button style={{backgroundColor: '#0f750f', color: 'white'}} variant="contained" color="primary" onClick={() => this.play()}>
                                             <PlayArrowIcon />
                                         </Button>
-                                        <div className="GuessSong-controlMenuInfo">
-                                            <div className="GuessSong-controlMenuInfoChild"> <PersonIcon /> {this.state.selectedOptionPlayerName == "" ? 'anonimo' : this.state.selectedOptionPlayerName}</div>
-                                            <div className="GuessSong-controlMenuInfoChild">highest score: {this.state.highestscore}</div>
-                                            <div className="GuessSong-controlMenuInfoChild"><BarChartOutlinedIcon /> {this.state.selectedOptionDifficulty.label}</div>
-                                            <div className="GuessSong-controlMenuInfoChild"><CheckBoxOutlinedIcon /> {this.state.score}</div>
-                                            <div className="GuessSong-controlMenuInfoChild"><AccessAlarmOutlinedIcon /> {`${this.state.mins} : ${this.state.secs}`}</div>
+                                        <div className="CompleteLyric-controlMenuInfo">
+                                            <div className="CompleteLyric-controlMenuInfoChild"> <PersonIcon /> {this.state.selectedOptionPlayerName == "" ? 'anonimo' : this.state.selectedOptionPlayerName}</div>
+                                            <div className="CompleteLyric-controlMenuInfoChild">highest score: {this.state.highestscore}</div>
+                                            <div className="CompleteLyric-controlMenuInfoChild"><BarChartOutlinedIcon /> {this.state.selectedOptionDifficulty.label}</div>
+                                            <div className="CompleteLyric-controlMenuInfoChild"><CheckBoxOutlinedIcon /> {this.state.score}</div>
+                                            <div className="CompleteLyric-controlMenuInfoChild"><AccessAlarmOutlinedIcon /> {`${this.state.mins} : ${this.state.secs}`}</div>
                                         </div>
                                     </div>
-                                    <div className="GuessSong-audioPlayer">
+                                    <div className="CompleteLyric-audioPlayer">
                                         <audio
                                             style={{display:"none"}}
                                             className={"KaraokeDisplay-audio"}
@@ -397,7 +397,7 @@ class ConnectedGuessSong extends Component {
                                             } //because im cheap and im not paying for firebase
                                         />
                                     </div>
-                                    <div className="GuessSong-options">
+                                    <div className="CompleteLyric-options">
                                         {this.state.songsInOption.map((song) =>
                                             <Song
                                                 key={song.id}
@@ -407,7 +407,7 @@ class ConnectedGuessSong extends Component {
                                             />
                                         )}
                                     </div>
-                                    <div className="GuessSong-lowerMenu">
+                                    <div className="CompleteLyric-lowerMenu">
                                         <Button variant="contained" style={{backgroundColor: '#0f750f', color: 'white'}} onClick={() => this.restartGame()}>
                                             <ReplayIcon />
                                         </Button>
@@ -443,8 +443,8 @@ const mapStateToProps = state => {
     return {};
 };
 
-const guessSong = withRouter(connect(mapStateToProps)(ConnectedGuessSong));
-export default guessSong;
+const completeLyric = withRouter(connect(mapStateToProps)(ConnectedCompleteLyric));
+export default completeLyric;
 
 
 //https://material-ui.com/components/material-icons/#material-icons

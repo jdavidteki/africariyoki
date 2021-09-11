@@ -6,6 +6,7 @@ import config from './firebase/config.js';
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./Redux/Store.js";
+import * as serviceWorkerRegistration from "./serviceWorkerRegistration.js";
 
 if (!firebase.apps.length) {
     firebase.initializeApp(config);
@@ -23,6 +24,7 @@ window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true;
 
 ReactDOM.render(app, document.getElementById("root"));
 
+serviceWorkerRegistration.register();
 
 //persistence after page refresh
 
