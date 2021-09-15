@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import moment from "moment"
-import { Dots } from "react-activity";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import Firebase from "../../firebase/firebase.js";
 import TextField from "@material-ui/core/TextField";
 import Song from '../song/Song'
@@ -421,9 +421,7 @@ class ConnectedGuessSong extends Component {
         }
         return (
             <div className="Dots">
-              <Dots
-                color={'#3F51B5'}
-              />
+                <div><CircularProgress /></div>
             </div>
         )
     }

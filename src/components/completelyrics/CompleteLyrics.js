@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import moment from "moment"
-import { Dots } from "react-activity";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import Firebase from "../../firebase/firebase.js";
 import TextField from "@material-ui/core/TextField";
 import Song from '../song/Song'
@@ -48,7 +48,7 @@ const levelToPlaySec = {
     "master": 2.5,
 }
 
-class ConnectedCompleteLyric extends Component {
+class ConnectedCompleteLyrics extends Component {
 
     state = {
         secs:0,
@@ -66,6 +66,7 @@ class ConnectedCompleteLyric extends Component {
         selectedOptionDuration: {value: 1, label: '1min'},
         selectedOptionDifficulty: {value: 'Beginner', label: 'beginner'},
         printResult: false,
+        showChoks: false,
         songInQuestion: {
             audiourl: '',
             singer: '',
@@ -109,8 +110,8 @@ class ConnectedCompleteLyric extends Component {
 
     componentDidMount(){
         const analytics = new Analytics('UA-187038287-1');
-        analytics.hit(new PageHit('Game'))
-            .then(() => console.log("google analytics on game"))
+        analytics.hit(new PageHit('CompleteTheLyrics'))
+            .then(() => console.log("google analytics on complete the lyric"))
             .catch(e => console.log(e.message));
 
         Firebase.getLyrics().then(
@@ -118,36 +119,66 @@ class ConnectedCompleteLyric extends Component {
                 let songInQuestionIndex = Math.floor(Math.random() * (val.length - 0) + 0);
 
                 this.setState({
-                  songs: val,
-                  songInQuestionIndex: songInQuestionIndex,
-                  songInQuestion: val[songInQuestionIndex],
-                  songsInOption: this.generateSongsInOptions(val, val[songInQuestionIndex])
+                    songs: val,
+                    songInQuestionIndex: songInQuestionIndex,
+                    songInQuestion: val[songInQuestionIndex],
+                    lyricAndOptionObj: this.getLyricAndOptionObj(val, songInQuestionIndex),
                 })
             }
         )
-
-        // let songInQuestionIndex = Math.floor(Math.random() * (Object.values(AllSongs).length - 0) + 0);
-
-        // this.setState({
-        //   songs: Object.values(AllSongs),
-        //   songInQuestionIndex: songInQuestionIndex,
-        //   songInQuestion: Object.values(AllSongs)[songInQuestionIndex],
-        //   songsInOption: this.generateSongsInOptions(Object.values(AllSongs), Object.values(AllSongs)[songInQuestionIndex])
-        // })
     }
 
-    play(){
-        if(this.audio != null){
-            this.audio.currentTime = 40;
-            this.audio.play();
-
-            var int = setInterval(() => {
-                if (this.audio != null && this.audio.currentTime > 40 + levelToPlaySec[this.state.selectedOptionDifficulty.label]) {
-                    this.audio.pause();
-                    clearInterval(int);
-                }
-            }, 10);
+    getLyricAndOptionObj(val, songInQuestionIndex){
+        let songInQuestionId = val[songInQuestionIndex].id
+        let lyricArrayBySongId = this.getLyricsArrayBySongId(val)
+        let lyricArray = lyricArrayBySongId[songInQuestionId]
+        let lyricQuestionLineId = Math.floor(Math.random() * (lyricArray.length - 1) + 0);
+        let lyricQuestion = lyricArray[lyricQuestionLineId]
+        let lyricAnswer = lyricArray[lyricQuestionLineId + 1]
+        let lyricOptions = this.generateLyricsInOptions(lyricArrayBySongId, lyricAnswer)
+        let lyricAndOptionObj = {
+            "question": cleanLine(lyricQuestion),
+            "answer": cleanLine(lyricAnswer),
+            "lyricOptions": lyricOptions,
         }
+
+        return lyricAndOptionObj
+    }
+
+    getLyricsArrayBySongId(val){
+        let labsi = {}
+
+        for (var i = 0; i < val.length; i++){
+            let lyricArray = val[i].lyrics.split('\n')
+
+            for (var j=0; j<lyricArray.length; j++){
+                labsi[val[i].id] = val[i].lyrics.split('\n')
+            }
+        }
+
+        return labsi
+    }
+
+    generateLyricsInOptions(labsi, lyricAnswer){
+        let lyricFromAllSongs = Object.values(labsi)
+
+        let lyricsInOptions = [cleanLine(lyricAnswer)]
+
+        for(var i=0; i<3; i++){
+            let randomSong = Math.floor(Math.random() * (lyricFromAllSongs.length - 0) + 0);
+
+            let songOption = lyricFromAllSongs[randomSong]
+
+            let randomSongLine = Math.floor(Math.random() * (songOption.length - 0) + 0);
+
+            if(!lyricsInOptions.includes(cleanLine(lyricFromAllSongs[randomSong][randomSongLine]))){
+                lyricsInOptions.push(cleanLine(lyricFromAllSongs[randomSong][randomSongLine]))
+            }else{
+                i-=1
+            }
+        }
+
+        return shuffleArray(lyricsInOptions)
     }
 
     handleChangePlayerName = selectedOptionPlayerName => {
@@ -163,27 +194,15 @@ class ConnectedCompleteLyric extends Component {
         this.setState({ selectedOptionDuration });
     };
 
-
-    generateSongsInOptions(allSongs, songInQuestion){
-        let songsInOptions = [songInQuestion]
-
-        for(var i=0; i<3; i++){
-            let random = Math.floor(Math.random() * (allSongs.length - 0) + 0);
-
-            if(!songsInOptions.includes(allSongs[random])){
-                songsInOptions.push(allSongs[random])
-            }else{
-                i-=1
-            }
-        }
-        return shuffleArray(songsInOptions)
-    }
-
-    checkAnswer(song){
-        if(song == this.state.songInQuestion){
-            this.setState({score: this.state.score+=1})
+    checkAnswer(lyricOption){
+        if(lyricOption == this.state.lyricAndOptionObj["answer"]){
+            this.setState({
+                score: this.state.score+=1
+            })
         }else{
-            this.setState({score: this.state.score-=1})
+            this.setState({
+                score: this.state.score-=1
+            })
         }
 
         let songInQuestionIndex = Math.floor(Math.random() * (this.state.songs.length - 0) + 0);
@@ -191,7 +210,7 @@ class ConnectedCompleteLyric extends Component {
         this.setState({
             songInQuestionIndex: songInQuestionIndex,
             songInQuestion: this.state.songs[songInQuestionIndex],
-            songsInOption: this.generateSongsInOptions(this.state.songs, this.state.songs[songInQuestionIndex])
+            lyricAndOptionObj: this.getLyricAndOptionObj(this.state.songs, songInQuestionIndex)
         })
     }
 
@@ -236,7 +255,6 @@ class ConnectedCompleteLyric extends Component {
             printResult: false,
             songInQuestionIndex: songInQuestionIndex,
             songInQuestion: this.state.songs[songInQuestionIndex],
-            songsInOption: this.generateSongsInOptions(this.state.songs, this.state.songs[songInQuestionIndex])
         })
     }
 
@@ -270,10 +288,32 @@ class ConnectedCompleteLyric extends Component {
         }
     }
 
+    toggleChoks(){
+        if(this.state.showChoks){
+            this.setState({showChoks: false})
+        }else{
+            this.setState({showChoks: true})
+        }
+    }
+
+    play(){
+        if(this.audio != null){
+            this.audio.currentTime = 40;
+            this.audio.play();
+
+            var int = setInterval(() => {
+                if (this.audio != null && this.audio.currentTime > 40 + levelToPlaySec[this.state.selectedOptionDifficulty.label]) {
+                    this.audio.pause();
+                    clearInterval(int);
+                }
+            }, 10);
+        }
+    }
+
     render() {
-        if (this.state.songInQuestion.title != "") {
+        if (this.state.lyricAndOptionObj != undefined) {
             return (
-                <div className="CompleteLyric">
+                <div className="CompleteLyrics">
                     <MetaTags>
                       <title>africariyoki - sing with africa!</title>
                       <meta name="description" content="sing along to your favourite afro beat songs - guess the song" />
@@ -296,19 +336,19 @@ class ConnectedCompleteLyric extends Component {
                             paused={this.state.pauseSetGameModal}
                             reverse={this.state.reverse}
                             moment={this.state.moment}
-                            className="CompleteLyric-setGameModel"
+                            className="CompleteLyrics-setGameModel"
                         >
-                            <div className="CompleteLyric-setGameModel-container pulse">
+                            <div className="CompleteLyrics-setGameModel-container pulse">
                                 <TextField
                                     value={this.state.selectedOptionPlayerName}
-                                    className="CompleteLyric-input CompleteLyric-gameOption"
+                                    className="CompleteLyrics-input CompleteLyrics-gameOption"
                                     label={"enter player name"}
                                     onChange={this.handleChangePlayerName}
                                 />
 
                                 <Select
                                     value={this.state.selectedOptionDifficulty}
-                                    className="CompleteLyric-gameOption"
+                                    className="CompleteLyrics-gameOption"
                                     onChange={this.handleChangeDifficulty}
                                     options={DifficultyOptions}
                                     isSearchable={false}
@@ -317,7 +357,7 @@ class ConnectedCompleteLyric extends Component {
 
                                 <Select
                                     value={this.state.selectedOptionDuration}
-                                    className="CompleteLyric-gameOption"
+                                    className="CompleteLyrics-gameOption"
                                     onChange={this.handleChangeDuration}
                                     options={DurationOptions}
                                     isSearchable={false}
@@ -326,7 +366,7 @@ class ConnectedCompleteLyric extends Component {
                             </div>
                             <ArrowForward
                                 fontSize={'large'}
-                                className={"CompleteLyric-setGameModel-close"}
+                                className={"CompleteLyrics-setGameModel-close"}
                                 style={{ color: '#f7f8e4' }}
                                 onClick={()=>{
                                     this.startGame()
@@ -335,16 +375,16 @@ class ConnectedCompleteLyric extends Component {
 
                         </TweenOne>
                     :
-                        <div className="CompleteLyric-wrapper">
+                        <div className="CompleteLyrics-wrapper">
                             {this.state.printResult
                             ?
-                                <div className="CompleteLyric-results pulse">
-                                    <div className="CompleteLyric-results-title">Result:</div>
-                                    <div className="CompleteLyric-gameOption"><PersonIcon /> {this.state.selectedOptionPlayerName == "" ? 'anonimo' : this.state.selectedOptionPlayerName}</div>
-                                    <div className="CompleteLyric-gameOption"><BarChartOutlinedIcon /> {this.state.selectedOptionDifficulty.label}</div>
-                                    <div className="CompleteLyric-gameOption"><TrendingUpOutlinedIcon /> {this.state.score}</div>
-                                    <div className="CompleteLyric-gameOption"><AccessAlarmOutlinedIcon /> {this.state.selectedOptionDuration.label}</div>
-                                    <div className="CompleteLyric-gameOption CompleteLyric-comment">
+                                <div className="CompleteLyrics-results pulse">
+                                    <div className="CompleteLyrics-results-title">Result:</div>
+                                    <div className="CompleteLyrics-gameOption"><PersonIcon /> {this.state.selectedOptionPlayerName == "" ? 'anonimo' : this.state.selectedOptionPlayerName}</div>
+                                    <div className="CompleteLyrics-gameOption"><BarChartOutlinedIcon /> {this.state.selectedOptionDifficulty.label}</div>
+                                    <div className="CompleteLyrics-gameOption"><TrendingUpOutlinedIcon /> {this.state.score}</div>
+                                    <div className="CompleteLyrics-gameOption"><AccessAlarmOutlinedIcon /> {this.state.selectedOptionDuration.label}</div>
+                                    <div className="CompleteLyrics-gameOption CompleteLyrics-comment">
                                         {this.getComment()}
                                         <Emoji
                                             emoji={'grapes'}
@@ -352,7 +392,7 @@ class ConnectedCompleteLyric extends Component {
                                             size={18}
                                         />
                                     </div>
-                                    <Button style={{backgroundColor: '#0f750f', color: 'white', marginTop: '30px'}} variant="contained" color="primary" onClick={() => this.restartGame()}>
+                                    <Button style={{backgroundColor: '#3413f1', color: 'white', marginTop: '30px'}} variant="contained" color="primary" onClick={() => this.restartGame()}>
                                         play again
                                     </Button>
                                 </div>
@@ -365,25 +405,27 @@ class ConnectedCompleteLyric extends Component {
                                         ]
                                     }
                                     paused={false}
-                                    className="CompleteLyric-display"
+                                    className="CompleteLyrics-display"
                                     style={{ margin: 'auto' }}
                                 >
 
-                                    <div className="CompleteLyric-title">complete the lyric</div>
-                                    <div>press play to listen to snippet</div>
-                                    <div className="CompleteLyric-controlMenu">
-                                        <Button style={{backgroundColor: '#0f750f', color: 'white'}} variant="contained" color="primary" onClick={() => this.play()}>
+                                    <div className="CompleteLyrics-title">what is the next line?</div>
+                                    <div className="CompleteLyrics-lyricInQuestion">
+                                        {this.state.lyricAndOptionObj["question"] ? this.state.lyricAndOptionObj["question"] : this.state.songInQuestion.title }
+                                    </div>
+                                    <div className="CompleteLyrics-controlMenu">
+                                        <Button style={{backgroundColor: '#3413f1', color: 'white'}} variant="contained" color="primary" onClick={() => this.play()}>
                                             <PlayArrowIcon />
                                         </Button>
-                                        <div className="CompleteLyric-controlMenuInfo">
-                                            <div className="CompleteLyric-controlMenuInfoChild"> <PersonIcon /> {this.state.selectedOptionPlayerName == "" ? 'anonimo' : this.state.selectedOptionPlayerName}</div>
-                                            <div className="CompleteLyric-controlMenuInfoChild">highest score: {this.state.highestscore}</div>
-                                            <div className="CompleteLyric-controlMenuInfoChild"><BarChartOutlinedIcon /> {this.state.selectedOptionDifficulty.label}</div>
-                                            <div className="CompleteLyric-controlMenuInfoChild"><CheckBoxOutlinedIcon /> {this.state.score}</div>
-                                            <div className="CompleteLyric-controlMenuInfoChild"><AccessAlarmOutlinedIcon /> {`${this.state.mins} : ${this.state.secs}`}</div>
+                                        <div className="CompleteLyrics-controlMenuInfo">
+                                            <div className="CompleteLyrics-controlMenuInfoChild"> <PersonIcon /> {this.state.selectedOptionPlayerName == "" ? 'anonimo' : this.state.selectedOptionPlayerName}</div>
+                                            <div className="CompleteLyrics-controlMenuInfoChild">highest score: {this.state.highestscore}</div>
+                                            <div className="CompleteLyrics-controlMenuInfoChild"><BarChartOutlinedIcon /> {this.state.selectedOptionDifficulty.label}</div>
+                                            <div className="CompleteLyrics-controlMenuInfoChild"><CheckBoxOutlinedIcon /> {this.state.score}</div>
+                                            <div className="CompleteLyrics-controlMenuInfoChild"><AccessAlarmOutlinedIcon /> {`${this.state.mins} : ${this.state.secs}`}</div>
                                         </div>
                                     </div>
-                                    <div className="CompleteLyric-audioPlayer">
+                                    <div className="CompleteLyrics-audioPlayer">
                                         <audio
                                             style={{display:"none"}}
                                             className={"KaraokeDisplay-audio"}
@@ -397,18 +439,32 @@ class ConnectedCompleteLyric extends Component {
                                             } //because im cheap and im not paying for firebase
                                         />
                                     </div>
-                                    <div className="CompleteLyric-options">
-                                        {this.state.songsInOption.map((song) =>
-                                            <Song
-                                                key={song.id}
-                                                song={song}
-                                                playSong={() => this.checkAnswer(song)}
-                                                countries={song.countries}
-                                            />
+                                    <div className="CompleteLyrics-options">
+                                        {this.state.lyricAndOptionObj["lyricOptions"].map((lyricOption) =>
+                                            <div
+                                                className="CompleteLyrics-option"
+                                                onClick={()=>this.checkAnswer(lyricOption)}
+                                                key={lyricOption}
+                                            >
+                                                    {lyricOption}
+                                            </div>
                                         )}
                                     </div>
-                                    <div className="CompleteLyric-lowerMenu">
-                                        <Button variant="contained" style={{backgroundColor: '#0f750f', color: 'white'}} onClick={() => this.restartGame()}>
+                                    <div className="CompleteLyrics-lowerMenu">
+                                        <Button variant="contained" style={{backgroundColor: '#3413f1', color: 'white'}} onClick={() => this.toggleChoks()}>
+                                            Chokolo
+                                        </Button>
+
+                                        {this.state.showChoks &&
+                                            <div className="CompleteLyrics-showChoks">
+                                                <div>hints:</div>
+                                                <div>{this.state.songInQuestion.title ? 'title: ' +  this.state.songInQuestion.title : ''}</div>
+                                                <div>{this.state.songInQuestion.singer ? 'artist: ' +  this.state.songInQuestion.singer : ''}</div>
+                                                <div>{this.state.songInQuestion.album ? 'album: ' +  this.state.songInQuestion.album : ''}</div>
+                                            </div>
+                                        }
+
+                                        <Button variant="contained" style={{backgroundColor: '#3413f1', color: 'white'}} onClick={() => this.restartGame()}>
                                             <ReplayIcon />
                                         </Button>
                                     </div>
@@ -421,9 +477,7 @@ class ConnectedCompleteLyric extends Component {
         }
         return (
             <div className="Dots">
-              <Dots
-                color={'#3F51B5'}
-              />
+                <div><CircularProgress /></div>
             </div>
         )
     }
@@ -437,14 +491,20 @@ function shuffleArray(array) {
     return array
 }
 
+function cleanLine(string){
+    if (string != undefined){
+        return string.substr(10).toLowerCase().replace("by rentanadvisercom", '***').replace("ing soon", 'no dey do like bolo')
+    }
+    return ""
+}
 
 
 const mapStateToProps = state => {
     return {};
 };
 
-const completeLyric = withRouter(connect(mapStateToProps)(ConnectedCompleteLyric));
-export default completeLyric;
+const completeLyrics = withRouter(connect(mapStateToProps)(ConnectedCompleteLyrics));
+export default completeLyrics;
 
 
 //https://material-ui.com/components/material-icons/#material-icons

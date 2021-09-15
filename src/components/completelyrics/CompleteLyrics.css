@@ -1,14 +1,14 @@
-.CompleteLyric{
+.CompleteLyrics{
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #1edada;
+    background-color: #6c7204;
 }
 
-.CompleteLyric-wrapper{
+.CompleteLyrics-wrapper{
     display: flex;
     flex-direction: column;
     width: 80%;
@@ -19,18 +19,18 @@
     position: relative;
 }
 
-.CompleteLyric-setGameModel{
+.CompleteLyrics-setGameModel{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.CompleteLyric-comment{
+.CompleteLyrics-comment{
     font-style: italic;
 }
 
-.CompleteLyric-setGameModel-close{
+.CompleteLyrics-setGameModel-close{
     display: flex;
     justify-self: right;
     max-height: 40px;
@@ -39,86 +39,123 @@
     cursor: pointer;
 }
 
-.CompleteLyric-results,
-.CompleteLyric-setGameModel-container{
+.CompleteLyrics-results,
+.CompleteLyrics-setGameModel-container{
     display: flex;
     flex-direction: column;
     padding: 20px;
-    background-color: #f0ffff;
+    background-color: #f7f8e4;
 }
 
-.CompleteLyric-results{
+.CompleteLyrics-results{
     margin: auto;
     width: 320px;
 }
 
-.CompleteLyric-results-title{
+.CompleteLyrics-results-title{
     font-weight: bold;
     font-size: 18px;
 }
 
-.CompleteLyric-gameOption{
+.CompleteLyrics-gameOption{
     padding: 15px 0;
 }
 
-.CompleteLyric-controlMenuInfoChild{
+.CompleteLyrics-controlMenuInfoChild{
     padding: 0 10px;
 }
 
-.CompleteLyric-controlMenuInfo{
+.CompleteLyrics-controlMenuInfo{
     display: flex;
 }
 
-.CompleteLyric-controlMenu{
+.CompleteLyrics-controlMenu{
     font-weight: bold;
     padding: 15px 5px;
     display: flex;
 }
 
-.CompleteLyric-controlMenu
+.CompleteLyrics-controlMenu
 .css-2b097c-container{
     width: 100px;
 }
 
-.CompleteLyric-lowerMenu{
+.CompleteLyrics-lowerMenu{
     margin-top: 15px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    position: relative;
 }
 
-.CompleteLyric-options{
+.CompleteLyrics-options{
     display: flex;
     flex-direction: column;
 }
 
-.CompleteLyric-options .Song{
+.CompleteLyrics-option{
+    padding: 8px 16px;
+    border-radius: 4px;
+    background-color: #f5df66;
+    margin: 5px 0;
+}
+
+.CompleteLyrics-option:hover{
+    background-color: #f7f8e4;
+    cursor: pointer;
+}
+
+.CompleteLyrics-options .Song{
     width: 50%;
 }
 
-.CompleteLyric-title{
-    font-weight: bold;
-    font-size: 24px;
-    text-transform: uppercase;
+.CompleteLyrics-title{
+    font-size: 16px;
     padding-bottom: 15px;
 }
 
-.CompleteLyric-display{
+.CompleteLyrics-lyricInQuestion{
+    font-style: italic;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    margin: 8px 0;
+    border-radius: 4px;
+    color: #3413f1;
+    background-color: #cdc5f8;
+    padding: 16px 8px;
+}
+
+.CompleteLyrics-display{
     width: 100%;
-    background-color: #c2f1f1;
+    background-color: #f2f7b3;
     padding: 20px;
     border-radius: 4px;
 }
 
-.CompleteLyric .rhap_progress-section{
+.CompleteLyrics .rhap_progress-section{
     pointer-events: none;
 }
 
-.CompleteLyric .rhap_time.rhap_total-time,
-.CompleteLyric .rhap_current-time{
+.CompleteLyrics .rhap_time.rhap_total-time,
+.CompleteLyrics .rhap_current-time{
     display: none;
 }
 
-.CompleteLyric-table{
+.CompleteLyrics-showChoks
+{
+    position: absolute;
+    top: -100px;
+    left: 0;
+    height: 100px;
+    overflow-y: auto;
+    max-width: 80%;
+    background-color: #cdc5f8;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.CompleteLyrics-table{
     padding: 20px;
 }
 
@@ -127,31 +164,31 @@
 }
 
 @media only screen and (max-width: 600px) {
-    .CompleteLyric-options .Song{
+    .CompleteLyrics-options .Song{
         width: 100%;
     }
 
-    .CompleteLyric-controlMenu{
+    .CompleteLyrics-controlMenu{
         flex-direction: column;
         order: -1;
     }
 
-    .CompleteLyric-controlMenuInfo{
+    .CompleteLyrics-controlMenuInfo{
         margin-top: 16px;
         flex-wrap: wrap;
     }
 
-    .CompleteLyric-wrapper{
+    .CompleteLyrics-wrapper{
         margin-top: 60px;
         height: calc(100% - 60px);
     }
 
-    .CompleteLyric-wrapper,
-    .CompleteLyric-results{
+    .CompleteLyrics-wrapper,
+    .CompleteLyrics-results{
         width: 100%;
     }
 
-    .CompleteLyric-controlMenuInfoChild{
+    .CompleteLyrics-controlMenuInfoChild{
         flex-grow: 1;
         width: 50%;
     }
@@ -159,7 +196,7 @@
 
 /* bigger screen */
 @media only screen and (min-width: 601px) {
-    .CompleteLyric-display{
+    .CompleteLyrics-display{
         position: absolute;
         top: 20%;
         right: 0;

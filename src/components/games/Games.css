@@ -1,0 +1,45 @@
+.Games{
+    background-color: #3413f1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Games-wrapper{
+    margin: auto;
+    width: 50%;
+}
+
+.Games-nextLine,
+.Games-guessTheSong{
+    background-color: #1edada;
+    border-radius: 4px;
+    padding: 16px;
+    transition: background-color 0.25s ease-in;
+    margin: 16px 8px;
+}
+
+.Games-nextLine:hover,
+.Games-guessTheSong:hover{
+    cursor: pointer;
+    background-color: aliceblue;
+    transition: background-color 0.25s ease-in;
+}
+
+.Games-nextLine{
+    background-color: #f5df66;
+}
+
+.Games-gameTitle
+{
+    font-size: 32px;
+    font-weight: bold;
+}
+
+/* smaller screens */
+@media only screen and (max-width: 600px) {
+    .Games-wrapper{
+      width: 90%;
+    }
+}

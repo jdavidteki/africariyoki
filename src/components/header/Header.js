@@ -47,9 +47,9 @@ class Header extends Component {
                     className="Header-navLink"
                     variant="outlined"
                     color="primary"
-                    to = "/game"
+                    to = "/games"
                   >
-                      game
+                      games
               </Link>
             </div>
         </div>

@@ -9,6 +9,7 @@ import LRCFixer from './components/lrcFixer/LRCFixer.js'
 import { Switch, Route } from "react-router-dom";
 import ForOFor from './components/forofor/ForOFor.js';
 import CompleteTheLyrics from './components/completelyrics/CompleteLyrics.js';
+import Games from './components/games/Games.js';
 
 import "./App.css";
 
@@ -32,8 +33,10 @@ class App extends Component {
               <Route path="/guesssong" exact component={GuessSong} />
               <Route path="/karaokedisplay/:id" component={KaraokeDisplay} />
               <Route path="/lrcfixer/:id" component={LRCFixer} />
-              <Route path="/game" exact component={GuessSong} />
-              <Route path="/ctl" exact component={CompleteTheLyrics}/>
+              <Route path="/games" exact component={Games} />
+              <Route path="/game" exact component={Games} />
+              <Route path="/guessthesong" exact component={GuessSong} />
+              <Route path="/cls" exact component={CompleteTheLyrics}/>
               <Route path="/annotationfixer/:id" component={AnnotationFixer} />
               <Route component={ForOFor}/>
             </Switch>
