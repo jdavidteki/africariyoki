@@ -23,7 +23,9 @@ class Games extends Component {
   }
 
     goToGame(game){
-        window.location.href = "/" + game;
+        this.props.history.push({
+            pathname: `/${game}/`
+        });
     }
 
     render() {
