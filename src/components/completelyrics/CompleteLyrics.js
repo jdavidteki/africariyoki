@@ -36,9 +36,9 @@ const DifficultyOptions = [
 ];
 
 const DurationOptions = [
-    {value: 1, label: '1min'},
-    {value: 2, label: '2mins'},
     {value: 3, label: '3mins'},
+    {value: 5, label: '5mins'},
+    {value: 10, label: '10mins'},
 ];
 
 const levelToPlaySec = {
@@ -63,7 +63,7 @@ class ConnectedCompleteLyrics extends Component {
         pauseSetGameModal: true,
         moment: null,
         reverse: false,
-        selectedOptionDuration: {value: 1, label: '1min'},
+        selectedOptionDuration: {value: 3, label: '3mins'},
         selectedOptionDifficulty: {value: 'Beginner', label: 'beginner'},
         printResult: false,
         showChoks: false,
@@ -155,7 +155,6 @@ class ConnectedCompleteLyrics extends Component {
                 labsi[val[i].id] = val[i].lyrics.split('\n')
             }
         }
-
         return labsi
     }
 
@@ -255,6 +254,7 @@ class ConnectedCompleteLyrics extends Component {
             printResult: false,
             songInQuestionIndex: songInQuestionIndex,
             songInQuestion: this.state.songs[songInQuestionIndex],
+            lyricAndOptionObj: this.getLyricAndOptionObj(this.state.songs, songInQuestionIndex),
         })
     }
 
