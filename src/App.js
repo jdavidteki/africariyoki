@@ -33,7 +33,6 @@ class App extends Component {
               <Route path="/guesssong" exact component={GuessSong} />
               <Route path="/karaokedisplay/:id" component={KaraokeDisplay} />
               <Route path="/lrcfixer/:id" component={LRCFixer} />
-              <Route path="/games" exact component={Games} />
               <Route path="/game" exact component={Games} />
               <Route path="/guessthesong" exact component={GuessSong} />
               <Route path="/cls" exact component={CompleteTheLyrics}/>
