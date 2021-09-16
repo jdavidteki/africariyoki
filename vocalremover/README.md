@@ -1,1 +1,0 @@
-ssh -i vocalremovercert.cer ubuntu@100.25.218.30.
