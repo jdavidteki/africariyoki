@@ -167,7 +167,6 @@ class ConnectedAdmin extends Component {
                 songId: this.state.selectedSongIds[0],
             }
         });
-        window.location.reload(true);
     }
 
     updateAnnotation(){
@@ -178,7 +177,6 @@ class ConnectedAdmin extends Component {
                 songId: this.state.selectedSongIds[0],
             }
         });
-        window.location.reload(true);
     }
 
     onGridRowsUpdated = ({ fromRow, toRow, updated }) => {
