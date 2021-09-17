@@ -223,6 +223,8 @@ class ConnectedGuessSong extends Component {
             this.setState({
                 setGameModel: false,
                 printResult: false,
+                audioPaused: true,
+                answerCorrect: true,
                 eventDate: moment.duration().add({days:0,hours:0,minutes:this.state.selectedOptionDuration.value,seconds:0}),
             })
         }, 900)
@@ -239,6 +241,8 @@ class ConnectedGuessSong extends Component {
             pauseSetGameModal: true,
             setGameModel: true,
             printResult: false,
+            audioPaused: true,
+            answerCorrect: true,
             songInQuestionIndex: songInQuestionIndex,
             songInQuestion: this.state.songs[songInQuestionIndex],
             songsInOption: this.generateSongsInOptions(this.state.songs, this.state.songs[songInQuestionIndex])

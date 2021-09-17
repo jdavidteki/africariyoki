@@ -90,12 +90,6 @@
     width: 100px;
     border-radius: 4px;
     box-shadow: none;
-    pointer-events: all;
-}
-
-.GuessSong-playArrowIcon.pulse
-{
-    pointer-events: none;
 }
 
 .GuessSong-controlMenu
@@ -156,6 +150,11 @@
 @media only screen and (max-width: 600px) {
     .GuessSong-options .Song{
         width: 100%;
+    }
+
+    .GuessSong .Song-title,
+    .GuessSong .Song-singer{
+        max-height: none;
     }
 
     .GuessSong-controlMenu{
