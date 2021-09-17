@@ -67,6 +67,7 @@ class ConnectedGuessSong extends Component {
         selectedOptionDuration: {value: 1, label: '1min'},
         selectedOptionDifficulty: {value: 'Beginner', label: 'beginner'},
         printResult: false,
+        audioPaused: true,
         answerCorrect: true,
         songInQuestion: {
             audiourl: '',
@@ -92,7 +93,7 @@ class ConnectedGuessSong extends Component {
                 count:0,
                 eventDate: moment.duration().add({days:0,hours:0,minutes:this.state.selectedOptionDuration.value,seconds:0}),
                 secs:0,
-                mins:1,
+                mins:this.state.selectedOptionDuration.value,
                 printResult: true,
             })
             clearInterval(x)
@@ -128,21 +129,13 @@ class ConnectedGuessSong extends Component {
                 })
             }
         )
-
-        // let songInQuestionIndex = Math.floor(Math.random() * (Object.values(AllSongs).length - 0) + 0);
-
-        // this.setState({
-        //   songs: Object.values(AllSongs),
-        //   songInQuestionIndex: songInQuestionIndex,
-        //   songInQuestion: Object.values(AllSongs)[songInQuestionIndex],
-        //   songsInOption: this.generateSongsInOptions(Object.values(AllSongs), Object.values(AllSongs)[songInQuestionIndex])
-        // })
     }
 
     play(){
         if(this.audio != null){
             this.audio.currentTime = 40;
             this.audio.play();
+            this.setState({audioPaused: false})
 
             //update song plays
             Firebase.getLyricsById(this.state.songInQuestion.id).then(
@@ -154,6 +147,7 @@ class ConnectedGuessSong extends Component {
             var int = setInterval(() => {
                 if (this.audio != null && this.audio.currentTime > 40 + levelToPlaySec[this.state.selectedOptionDifficulty.label]) {
                     this.audio.pause();
+                    this.setState({audioPaused: true})
                     clearInterval(int);
                 }
             }, 10);
@@ -199,6 +193,7 @@ class ConnectedGuessSong extends Component {
         let songInQuestionIndex = Math.floor(Math.random() * (this.state.songs.length - 0) + 0);
 
         this.setState({
+            audioPaused: true,
             songInQuestionIndex: songInQuestionIndex,
             songInQuestion: this.state.songs[songInQuestionIndex],
             songsInOption: this.generateSongsInOptions(this.state.songs, this.state.songs[songInQuestionIndex])
@@ -376,18 +371,21 @@ class ConnectedGuessSong extends Component {
                                     }
                                     paused={false}
                                     className="GuessSong-display"
-                                    style={{ margin: 'auto' }}
                                 >
 
                                     <div className="GuessSong-title">guess the song</div>
                                     <div>press play to listen to snippet</div>
                                     <div className="GuessSong-controlMenu">
-                                        <Button style={{backgroundColor: '#0f750f', color: 'white'}} variant="contained" color="primary" onClick={() => this.play()}>
-                                            <PlayArrowIcon />
+                                        <Button
+                                            class={this.state.audioPaused ? "GuessSong-playArrowIcon" : "GuessSong-playArrowIcon pulse"}
+                                            variant="contained" color="primary" onClick={() => this.play()}
+                                        >
+                                            <PlayArrowIcon fontSize="large" />
                                         </Button>
+
                                         <div className="GuessSong-controlMenuInfo">
                                             <div className="GuessSong-controlMenuInfoChild"> <PersonIcon /> {this.state.selectedOptionPlayerName == "" ? 'anonimo' : this.state.selectedOptionPlayerName}</div>
-                                            <div className="GuessSong-controlMenuInfoChild">highest score: {this.state.highestscore}</div>
+                                            <div className="GuessSong-controlMenuInfoChild">top score: {this.state.highestscore}</div>
                                             <div className="GuessSong-controlMenuInfoChild"><BarChartOutlinedIcon /> {this.state.selectedOptionDifficulty.label}</div>
                                             <div className="GuessSong-controlMenuInfoChild">
                                                 {this.state.answerCorrect
@@ -396,7 +394,8 @@ class ConnectedGuessSong extends Component {
                                                     :
                                                     (<CancelPresentationIcon />)
                                                 }
-                                                {this.state.score}</div>
+                                                &nbsp; {this.state.score}
+                                            </div>
                                             <div className="GuessSong-controlMenuInfoChild"><AccessAlarmOutlinedIcon /> {`${this.state.mins} : ${this.state.secs}`}</div>
                                         </div>
                                     </div>

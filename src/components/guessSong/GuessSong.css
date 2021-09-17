@@ -5,7 +5,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #1edada;
+    background-color: #4cada5;
 }
 
 .GuessSong-wrapper{
@@ -57,6 +57,10 @@
     font-size: 18px;
 }
 
+.GuessSong .Song-title{
+    margin-right: 18px;
+}
+
 .GuessSong-gameOption{
     padding: 15px 0;
 }
@@ -73,6 +77,25 @@
     font-weight: bold;
     padding: 15px 5px;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.GuessSong-playArrowIcon
+{
+    background-color: #0f750f;
+    color: white;
+    margin-bottom: 15px;
+    height: 100px;
+    width: 100px;
+    border-radius: 4px;
+    box-shadow: none;
+    pointer-events: all;
+}
+
+.GuessSong-playArrowIcon.pulse
+{
+    pointer-events: none;
 }
 
 .GuessSong-controlMenu
@@ -88,25 +111,29 @@
 
 .GuessSong-options{
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .GuessSong-options .Song{
-    width: 50%;
+    flex-basis: 45%;
+    border-radius: 4px;
+    height: auto;
 }
 
 .GuessSong-title{
     font-weight: bold;
-    font-size: 24px;
     text-transform: uppercase;
     padding-bottom: 15px;
 }
 
 .GuessSong-display{
     width: 100%;
-    background-color: #c2f1f1;
+    background-color: #e1f8ef;
     padding: 20px;
-    border-radius: 4px;
+    border-radius: 16px;
+    margin: auto;
+    flex-grow: 1;
 }
 
 .GuessSong .rhap_progress-section{
@@ -136,6 +163,10 @@
         order: -1;
     }
 
+    .GuessSong-display{
+        margin: 0;
+    }
+
     .GuessSong-controlMenuInfo{
         margin-top: 16px;
         flex-wrap: wrap;
@@ -144,6 +175,7 @@
     .GuessSong-wrapper{
         margin-top: 60px;
         height: calc(100% - 60px);
+        position: fixed;
     }
 
     .GuessSong-wrapper,
@@ -167,7 +199,7 @@
 }
 
 .pulse {
-    animation: pulse-animation 2s infinite;
+    animation: pulse-animation 0.5s infinite;
 }
 
 @keyframes pulse-animation {
