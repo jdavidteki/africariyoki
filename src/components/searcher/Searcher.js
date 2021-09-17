@@ -35,7 +35,15 @@ class Searcher extends Component {
 
   componentDidMount () {
 
-    console.log("window.location", window.location.href)
+    //hack: use this to fix github pages doing ?/ on pages
+    if (window.location.href.includes("?/")){
+      let actualDestination = window.location.href.split("?/")[1]
+
+      console.log("actualDestination", actualDestination)
+      this.props.history.push({
+        pathname: "/" + actualDestination
+      });
+    }
 
     const analytics = new Analytics('UA-187038287-1');
     analytics.hit(new PageHit('Searcher'))
