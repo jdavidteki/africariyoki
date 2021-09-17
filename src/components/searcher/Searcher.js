@@ -35,6 +35,8 @@ class Searcher extends Component {
 
   componentDidMount () {
 
+    console.log("window.location", window.location.href)
+
     const analytics = new Analytics('UA-187038287-1');
     analytics.hit(new PageHit('Searcher'))
       .then(() => console.log("google analytics on searcher"))
