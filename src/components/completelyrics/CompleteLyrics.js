@@ -10,6 +10,7 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import Button from "@material-ui/core/Button";
 import ReplayIcon from '@material-ui/icons/Replay';
 import CheckBoxOutlinedIcon from '@material-ui/icons/CheckBoxOutlined';
+import CancelPresentationIcon from '@material-ui/icons/CancelPresentation';
 import Select  from 'react-select';
 import ArrowForward from '@material-ui/icons/ArrowForward'
 import TrendingUpOutlinedIcon from '@material-ui/icons/TrendingUpOutlined';
@@ -67,6 +68,7 @@ class ConnectedCompleteLyrics extends Component {
         selectedOptionDifficulty: {value: 'Beginner', label: 'beginner'},
         printResult: false,
         showChoks: false,
+        answerCorrect: true,
         songInQuestion: {
             audiourl: '',
             singer: '',
@@ -196,11 +198,13 @@ class ConnectedCompleteLyrics extends Component {
     checkAnswer(lyricOption){
         if(lyricOption == this.state.lyricAndOptionObj["answer"]){
             this.setState({
-                score: this.state.score+=1
+                score: this.state.score+=1,
+                answerCorrect: true,
             })
         }else{
             this.setState({
-                score: this.state.score-=1
+                score: this.state.score-=1,
+                answerCorrect: false,
             })
         }
 
@@ -268,19 +272,19 @@ class ConnectedCompleteLyrics extends Component {
         }
 
         if(this.state.score >= 10 && this.state.score < 15){
-            return "do better next time..."
+            return "baldadashhh mtchew"
         }
 
         if(this.state.score >= 15 && this.state.score < 20){
-            return "like mr macaroni, you are doing well"
+            return "you are doing wehhll"
         }
 
         if(this.state.score >= 20 && this.state.score < 25){
-            return "you have too much pride, try to be calming down"
+            return "fantabulous"
         }
 
         if(this.state.score >= 25 && this.state.score < 30){
-            return "fantabulous"
+            return "you have too much pride, try to be calming down"
         }
 
         if(this.state.score >= 30 && this.state.score < 35){
@@ -300,6 +304,13 @@ class ConnectedCompleteLyrics extends Component {
         if(this.audio != null){
             this.audio.currentTime = 40;
             this.audio.play();
+
+            //update song plays
+            Firebase.getLyricsById(this.state.songInQuestion.id).then(
+                val => {
+                  Firebase.updateNumPlays(this.state.songInQuestion.id, val.numPlays +=1)
+                }
+            )
 
             var int = setInterval(() => {
                 if (this.audio != null && this.audio.currentTime > 40 + levelToPlaySec[this.state.selectedOptionDifficulty.label]) {
@@ -421,7 +432,15 @@ class ConnectedCompleteLyrics extends Component {
                                             <div className="CompleteLyrics-controlMenuInfoChild"> <PersonIcon /> {this.state.selectedOptionPlayerName == "" ? 'anonimo' : this.state.selectedOptionPlayerName}</div>
                                             <div className="CompleteLyrics-controlMenuInfoChild">highest score: {this.state.highestscore}</div>
                                             <div className="CompleteLyrics-controlMenuInfoChild"><BarChartOutlinedIcon /> {this.state.selectedOptionDifficulty.label}</div>
-                                            <div className="CompleteLyrics-controlMenuInfoChild"><CheckBoxOutlinedIcon /> {this.state.score}</div>
+                                            <div className="CompleteLyrics-controlMenuInfoChild">
+                                                {this.state.answerCorrect
+                                                    ?
+                                                    (<CheckBoxOutlinedIcon />)
+                                                    :
+                                                    (<CancelPresentationIcon />)
+                                                }
+                                                {this.state.score}
+                                            </div>
                                             <div className="CompleteLyrics-controlMenuInfoChild"><AccessAlarmOutlinedIcon /> {`${this.state.mins} : ${this.state.secs}`}</div>
                                         </div>
                                     </div>
