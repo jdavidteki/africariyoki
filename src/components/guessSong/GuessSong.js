@@ -381,7 +381,7 @@ class ConnectedGuessSong extends Component {
                                     <div>press play to listen to snippet</div>
                                     <div className="GuessSong-controlMenu">
                                         <Button
-                                            class={this.state.audioPaused ? "GuessSong-playArrowIcon" : "GuessSong-playArrowIcon pulse"}
+                                            class={this.state.audioPaused ? "GuessSong-playArrowIcon" : "GuessSong-playArrowIcon shaking"}
                                             variant="contained" color="primary" onClick={() => this.play()}
                                         >
                                             <PlayArrowIcon fontSize="large" />
