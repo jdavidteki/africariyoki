@@ -192,16 +192,18 @@ class ConnectedGuessSong extends Component {
             document.getElementById(song.id).style.backgroundColor = 'red'
         }
 
-        setTimeout( () => {
-            let songInQuestionIndex = Math.floor(Math.random() * (this.state.songs.length - 0) + 0);
+        let songInQuestionIndex = Math.floor(Math.random() * (this.state.songs.length - 0) + 0);
+        this.setState({
+            audioPaused: true,
+            songInQuestionIndex: songInQuestionIndex,
+            songInQuestion: this.state.songs[songInQuestionIndex],
+        })
 
+        setTimeout( () => {
             this.setState({
-                audioPaused: true,
-                songInQuestionIndex: songInQuestionIndex,
-                songInQuestion: this.state.songs[songInQuestionIndex],
                 songsInOption: this.generateSongsInOptions(this.state.songs, this.state.songs[songInQuestionIndex])
             })
-        }, 350);
+        }, 400);
     }
 
     startGame(){
