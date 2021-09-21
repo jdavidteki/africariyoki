@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import store from "./src/Redux/Store";
 import firebase from "firebase";
 import config from './src/firebase/config.js';
-import { Analytics, PageHit } from 'expo-analytics';
+import * as serviceWorkerRegistration from "./serviceWorkerRegistration.js";
 
 if (!firebase.apps.length) {
   firebase.initializeApp(config);
@@ -23,6 +23,8 @@ let app = (
 window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true;
 
 ReactDOM.render(app, document.getElementById("root"));
+
+serviceWorkerRegistration.register();
 
 //persistence after page refresh
 
