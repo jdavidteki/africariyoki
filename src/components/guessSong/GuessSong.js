@@ -186,18 +186,23 @@ class ConnectedGuessSong extends Component {
     checkAnswer(song){
         if(song == this.state.songInQuestion){
             this.setState({score: this.state.score+=1, answerCorrect: true})
+            document.getElementById(song.id).style.backgroundColor = 'green' //TODO: figure out a better way of doing this
         }else{
             this.setState({score: this.state.score-=1, answerCorrect: false})
+            document.getElementById(song.id).style.backgroundColor = 'red'
         }
 
-        let songInQuestionIndex = Math.floor(Math.random() * (this.state.songs.length - 0) + 0);
+        setTimeout( () => {
+            let songInQuestionIndex = Math.floor(Math.random() * (this.state.songs.length - 0) + 0);
 
-        this.setState({
-            audioPaused: true,
-            songInQuestionIndex: songInQuestionIndex,
-            songInQuestion: this.state.songs[songInQuestionIndex],
-            songsInOption: this.generateSongsInOptions(this.state.songs, this.state.songs[songInQuestionIndex])
-        })
+            this.setState({
+                backgroundColor: null,
+                audioPaused: true,
+                songInQuestionIndex: songInQuestionIndex,
+                songInQuestion: this.state.songs[songInQuestionIndex],
+                songsInOption: this.generateSongsInOptions(this.state.songs, this.state.songs[songInQuestionIndex])
+            })
+        }, 350);
     }
 
     startGame(){
@@ -423,6 +428,7 @@ class ConnectedGuessSong extends Component {
                                                 key={song.id}
                                                 song={song}
                                                 playSong={() => this.checkAnswer(song)}
+                                                backgroundColor={this.state.optionBackground}
                                                 countries={song.countries}
                                             />
                                         )}

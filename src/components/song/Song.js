@@ -7,6 +7,7 @@ const Song = (props) => {
   return (
     <div
       className="Song"
+      id={props.song.id}
       onClick={() => props.playSong(props.song.id)}
     >
       <span className="Song-title">{props.song.title}</span>
