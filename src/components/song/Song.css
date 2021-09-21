@@ -24,7 +24,7 @@
   overflow-y: scroll;
 }
 .Song:hover {
-  background-color: #0f750f;
+  background-color: #f1faf1;
   cursor: pointer;
   color: white;
   transition: background-color 0.25s ease-in;
