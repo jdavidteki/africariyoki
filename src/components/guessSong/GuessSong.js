@@ -196,7 +196,6 @@ class ConnectedGuessSong extends Component {
             let songInQuestionIndex = Math.floor(Math.random() * (this.state.songs.length - 0) + 0);
 
             this.setState({
-                backgroundColor: null,
                 audioPaused: true,
                 songInQuestionIndex: songInQuestionIndex,
                 songInQuestion: this.state.songs[songInQuestionIndex],
