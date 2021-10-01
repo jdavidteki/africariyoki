@@ -17,19 +17,23 @@ const SongList = (props) => {
             {props.filteredSongs.map(song => <Song key= {song.id} song={song} playSong={props.playSong} countries={song.countries}/>)}
           </div>
         :
-          <span className="SongList-emptySearch">
-            you too search something we have, mtchewww
-            <Emoji
-              emoji={'face_with_rolling_eyes'}
-              set='apple'
-              size={18}
-            />
-            <Emoji
-              emoji={'unamused'}
-              set='apple'
-              size={18}
-            />
-          </span>
+          <div className="SongList-emptySearch-wrapper">
+            <span className="SongList-emptySearch">
+              you too search something we have, mtchewww
+              <Emoji
+                emoji={'face_with_rolling_eyes'}
+                set='apple'
+                size={16}
+              />
+              <Emoji
+                emoji={'unamused'}
+                set='apple'
+                size={16}
+              />
+            </span>
+            <span className="SongList-emptySearch">or you can <span onClick={()=>{props.suggestSong()}} className="SongList-suggestText" on>suggest</span> a song to us</span>
+          </div>
+
       }
     </div>
   )

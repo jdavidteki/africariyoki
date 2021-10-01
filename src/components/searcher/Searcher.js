@@ -11,6 +11,7 @@ import blankBack from "./assets/blankBack.jpeg"
 import MetaTags from 'react-meta-tags';
 import Sbta from '../sbta/Sbta.js'
 import { Analytics, PageHit } from 'expo-analytics';
+import Suggestions from "../suggestions/Suggestions";
 
 import './Searcher.css';
 class Searcher extends Component {
@@ -30,6 +31,7 @@ class Searcher extends Component {
       selectedCode: '',
       countryToBackgroundImage: {},
       bckImageNum: '',
+      openSuggestionModel: false,
     }
   }
 
@@ -210,6 +212,12 @@ class Searcher extends Component {
     })
   }
 
+  suggestSong=() => {
+    this.setState({
+      openSuggestionModel: true,
+    })
+  }
+
   selectCountryFlag(code){
     this.setState({
       selectedCode: code,
@@ -220,6 +228,17 @@ class Searcher extends Component {
   render() {
     return (
       <div className="Searcher">
+        {this.state.openSuggestionModel &&
+          <div className="Searcher-openSuggestionModel">
+            <CloseIcon
+              fontSize={'large'}
+              className={"Searcher-openSuggestionModel-close"}
+              style={{ color: '#f7f8e4' }}
+              onClick={()=>{    this.setState({openSuggestionModel: false})}}
+            />
+            <Suggestions />
+          </div>
+        }
         <MetaTags>
           <title>africariyoki - sing with africa!</title>
           <meta name="description" content="sing along to your favourite afro beat songs" />
@@ -277,6 +296,7 @@ class Searcher extends Component {
               songs={this.state.songs}
               filteredSongs={this.state.filteredSongs}
               playSong={this.playSong}
+              suggestSong={this.suggestSong}
               expandResults={this.state.expandResults}
             />
 

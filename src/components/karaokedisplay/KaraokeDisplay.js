@@ -14,6 +14,7 @@ import MetaTags from 'react-meta-tags';
 import { Emoji } from 'emoji-mart'
 import codeToCountries from "../searcher/codeToCountry.js";
 import Searcher from "../searcher/Searcher";
+import Suggestions from "../suggestions/Suggestions";
 import CloseIcon from '@material-ui/icons/Close';
 import AlbumIcon from '@material-ui/icons/Album';
 import { SocialIcon } from 'react-social-icons';
@@ -40,6 +41,7 @@ class ConnectedKaraokeDisplay extends Component {
       nextSongOptions: ['1qgiNdSGx-c'],
       motivator: 'less gerriiitt',
       openSearcherModel: false,
+      openSuggestionModel: false,
       smileyToSet: 'smiley',
       singer: {
         audiourl: '',
@@ -267,6 +269,17 @@ class ConnectedKaraokeDisplay extends Component {
               <Searcher />
             </div>
           }
+          {this.state.openSuggestionModel &&
+            <div className="KaraokeDisplay-openSuggestionModel">
+              <CloseIcon
+                fontSize={'large'}
+                className={"KaraokeDisplay-openSuggestionModel-close"}
+                style={{ color: '#f7f8e4' }}
+                onClick={()=>{this.setState({openSuggestionModel: false})}}
+              />
+              <Suggestions />
+            </div>
+          }
           <div className="KaraokeDisplay-cloudBackground">
             <Clouds/>
             <div className="KaraokeDisplay-twinkling"></div>
@@ -334,7 +347,7 @@ class ConnectedKaraokeDisplay extends Component {
                     />
                   )}
                 </div>
-                <AlbumIcon className={"KaraokeDisplay-lowerPaneIcon"} style={{ color: this.getColorFromNumPlays(this.state.singer.numPlays) }} />
+                <AlbumIcon className={"KaraokeDisplay-lowerPaneIcon"} style={{ color: this.getColorFromNumPlays(this.state.singer.numPlays) }}  onClick={()=>{this.setState({openSuggestionModel: true})}}/>
                 <SocialIcon bgColor={"#3413f1"} fgColor={"white"} className={"KaraokeDisplay-socialMedia KaraokeDisplay-instagram KaraokeDisplay-lowerPaneIcon"}  url="https://www.instagram.com/africariyoki" />
                 <SocialIcon bgColor={"#3413f1"} fgColor={"white"} className={"KaraokeDisplay-socialMedia KaraokeDisplay-twitter KaraokeDisplay-lowerPaneIcon" }  url="https://www.twitter.com/africariyoki" />
                 <Sbta useDefaultImage={true} useIcon={true} imageBckNum={this.props.match.params.id} />

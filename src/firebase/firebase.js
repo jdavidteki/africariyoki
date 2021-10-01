@@ -156,6 +156,26 @@ class Firebase {
     })
   }
 
+  submitASuggestion = (songTitle, artistName, youtubeLink) => {
+    return new Promise(resolve => {
+      firebase.database()
+      .ref('/suggestions/')
+      .push(
+        {
+          songTitle: songTitle,
+          artistName: artistName,
+          youtubeLink: youtubeLink,
+        },
+      )
+      .then((response) => {
+        resolve(true)
+      })
+      .catch(error => {
+        console.warn("error", error)
+      })
+    })
+  }
+
   addAfricariyoki = (item) => {
     return new Promise(resolve => {
       firebase.database()

@@ -57,6 +57,37 @@
     padding-bottom: 85px;
   }
 
+  .Searcher-openSuggestionModel-close{
+    display: flex;
+    justify-self: left;
+    max-height: 40px;
+    margin-left: auto;
+    margin-bottom: 5px;
+  }
+
+  .Searcher-openSuggestionModel-close:hover{
+    fill: #3413f1;
+    cursor: pointer ;
+  }
+
+  .Searcher-openSuggestionModel{
+    z-index: 9999;
+    position: fixed;
+    display: flex;
+    padding: 10% 20px;
+    flex-direction: column;
+
+    background:
+      /* top, transparent black, faked with gradient */
+      linear-gradient(
+        rgba(0, 0, 0, 0.7),
+        rgba(0, 0, 0, 0.7)
+      );
+
+    height: 100%;
+    width: 100%;
+  }
+
   .Searcher-backgroundOverlay {
     background-color: #0000008f;
     top: 0;
@@ -118,6 +149,10 @@
     border-radius: 100px; }
 
   @media only screen and (max-width: 600px) {
+
+    .Searcher-openSuggestionModel{
+      padding-top: 20%;
+    }
 
     .MuiFormLabel-root.MuiInputLabel-root.MuiInputLabel-formControl.MuiInputLabel-animated.MuiInputLabel-outlined{
       font-size: 14px;
