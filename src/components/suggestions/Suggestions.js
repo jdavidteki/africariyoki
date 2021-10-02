@@ -46,8 +46,7 @@ class Suggestions extends Component {
                 {!this.state.submited ?
                     <div className="Suggestions-wrapper">
                         <div className="Suggestions-title">
-                            we know you will have suggestions, alaseju! <br></br>
-                            oya sha enter the details of the song you want
+                            we know you will have suggestions, alaseju!
                         </div>
 
                         {this.state.errorMsg != '' &&
@@ -61,19 +60,19 @@ class Suggestions extends Component {
                                 <TextField
                                     value={this.state.songTitle}
                                     className="Suggestions-songTitle"
-                                    label={"Enter song title"}
+                                    label={"enter song title"}
                                     onChange={this.handleChangesongTitle}
                                 />
                                 <TextField
                                     value={this.state.artistName}
                                     className="Suggestions-artistName"
-                                    label={"Enter artist name"}
+                                    label={"enter artist name"}
                                     onChange={this.handleChangeArtistName}
                                 />
                                 <TextField
                                     value={this.state.youtubeLink}
                                     className="Suggestions-youtubeLink"
-                                    label={"Enter youtube link (optional)"}
+                                    label={"enter youtube link (optional)"}
                                     onChange={this.handleChangeYoutubeLink}
                                 />
                             </div>
