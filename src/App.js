@@ -12,7 +12,7 @@ import CompleteTheLyrics from './components/completelyrics/CompleteLyrics.js';
 import Games from './components/games/Games.js';
 
 import "./App.css";
-
+import * as serviceWorkerRegistration from "./serviceWorkerRegistration.js";
 
 window.onresize = function() {
   document.getElementsByClassName("App").height = window.innerHeight;
