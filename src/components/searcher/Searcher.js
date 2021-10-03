@@ -82,7 +82,9 @@ class Searcher extends Component {
           let songId = val[i].id
 
           var requestOptions = {
-            method: 'GET',      redirect: 'follow'
+            method: 'GET',
+            redirect: 'follow',
+            mode: 'no-cors'
           };
 
           fetch(`https://storage.googleapis.com/africariyoki-4b634.appspot.com/music/${songId}.mp3`, requestOptions)
