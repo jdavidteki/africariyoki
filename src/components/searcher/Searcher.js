@@ -47,6 +47,7 @@ class Searcher extends Component {
       });
     }
 
+
     const analytics = new Analytics('UA-187038287-1');
     analytics.hit(new PageHit('Searcher'))
       .then(() => console.log("google analytics on searcher"))
@@ -75,6 +76,20 @@ class Searcher extends Component {
           typingEffectSongs: shuffleArray(val.map(a => a.turnedOn == 1 ? a.title : '').filter(a => a != '')),
           songIds: val.map(a => a.id),
         })
+
+        for (var i = 0; i < val.length; i++){
+          console.log("we are here calling all the sit")
+          let songId = val[i].id
+
+          var requestOptions = {
+            method: 'GET',      redirect: 'follow'
+          };
+
+          fetch(`https://storage.googleapis.com/africariyoki-4b634.appspot.com/music/${songId}.mp3`, requestOptions)
+          .then(response => response.text())
+          .then(result => console.log(result))
+          .catch(error => console.log('error',error));
+        }
       }
     )
 
