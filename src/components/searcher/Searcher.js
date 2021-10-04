@@ -76,24 +76,25 @@ class Searcher extends Component {
           typingEffectSongs: shuffleArray(val.map(a => a.turnedOn == 1 ? a.title : '').filter(a => a != '')),
           songIds: val.map(a => a.id),
         })
-
-        for (var i = 0; i < val.length; i++){
-          console.log("we are here calling all the sit")
-          let songId = val[i].id
-
-          var requestOptions = {
-            method: 'GET',
-            redirect: 'follow',
-            mode: 'no-cors'
-          };
-
-          fetch(`https://storage.googleapis.com/africariyoki-4b634.appspot.com/music/${songId}.mp3`, requestOptions)
-          .then(response => response.text())
-          .then(result => console.log(result))
-          .catch(error => console.log('error',error));
-        }
       }
     )
+
+    //download all the images for caching purposes
+    for(var i = 0; i < 11; i++) {
+
+      console.log("downloading background image", i)
+
+      var requestOptions = {
+        method: 'GET',
+        redirect: 'follow',
+        mode: 'no-cors'
+      };
+
+      fetch(`https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/searchBackgrounds%2Fbck${i}bck.jpeg?alt=media`, requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error',error));
+    }
 
     setInterval( () => {
       this.setState({

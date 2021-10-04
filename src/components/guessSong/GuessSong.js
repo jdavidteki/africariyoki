@@ -127,6 +127,24 @@ class ConnectedGuessSong extends Component {
                   songInQuestion: val[songInQuestionIndex],
                   songsInOption: this.generateSongsInOptions(val, val[songInQuestionIndex])
                 })
+
+                //downloading all songs to be used in game
+                for (var i = 0; i < val.length; i++){
+                  let songId = val[i].id
+
+                  console.log("downloading...", songId)
+
+                  var requestOptions = {
+                    method: 'GET',
+                    redirect: 'follow',
+                    mode: 'no-cors'
+                  };
+
+                  fetch(`https://storage.googleapis.com/africariyoki-4b634.appspot.com/music/${songId}.mp3`, requestOptions)
+                  .then(response => response.text())
+                  .then(result => console.log(result))
+                  .catch(error => console.log('error',error));
+                }
             }
         )
     }
