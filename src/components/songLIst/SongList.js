@@ -31,7 +31,7 @@ const SongList = (props) => {
                 size={16}
               />
             </span>
-            <span className="SongList-emptySearch">or you can <span onClick={()=>{props.suggestSong()}} className="SongList-suggestText" on>suggest</span> a song to us</span>
+            <span className="SongList-emptySearch">or you can <span onClick={()=>{props.suggestSong()}} className="SongList-suggestText">suggest</span> a song to us</span>
           </div>
 
       }

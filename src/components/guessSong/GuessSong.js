@@ -22,6 +22,7 @@ import SvgMorphPlugin from 'rc-tween-one/lib/plugin/SvgMorphPlugin';
 import AccessAlarmOutlinedIcon from '@material-ui/icons/AccessAlarmOutlined';
 import { Analytics, PageHit } from 'expo-analytics';
 import { Emoji } from 'emoji-mart'
+import LocalSongObject from "../../assets/json/africariyoki-4b634-default-rtdb-lyrics-export.json"
 
 TweenOne.plugins.push(SvgMorphPlugin);
 
@@ -116,6 +117,17 @@ class ConnectedGuessSong extends Component {
         analytics.hit(new PageHit('Game'))
             .then(() => console.log("google analytics on game"))
             .catch(e => console.log(e.message));
+
+        //try to load local json file first
+        var LocalSongList = Object.values(LocalSongObject)
+        let songInQuestionIndex = Math.floor(Math.random() * (LocalSongList.length - 0) + 0);
+        console.log("LocalSongList", LocalSongList)
+        this.setState({
+          songs: LocalSongList,
+          songInQuestionIndex: songInQuestionIndex,
+          songInQuestion: LocalSongList[songInQuestionIndex],
+          songsInOption: this.generateSongsInOptions(LocalSongList, LocalSongList[songInQuestionIndex])
+        })
 
         Firebase.getLyrics().then(
             val => {

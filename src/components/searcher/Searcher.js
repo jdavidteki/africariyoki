@@ -12,6 +12,7 @@ import MetaTags from 'react-meta-tags';
 import Sbta from '../sbta/Sbta.js'
 import { Analytics, PageHit } from 'expo-analytics';
 import Suggestions from "../suggestions/Suggestions";
+import LocalSongObject from "../../assets/json/africariyoki-4b634-default-rtdb-lyrics-export.json"
 
 import './Searcher.css';
 class Searcher extends Component {
@@ -68,6 +69,16 @@ class Searcher extends Component {
       })
     }, 500);
 
+    //try to load local json file first
+    var LocalSongList = Object.values(LocalSongObject)
+    this.setState({
+      songs: LocalSongList,
+      songsCopy: LocalSongList,
+      typingEffectSongs: shuffleArray(LocalSongList.map(a => a.turnedOn == 1 ? a.title : '').filter(a => a != '')),
+      songIds: LocalSongList.map(a => a.id),
+    })
+
+    //if there is no internet connection this should atleast work
     Firebase.getLyrics().then(
       val => {
         this.setState({
@@ -79,16 +90,15 @@ class Searcher extends Component {
       }
     )
 
+    var requestOptions = {
+      method: 'GET',
+      redirect: 'follow',
+      mode: 'no-cors'
+    };
     //download all the images for caching purposes
     for(var i = 0; i < 11; i++) {
 
       console.log("downloading background image", i)
-
-      var requestOptions = {
-        method: 'GET',
-        redirect: 'follow',
-        mode: 'no-cors'
-      };
 
       fetch(`https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/searchBackgrounds%2Fbck${i}bck.jpeg?alt=media`, requestOptions)
       .then(response => response.text())
@@ -102,7 +112,6 @@ class Searcher extends Component {
       })
     }, 6000);
   }
-
 
   getRandomBackground(selectedCountry){
     let randomNumber =  Math.floor(Math.random() * 10);

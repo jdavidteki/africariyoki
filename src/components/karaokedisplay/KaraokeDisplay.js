@@ -21,6 +21,7 @@ import { SocialIcon } from 'react-social-icons';
 import Sbta from '../sbta/Sbta.js'
 import { Analytics, PageHit } from 'expo-analytics';
 import CircularProgress from "@material-ui/core/CircularProgress";
+import LocalSongObject from "../../assets/json/africariyoki-4b634-default-rtdb-lyrics-export.json"
 
 import 'react-h5-audio-player/lib/styles.css';
 import "./KaraokeDisplay.css";
@@ -97,6 +98,17 @@ class ConnectedKaraokeDisplay extends Component {
       })
     }, 5000);
 
+    //if no internet service, use this data
+    var currentSongInfo = LocalSongObject[this.props.match.params.id]
+    this.setState({
+      singer: currentSongInfo,
+      animatedTexts: [
+        currentSongInfo.title,
+        currentSongInfo.singer,
+        currentSongInfo.album,
+      ],
+    })
+
     Firebase.getLyricsById(this.props.match.params.id).then(
       val => {
         Firebase.updateNumPlays(this.props.match.params.id, val.numPlays +=1)
@@ -113,6 +125,14 @@ class ConnectedKaraokeDisplay extends Component {
         )
       }
     )
+
+    //if no internet service, use this data
+    var LocalSongList = Object.values(LocalSongObject)
+    this.setState({
+      popularSongs: LocalSongList,
+      nextSongOptions: LocalSongList.filter(v => v.turnedOn == 1),
+      highestNumPlays: this.getHighestNumberOfPlays(LocalSongList)
+    })
 
     Firebase.getLyrics().then(
       val => {
