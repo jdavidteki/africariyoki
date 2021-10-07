@@ -128,23 +128,37 @@ class ConnectedGuessSong extends Component {
           songsInOption: this.generateSongsInOptions(LocalSongList, LocalSongList[songInQuestionIndex])
         })
 
-        Firebase.getLyrics().then(
-            val => {
-                let songInQuestionIndex = Math.floor(Math.random() * (val.length - 0) + 0);
+        //if there are atleast ten yokis downloaded
+        let localYokis = JSON.parse(localStorage.getItem('yokis'));
+        if (localYokis != null && localYokis['yokis'].length >=  10){
+            let localYokisArray = Object.values(localYokis['yokis'])
+            let songInQuestionIndex = Math.floor(Math.random() * (localYokisArray.length - 0) + 0);
 
-                this.setState({
-                  songs: val,
-                  songInQuestionIndex: songInQuestionIndex,
-                  songInQuestion: val[songInQuestionIndex],
-                  songsInOption: this.generateSongsInOptions(val, val[songInQuestionIndex])
-                })
-            }
-        )
+            this.setState({
+                songs: localYokisArray,
+                songInQuestionIndex: songInQuestionIndex,
+                songInQuestion: localYokisArray[songInQuestionIndex],
+                songsInOption: this.generateSongsInOptions(localYokisArray, localYokisArray[songInQuestionIndex])
+            })
+        }else{
+            Firebase.getLyrics().then(
+                val => {
+                    let songInQuestionIndex = Math.floor(Math.random() * (val.length - 0) + 0);
+
+                    this.setState({
+                      songs: val,
+                      songInQuestionIndex: songInQuestionIndex,
+                      songInQuestion: val[songInQuestionIndex],
+                      songsInOption: this.generateSongsInOptions(val, val[songInQuestionIndex])
+                    })
+                }
+            )
+        }
     }
 
     play(){
         if(this.audio != null){
-            this.audio.currentTime = 40;
+            this.audio.currentTime = 50;
             this.audio.play();
             this.setState({audioPaused: false})
 
@@ -156,7 +170,7 @@ class ConnectedGuessSong extends Component {
             )
 
             var int = setInterval(() => {
-                if (this.audio != null && this.audio.currentTime > 40 + levelToPlaySec[this.state.selectedOptionDifficulty.label]) {
+                if (this.audio != null && this.audio.currentTime > 50 + levelToPlaySec[this.state.selectedOptionDifficulty.label]) {
                     this.audio.pause();
                     this.setState({audioPaused: true})
                     clearInterval(int);
@@ -399,7 +413,7 @@ class ConnectedGuessSong extends Component {
                                     <div className="GuessSong-controlMenu">
                                         <Button
                                             className={this.state.audioPaused ? "GuessSong-playArrowIcon" : "GuessSong-playArrowIcon shaking"}
-                                            variant="contained" color="primary" onClick={() => this.play()}
+                                            variant="contained" color="primary" style={{backgroundColor:"#0f750f"}} onClick={() => this.play()}
                                         >
                                             <PlayArrowIcon fontSize="large" />
                                         </Button>

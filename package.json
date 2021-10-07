@@ -68,7 +68,6 @@
     "redux-thunk": "^2.3.0",
     "stripe": "^8.55.0",
     "styled-components": "^5.1.1",
-    "workbox-webpack-plugin": "^6.1.5",
     "workbox-background-sync": "^6.1.5",
     "workbox-broadcast-update": "^6.1.5",
     "workbox-cacheable-response": "^6.1.5",
@@ -80,7 +79,8 @@
     "workbox-range-requests": "^6.1.5",
     "workbox-routing": "^6.1.5",
     "workbox-strategies": "^6.1.5",
-    "workbox-streams": "^6.1.5"
+    "workbox-streams": "^6.1.5",
+    "workbox-webpack-plugin": "^6.1.5"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",

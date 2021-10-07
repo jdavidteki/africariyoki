@@ -3,7 +3,6 @@ import InsertCommentIcon from '@material-ui/icons/InsertComment';
 import CloseIcon from '@material-ui/icons/Close';
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Button from "@material-ui/core/Button";
-import { setDownloadedYokis } from "../../Redux/Actions";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
@@ -25,6 +24,11 @@ class ConnectedYokis extends Component {
     componentDidUpdate(prevProps, prevState){
         if (prevProps.songs !== this.props.songs) {
             this.setState({songs: this.props.songs})
+
+            let localYokis = JSON.parse(localStorage.getItem('yokis'));
+            if (localYokis != null && localYokis['yokis'].length >  0){
+                this.setState({yokis: localYokis['yokis']})
+            }
         }
     }
 
@@ -47,7 +51,6 @@ class ConnectedYokis extends Component {
         if(!this.state.stopUpdating){
             setTimeout(() => {
                 let songId = this.state.songs[this.state.updateSongIndex].id
-                let songTitle = this.state.songs[this.state.updateSongIndex].title
 
                 var requestOptions = {
                   method: 'GET',
@@ -60,9 +63,11 @@ class ConnectedYokis extends Component {
                 .catch(error => console.log('error',error));
 
                 this.setState(previousState => ({
-                    yokis: [...previousState.yokis, songTitle]
+                    yokis: getUniqueListBy([...previousState.yokis, this.state.songs[this.state.updateSongIndex]], 'id')
                 }), ()=>{
-                    this.props.dispatch(setDownloadedYokis(this.state.yokis))
+                    localStorage.setItem('yokis', JSON.stringify({
+                        "yokis": this.state.yokis,
+                    }));
                 });
 
 
@@ -96,8 +101,9 @@ class ConnectedYokis extends Component {
                                 </div>
                                 <div className="Yokis-content">
                                     <div className="Yokis-title">
-                                        <p>update all yokis to enjoy africariyoki offline. </p>
-                                        <p>pls o dont click 'start updating' if you no get better wifi - teinz</p>
+                                        <p className="Yokis-title-super">update all yokis to enjoy africariyoki offline. </p>
+                                        <p className="Yokis-title-sub">pls o, don't click 'start update' if you don't have good internet - teinz</p>
+                                        <p className="Yokis-title-sub">you need to update atleast 10 yokis (200 seconds) to enjoy games</p>
                                     </div>
                                     <div className="Yokis-controlMenu">
                                         <Button
@@ -117,14 +123,14 @@ class ConnectedYokis extends Component {
                                     </div>
                                     <div className="Yokis-updatedSongs">
                                         <div className="Yokis-updateProgress">
-                                            {this.props.yokis.length}/{this.state.songs.length} updated
+                                            {this.state.yokis.length}/{this.state.songs.length} updated
 
                                             {this.state.loadingUpdates &&
                                                 <CircularProgress size={15} />
                                             }
                                         </div>
-                                        {this.props.yokis.map((songTitle, index) =>
-                                            <div key={index}>updated - {songTitle}</div>
+                                        {this.state.yokis.map((song, index) =>
+                                            <div key={index}>updated - {song.title}</div>
                                         )}
                                     </div>
                                 </div>
@@ -137,10 +143,12 @@ class ConnectedYokis extends Component {
     }
 }
 
+function getUniqueListBy(arr, key) {
+    return [...new Map(arr.map(item => [item[key], item])).values()]
+}
+
 const mapStateToProps = state => {
-    return {
-      yokis: state.yokis,
-    };
+    return {};
 };
 
 const Yokis = withRouter(connect(mapStateToProps)(ConnectedYokis));

@@ -70,6 +70,7 @@
 }
 
 .GuessSong-controlMenuInfo{
+    margin-top: 16px;
     display: flex;
 }
 
@@ -167,7 +168,6 @@
     }
 
     .GuessSong-controlMenuInfo{
-        margin-top: 16px;
         flex-wrap: wrap;
     }
 
