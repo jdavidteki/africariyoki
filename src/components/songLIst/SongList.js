@@ -33,7 +33,6 @@ const SongList = (props) => {
             </span>
             <span className="SongList-emptySearch">or you can <span onClick={()=>{props.suggestSong()}} className="SongList-suggestText">suggest</span> a song to us</span>
           </div>
-
       }
     </div>
   )

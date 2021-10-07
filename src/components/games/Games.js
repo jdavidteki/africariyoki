@@ -32,6 +32,9 @@ class Games extends Component {
         return (
             <StyleRoot className="Games">
                 <div className="Games-wrapper">
+                    <p className="Games-instruction" style={styles.bounce}>
+                        to enjoy games, go to home page, click 'yokis' on lower pane and update yokis
+                    </p>
 
                     <div className="Games-guessTheSong" onClick={()=>this.goToGame("guessthesong")} style={styles.bounce}>
                         <div className="Games-gameTitle">

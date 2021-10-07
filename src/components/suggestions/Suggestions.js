@@ -79,7 +79,7 @@ class Suggestions extends Component {
                             <Button
                                 fontSize={'large'}
                                 className={"Suggestions-setGameModel-close"}
-                                style={{ marginTop: 20, width: 100, marginLeft: 200 }}
+                                style={{ marginTop: 20, width: 100, marginLeft: 200, textTransform: 'lowercase'}}
                                 variant="contained"
                                 size="medium"
                                 color="primary"

@@ -5,6 +5,8 @@
   padding: 0;
   margin: 0;
   display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
   .Searcher .MuiInputBase-input,
@@ -70,6 +72,30 @@
     cursor: pointer ;
   }
 
+  .Searcher-lowerPane{
+    display: flex;
+    justify-content: right;
+    padding: 8px 10px;
+    z-index: 9999;
+    width: 100%;
+  }
+
+  .Searcher-lowerPane > *{
+    margin-left: 16px;
+  }
+
+  @media only screen and (max-width: 600px) {
+    .Searcher-lowerPane {
+      width: 100%;
+    }
+  }
+
+  @media only screen and (min-width: 1170px) {
+    .Searcher-lowerPane{
+      max-width: 1170px;
+    }
+  }
+
   .Searcher-openSuggestionModel{
     z-index: 9999;
     position: fixed;
@@ -121,16 +147,6 @@
 
   .ReactFlagsSelect-module_selectBtn__19wW7{
     padding-left: 0;
-  }
-
-  .Searcher
-  .Sbta
-  {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    font-weight: bold;
-    z-index: 999;
   }
 
   .Searcher-typeEffectWrapper {

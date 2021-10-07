@@ -121,7 +121,6 @@ class ConnectedGuessSong extends Component {
         //try to load local json file first
         var LocalSongList = Object.values(LocalSongObject)
         let songInQuestionIndex = Math.floor(Math.random() * (LocalSongList.length - 0) + 0);
-        console.log("LocalSongList", LocalSongList)
         this.setState({
           songs: LocalSongList,
           songInQuestionIndex: songInQuestionIndex,
@@ -139,24 +138,6 @@ class ConnectedGuessSong extends Component {
                   songInQuestion: val[songInQuestionIndex],
                   songsInOption: this.generateSongsInOptions(val, val[songInQuestionIndex])
                 })
-
-                //downloading all songs to be used in game
-                for (var i = 0; i < val.length; i++){
-                  let songId = val[i].id
-
-                  console.log("downloading...", songId)
-
-                  var requestOptions = {
-                    method: 'GET',
-                    redirect: 'follow',
-                    mode: 'no-cors'
-                  };
-
-                  fetch(`https://storage.googleapis.com/africariyoki-4b634.appspot.com/music/${songId}.mp3`, requestOptions)
-                  .then(response => response.text())
-                  .then(result => console.log(result))
-                  .catch(error => console.log('error',error));
-                }
             }
         )
     }
@@ -417,7 +398,7 @@ class ConnectedGuessSong extends Component {
                                     <div>press play to listen to snippet</div>
                                     <div className="GuessSong-controlMenu">
                                         <Button
-                                            class={this.state.audioPaused ? "GuessSong-playArrowIcon" : "GuessSong-playArrowIcon shaking"}
+                                            className={this.state.audioPaused ? "GuessSong-playArrowIcon" : "GuessSong-playArrowIcon shaking"}
                                             variant="contained" color="primary" onClick={() => this.play()}
                                         >
                                             <PlayArrowIcon fontSize="large" />

@@ -10,6 +10,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import blankBack from "./assets/blankBack.jpeg"
 import MetaTags from 'react-meta-tags';
 import Sbta from '../sbta/Sbta.js'
+import Yokis from '../Yokis/Yokis.js'
 import { Analytics, PageHit } from 'expo-analytics';
 import Suggestions from "../suggestions/Suggestions";
 import LocalSongObject from "../../assets/json/africariyoki-4b634-default-rtdb-lyrics-export.json"
@@ -343,7 +344,11 @@ class Searcher extends Component {
             </div>
           }
         </div>
-        <Sbta useDefaultImage={false} imageBckNum={this.state.bckImageNum} />
+
+        <div className="Searcher-lowerPane">
+          <Yokis songs={this.state.songs}/>
+          <Sbta useDefaultImage={false} imageBckNum={this.state.bckImageNum} />
+        </div>
       </div>
     )
   }
