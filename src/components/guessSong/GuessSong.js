@@ -22,7 +22,6 @@ import SvgMorphPlugin from 'rc-tween-one/lib/plugin/SvgMorphPlugin';
 import AccessAlarmOutlinedIcon from '@material-ui/icons/AccessAlarmOutlined';
 import { Analytics, PageHit } from 'expo-analytics';
 import { Emoji } from 'emoji-mart'
-import LocalSongObject from "../../assets/json/africariyoki-4b634-default-rtdb-lyrics-export.json"
 
 TweenOne.plugins.push(SvgMorphPlugin);
 
@@ -118,15 +117,20 @@ class ConnectedGuessSong extends Component {
             .then(() => console.log("google analytics on game"))
             .catch(e => console.log(e.message));
 
-        //try to load local json file first
-        var LocalSongList = Object.values(LocalSongObject)
-        let songInQuestionIndex = Math.floor(Math.random() * (LocalSongList.length - 0) + 0);
-        this.setState({
-          songs: LocalSongList,
-          songInQuestionIndex: songInQuestionIndex,
-          songInQuestion: LocalSongList[songInQuestionIndex],
-          songsInOption: this.generateSongsInOptions(LocalSongList, LocalSongList[songInQuestionIndex])
-        })
+
+        //try to load local songs file first
+        let localSongs = JSON.parse(localStorage.getItem('lyrics'));
+        if (localSongs != null){
+            let localLyrics = localSongs['lyrics']
+            let songInQuestionIndex = Math.floor(Math.random() * (localLyrics.length - 0) + 0);
+
+            this.setState({
+                songs: localLyrics,
+                songInQuestionIndex: songInQuestionIndex,
+                songInQuestion: localLyrics[songInQuestionIndex],
+                songsInOption: this.generateSongsInOptions(localLyrics, localLyrics[songInQuestionIndex])
+            })
+        }
 
         //if there are atleast ten yokis downloaded
         let localYokis = JSON.parse(localStorage.getItem('yokis'));

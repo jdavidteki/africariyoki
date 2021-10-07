@@ -13,7 +13,6 @@ import Sbta from '../sbta/Sbta.js'
 import Yokis from '../Yokis/Yokis.js'
 import { Analytics, PageHit } from 'expo-analytics';
 import Suggestions from "../suggestions/Suggestions";
-import LocalSongObject from "../../assets/json/africariyoki-4b634-default-rtdb-lyrics-export.json"
 
 import './Searcher.css';
 class Searcher extends Component {
@@ -70,14 +69,17 @@ class Searcher extends Component {
       })
     }, 500);
 
-    //try to load local json file first
-    var LocalSongList = Object.values(LocalSongObject)
-    this.setState({
-      songs: LocalSongList,
-      songsCopy: LocalSongList,
-      typingEffectSongs: shuffleArray(LocalSongList.map(a => a.turnedOn == 1 ? a.title : '').filter(a => a != '')),
-      songIds: LocalSongList.map(a => a.id),
-    })
+    //try to load local songs file first
+    let localSongs = JSON.parse(localStorage.getItem('lyrics'));
+    if (localSongs != null){
+      let localLyrics = localSongs['lyrics']
+      this.setState({
+        songs: localLyrics,
+        songsCopy: localLyrics,
+        typingEffectSongs: shuffleArray(localLyrics.map(a => a.turnedOn == 1 ? a.title : '').filter(a => a != '')),
+        songIds: localLyrics.map(a => a.id),
+      })
+    }
 
     //if there is no internet connection this should atleast work
     Firebase.getLyrics().then(
@@ -88,6 +90,10 @@ class Searcher extends Component {
           typingEffectSongs: shuffleArray(val.map(a => a.turnedOn == 1 ? a.title : '').filter(a => a != '')),
           songIds: val.map(a => a.id),
         })
+
+        localStorage.setItem('lyrics', JSON.stringify({
+          "lyrics": val,
+        }));
       }
     )
 
