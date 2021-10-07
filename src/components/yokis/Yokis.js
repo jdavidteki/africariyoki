@@ -3,19 +3,22 @@ import InsertCommentIcon from '@material-ui/icons/InsertComment';
 import CloseIcon from '@material-ui/icons/Close';
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Button from "@material-ui/core/Button";
+import { setDownloadedYokis } from "../../Redux/Actions";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 import "./Yokis.css";
 
-class Yokis extends Component {
+class ConnectedYokis extends Component {
     constructor(props){
         super(props);
         this.state = {
             songs: this.props.songs,
-            yokis: [],
             loadingUpdates: false,
             updateSongIndex: 0,
             stopUpdating: false,
-            updateDownloadCTA: 'start update'
+            updateDownloadCTA: 'start update',
+            yokis: [],
         }
     }
 
@@ -58,7 +61,10 @@ class Yokis extends Component {
 
                 this.setState(previousState => ({
                     yokis: [...previousState.yokis, songTitle]
-                }));
+                }), ()=>{
+                    this.props.dispatch(setDownloadedYokis(this.state.yokis))
+                });
+
 
                 if (this.state.updateSongIndex < this.state.songs.length) {
                     this.downloadYokis();
@@ -111,13 +117,13 @@ class Yokis extends Component {
                                     </div>
                                     <div className="Yokis-updatedSongs">
                                         <div className="Yokis-updateProgress">
-                                            {this.state.yokis.length}/{this.state.songs.length} updated
+                                            {this.props.yokis.length}/{this.state.songs.length} updated
 
                                             {this.state.loadingUpdates &&
                                                 <CircularProgress size={15} />
                                             }
                                         </div>
-                                        {this.state.yokis.map((songTitle, index) =>
+                                        {this.props.yokis.map((songTitle, index) =>
                                             <div key={index}>updated - {songTitle}</div>
                                         )}
                                     </div>
@@ -130,5 +136,13 @@ class Yokis extends Component {
         )
     }
 }
+
+const mapStateToProps = state => {
+    return {
+      yokis: state.yokis,
+    };
+};
+
+const Yokis = withRouter(connect(mapStateToProps)(ConnectedYokis));
 
 export default Yokis;
