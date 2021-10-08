@@ -3,6 +3,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import Button from "@material-ui/core/Button";
 import Firebase from "../../firebase/firebase.js";
 import InsertCommentIcon from '@material-ui/icons/InsertComment';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 import "./Sbta.css";
 
@@ -18,11 +19,16 @@ class Sbta extends Component {
             dateCreated: '',
             useIcon: this.props.useIcon,
             storyAvailable: false,
+            openOnLoad: this.props.openOnLoad,
         }
     }
 
     componentDidMount(){
         this.grabStoryFromFirebase(this.props.imageBckNum)
+
+        if(this.state.openOnLoad){
+            this.setState({showArtDesc: true})
+        }
     }
 
     componentDidUpdate(prevProps, prevState){
@@ -30,6 +36,7 @@ class Sbta extends Component {
             this.grabStoryFromFirebase(this.props.imageBckNum)
         }
     }
+
 
     grabStoryFromFirebase(storyID){
         Firebase.getStoryFromID(storyID).then(val => {
@@ -42,12 +49,9 @@ class Sbta extends Component {
             })
         })
 
-        let imageToUse = storyID
-        if (this.props.useDefaultImage){
-            imageToUse = 1
-        }
+        let randomNumber =  Math.floor(Math.random() * (11 - 1 + 1) + 1); //todo; redo this
         this.setState({
-            imageBck: `https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/searchBackgrounds%2Fbck${imageToUse}bck.jpeg?alt=media`,
+            imageBck: `https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/searchBackgrounds%2Fbck${randomNumber}bck.jpeg?alt=media`,
         })
     }
 
@@ -68,8 +72,13 @@ class Sbta extends Component {
                             <div className="Sbta-artDesc">
                                 <div className="Sbta-artDescWrapper">
                                     <div className="Sbta-closeIcon">
+                                        <Button onClick={() => {
+                                            navigator.clipboard.writeText(window.location.href + '?withsbta=1')
+                                        }}>
+                                            <ContentCopyIcon fontSize="small" style={{ color: '#f7c99e'}} />
+                                        </Button>
                                         <Button onClick={() => this.setState({showArtDesc: false})}>
-                                            <CloseIcon style={{ color: '#f7c99e'}} />
+                                            <CloseIcon fontSize="small" style={{ color: '#f7c99e'}} />
                                         </Button>
                                     </div>
                                     <div className="Sbta-imageStory">

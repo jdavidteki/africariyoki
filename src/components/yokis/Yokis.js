@@ -102,8 +102,10 @@ class ConnectedYokis extends Component {
                                 <div className="Yokis-content">
                                     <div className="Yokis-title">
                                         <p className="Yokis-title-super">update all yokis to enjoy africariyoki offline. </p>
-                                        <p className="Yokis-title-sub">pls o, don't click 'start update' if you don't have good internet - teinz</p>
-                                        <p className="Yokis-title-sub">you need to update atleast 10 yokis (200 seconds) to enjoy games</p>
+                                        <p className="Yokis-title-sub">
+                                            you need to update atleast 10 yokis (200 seconds) to enjoy games.
+                                            pls o, don't click 'start update' if you don't have good internet - teinz
+                                        </p>
                                     </div>
                                     <div className="Yokis-controlMenu">
                                         <Button

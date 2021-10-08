@@ -35,7 +35,7 @@
 	right: 0;
 	top: 80px;
 	margin: 0 auto;
-	height: 80%;
+	height: 75%;
 	background-color: #f7f8e4;
 	width: 80%;
 	border-radius: 5px;
@@ -203,5 +203,10 @@
 	{
 		margin-top: 15px;
 		margin-left: 0;
+	}
+
+	.Yokis-title-sub
+	{
+		text-align: left;
 	}
 }

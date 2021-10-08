@@ -51,6 +51,7 @@ class ConnectedKaraokeDisplay extends Component {
       },
       animatedTexts: [],
       annotationObj: {},
+      openSbtaOnPageLoad: false,
     };
   }
 
@@ -84,6 +85,11 @@ class ConnectedKaraokeDisplay extends Component {
   }
 
   componentDidMount(){
+    let withsbta = getParameterByName('withsbta')
+    if(withsbta != null && withsbta == 1){
+      this.setState({openSbtaOnPageLoad: true})
+    }
+
     const analytics = new Analytics('UA-187038287-1');
     analytics.hit(new PageHit('KaraokeDisplay'))
       .then(() => console.log("karaokeDisplay analytics setup"))
@@ -380,7 +386,7 @@ class ConnectedKaraokeDisplay extends Component {
                 <AlbumIcon className={"KaraokeDisplay-lowerPaneIcon"} style={{ color: this.getColorFromNumPlays(this.state.singer.numPlays) }}  onClick={()=>{this.setState({openSuggestionModel: true})}}/>
                 <SocialIcon bgColor={"#3413f1"} fgColor={"white"} className={"KaraokeDisplay-socialMedia KaraokeDisplay-instagram KaraokeDisplay-lowerPaneIcon"}  url="https://www.instagram.com/africariyoki" />
                 <SocialIcon bgColor={"#3413f1"} fgColor={"white"} className={"KaraokeDisplay-socialMedia KaraokeDisplay-twitter KaraokeDisplay-lowerPaneIcon" }  url="https://www.twitter.com/africariyoki" />
-                <Sbta useDefaultImage={true} useIcon={true} imageBckNum={this.props.match.params.id} />
+                <Sbta openOnLoad={this.state.openSbtaOnPageLoad} useIcon={true} imageBckNum={this.props.match.params.id} />
                 <SearchIcon className={"KaraokeDisplay-lowerPaneIcon"} style={{ color: '#3413f1' }} onClick={()=>{this.setState({openSearcherModel: true})}} />
               </div>
             </div>
@@ -417,6 +423,14 @@ class ConnectedKaraokeDisplay extends Component {
   }
 }
 
+function getParameterByName(name, url = window.location.href) {
+  name = name.replace(/[\[\]]/g, '\\$&');
+  var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+      results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
 
 function getCodeFromCountryName(value) {
   let val = Object.keys(codeToCountries).find(key => codeToCountries[key] === value)

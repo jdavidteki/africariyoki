@@ -33,6 +33,8 @@ class Searcher extends Component {
       countryToBackgroundImage: {},
       bckImageNum: '',
       openSuggestionModel: false,
+      inputPromptMsg: 'kini awa nko loni',
+
     }
   }
 
@@ -42,7 +44,6 @@ class Searcher extends Component {
     if (window.location.href.includes("?/")){
       let actualDestination = window.location.href.split("?/")[1]
 
-      console.log("actualDestination", actualDestination)
       this.props.history.push({
         pathname: "/" + actualDestination
       });
@@ -116,12 +117,40 @@ class Searcher extends Component {
     setInterval( () => {
       this.setState({
         count: (this.state.count+1) % 20,
+        inputPromptMsg: this.getRandomPromptMsg()
       })
     }, 6000);
   }
 
+  getRandomPromptMsg(){
+    let randomNumber =  Math.floor(Math.random() * (9 - 1 + 1) + 1)
+
+    switch(randomNumber) {
+      case 1:
+        return 'wetin we wan sing today'
+      case 2:
+        return 'kini awa nko loni'
+      case 3:
+        return 'kedu ihe anyị na -agụ taa'
+      case 4:
+        return 'me muke rera yau'
+      case 5:
+        return 'tunaimba nini leo'
+      case 6:
+        return 'wat sing ons vandag'
+      case 7:
+        return 'wah we singing today'
+      case 8:
+        return 'sicula ini namhlanje'
+      case 9:
+        return 'tiri kuimba chii nhasi'
+      default:
+        return 'what are we singing today'
+    }
+  }
+
   getRandomBackground(selectedCountry){
-    let randomNumber =  Math.floor(Math.random() * 10);
+    let randomNumber =  Math.floor(Math.random() * (11 - 1 + 1) + 1)
     let backgroundToReturn = ""
     let bckImageNum = ""
 
@@ -290,7 +319,7 @@ class Searcher extends Component {
           <div className="Searcher-inputWrapper">
             <TextField
               className="Searcher-input"
-              label={`${this.state.selectedCode != '' ? ' what do you want to sing from ' + codeToCountries[this.state.selectedCode] + ' today??': 'what do you want to sing today'}???`}
+              label={`${this.state.selectedCode != '' ? ' what do you want to sing from ' + codeToCountries[this.state.selectedCode] + ' today??': this.state.inputPromptMsg}?`}
               variant="outlined"
               onChange={event=>{
                 this.setState({query: event.target.value}, ()=> {

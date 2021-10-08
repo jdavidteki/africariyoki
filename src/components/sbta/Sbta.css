@@ -20,11 +20,16 @@
 	right: 0;
 	top: 80px;
 	margin: 0 auto;
-	height: 80%;
-	background-color: #f7f8e4;
-	width: 80%;
+	height: 100%;
+	width: 100%;
 	border-radius: 5px;
 	z-index: 9999;
+	background:
+		/* top, transparent black, faked with gradient */
+		linear-gradient(
+		rgba(0, 0, 0, 0.7),
+		rgba(0, 0, 0, 0.7)
+		);
 }
 
 .Sbta-closeIcon
@@ -32,13 +37,23 @@
 	position: absolute;
 	right: 0;
 	top: 5px;
+	display: flex;
+}
+
+.Sbta-closeIcon > *
+{
+	margin-left: 8px;
 }
 
 .Sbta-artDescWrapper
 {
 	position: relative;
-	width: 100%;
-	height: 100%;
+	width: 80%;
+	height: 80%;
+	background-color: #f7f8e4;
+	margin-right: auto;
+	margin-left: auto;
+	border-radius: 4px;
 }
 
 .Sbta-imageStory
@@ -111,6 +126,10 @@
     align-items: flex-end;
 }
 
+.Sbta-closeIcon .MuiButtonBase-root.MuiButton-root.MuiButton-text{
+	min-width: 0;
+}
+
 @media only screen and (max-width: 600px) {
 	.Sbta-DescWrapper,
 	.Sbta-ImageDescWrapper
@@ -121,7 +140,6 @@
 	.Sbta-imageStory
 	{
 		flex-direction: column;
-		padding: 15px;
 	}
 
 	.Sbta-image
