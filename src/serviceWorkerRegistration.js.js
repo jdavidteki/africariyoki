@@ -97,7 +97,12 @@ const isLocalhost = Boolean(
       })
       .catch((error) => {
         console.error("Error during service worker registration:", error);
-      });
+    });
+
+    navigator.serviceWorker.addEventListener('message', event => {
+      console.log("data", event.data)
+      // ProgressBar.evalProgress(event.data)
+    })
   }
 
   function checkValidServiceWorker(swUrl, config) {
