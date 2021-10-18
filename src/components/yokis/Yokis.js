@@ -36,9 +36,11 @@ class ConnectedYokis extends Component {
     }
 
     handleUpdatingYokis =  () => {
+        localStorage.removeItem('yokis')
         this.setState({
-            stopUpdating: false,
-            loadingUpdates: true,
+          yokis: [],
+          stopUpdating: false,
+          loadingUpdates: true,
         }, ()=>{this.downloadYokis()})
     }
 
