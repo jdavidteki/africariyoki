@@ -5,10 +5,10 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import AudioPlayer from 'react-h5-audio-player';
-
+import NoSleep from 'nosleep.js';
 import "./Yokis.css";
 
+var noSleep = new NoSleep();
 class ConnectedYokis extends Component {
     constructor(props){
         super(props);
@@ -33,6 +33,14 @@ class ConnectedYokis extends Component {
             this.setState({yokis: localYokis['yokis']})
         }
       }
+    }
+
+    componentDidMount(){
+      noSleep.enable();
+    }
+
+    componentWillUnmount(){
+      noSleep.disable();
     }
 
     handleUpdatingYokis =  () => {
@@ -119,13 +127,15 @@ class ConnectedYokis extends Component {
               }
             )
 
-            this.setState(previousState => ({
-              yokis: getUniqueListBy([...previousState.yokis, this.state.songs[this.state.updateSongIndex]], 'id')
-            }), ()=>{
-              localStorage.setItem('yokis', JSON.stringify({
-                  "yokis": this.state.yokis,
-              }));
-            });
+            if(this.state.songs[this.state.updateSongIndex] != undefined){
+              this.setState(previousState => ({
+                yokis: getUniqueListBy([...previousState.yokis, this.state.songs[this.state.updateSongIndex]], 'id')
+              }), ()=>{
+                localStorage.setItem('yokis', JSON.stringify({
+                    "yokis": this.state.yokis,
+                }));
+              });
+            }
           })
           .catch(error => {
             this.setState(
