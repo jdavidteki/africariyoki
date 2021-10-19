@@ -59,13 +59,83 @@ class ConnectedYokis extends Component {
 
           this.setState({songIdToDownload: songId})
 
-          this.setState(previousState => ({
-            yokis: getUniqueListBy([...previousState.yokis, this.state.songs[this.state.updateSongIndex]], 'id')
-          }), ()=>{
-            localStorage.setItem('yokis', JSON.stringify({
-                "yokis": this.state.yokis,
-            }));
-          });
+          var requestOptions = {
+            method: 'GET',
+            redirect: 'follow',
+          };
+
+          fetch(`https://storage.googleapis.com/africariyoki-4b634.appspot.com/music/${songId}.mp3`, requestOptions)
+          .then(response => {
+            if (!response.ok) {
+              throw Error(response.status+' '+response.statusText)
+            }
+
+            if (!response.body) {
+              throw Error('ReadableStream not yet supported in this browser.')
+            }
+
+            // to access headers, server must send CORS header "Access-Control-Expose-Headers: content-encoding, content-length x-file-size"
+            // server must send custom x-file-size header if gzip or other content-encoding is used
+            const contentEncoding = response.headers.get('content-encoding');
+            const contentLength = response.headers.get(contentEncoding ? 'x-file-size' : 'content-length');
+            if (contentLength === null) {
+              throw Error('Response size header unavailable');
+            }
+
+            const total = parseInt(contentLength, 10);
+            let loaded = 0;
+
+            return new Response(
+              new ReadableStream({
+                start(controller) {
+                  const reader = response.body.getReader();
+
+                  read();
+                  function read() {
+                    reader.read().then(({done, value}) => {
+                      if (done) {
+                        controller.close();
+                        return;
+                      }
+                      loaded += value.byteLength;
+                      controller.enqueue(value);
+                      read();
+                    }).catch(error => {
+                      console.error(error);
+                      controller.error(error)
+                    })
+                  }
+                }
+              })
+            );
+          })
+          .then(response => response.blob())
+          .then(data => {
+            this.setState(
+              {
+                updateSongIndex: this.state.updateSongIndex+1,
+              }, ()=>{
+                this.downloadYokis()
+              }
+            )
+
+            this.setState(previousState => ({
+              yokis: getUniqueListBy([...previousState.yokis, this.state.songs[this.state.updateSongIndex]], 'id')
+            }), ()=>{
+              localStorage.setItem('yokis', JSON.stringify({
+                  "yokis": this.state.yokis,
+              }));
+            });
+          })
+          .catch(error => {
+            this.setState(
+              {
+                updateSongIndex: this.state.updateSongIndex+1,
+              }, ()=>{
+                this.downloadYokis()
+              }
+            )
+          })
 
 
           if(this.state.updateSongIndex + 1 == this.state.songs.length){
@@ -75,45 +145,10 @@ class ConnectedYokis extends Component {
       }
     }
 
-    loadListener = () => {
-      var thisaudio = this.player.audio.current
-
-      thisaudio.addEventListener("progress", () => {
-        if(thisaudio.buffered.length>0){
-          if (Math.round(thisaudio.buffered.end(0)) / Math.round(thisaudio.seekable.end(0)) === 1) {
-            this.setState(
-              {
-                updateSongIndex: this.state.updateSongIndex+1,
-              }, ()=>{
-                this.downloadYokis()
-              }
-            )
-          }
-        }
-      }, false);
-    }
 
     render() {
         return(
           <div className="Yokis">
-            <div className="is-hidden">
-              <AudioPlayer
-                onLoadStart={() => {this.loadListener()}}
-                ref={ref => this.player = ref}
-                muted
-                src={`https://storage.googleapis.com/africariyoki-4b634.appspot.com/music/${this.state.songIdToDownload}.mp3`}
-                onError = {() => {
-                  this.setState(
-                    {
-                      updateSongIndex: this.state.updateSongIndex+1,
-                    }, ()=>{
-                      this.downloadYokis()
-                    }
-                  )
-                }}
-              />
-            </div>
-
               <div className="Yokis-wrapper">
                   <div className="Yokis-icon" onClick={()=>this.setState({showArtDesc: true})}>
                       {this.state.useIcon
