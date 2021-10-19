@@ -52,7 +52,7 @@ registerRoute(
   // Add in any other file extensions or routing criteria as needed.
   ({ url }) =>
     url.origin === self.location.origin && url.pathname.endsWith(".png"), // Customize this strategy as needed, e.g., by changing to CacheFirst.
-  new StaleWhileRevalidate({
+  new CacheFirst({
     cacheName: "images",
     plugins: [
       // Ensure that once this runtime cache reaches a maximum size the
@@ -75,7 +75,7 @@ const matchFunction = ({url, request, event}) => {
 // // precache, in this case same-origin .png requests like those from in public/
 registerRoute(
   matchFunction,
-  new StaleWhileRevalidate({
+  new CacheFirst({
     cacheName: 'songs',
     plugins: [
       new ExpirationPlugin({
