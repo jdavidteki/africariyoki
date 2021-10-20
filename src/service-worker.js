@@ -75,11 +75,11 @@ const matchFunction = ({url, request, event}) => {
 // // precache, in this case same-origin .png requests like those from in public/
 registerRoute(
   matchFunction,
-  new CacheFirst({
+  new StaleWhileRevalidate({
     cacheName: 'songs',
     plugins: [
       new ExpirationPlugin({
-        maxEntries: 60,
+        maxEntries: 1000,
         maxAgeSeconds: 30 * 24 * 60 * 60, // 30 Days
       }),
     ],
