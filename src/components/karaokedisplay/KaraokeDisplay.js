@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import moment from "moment"
 import LRCParser from '../lrcParser/LRCParser';
 import SearchIcon from '@material-ui/icons/Search';
-import Clouds from '../clouds/Clouds'
+import SpaceBackground from '../spaceBackground/SpaceBackground.js'
 import Firebase from "../../firebase/firebase.js";
 import NoSleep from 'nosleep.js';
 import AudioPlayer from 'react-h5-audio-player';
@@ -316,11 +316,8 @@ class ConnectedKaraokeDisplay extends Component {
               <Suggestions />
             </div>
           }
-          <div className="KaraokeDisplay-cloudBackground">
-            <Clouds/>
-            <div className="KaraokeDisplay-twinkling"></div>
-            <div className="KaraokeDisplay-stars"></div>
-          </div>
+
+          <SpaceBackground />
 
           <div className="KaraokeDisplay-container">
 
