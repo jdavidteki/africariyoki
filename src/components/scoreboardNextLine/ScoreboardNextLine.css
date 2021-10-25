@@ -1,0 +1,112 @@
+.ScoreboardNextLine{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 80px;
+}
+
+.ScoreboardNextLine-guessTheSong
+{
+    display: flex;
+    flex-direction: column;
+    height: 100%
+}
+
+.ScoreboardNextLine-title
+{
+    text-align: center;
+    font-size: 32px;
+    color: #6c7204;
+    font-weight: bold;
+}
+
+.ScoreboardNextLine-scoreInfo--beginner,
+.ScoreboardNextLine-scoreInfo--amateur,
+.ScoreboardNextLine-scoreInfo--professional,
+.ScoreboardNextLine-scoreInfo--master
+{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+    transition: ease max-height 2s;
+}
+
+.ScoreboardNextLine-scoreInfoWrapper
+{
+    display: flex;
+}
+
+.ScoreboardNextLine-scoreInfo--title
+{
+    padding: 12px 8px;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    background-color: #6c7204;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.ScoreboardNextLine-arrow--beginner,
+.ScoreboardNextLine-arrow--amateur,
+.ScoreboardNextLine-arrow--professional,
+.ScoreboardNextLine-arrow--master
+{
+    cursor: pointer;
+    transform: rotate(180deg);
+}
+
+.ScoreboardNextLine-arrow--beginner.open,
+.ScoreboardNextLine-arrow--amateur.open,
+.ScoreboardNextLine-arrow--professional.open,
+.ScoreboardNextLine-arrow--master.open
+{
+    transform: rotate(0);
+}
+
+.ScoreboardNextLine-scoreInfo--beginner.open,
+.ScoreboardNextLine-scoreInfo--amateur.open,
+.ScoreboardNextLine-scoreInfo--professional.open,
+.ScoreboardNextLine-scoreInfo--master.open
+{
+    max-height: 65px;
+    overflow: hidden;
+    transition: ease max-height 2s;
+}
+
+
+.ScoreboardNextLine-wrapper
+{
+    width: 80%;
+}
+
+.gray
+{
+    background-color: #f2f2f280;
+}
+
+.ScoreboardNextLine-scoreInfo--subTitle
+{
+    display: flex;
+    width: 100%;
+    background-color: #f7f8e4;
+    font-weight: bold;
+    padding: 4px 0;
+}
+
+
+.ScoreboardNextLine-scoreInfo--subTitle > *,
+.ScoreboardNextLine-scoreInfoWrapper > *
+{
+    width: 20%;
+}
+
+.ScoreboardNextLine-scoreInfo--rank,
+.ScoreboardNextLine-scoreInfo--name,
+.ScoreboardNextLine-scoreInfo--score,
+.ScoreboardNextLine-scoreInfo--duration,
+.ScoreboardNextLine-scoreInfo--averageScore
+{
+    margin-right: 8px;
+}

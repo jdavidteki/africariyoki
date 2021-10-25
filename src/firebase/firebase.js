@@ -16,14 +16,14 @@ class Firebase {
     })
   }
 
-  getLyricsById = (id) =>{
+  getScoreBoardGuessSong = () =>{
     return new Promise(resolve => {
       firebase.database()
-      .ref('/lyrics/'+id)
+      .ref('/scoreboard/')
       .once('value')
       .then(snapshot => {
         if (snapshot.val()){
-          resolve(Object(snapshot.val()))
+          resolve(snapshot.val())
         }else{
           resolve({})
         }
@@ -31,29 +31,27 @@ class Firebase {
     })
   }
 
-  updateHighestScore = (highestscore, difficultyLevel) => {
+  getScoreBoardNextLine = () =>{
     return new Promise(resolve => {
       firebase.database()
-      .ref('/highestscore/' + difficultyLevel + '/')
-      .update(
-        {
-          score: highestscore,
-        },
-      )
-      .then((response) => {
-        console.log("response", response)
-        resolve(true)
-      })
-      .catch(error => {
-        console.log("error", error)
+      .ref('/scoreboardnextline/')
+      .once('value')
+      .then(snapshot => {
+        if (snapshot.val()){
+          resolve(snapshot.val())
+        }else{
+          resolve({})
+        }
       })
     })
   }
 
-  getHighestScore = () => {
+
+
+  getLyricsById = (id) =>{
     return new Promise(resolve => {
       firebase.database()
-      .ref('/highestscore/')
+      .ref('/lyrics/'+id)
       .once('value')
       .then(snapshot => {
         if (snapshot.val()){
@@ -322,6 +320,22 @@ class Firebase {
           isSuccessful: true,
           time: '13:03'
         },
+      )
+      .then((response) => {
+        resolve(true)
+      })
+      .catch(error => {
+        console.warn("error", error)
+      })
+    })
+  }
+
+  updateScoreBoard = (scoreBoardObject) => {
+    return new Promise(resolve => {
+      firebase.database()
+      .ref('/scoreboard/')
+      .set(
+        scoreBoardObject
       )
       .then((response) => {
         resolve(true)

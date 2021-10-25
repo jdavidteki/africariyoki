@@ -1,0 +1,112 @@
+.ScoreboardGuessSong{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 80px;
+}
+
+.ScoreboardGuessSong-guessTheSong
+{
+    display: flex;
+    flex-direction: column;
+    height: 100%
+}
+
+.ScoreboardGuessSong-title
+{
+    text-align: center;
+    font-size: 32px;
+    color: #4cada5;
+    font-weight: bold;
+}
+
+.ScoreboardGuessSong-scoreInfo--beginner,
+.ScoreboardGuessSong-scoreInfo--amateur,
+.ScoreboardGuessSong-scoreInfo--professional,
+.ScoreboardGuessSong-scoreInfo--master
+{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+    transition: ease max-height 2s;
+}
+
+.ScoreboardGuessSong-scoreInfoWrapper
+{
+    display: flex;
+}
+
+.ScoreboardGuessSong-scoreInfo--title
+{
+    padding: 12px 8px;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    background-color: #4cada5;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.ScoreboardGuessSong-arrow--beginner,
+.ScoreboardGuessSong-arrow--amateur,
+.ScoreboardGuessSong-arrow--professional,
+.ScoreboardGuessSong-arrow--master
+{
+    cursor: pointer;
+    transform: rotate(180deg);
+}
+
+.ScoreboardGuessSong-arrow--beginner.open,
+.ScoreboardGuessSong-arrow--amateur.open,
+.ScoreboardGuessSong-arrow--professional.open,
+.ScoreboardGuessSong-arrow--master.open
+{
+    transform: rotate(0);
+}
+
+.ScoreboardGuessSong-scoreInfo--beginner.open,
+.ScoreboardGuessSong-scoreInfo--amateur.open,
+.ScoreboardGuessSong-scoreInfo--professional.open,
+.ScoreboardGuessSong-scoreInfo--master.open
+{
+    max-height: 65px;
+    overflow: hidden;
+    transition: ease max-height 2s;
+}
+
+
+.ScoreboardGuessSong-wrapper
+{
+    width: 80%;
+}
+
+.gray
+{
+    background-color: #f2f2f280;
+}
+
+.ScoreboardGuessSong-scoreInfo--subTitle
+{
+    display: flex;
+    width: 100%;
+    background-color: #f7f8e4;
+    font-weight: bold;
+    padding: 4px 0;
+}
+
+
+.ScoreboardGuessSong-scoreInfo--subTitle > *,
+.ScoreboardGuessSong-scoreInfoWrapper > *
+{
+    width: 20%;
+}
+
+.ScoreboardGuessSong-scoreInfo--rank,
+.ScoreboardGuessSong-scoreInfo--name,
+.ScoreboardGuessSong-scoreInfo--score,
+.ScoreboardGuessSong-scoreInfo--duration,
+.ScoreboardGuessSong-scoreInfo--averageScore
+{
+    margin-right: 8px;
+}

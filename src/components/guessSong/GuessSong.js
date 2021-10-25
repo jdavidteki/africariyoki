@@ -85,9 +85,7 @@ class ConnectedGuessSong extends Component {
           let { eventDate} = this.state
 
         if(eventDate <=0){
-            if(this.state.score > this.state.highestscore){
-                Firebase.updateHighestScore(this.state.score, this.state.selectedOptionDifficulty.label)
-            }
+            this.updateFirebaseScoreBoard()
 
             this.setState({
                 count:0,
@@ -109,6 +107,35 @@ class ConnectedGuessSong extends Component {
             })
         }
         },1000)
+    }
+
+    updateFirebaseScoreBoard(){
+        Firebase.getScoreBoard()
+        .then(val => {
+            let playerName = this.state.selectedOptionPlayerName === "" ? "anonimo" : this.state.selectedOptionPlayerName
+
+            val[this.state.selectedOptionDifficulty.label].push({
+                "rank": 1,
+                "name": playerName,
+                "score": this.state.score,
+                "duration": this.state.selectedOptionDuration.value,
+                "averageScore": this.state.score/this.state.selectedOptionDuration.value,
+            });
+
+            val[this.state.selectedOptionDifficulty.label].sort((a, b) => (a.averageScore < b.averageScore) ? 1 : -1)
+
+            for (let step = 0; step < val[this.state.selectedOptionDifficulty.label].length; step++) {
+                if(step != 0 &&  val[this.state.selectedOptionDifficulty.label][step].averageScore == val[this.state.selectedOptionDifficulty.label][step-1].averageScore){
+                    val[this.state.selectedOptionDifficulty.label][step].rank = val[this.state.selectedOptionDifficulty.label][step-1].rank
+                }else{
+                    val[this.state.selectedOptionDifficulty.label][step].rank = step + 1
+                }
+            }
+
+            val[this.state.selectedOptionDifficulty.label] = val[this.state.selectedOptionDifficulty.label].slice(0, 10)
+
+            Firebase.updateScoreBoard(val)
+        })
     }
 
     componentDidMount(){
@@ -248,11 +275,11 @@ class ConnectedGuessSong extends Component {
 
         //actually start game
         setTimeout(()=>{
-            Firebase.getHighestScore().then(
-                val=> {
-                    this.setState({highestscore: val[this.state.selectedOptionDifficulty.label].score})
-                }
-            )
+
+            Firebase.getScoreBoardGuessSong()
+            .then(val => {
+                this.setState({highestscore: val[this.state.selectedOptionDifficulty.label][0].averageScore})
+            })
 
             this.updateTimer()
             this.setState({
@@ -424,7 +451,7 @@ class ConnectedGuessSong extends Component {
 
                                         <div className="GuessSong-controlMenuInfo">
                                             <div className="GuessSong-controlMenuInfoChild"> <PersonIcon /> {this.state.selectedOptionPlayerName == "" ? 'anonimo' : this.state.selectedOptionPlayerName}</div>
-                                            <div className="GuessSong-controlMenuInfoChild">top score: {this.state.highestscore}</div>
+                                            <div className="GuessSong-controlMenuInfoChild">top score/min: {this.state.highestscore}</div>
                                             <div className="GuessSong-controlMenuInfoChild"><BarChartOutlinedIcon /> {this.state.selectedOptionDifficulty.label}</div>
                                             <div className="GuessSong-controlMenuInfoChild">
                                                 {this.state.answerCorrect

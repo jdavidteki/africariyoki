@@ -1,0 +1,130 @@
+{
+    "beginner":
+    [
+        {
+            "rank": 1,
+            "name": "anonimo",
+            "score": 40,
+            "duration": 2,
+            "averageScore": 20,
+            "sessionRoom": "nairobi"
+        },
+        {
+            "rank": 2,
+            "name": "anonimo",
+            "score": 30,
+            "duration": 2,
+            "averageScore": 15,
+            "sessionRoom": "nairobi"
+        },
+        {
+            "rank": 3,
+            "name": "anonimo",
+            "score": 50,
+            "duration": 2,
+            "averageScore": 25,
+            "sessionRoom": "nairobi"
+        },
+        {
+            "rank": 4,
+            "name": "anonimo",
+            "score": 20,
+            "duration": 2,
+            "averageScore": 10,
+            "sessionRoom": "nairobi"
+        }
+    ],
+    "amateur":
+    [
+        {
+            "rank": 1,
+            "name": "anonimo",
+            "score": 40,
+            "duration": 2,
+            "averageScore": 20
+        },
+        {
+            "rank": 2,
+            "name": "anonimo",
+            "score": 30,
+            "duration": 2,
+            "averageScore": 15
+        },
+        {
+            "rank": 3,
+            "name": "anonimo",
+            "score": 50,
+            "duration": 2,
+            "averageScore": 25
+        },
+        {
+            "rank": 4,
+            "name": "anonimo",
+            "score": 20,
+            "duration": 2,
+            "averageScore": 10
+        }
+    ],
+    "professional":
+    [
+        {
+            "rank": 1,
+            "name": "anonimo",
+            "score": 40,
+            "duration": 2,
+            "averageScore": 20
+        },
+        {
+            "rank": 2,
+            "name": "anonimo",
+            "score": 30,
+            "duration": 2,
+            "averageScore": 15
+        },
+        {
+            "rank": 3,
+            "name": "anonimo",
+            "score": 50,
+            "duration": 2,
+            "averageScore": 25
+        },
+        {
+            "rank": 4,
+            "name": "anonimo",
+            "score": 20,
+            "duration": 2,
+            "averageScore": 10
+        }
+    ],
+    "master":
+    [
+        {
+            "rank": 4,
+            "name": "anonimo",
+            "score": 40,
+            "duration": 2,
+            "averageScore": 20
+        },
+        {
+            "rank": 2,
+            "name": "anonimo",
+            "score": 30,
+            "duration": 2,
+            "averageScore": 15
+        },
+        {
+            "rank": 1,
+            "name": "anonimo",
+            "score": 50,
+            "duration": 2,
+            "averageScore": 25
+        },
+        {
+            "rank": 3,
+            "name": "anonimo",
+            "score": 20,
+            "duration": 2,
+            "averageScore": 10
+        }
+    ]
+}

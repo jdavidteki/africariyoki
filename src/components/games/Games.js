@@ -28,29 +28,37 @@ class Games extends Component {
         });
     }
 
+    goToScoreboard(game){
+        this.props.history.push({
+            pathname: `/${game}/`
+        });
+    }
+
     render() {
         return (
             <StyleRoot className="Games">
                 <div className="Games-wrapper">
-                    <p className="Games-instruction" style={styles.bounce}>
-                        to enjoy games, go to home page, click 'yokis' on lower pane and update yokis
-                    </p>
-
-                    <div className="Games-guessTheSong" onClick={()=>this.goToGame("guessthesong")} style={styles.bounce}>
+                    <div className="Games-guessTheSong" style={styles.bounce}>
                         <div className="Games-gameTitle">
                             guess the song
                         </div>
-                        <div>
+                        <div onClick={()=>this.goToGame("guessthesong")}>
                             listen to snippets of song instrumentals and select correct song from list of options. click to play
+                        </div>
+                        <div className="Games-scoreboard" onClick={()=>this.goToScoreboard("scoreboardguesssong")}>
+                           scores
                         </div>
                     </div>
 
-                    <div className="Games-nextLine" onClick={()=>this.goToGame("cls")} style={styles.bounce}>
+                    <div className="Games-nextLine" style={styles.bounce}>
                         <div className="Games-gameTitle">
                             next line
                         </div>
-                        <div>
+                        <div onClick={()=>this.goToGame("cls")}>
                             select the next line of your favourite songs. click to play
+                        </div>
+                        <div className="Games-scoreboard" onClick={()=>this.goToScoreboard("scoreboardnextline")}>
+                           scores
                         </div>
                     </div>
                 </div>

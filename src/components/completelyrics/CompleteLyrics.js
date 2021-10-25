@@ -230,11 +230,10 @@ class ConnectedCompleteLyrics extends Component {
 
         //actually start game
         setTimeout(()=>{
-            Firebase.getHighestScore().then(
-                val=> {
-                    this.setState({highestscore: val[this.state.selectedOptionDifficulty.label].score})
-                }
-            )
+            Firebase.getScoreBoardNextLine()
+            .then(val => {
+                this.setState({highestscore: val[this.state.selectedOptionDifficulty.label][0].averageScore})
+            })
 
             this.updateTimer()
             this.setState({
@@ -430,7 +429,7 @@ class ConnectedCompleteLyrics extends Component {
                                         </Button>
                                         <div className="CompleteLyrics-controlMenuInfo">
                                             <div className="CompleteLyrics-controlMenuInfoChild"> <PersonIcon /> {this.state.selectedOptionPlayerName == "" ? 'anonimo' : this.state.selectedOptionPlayerName}</div>
-                                            <div className="CompleteLyrics-controlMenuInfoChild">top score: {this.state.highestscore}</div>
+                                            <div className="CompleteLyrics-controlMenuInfoChild">top score/min: {this.state.highestscore}</div>
                                             <div className="CompleteLyrics-controlMenuInfoChild"><BarChartOutlinedIcon /> {this.state.selectedOptionDifficulty.label}</div>
                                             <div className="CompleteLyrics-controlMenuInfoChild">
                                                 {this.state.answerCorrect

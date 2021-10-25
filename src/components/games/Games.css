@@ -22,9 +22,10 @@
 .Games-guessTheSong{
     background-color: #1edada;
     border-radius: 4px;
-    padding: 16px;
+    padding: 30px;
     transition: background-color 0.25s ease-in;
     margin: 16px 8px;
+    position: relative;
 }
 
 .Games-nextLine:hover,
@@ -42,6 +43,16 @@
 {
     font-size: 32px;
     font-weight: bold;
+}
+
+.Games-scoreboard
+{
+    position: absolute;
+    bottom: 3px;
+    right: 10px;
+    color: black;
+    font-weight: bold;
+    z-index: 99;
 }
 
 /* smaller screens */
