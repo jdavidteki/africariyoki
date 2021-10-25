@@ -330,10 +330,26 @@ class Firebase {
     })
   }
 
-  updateScoreBoard = (scoreBoardObject) => {
+  updateScoreBoardGuessSong = (scoreBoardObject) => {
     return new Promise(resolve => {
       firebase.database()
       .ref('/scoreboard/')
+      .set(
+        scoreBoardObject
+      )
+      .then((response) => {
+        resolve(true)
+      })
+      .catch(error => {
+        console.warn("error", error)
+      })
+    })
+  }
+
+  updateScoreBoardNextLine = (scoreBoardObject) => {
+    return new Promise(resolve => {
+      firebase.database()
+      .ref('/scoreboardnextline/')
       .set(
         scoreBoardObject
       )

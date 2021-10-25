@@ -1,3 +1,4 @@
+
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -110,7 +111,7 @@ class ConnectedGuessSong extends Component {
     }
 
     updateFirebaseScoreBoard(){
-        Firebase.getScoreBoard()
+        Firebase.getScoreBoardGuessSong()
         .then(val => {
             let playerName = this.state.selectedOptionPlayerName === "" ? "anonimo" : this.state.selectedOptionPlayerName
 
@@ -134,7 +135,7 @@ class ConnectedGuessSong extends Component {
 
             val[this.state.selectedOptionDifficulty.label] = val[this.state.selectedOptionDifficulty.label].slice(0, 10)
 
-            Firebase.updateScoreBoard(val)
+            Firebase.updateScoreBoardGuessSong(val)
         })
     }
 
