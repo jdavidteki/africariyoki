@@ -39,7 +39,7 @@ class Games extends Component {
             <StyleRoot className="Games">
                 <div className="Games-wrapper">
                     <div className="Games-guessTheSong" style={styles.bounce}>
-                        <div className="Games-gameTitle">
+                        <div onClick={()=>this.goToGame("guessthesong")} className="Games-gameTitle">
                             guess the song
                         </div>
                         <div onClick={()=>this.goToGame("guessthesong")}>
@@ -51,7 +51,7 @@ class Games extends Component {
                     </div>
 
                     <div className="Games-nextLine" style={styles.bounce}>
-                        <div className="Games-gameTitle">
+                        <div onClick={()=>this.goToGame("cls")} className="Games-gameTitle">
                             next line
                         </div>
                         <div onClick={()=>this.goToGame("cls")}>
