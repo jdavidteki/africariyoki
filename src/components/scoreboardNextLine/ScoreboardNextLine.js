@@ -1,20 +1,10 @@
 
 import React, { Component } from 'react';
-import { bounce } from 'react-animations'
-import Radium, {StyleRoot} from 'radium';
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Firebase from "../../firebase/firebase.js";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 import './ScoreboardNextLine.css';
-
-const styles = {
-    bounce: {
-      animation: 'x 10s',
-      animationName: Radium.keyframes(bounce, 'bounce')
-    }
-  }
-
 class ScoreboardNextLine extends Component {
     constructor(props){
         super(props);
@@ -56,7 +46,7 @@ class ScoreboardNextLine extends Component {
     render() {
         if(Object.keys(this.state.scores).length > 0){
             return (
-                <StyleRoot className="ScoreboardNextLine">
+                <div className="ScoreboardNextLine">
                     <div className="ScoreboardNextLine-wrapper">
                         <div className="ScoreboardNextLine-guessTheSong">
                             <div className="ScoreboardNextLine-title">
@@ -128,7 +118,7 @@ class ScoreboardNextLine extends Component {
                             </div>
                         </div>
                     </div>
-                </StyleRoot>
+                </div>
             );
         }else{
             return(

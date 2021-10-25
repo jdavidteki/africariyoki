@@ -1,19 +1,10 @@
 
 import React, { Component } from 'react';
-import { bounce } from 'react-animations'
-import Radium, {StyleRoot} from 'radium';
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Firebase from "../../firebase/firebase.js";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 import './ScoreboardGuessSong.css';
-
-const styles = {
-    bounce: {
-      animation: 'x 10s',
-      animationName: Radium.keyframes(bounce, 'bounce')
-    }
-  }
 
 class ScoreboardGuessSong extends Component {
     constructor(props){
@@ -56,7 +47,7 @@ class ScoreboardGuessSong extends Component {
     render() {
         if(Object.keys(this.state.scores).length > 0){
             return (
-                <StyleRoot className="ScoreboardGuessSong">
+                <div className="ScoreboardGuessSong">
                     <div className="ScoreboardGuessSong-wrapper">
                         <div className="ScoreboardGuessSong-guessTheSong">
                             <div className="ScoreboardGuessSong-title">
@@ -128,7 +119,7 @@ class ScoreboardGuessSong extends Component {
                             </div>
                         </div>
                     </div>
-                </StyleRoot>
+                </div>
             );
         }else{
             return(

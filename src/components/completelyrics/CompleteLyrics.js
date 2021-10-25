@@ -118,7 +118,7 @@ class ConnectedCompleteLyrics extends Component {
                 "name": playerName,
                 "score": this.state.score,
                 "duration": this.state.selectedOptionDuration.value,
-                "averageScore": this.state.score/this.state.selectedOptionDuration.value,
+                "averageScore": (this.state.score/this.state.selectedOptionDuration.value).toFixed(2),
             });
 
             val[this.state.selectedOptionDifficulty.label].sort((a, b) => (a.averageScore < b.averageScore) ? 1 : -1)
