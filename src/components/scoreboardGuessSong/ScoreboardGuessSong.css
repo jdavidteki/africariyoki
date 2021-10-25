@@ -2,7 +2,8 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    margin-top: 80px;
+    padding-top: 80px;
+    background-color: #4cada5;
 }
 
 .ScoreboardGuessSong-guessTheSong
@@ -16,7 +17,7 @@
 {
     text-align: center;
     font-size: 32px;
-    color: #4cada5;
+    color: white;
     font-weight: bold;
 }
 
@@ -70,7 +71,7 @@
 .ScoreboardGuessSong-scoreInfo--professional.open,
 .ScoreboardGuessSong-scoreInfo--master.open
 {
-    max-height: 65px;
+    max-height: 62px;
     overflow: hidden;
     transition: ease max-height 2s;
 }
@@ -100,6 +101,7 @@
 .ScoreboardGuessSong-scoreInfoWrapper > *
 {
     width: 20%;
+    margin-left: 8px;
 }
 
 .ScoreboardGuessSong-scoreInfo--rank,
@@ -108,5 +110,5 @@
 .ScoreboardGuessSong-scoreInfo--duration,
 .ScoreboardGuessSong-scoreInfo--averageScore
 {
-    margin-right: 8px;
+    margin-left: 8px;
 }
