@@ -14,11 +14,16 @@
   color: #3413f1;
   font-weight: 600;
   font-size: 22px;
+  margin-bottom: 12px;
 }
 
 .LRCParser-nextLine,
 .LRCParser-previousLine {
   font-size: 13px;
+  margin-bottom: 12px;
+  height: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .LRCParser-containerWrapper{
