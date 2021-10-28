@@ -58,8 +58,13 @@
 }
 
 .GuessSong .Song-title{
-    margin-right: 18px;
+    margin-right: 24px;
 }
+
+.GuessSong .Song{
+    justify-content: start;
+}
+
 
 .GuessSong-gameOption{
     padding: 15px 0;
