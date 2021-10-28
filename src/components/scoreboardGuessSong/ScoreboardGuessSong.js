@@ -76,7 +76,7 @@ class ScoreboardGuessSong extends Component {
                                 </div>
                                 {this.scoreSubTitiles()}
                                 {this.state.scores.amateur.map((scoreInfo, index) =>
-                                    <div className={index % 2 != 0 ? "ScoreboardGuessSong-scoreInfoWrapper gray" : "ScoreboardGuessSong-scoreInfoWrapper"} key={scoreInfo.rank}>
+                                    <div className={index % 2 != 0 ? "ScoreboardGuessSong-scoreInfoWrapper gray" : "ScoreboardGuessSong-scoreInfoWrapper"} key={index}>
                                         <div className="ScoreboardGuessSong-scoreInfo--rank">{scoreInfo.rank}</div>
                                         <div className="ScoreboardGuessSong-scoreInfo--name">{scoreInfo.name} </div>
                                         <div className="ScoreboardGuessSong-scoreInfo--score">{scoreInfo.score} </div>
@@ -92,7 +92,7 @@ class ScoreboardGuessSong extends Component {
                                 </div>
                                 {this.scoreSubTitiles()}
                                 {this.state.scores.professional.map((scoreInfo, index) =>
-                                    <div className={index % 2 != 0 ? "ScoreboardGuessSong-scoreInfoWrapper gray" : "ScoreboardGuessSong-scoreInfoWrapper"} key={scoreInfo.rank}>
+                                    <div className={index % 2 != 0 ? "ScoreboardGuessSong-scoreInfoWrapper gray" : "ScoreboardGuessSong-scoreInfoWrapper"} key={index}>
                                         <div className="ScoreboardGuessSong-scoreInfo--rank">{scoreInfo.rank}</div>
                                         <div className="ScoreboardGuessSong-scoreInfo--name">{scoreInfo.name} </div>
                                         <div className="ScoreboardGuessSong-scoreInfo--score">{scoreInfo.score} </div>
@@ -108,7 +108,7 @@ class ScoreboardGuessSong extends Component {
                                 </div>
                                 {this.scoreSubTitiles()}
                                 {this.state.scores.master.map((scoreInfo, index) =>
-                                    <div className={index % 2 != 0 ? "ScoreboardGuessSong-scoreInfoWrapper gray" : "ScoreboardGuessSong-scoreInfoWrapper"} key={scoreInfo.rank}>
+                                    <div className={index % 2 != 0 ? "ScoreboardGuessSong-scoreInfoWrapper gray" : "ScoreboardGuessSong-scoreInfoWrapper"} key={index}>
                                         <div className="ScoreboardGuessSong-scoreInfo--rank">{scoreInfo.rank}</div>
                                         <div className="ScoreboardGuessSong-scoreInfo--name">{scoreInfo.name} </div>
                                         <div className="ScoreboardGuessSong-scoreInfo--score">{scoreInfo.score} </div>

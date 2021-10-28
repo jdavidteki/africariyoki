@@ -120,16 +120,19 @@ class ConnectedGuessSong extends Component {
                 "name": playerName,
                 "score": this.state.score,
                 "duration": this.state.selectedOptionDuration.value,
-                "averageScore": (this.state.score/this.state.selectedOptionDuration.value).toFixed(2),
+                "averageScore": Number((this.state.score/this.state.selectedOptionDuration.value).toFixed(2)),
             });
 
             val[this.state.selectedOptionDifficulty.label].sort((a, b) => (a.averageScore < b.averageScore) ? 1 : -1)
 
             for (let step = 0; step < val[this.state.selectedOptionDifficulty.label].length; step++) {
-                if(step != 0 &&  val[this.state.selectedOptionDifficulty.label][step].averageScore == val[this.state.selectedOptionDifficulty.label][step-1].averageScore){
-                    val[this.state.selectedOptionDifficulty.label][step].rank = val[this.state.selectedOptionDifficulty.label][step-1].rank
-                }else{
-                    val[this.state.selectedOptionDifficulty.label][step].rank = step + 1
+                if(val[this.state.selectedOptionDifficulty.label][step]){
+                    console.log("val[this.", step, this.state.selectedOptionDifficulty.label, val[this.state.selectedOptionDifficulty.label].length)
+                    if(step > 0 && val[this.state.selectedOptionDifficulty.label][step].averageScore == val[this.state.selectedOptionDifficulty.label][step-1].averageScore){
+                        val[this.state.selectedOptionDifficulty.label][step].rank = val[this.state.selectedOptionDifficulty.label][step-1].rank
+                    }else{
+                        val[this.state.selectedOptionDifficulty.label][step].rank = step + 1
+                    }
                 }
             }
 
