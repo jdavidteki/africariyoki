@@ -50,6 +50,9 @@ const levelToPlaySec = {
     "master": 2.5,
 }
 
+const startTimes = [40, 50, 60, 65, 70, 80];
+const selectedStartTime = Math.floor(Math.random() * startTimes.length);
+
 class ConnectedGuessSong extends Component {
 
     state = {
@@ -127,7 +130,6 @@ class ConnectedGuessSong extends Component {
 
             for (let step = 0; step < val[this.state.selectedOptionDifficulty.label].length; step++) {
                 if(val[this.state.selectedOptionDifficulty.label][step]){
-                    console.log("val[this.", step, this.state.selectedOptionDifficulty.label, val[this.state.selectedOptionDifficulty.label].length)
                     if(step > 0 && val[this.state.selectedOptionDifficulty.label][step].averageScore == val[this.state.selectedOptionDifficulty.label][step-1].averageScore){
                         val[this.state.selectedOptionDifficulty.label][step].rank = val[this.state.selectedOptionDifficulty.label][step-1].rank
                     }else{
@@ -193,7 +195,7 @@ class ConnectedGuessSong extends Component {
 
     play(){
         if(this.audio != null){
-            this.audio.currentTime = 50;
+            this.audio.currentTime = selectedStartTime
             this.audio.play();
             this.setState({audioPaused: false})
 
@@ -205,7 +207,7 @@ class ConnectedGuessSong extends Component {
             )
 
             var int = setInterval(() => {
-                if (this.audio != null && this.audio.currentTime > 50 + levelToPlaySec[this.state.selectedOptionDifficulty.label]) {
+                if (this.audio != null && this.audio.currentTime > selectedStartTime + levelToPlaySec[this.state.selectedOptionDifficulty.label]) {
                     this.audio.pause();
                     this.setState({audioPaused: true})
                     clearInterval(int);
