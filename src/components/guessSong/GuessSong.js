@@ -50,7 +50,7 @@ const levelToPlaySec = {
     "master": 2.5,
 }
 
-const startTimes = [40, 50, 60, 65, 70, 80];
+const startTimes = [40, 45, 50, 55, 60, 65, 70];
 const selectedStartTime = Math.floor(Math.random() * startTimes.length);
 
 class ConnectedGuessSong extends Component {
