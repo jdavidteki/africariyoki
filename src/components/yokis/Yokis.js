@@ -180,8 +180,8 @@ class ConnectedYokis extends Component {
                                   <div className="Yokis-title">
                                       <p className="Yokis-title-super">update all yokis to enjoy africariyoki offline. </p>
                                       <p className="Yokis-title-sub">
-                                          you need to update atleast 10 yokis (200 seconds) to enjoy games.
-                                          pls o, don't click 'start update' if you don't have good internet - teinz
+                                          you need to update atleast 10 yokis to enjoy games.
+                                          if you ever clear your browser (chrome) cache, you will need to download yokis again.
                                       </p>
                                   </div>
                                   <div className="Yokis-controlMenu">
@@ -202,11 +202,9 @@ class ConnectedYokis extends Component {
                                   </div>
                                   <div className="Yokis-updatedSongs">
                                       <div className="Yokis-updateProgress">
-                                          {this.state.yokis.length}/{this.state.songs.length} updated
-
-                                          {this.state.loadingUpdates &&
-                                              <CircularProgress size={15} />
-                                          }
+                                        {this.state.loadingUpdates &&
+                                          <CircularProgress size={15} />
+                                        }
                                       </div>
                                       {this.state.yokis.map((song, index) =>
                                           <div key={index}>updated - {song.title}</div>
