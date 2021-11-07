@@ -11,6 +11,7 @@ import blankBack from "./assets/blankBack.jpeg"
 import MetaTags from 'react-meta-tags';
 import Sbta from '../sbta/Sbta.js'
 import Yokis from '../Yokis/Yokis.js'
+import YokiPhone from '../YokiPhone/YokiPhone.js'
 import { Analytics, PageHit } from 'expo-analytics';
 import Suggestions from "../suggestions/Suggestions";
 import { SocialIcon } from 'react-social-icons';
