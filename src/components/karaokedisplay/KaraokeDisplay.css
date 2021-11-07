@@ -120,8 +120,9 @@
     align-items: center;
   }
 
-  .KaraokeDisplay-openSuggestionModel-close,
-  .KaraokeDisplay-openSearcherModel-close{
+  .KaraokeDisplay-openCopyCliboardModal-close,
+  .KaraokeDisplay-openSuggestionModal-close,
+  .KaraokeDisplay-openSearcherModal-close{
     display: flex;
     justify-self: left;
     max-height: 40px;
@@ -129,8 +130,9 @@
     margin-bottom: 5px;
   }
 
-  .KaraokeDisplay-openSuggestionModel-close:hover,
-  .KaraokeDisplay-openSearcherModel-close:hover{
+  .KaraokeDisplay-openCopyCliboardModal-close:hover,
+  .KaraokeDisplay-openSuggestionModal-close:hover,
+  .KaraokeDisplay-openSearcherModal-close:hover{
     fill: #3413f1;
     cursor: pointer ;
   }
@@ -141,8 +143,19 @@
     box-shadow: none;
   }
 
-  .KaraokeDisplay-openSuggestionModel,
-  .KaraokeDisplay-openSearcherModel{
+  .KaraokeDisplay-openCopyCliboardModal-content
+  {
+    background-color: #f7f8e4;
+    padding: 16px;
+    margin: auto;
+    font-weight: bold;
+    color: #3413f1;
+    border-radius: 4px;
+  }
+
+  .KaraokeDisplay-openCopyCliboardModal,
+  .KaraokeDisplay-openSuggestionModal,
+  .KaraokeDisplay-openSearcherModal{
     z-index: 99;
     position: fixed;
     display: flex;
@@ -224,8 +237,9 @@
     }
 
   @media only screen and (max-width: 600px) {
-    .KaraokeDisplay-openSuggestionModel,
-    .KaraokeDisplay-openSearcherModel{
+    .KaraokeDisplay-openCopyCliboardModal,
+    .KaraokeDisplay-openSuggestionModal,
+    .KaraokeDisplay-openSearcherModal{
       padding-top: 20%;
     }
     .KaraokeDisplay .Lyrics-container {

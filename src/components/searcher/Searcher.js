@@ -13,6 +13,7 @@ import Sbta from '../sbta/Sbta.js'
 import Yokis from '../Yokis/Yokis.js'
 import { Analytics, PageHit } from 'expo-analytics';
 import Suggestions from "../suggestions/Suggestions";
+import { SocialIcon } from 'react-social-icons';
 
 import './Searcher.css';
 class Searcher extends Component {
@@ -32,7 +33,7 @@ class Searcher extends Component {
       selectedCode: '',
       countryToBackgroundImage: {},
       bckImageNum: '',
-      openSuggestionModel: false,
+      openSuggestionModal: false,
       inputPromptMsg: 'kini awa nko loni',
 
     }
@@ -277,7 +278,7 @@ class Searcher extends Component {
 
   suggestSong=() => {
     this.setState({
-      openSuggestionModel: true,
+      openSuggestionModal: true,
     })
   }
 
@@ -291,13 +292,13 @@ class Searcher extends Component {
   render() {
     return (
       <div className="Searcher">
-        {this.state.openSuggestionModel &&
-          <div className="Searcher-openSuggestionModel">
+        {this.state.openSuggestionModal &&
+          <div className="Searcher-openSuggestionModal">
             <CloseIcon
               fontSize={'large'}
-              className={"Searcher-openSuggestionModel-close"}
+              className={"Searcher-openSuggestionModal-close"}
               style={{ color: '#f7f8e4' }}
-              onClick={()=>{    this.setState({openSuggestionModel: false})}}
+              onClick={()=>{    this.setState({openSuggestionModal: false})}}
             />
             <Suggestions />
           </div>
@@ -381,8 +382,14 @@ class Searcher extends Component {
         </div>
 
         <div className="Searcher-lowerPane">
-          <Yokis songs={this.state.songs}/>
-          <Sbta useDefaultImage={false} imageBckNum={this.state.bckImageNum} />
+          <div className="Searcher-lowerPane--leftPane">
+            <SocialIcon bgColor={"#3413f1"} fgColor={"white"} className={"Searcher-socialMedia Searcher-instagram Searcher-lowerPaneIcon"}  url="https://www.instagram.com/africariyoki/" />
+            <SocialIcon bgColor={"#3413f1"} fgColor={"white"} className={"Searcher-socialMedia Searcher-twitter Searcher-lowerPaneIcon" }  url="https://www.twitter.com/africariyoki/" />
+          </div>
+          <div className="Searcher-lowerPane--rightPane">
+            <Yokis songs={this.state.songs}/>
+            <Sbta useDefaultImage={false} imageBckNum={this.state.bckImageNum} />
+          </div>
         </div>
       </div>
     )

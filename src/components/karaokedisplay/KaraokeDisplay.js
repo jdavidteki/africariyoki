@@ -21,6 +21,7 @@ import { SocialIcon } from 'react-social-icons';
 import Sbta from '../sbta/Sbta.js'
 import { Analytics, PageHit } from 'expo-analytics';
 import CircularProgress from "@material-ui/core/CircularProgress";
+import ShareIcon from '@mui/icons-material/Share';
 
 import 'react-h5-audio-player/lib/styles.css';
 import "./KaraokeDisplay.css";
@@ -40,8 +41,9 @@ class ConnectedKaraokeDisplay extends Component {
       popularSongs:[],
       nextSongOptions: ['1qgiNdSGx-c'],
       motivator: 'less gerriiitt',
-      openSearcherModel: false,
-      openSuggestionModel: false,
+      openSearcherModal: false,
+      openCopyCliboardModal: false,
+      openSuggestionModal: false,
       smileyToSet: 'smiley',
       singer: {
         audiourl: '',
@@ -282,6 +284,11 @@ class ConnectedKaraokeDisplay extends Component {
     this.setState({motivator: motivator, smileyToSet: smileyToSet})
   }
 
+  copyURL = () => {
+    navigator.clipboard.writeText(window.location.href)
+    this.setState({openCopyCliboardModal:true})
+  }
+
   render() {
     if (this.state.singer.title != "") {
       return (
@@ -294,29 +301,41 @@ class ConnectedKaraokeDisplay extends Component {
             <meta http-equiv='expires' content='0' />
             <meta http-equiv='pragma' content='no-cache' />
           </MetaTags>
-          {this.state.openSearcherModel &&
-            <div className="KaraokeDisplay-openSearcherModel">
+          {this.state.openSearcherModal &&
+            <div className="KaraokeDisplay-openSearcherModal">
               <CloseIcon
                 fontSize={'large'}
-                className={"KaraokeDisplay-openSearcherModel-close"}
+                className={"KaraokeDisplay-openSearcherModal-close"}
                 style={{ color: '#f7f8e4' }}
-                onClick={()=>{this.setState({openSearcherModel: false})}}
+                onClick={()=>{this.setState({openSearcherModal: false})}}
               />
               <Searcher />
             </div>
           }
-          {this.state.openSuggestionModel &&
-            <div className="KaraokeDisplay-openSuggestionModel">
+          {this.state.openSuggestionModal &&
+            <div className="KaraokeDisplay-openSuggestionModal">
               <CloseIcon
                 fontSize={'large'}
-                className={"KaraokeDisplay-openSuggestionModel-close"}
+                className={"KaraokeDisplay-openSuggestionModal-close"}
                 style={{ color: '#f7f8e4' }}
-                onClick={()=>{this.setState({openSuggestionModel: false})}}
+                onClick={()=>{this.setState({openSuggestionModal: false})}}
               />
               <Suggestions />
             </div>
           }
-
+          {this.state.openCopyCliboardModal &&
+            <div className="KaraokeDisplay-openCopyCliboardModal">
+              <CloseIcon
+                fontSize={'large'}
+                className={"KaraokeDisplay-openCopyCliboardModal-close"}
+                style={{ color: '#f7f8e4' }}
+                onClick={()=>{this.setState({openCopyCliboardModal: false})}}
+              />
+              <div className="KaraokeDisplay-openCopyCliboardModal-content">
+                yoki copied to clipboard. goan and share!
+              </div>
+            </div>
+          }
           <SpaceBackground />
 
           <div className="KaraokeDisplay-container">
@@ -380,11 +399,12 @@ class ConnectedKaraokeDisplay extends Component {
                     />
                   )}
                 </div>
-                <AlbumIcon className={"KaraokeDisplay-lowerPaneIcon"} style={{ color: this.getColorFromNumPlays(this.state.singer.numPlays) }}  onClick={()=>{this.setState({openSuggestionModel: true})}}/>
+                <AlbumIcon className={"KaraokeDisplay-lowerPaneIcon"} style={{ color: this.getColorFromNumPlays(this.state.singer.numPlays) }}  onClick={()=>{this.setState({openSuggestionModal: true})}}/>
                 <SocialIcon bgColor={"#3413f1"} fgColor={"white"} className={"KaraokeDisplay-socialMedia KaraokeDisplay-instagram KaraokeDisplay-lowerPaneIcon"}  url="https://www.instagram.com/africariyoki" />
                 <SocialIcon bgColor={"#3413f1"} fgColor={"white"} className={"KaraokeDisplay-socialMedia KaraokeDisplay-twitter KaraokeDisplay-lowerPaneIcon" }  url="https://www.twitter.com/africariyoki" />
                 <Sbta openOnLoad={this.state.openSbtaOnPageLoad} useIcon={true} imageBckNum={this.props.match.params.id} />
-                <SearchIcon className={"KaraokeDisplay-lowerPaneIcon"} style={{ color: '#3413f1' }} onClick={()=>{this.setState({openSearcherModel: true})}} />
+                <ShareIcon className={"KaraokeDisplay-lowerPaneIcon"} style={{ color: '#3413f1' }} onClick={() => {this.copyURL()}} fontSize="small"/>
+                <SearchIcon className={"KaraokeDisplay-lowerPaneIcon"} style={{ color: '#3413f1' }} onClick={()=>{this.setState({openSearcherModal: true})}} />
               </div>
             </div>
             <div className="KaraokeDisplay-bottomContainer">
