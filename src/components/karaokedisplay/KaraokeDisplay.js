@@ -356,7 +356,7 @@ class ConnectedKaraokeDisplay extends Component {
 
               {this.state.showTimer &&
                 <div className="KaraokeDisplay-showTimer">
-                  <span>i'm playing something you will like in... {` ${this.state.secs}`} sec(s)</span>
+                  <span>playing a yoki you will like in {` ${this.state.secs}`}</span>
                 </div>
               }
 
