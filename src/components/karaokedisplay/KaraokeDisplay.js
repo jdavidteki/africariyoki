@@ -400,8 +400,8 @@ class ConnectedKaraokeDisplay extends Component {
                   )}
                 </div>
                 <AlbumIcon className={"KaraokeDisplay-lowerPaneIcon"} style={{ color: this.getColorFromNumPlays(this.state.singer.numPlays) }}  onClick={()=>{this.setState({openSuggestionModal: true})}}/>
-                <SocialIcon bgColor={"#3413f1"} fgColor={"white"} className={"KaraokeDisplay-socialMedia KaraokeDisplay-instagram KaraokeDisplay-lowerPaneIcon"}  url="https://www.instagram.com/africariyoki" />
-                <SocialIcon bgColor={"#3413f1"} fgColor={"white"} className={"KaraokeDisplay-socialMedia KaraokeDisplay-twitter KaraokeDisplay-lowerPaneIcon" }  url="https://www.twitter.com/africariyoki" />
+                <SocialIcon target="_blank" bgColor={"#3413f1"} fgColor={"white"} className={"KaraokeDisplay-socialMedia KaraokeDisplay-instagram KaraokeDisplay-lowerPaneIcon"}  url="https://www.instagram.com/africariyoki/?hl=en" />
+                <SocialIcon target="_blank" bgColor={"#3413f1"} fgColor={"white"} className={"KaraokeDisplay-socialMedia KaraokeDisplay-youtube KaraokeDisplay-lowerPaneIcon" }  url={"https://www.youtube.com/watch?v=" + this.props.match.params.id} />
                 <Sbta openOnLoad={this.state.openSbtaOnPageLoad} useIcon={true} imageBckNum={this.props.match.params.id} />
                 <ShareIcon className={"KaraokeDisplay-lowerPaneIcon"} style={{ color: '#3413f1' }} onClick={() => {this.copyURL()}} fontSize="small"/>
                 <SearchIcon className={"KaraokeDisplay-lowerPaneIcon"} style={{ color: '#3413f1' }} onClick={()=>{this.setState({openSearcherModal: true})}} />
