@@ -355,7 +355,7 @@ class ConnectedCompleteLyrics extends Component {
             return (
                 <div className="CompleteLyrics">
                     <MetaTags>
-                      <title>africariyoki - sing with africa!</title>
+                      <title>africariyoki - karaoke with africa!</title>
                       <meta name="description" content="sing along to your favourite afro beat songs - guess the song" />
                       <meta property="og:title" content="africariyoki" />
                       <meta http-equiv='cache-control' content='no-cache' />
