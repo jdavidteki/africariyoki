@@ -1,95 +1,78 @@
 import React, { Component } from 'react';
-import InsertCommentIcon from '@material-ui/icons/InsertComment';
-import CloseIcon from '@material-ui/icons/Close';
-import CircularProgress from "@material-ui/core/CircularProgress";
-import Button from "@material-ui/core/Button";
+import MicIcon from '@mui/icons-material/Mic';
+import MicOffIcon from '@mui/icons-material/MicOff';
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import "./YokiPhone.css";
-
-
 class ConnectedYokiPhone extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-          playAudioNow: false,
-        }
+  constructor(props){
+    super(props);
+    this.state = {
+      micOn: false,
     }
+  }
 
-    alreadyStarted = false
-    audioQueue = []
+  audioQueue = []
 
-    recordAudio = async () =>{
-      while(1){
+  recordAudio = async () =>{
+    while(1){
+      if(this.state.micOn){
+        console.log("we here6")
         const recorder = await recordAudio();
         recorder.start();
-        await sleep(3000);
+        await sleep(1000);
         const audio = await recorder.stop();
         this.audioQueue = [...this.audioQueue, audio]
-        this.setState({playAudioNow: true})
+      }else{
+        await sleep(3000);
       }
     }
+  }
 
-    playAudio = async () => {
-      if(!this.alreadyStarted){
-        while(1){
-          console.log("we here")
-          if(this.audioQueue.length > 0 ){
-            this.alreadyStarted = true
-            this.audioQueue[0].play()
-            this.audioQueue = this.audioQueue.slice(1)
-          }
-          await sleep(3000);
-        }
+  playAudio = async () => {
+    while(1){
+      if(this.audioQueue.length > 0 && this.state.micOn){
+        console.log("we here6")
+        this.audioQueue[0].play()
+        this.audioQueue = this.audioQueue.slice(1)
+        await sleep(1000);
+      }else{
+        await sleep(3000);
       }
     }
+  }
 
-    async componentDidUpdate(){
-      console.log("componenetdidupdate")
-      this.playAudio()
-      await sleep(3000);
-    }
+  componentDidMount(){
+    this.recordAudio()
+    this.playAudio()
+  }
 
-    componentDidMount(){
-      this.recordAudio()
-    }
+  toggleMicOn = () => {
+    this.setState(prevState => ({
+      micOn: !prevState.micOn
+    }));
+  }
 
-    render() {
-      return(
-        <div className="YokiPhone">
-          <div className="YokiPhone-wrapper">
-              <div className="YokiPhone-icon" onClick={()=>this.setState({showArtDesc: true})}>
-                  {this.state.useIcon
-                  ?
-                      <InsertCommentIcon className={"YokiPhone-insertCommentIcon"} style={{ color: '#3413f1' }} />
-                  :
-                      <span className="YokiPhone-cta">yokiphone</span>
-                  }
-              </div>
-              {this.state.showArtDesc &&
-                <div className="YokiPhone-artDesc">
-                    <div className="YokiPhone-artDescWrapper">
-                        <div className="YokiPhone-closeIcon">
-                            <Button onClick={() => this.setState({showArtDesc: false})}>
-                                <CloseIcon style={{ color: '#f7c99e'}} />
-                            </Button>
-                        </div>
-                        <div className="YokiPhone-content">
-
-                        </div>
-                    </div>
-                </div>
-              }
+  render() {
+    return(
+      <div className="YokiPhone">
+        <div className="YokiPhone-wrapper">
+          <div className="YokiPhone-icon" onClick={() => this.toggleMicOn()}>
+            {this.state.micOn ?
+              <MicIcon className={"YokiPhone-micOnIcon"} style={{ color: 'white' }} />
+              :
+              <MicOffIcon className={"YokiPhone-micOnIcon"} style={{ color: 'white' }} />
+            }
           </div>
         </div>
-      )
-    }
+      </div>
+    )
+  }
 }
 
 const mapStateToProps = state => {
     return {};
 };
-
 const YokiPhone = withRouter(connect(mapStateToProps)(ConnectedYokiPhone));
 
 export default YokiPhone;
@@ -103,7 +86,6 @@ const recordAudio = () =>
 
     mediaRecorder.addEventListener("dataavailable", event => {
       audioChunks.push(event.data);
-
     });
 
     const start = () => mediaRecorder.start();

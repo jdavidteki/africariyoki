@@ -11,7 +11,7 @@ import blankBack from "./assets/blankBack.jpeg"
 import MetaTags from 'react-meta-tags';
 import Sbta from '../sbta/Sbta.js'
 import Yokis from '../Yokis/Yokis.js'
-import YokiPhone from '../YokiPhone/YokiPhone.js'
+import YokiPhone from '../yokiPhone/YokiPhone.js'
 import { Analytics, PageHit } from 'expo-analytics';
 import Suggestions from "../suggestions/Suggestions";
 import { SocialIcon } from 'react-social-icons';
@@ -388,6 +388,10 @@ class Searcher extends Component {
             <SocialIcon bgColor={"#3413f1"} fgColor={"white"} className={"Searcher-socialMedia Searcher-twitter Searcher-lowerPaneIcon" }  url="https://www.twitter.com/africariyoki/" />
           </div>
           <div className="Searcher-lowerPane--rightPane">
+            {/* use microphone for only mobile so users can use their phones as a semi-megaphone */}
+            {window.innerWidth < 767 &&
+              <YokiPhone />
+            }
             <Yokis songs={this.state.songs}/>
             <Sbta useDefaultImage={false} imageBckNum={this.state.bckImageNum} />
           </div>
