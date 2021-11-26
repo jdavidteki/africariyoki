@@ -264,7 +264,9 @@ class ConnectedGuessSong extends Component {
         setTimeout( () => {
             this.setState({
                 songsInOption: this.generateSongsInOptions(this.state.songs, this.state.songs[songInQuestionIndex])
-            })
+            },() => {
+                this.play() //play next song immediately after old song
+            });
         }, 400);
     }
 
