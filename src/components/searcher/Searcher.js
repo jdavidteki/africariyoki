@@ -35,13 +35,11 @@ class Searcher extends Component {
       countryToBackgroundImage: {},
       bckImageNum: '',
       openSuggestionModal: false,
-      inputPromptMsg: 'kini awa nko loni',
-
+      inputPromptMsg: 'english: what do you want to sing to',
     }
   }
 
   componentDidMount () {
-
     //hack: use this to fix github pages doing ?/ on pages
     if (window.location.href.includes("?/")){
       let actualDestination = window.location.href.split("?/")[1]
@@ -50,7 +48,6 @@ class Searcher extends Component {
         pathname: "/" + actualDestination
       });
     }
-
 
     const analytics = new Analytics('UA-187038287-1');
     analytics.hit(new PageHit('Searcher'))
@@ -116,38 +113,46 @@ class Searcher extends Component {
       .catch(error => console.log('error',error));
     }
 
+    //interval for changing song options
     setInterval( () => {
       this.setState({
         count: (this.state.count+1) % 20,
-        inputPromptMsg: this.getRandomPromptMsg()
       })
     }, 6000);
+
+    //interval for chainging input prompt
+    let nthPromptToShow = 0
+    setInterval( () => {
+      nthPromptToShow += 1
+      this.setState({
+        inputPromptMsg: this.getRandomPromptMsg(nthPromptToShow % 10)
+      })
+    }, 2000);
   }
 
-  getRandomPromptMsg(){
-    let randomNumber =  Math.floor(Math.random() * (9 - 1 + 1) + 1)
-
-    switch(randomNumber) {
-      case 1:
-        return 'wetin we wan sing today'
-      case 2:
-        return 'kini awa nko loni'
+  getRandomPromptMsg(nthPromptToShow){
+    switch(nthPromptToShow) {
       case 3:
-        return 'kedu ihe anyị na -agụ taa'
+        return 'pidgin: wetin you wan sing' //pidgin
       case 4:
-        return 'me muke rera yau'
+        return 'yoruba: kini o fẹ lati kọrin si' //yoruba
       case 5:
-        return 'tunaimba nini leo'
+        return 'igbo: kedu ihe ị chọrọ ịbụ abụ' //igbo
       case 6:
-        return 'wat sing ons vandag'
+        return 'hausa: me kuke so ku yi waka' //hausa
       case 7:
-        return 'wah we singing today'
+        return 'swahili: unataka kuimba nini' //swahili
       case 8:
-        return 'sicula ini namhlanje'
+        return 'afrikaans: waarvoor wil jy sing' //afrikaans
       case 9:
-        return 'tiri kuimba chii nhasi'
+        return 'amharic: ምን መዝፈን ትፈልጋለህ' //amharic
+      case 10:
+        return 'zulu:  ufuna ukucula ini' //zulu
+      case 11:
+        return 'shona: unoda kuimbira chii' //shona
       default:
-        return 'what are we singing today'
+        //we want english to take more screen time
+        return 'english: what do you want to sing to' //english
     }
   }
 
@@ -321,7 +326,8 @@ class Searcher extends Component {
           <div className="Searcher-inputWrapper">
             <TextField
               className="Searcher-input"
-              label={`${this.state.selectedCode != '' ? ' what do you want to sing from ' + codeToCountries[this.state.selectedCode] + ' today??': this.state.inputPromptMsg}?`}
+              shrink='true'
+              label={`${this.state.selectedCode != '' ? ' what do you want to sing from ' + codeToCountries[this.state.selectedCode] + ' today??': '     ' + this.state.inputPromptMsg}?`}
               variant="outlined"
               onChange={event=>{
                 this.setState({query: event.target.value}, ()=> {
@@ -330,7 +336,8 @@ class Searcher extends Component {
               }}
             />
 
-            <div className="Searcher-flagClose">
+            {/* NOTE: dont remove this. incase we want to add search by country in the future */}
+            {/* <div className="Searcher-flagClose">
               { this.state.selectedCode != "" &&
 
                 <Button
@@ -351,7 +358,7 @@ class Searcher extends Component {
                 showSelectedLabel={false}
                 countries={["DZ","AO","SH","BJ","BW","BF","BI","CM","CV","CF","TD","KM","CG","CD","DJ","EG","GQ","ER","SZ","ET","GA","GM","GH","GN","GW","CI","KE","LS","LR","LY","MG","MW","ML","MR","MU","YT","MA","MZ","NA","NE","NG","ST","RE","RW","ST","SN","SC","SL","SO","ZA","SS","SH","SD","SZ","TZ","TG","TN","UG","CD","ZM","TZ","ZW"]}
               />
-            </div>
+            </div> */}
           </div>
 
 
