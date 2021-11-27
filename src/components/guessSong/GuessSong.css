@@ -125,6 +125,10 @@
     font-weight: bold;
     text-transform: uppercase;
     padding-bottom: 15px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .GuessSong-display{
@@ -153,7 +157,61 @@
     font-family: JosefinSans;
 }
 
+.GuessSong-openyokis
+{
+    color: #0f750f;
+    text-decoration: underline;
+}
+
+.GuessSong-infoPane-close{
+  display: flex;
+  justify-self: left;
+  max-height: 40px;
+  margin-left: auto;
+  margin-bottom: 5px;
+}
+
+.GuessSong-infoPane-close:hover{
+  fill: #3413f1;
+  cursor: pointer ;
+}
+
+.GuessSong-infoPane-content
+{
+  background-color: #f7f8e4;
+  padding: 16px;
+  margin: auto;
+  font-weight: bold;
+  color: #3413f1;
+  border-radius: 4px;
+}
+
+.GuessSong-infoPane{
+  z-index: 99;
+  position: fixed;
+  display: flex;
+  padding: 10% 20px;
+  flex-direction: column;
+  top: 0;
+  left: 0;
+
+  background:
+    /* top, transparent black, faked with gradient */
+    linear-gradient(
+      rgba(0, 0, 0, 0.7),
+      rgba(0, 0, 0, 0.7)
+    );
+
+  height: 100%;
+  width: 100%;
+}
+
+
 @media only screen and (max-width: 600px) {
+    .GuessSong-infoPane{
+      padding-top: 20%;
+    }
+
     .GuessSong-options .Song{
         width: 100%;
     }

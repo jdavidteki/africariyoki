@@ -22,7 +22,10 @@ import TweenOne from 'rc-tween-one';
 import SvgMorphPlugin from 'rc-tween-one/lib/plugin/SvgMorphPlugin';
 import AccessAlarmOutlinedIcon from '@material-ui/icons/AccessAlarmOutlined';
 import { Analytics, PageHit } from 'expo-analytics';
+import InfoIcon from '@mui/icons-material/Info';
+import CloseIcon from '@material-ui/icons/Close';
 import { Emoji } from 'emoji-mart'
+import { Link } from 'react-router-dom'
 
 TweenOne.plugins.push(SvgMorphPlugin);
 
@@ -68,6 +71,7 @@ class ConnectedGuessSong extends Component {
         pauseSetGameModal: true,
         moment: null,
         reverse: false,
+        openInfoPane: false,
         selectedOptionDuration: {value: 1, label: '1min'},
         selectedOptionDifficulty: {value: 'Beginner', label: 'beginner'},
         printResult: false,
@@ -267,7 +271,7 @@ class ConnectedGuessSong extends Component {
             },() => {
                 this.play() //play next song immediately after old song
             });
-        }, 400);
+        }, 1000);
     }
 
     startGame(){
@@ -446,8 +450,38 @@ class ConnectedGuessSong extends Component {
                                     paused={false}
                                     className="GuessSong-display"
                                 >
-
-                                    <div className="GuessSong-title">guess the song</div>
+                                    {this.state.openInfoPane &&
+                                        <div className="GuessSong-infoPane">
+                                            <CloseIcon
+                                                fontSize={'large'}
+                                                className={"GuessSong-infoPane-close"}
+                                                style={{ color: '#f7f8e4' }}
+                                                onClick={()=>{this.setState({openInfoPane: false})}}
+                                            />
+                                            <div className="GuessSong-infoPane-content">
+                                                experiencing lagging? please update yokis on
+                                                &nbsp;
+                                                <Link
+                                                    className="GuessSong-openyokis"
+                                                    variant="outlined"
+                                                    color="secondary"
+                                                    to = "/?openyokis"
+                                                >
+                                                    homepage
+                                                </Link>
+                                                &nbsp;
+                                                and try again
+                                            </div>
+                                        </div>
+                                    }
+                                    <div className="GuessSong-title">
+                                       <span>guess the song</span>
+                                       <InfoIcon className={"GuessSong-infoPane-icon"}
+                                        style={{ color: '#3413f1' }}
+                                        onClick={() => {this.setState({openInfoPane: true})}}
+                                        fontSize="small"
+                                       />
+                                    </div>
                                     <div>press play to listen to snippet</div>
                                     <div className="GuessSong-controlMenu">
                                         <Button

@@ -5,7 +5,6 @@ import Firebase from "../../firebase/firebase.js";
 import TextField from "@material-ui/core/TextField";
 import ReactTypingEffect from 'react-typing-effect';
 import codeToCountries from "./codeToCountry.js";
-import Button from "@material-ui/core/Button";
 import CloseIcon from '@material-ui/icons/Close';
 import blankBack from "./assets/blankBack.jpeg"
 import MetaTags from 'react-meta-tags';
@@ -40,6 +39,10 @@ class Searcher extends Component {
   }
 
   componentDidMount () {
+    if(window.location.href.includes("openyokis")){
+      document.getElementById('js-yokisCTA').click();
+    }
+
     //hack: use this to fix github pages doing ?/ on pages
     if (window.location.href.includes("?/")){
       let actualDestination = window.location.href.split("?/")[1]

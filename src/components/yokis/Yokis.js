@@ -165,7 +165,7 @@ class ConnectedYokis extends Component {
                       ?
                           <InsertCommentIcon className={"Yokis-insertCommentIcon"} style={{ color: '#3413f1' }} />
                       :
-                          <span className="Yokis-cta">yokis</span>
+                          <span id="js-yokisCTA" className="Yokis-cta">yokis</span>
                       }
                   </div>
                   {this.state.showArtDesc &&
