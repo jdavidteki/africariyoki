@@ -73,6 +73,8 @@ const matchFunction = ({url, request, event}) => {
 
 // // An example runtime caching route for requests that aren't handled by the
 // // precache, in this case same-origin .png requests like those from in public/
+//NOTE--we removed this because we changed strategies from service workers to indexDB :)
+//come back and fix this jesuyye. but leave it on for now cos u is a lazy mofucker
 registerRoute(
   matchFunction,
   new StaleWhileRevalidate({

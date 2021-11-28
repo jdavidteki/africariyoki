@@ -53,7 +53,7 @@ const levelToPlaySec = {
     "master": 2.5,
 }
 
-const startTimes = [50, 55, 60, 65, 70];
+const startTimes = [45, 50, 55];
 const selectedStartTime = Math.floor(Math.random() * startTimes.length);
 
 class ConnectedGuessSong extends Component {
@@ -77,6 +77,8 @@ class ConnectedGuessSong extends Component {
         printResult: false,
         audioPaused: true,
         answerCorrect: true,
+        songInQuestionBlob: '',
+        db: null,
         songInQuestion: {
             audiourl: '',
             singer: '',
@@ -149,6 +151,17 @@ class ConnectedGuessSong extends Component {
     }
 
     componentDidMount(){
+        //open indexdb to read yokis
+        var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || window.OIndexedDB || window.msIndexedDB,
+            dbVersion = 1.0;
+        // Create/open database --this is like a variable block in javascript
+        var request = indexedDB.open("yokisFolder", dbVersion),
+            db
+        request.onsuccess = (event) =>  {
+            db = request.result;
+            this.setState({db: db})
+        }
+
         const analytics = new Analytics('UA-187038287-1');
         analytics.hit(new PageHit('Game'))
             .then(() => console.log("google analytics on game"))
@@ -198,25 +211,38 @@ class ConnectedGuessSong extends Component {
     }
 
     play(){
-        if(this.audio != null){
-            this.audio.currentTime = selectedStartTime
-            this.audio.play();
-            this.setState({audioPaused: false})
+        var transaction = this.state.db.transaction(["yokis"], 'readwrite');
 
-            //update song plays
-            Firebase.getLyricsById(this.state.songInQuestion.id).then(
-                val => {
-                    Firebase.updateNumPlays(this.state.songInQuestion.id, val.numPlays +=1)
-                }
-            )
+        transaction.objectStore("yokis").get(this.state.songInQuestion.id).onsuccess = event => {
+            var soundFile = event.target.result;
 
-            var int = setInterval(() => {
-                if (this.audio != null && this.audio.currentTime > selectedStartTime + levelToPlaySec[this.state.selectedOptionDifficulty.label]) {
-                    this.audio.pause();
-                    this.setState({audioPaused: true})
-                    clearInterval(int);
+            // Get window.URL object
+            var URL = window.URL || window.webkitURL;
+
+            if(this.audio != null){
+                if (soundFile != undefined){
+                    var soundURL = URL.createObjectURL(soundFile);
+                    this.audio.setAttribute("src", soundURL)
                 }
-            }, 10);
+
+                this.audio.play();
+                this.setState({audioPaused: false})
+
+                //update song plays
+                Firebase.getLyricsById(this.state.songInQuestion.id).then(
+                    val => {
+                        Firebase.updateNumPlays(this.state.songInQuestion.id, val.numPlays +=1)
+                    }
+                )
+
+                var int = setInterval(() => {
+                    if (this.audio != null && this.audio.currentTime > selectedStartTime + levelToPlaySec[this.state.selectedOptionDifficulty.label]) {
+                        this.audio.pause();
+                        this.setState({audioPaused: true})
+                        clearInterval(int);
+                    }
+                }, 10);
+            }
         }
     }
 
@@ -266,12 +292,13 @@ class ConnectedGuessSong extends Component {
         })
 
         setTimeout( () => {
+            //make it so that if they dont have the song locally, they can still fetch from the network
             this.setState({
                 songsInOption: this.generateSongsInOptions(this.state.songs, this.state.songs[songInQuestionIndex])
             },() => {
                 this.play() //play next song immediately after old song
             });
-        }, 1000);
+        }, 700);
     }
 
     startGame(){

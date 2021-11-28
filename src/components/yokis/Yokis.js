@@ -11,15 +11,15 @@ import "./Yokis.css";
 var noSleep = new NoSleep();
 class ConnectedYokis extends Component {
     constructor(props){
-        super(props);
-        this.state = {
-            songs: this.props.songs,
-            loadingUpdates: false,
-            updateSongIndex: 0,
-            stopUpdating: true,
-            updateDownloadCTA: 'start update',
-            yokis: [],
-        }
+      super(props);
+      this.state = {
+        songs: this.props.songs,
+        loadingUpdates: false,
+        updateSongIndex: 0,
+        stopUpdating: true,
+        updateDownloadCTA: 'start update',
+        yokis: [],
+      }
     }
 
     player = null
@@ -49,87 +49,37 @@ class ConnectedYokis extends Component {
           yokis: [],
           stopUpdating: false,
           loadingUpdates: true,
-        }, ()=>{this.downloadYokis()})
+        }, ()=>{this.indexedDBGet(this.state.songs)})
     }
 
     pauseUpdating = () =>{
-        this.setState({
-            stopUpdating: true,
-            loadingUpdates: false,
-        })
+      this.setState({
+        stopUpdating: true,
+        loadingUpdates: false,
+      })
     }
 
-    downloadYokis = () => {
-      if(!this.state.stopUpdating){
-        if(this.state.songs[this.state.updateSongIndex] != undefined){
+    async getAudioFiles(yokis, db){
+      var requestOptions = {
+        method: 'GET',
+        redirect: 'follow',
+      };
 
-          let songId = this.state.songs[this.state.updateSongIndex].id
-
-          this.setState({songIdToDownload: songId})
-
-          var requestOptions = {
-            method: 'GET',
-            redirect: 'follow',
-          };
-
-          fetch(`https://storage.googleapis.com/africariyoki-4b634.appspot.com/music/${songId}.mp3`, requestOptions)
-          .then(response => {
-            if (!response.ok) {
-              throw Error(response.status+' '+response.statusText)
-            }
-
-            if (!response.body) {
-              throw Error('ReadableStream not yet supported in this browser.')
-            }
-
-            // to access headers, server must send CORS header "Access-Control-Expose-Headers: content-encoding, content-length x-file-size"
-            // server must send custom x-file-size header if gzip or other content-encoding is used
-            const contentEncoding = response.headers.get('content-encoding');
-            const contentLength = response.headers.get(contentEncoding ? 'x-file-size' : 'content-length');
-            if (contentLength === null) {
-              throw Error('Response size header unavailable');
-            }
-
-            const total = parseInt(contentLength, 10);
-            let loaded = 0;
-
-            return new Response(
-              new ReadableStream({
-                start(controller) {
-                  const reader = response.body.getReader();
-
-                  read();
-                  function read() {
-                    reader.read().then(({done, value}) => {
-                      if (done) {
-                        controller.close();
-                        return;
-                      }
-                      loaded += value.byteLength;
-                      controller.enqueue(value);
-                      read();
-                    }).catch(error => {
-                      console.error(error);
-                      controller.error(error)
-                    })
-                  }
-                }
-              })
-            );
-          })
+      for(var i = 0; i < yokis.length; i++){
+        if (!this.state.stopUpdating){
+          await fetch(`https://storage.googleapis.com/africariyoki-4b634.appspot.com/music/${yokis[i].id}.mp3`, requestOptions)
           .then(response => response.blob())
-          .then(data => {
-            this.setState(
-              {
-                updateSongIndex: this.state.updateSongIndex+1,
-              }, ()=>{
-                this.downloadYokis()
-              }
-            )
+          .then(async result => {
+            var blob = result;
+
+            // Open a transaction to the database
+            //TODO: figure out how to make this check local yokis before adding new ones to reduce waist of bandwidth
+            var transaction = db.transaction(["yokis"], "readwrite");
+            transaction.objectStore("yokis").put(blob, yokis[i].id);
 
             if(this.state.songs[this.state.updateSongIndex] != undefined){
               this.setState(previousState => ({
-                yokis: getUniqueListBy([...previousState.yokis, this.state.songs[this.state.updateSongIndex]], 'id')
+                yokis: getUniqueListBy([...previousState.yokis, yokis[i]], 'id')
               }), ()=>{
                 localStorage.setItem('yokis', JSON.stringify({
                     "yokis": this.state.yokis,
@@ -137,86 +87,120 @@ class ConnectedYokis extends Component {
               });
             }
           })
-          .catch(error => {
-            this.setState(
-              {
-                updateSongIndex: this.state.updateSongIndex+1,
-              }, ()=>{
-                this.downloadYokis()
-              }
-            )
-          })
-
-
-          if(this.state.updateSongIndex + 1 == this.state.songs.length){
-            this.pauseUpdating()
-          }
+          .catch(error => console.log('error',error));
         }
       }
     }
 
+    indexedDBGet(yokis){
+      var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || window.OIndexedDB || window.msIndexedDB,
+        dbVersion = 1.0;
+
+      // Create/open database --this is like a variable block in javascript
+      var request = indexedDB.open("yokisFolder", dbVersion),
+          createObjectStore = function (dataBase) {
+            // Create an objectStore
+            console.log("Creating objectStore")
+            dataBase.createObjectStore("yokis");
+          }
+
+      request.onerror = (event) => {
+        console.log("Error creating/accessing IndexedDB database");
+      };
+
+      request.onsuccess = (event) =>  {
+        console.log("Success creating/accessing IndexedDB database");
+        var db = request.result;
+
+        db.onerror = function (event) {
+          console.log("Error creating/accessing IndexedDB database");
+        };
+
+        // Interim solution for Google Chrome to create an objectStore. Will be deprecated
+        if (db.setVersion) {
+          if (db.version != dbVersion) {
+            var setVersion = db.setVersion(dbVersion);
+            setVersion.onsuccess = function () {
+                createObjectStore(db);
+                this.getAudioFiles(yokis, db);
+            };
+          }
+          else {
+            this.getAudioFiles(yokis, db);
+          }
+        }
+        else {
+          this.getAudioFiles(yokis, db);
+        }
+      }
+
+      // For future use. Currently only in latest Firefox versions
+      request.onupgradeneeded = function (event) {
+        createObjectStore(event.target.result);
+      };
+    }
 
     render() {
-        return(
-          <div className="Yokis">
-              <div className="Yokis-wrapper">
-                  <div className="Yokis-icon" onClick={()=>this.setState({showArtDesc: true})}>
-                      {this.state.useIcon
-                      ?
-                          <InsertCommentIcon className={"Yokis-insertCommentIcon"} style={{ color: '#3413f1' }} />
-                      :
-                          <span id="js-yokisCTA" className="Yokis-cta">yokis</span>
-                      }
-                  </div>
-                  {this.state.showArtDesc &&
-                      <div className="Yokis-artDesc">
-                          <div className="Yokis-artDescWrapper">
-                              <div className="Yokis-closeIcon">
-                                  <Button onClick={() => this.setState({showArtDesc: false})}>
-                                      <CloseIcon style={{ color: '#f7c99e'}} />
-                                  </Button>
-                              </div>
-                              <div className="Yokis-content">
-                                  <div className="Yokis-title">
-                                      <p className="Yokis-title-super">update all yokis to enjoy africariyoki offline. </p>
-                                      <p className="Yokis-title-sub">
-                                          you need to update atleast 10 yokis to enjoy games.
-                                          if you ever clear your browser (chrome) cache, you will need to download yokis again.
-                                      </p>
-                                  </div>
-                                  <div className="Yokis-controlMenu">
-                                      <Button
-                                          variant="contained"
-                                          style={{backgroundColor: '#3413f1', color: 'white', textTransform: 'lowercase', marginRight: 8}}
-                                          onClick={() => this.handleUpdatingYokis()}
-                                      >
-                                          start update
-                                      </Button>
-                                      <Button
-                                          variant="contained"
-                                          style={{backgroundColor: '#3413f1', color: 'white', textTransform: 'lowercase', marginRight: 8}}
-                                          onClick={() => this.pauseUpdating()}
-                                      >
-                                          pause update
-                                      </Button>
-                                  </div>
-                                  <div className="Yokis-updatedSongs">
-                                      <div className="Yokis-updateProgress">
-                                        {this.state.loadingUpdates &&
-                                          <CircularProgress size={15} />
-                                        }
-                                      </div>
-                                      {this.state.yokis.map((song, index) =>
-                                          <div key={index}>updated - {song.title}</div>
-                                      )}
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  }
-              </div>
+      return(
+        <div className="Yokis">
+          <div className="Yokis-wrapper">
+            <div className="Yokis-icon" onClick={()=>this.setState({showArtDesc: true})}>
+                {this.state.useIcon
+                ?
+                    <InsertCommentIcon className={"Yokis-insertCommentIcon"} style={{ color: '#3413f1' }} />
+                :
+                    <span id="js-yokisCTA" className="Yokis-cta">yokis</span>
+                }
+            </div>
+            {this.state.showArtDesc &&
+                <div className="Yokis-artDesc">
+                    <div className="Yokis-artDescWrapper">
+                        <div className="Yokis-closeIcon">
+                            <Button onClick={() => this.setState({showArtDesc: false})}>
+                                <CloseIcon style={{ color: '#f7c99e'}} />
+                            </Button>
+                        </div>
+                        <div className="Yokis-content">
+                            <div className="Yokis-title">
+                                <p className="Yokis-title-super">update all yokis to enjoy africariyoki offline. </p>
+                                <p className="Yokis-title-sub">
+                                    you need to download atleast 10 yokis to enjoy games.
+                                    if you ever clear your browser (chrome) cache, you will need to download yokis again.
+                                </p>
+                            </div>
+                            <div className="Yokis-controlMenu">
+                                <Button
+                                    variant="contained"
+                                    style={{backgroundColor: '#3413f1', color: 'white', textTransform: 'lowercase', marginRight: 8}}
+                                    onClick={() => this.handleUpdatingYokis()}
+                                >
+                                    start download
+                                </Button>
+                                <Button
+                                    variant="contained"
+                                    style={{backgroundColor: '#3413f1', color: 'white', textTransform: 'lowercase', marginRight: 8}}
+                                    onClick={() => this.pauseUpdating()}
+                                >
+                                    stop download
+                                </Button>
+                            </div>
+                            <div className="Yokis-updatedSongs">
+                                <div className="Yokis-updateProgress">
+                                  {this.state.loadingUpdates &&
+                                    <CircularProgress size={15} />
+                                  }
+                                </div>
+                                {this.state.yokis.map((song, index) =>
+                                    <div key={index}>updated - {song.title}</div>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
           </div>
-        )
+        </div>
+      )
     }
 }
 
