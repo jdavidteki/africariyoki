@@ -50,6 +50,15 @@ class Games extends Component {
                         </div>
                     </div>
 
+                    <div className="Games-guesssongline" style={styles.bounce}>
+                        <div onClick={()=>this.goToGame("popularline")} className="Games-gameTitle">
+                            guess song line
+                        </div>
+                        <div onClick={()=>this.goToGame("popularline")}>
+                            choose the right song after reading familiar lines. click to play
+                        </div>
+                    </div>
+
                     <div className="Games-nextLine" style={styles.bounce}>
                         <div onClick={()=>this.goToGame("cls")} className="Games-gameTitle">
                             next line

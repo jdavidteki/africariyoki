@@ -19,7 +19,8 @@
 }
 
 .Games-nextLine,
-.Games-guessTheSong{
+.Games-guessTheSong,
+.Games-guesssongline{
     background-color: #1edada;
     border-radius: 4px;
     padding: 30px;
@@ -29,7 +30,8 @@
 }
 
 .Games-nextLine:hover,
-.Games-guessTheSong:hover{
+.Games-guessTheSong:hover,
+.Games-guesssongline:hover{
     cursor: pointer;
     background-color: aliceblue;
     transition: background-color 0.25s ease-in;
@@ -37,6 +39,10 @@
 
 .Games-nextLine{
     background-color: #f5df66;
+}
+
+.Games-guesssongline{
+    background-color: #5fa0eb;
 }
 
 .Games-gameTitle

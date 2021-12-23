@@ -9,6 +9,7 @@ const Song = (props) => {
       className="Song"
       id={props.song.id}
       onClick={() => props.playSong(props.song.id)}
+      style={{ backgroundColor: props.backgroundColor ? props.backgroundColor : '#c0f0c0' }}
     >
       <span className="Song-title">{props.song.title}</span>
       <span className="Song-singer">{props.song.singer}</span>

@@ -5,6 +5,7 @@ import KaraokeDisplay from './components/karaokedisplay/KaraokeDisplay.js'
 import Admin from './components/admin/Admin.js'
 import GuessSong from './components/guessSong/GuessSong.js'
 import AnnotationFixer from './components/annotationFixer/AnnotationFixer.js'
+import PopularLine from './components/popularLine/PopularLine.js'
 import LRCFixer from './components/lrcFixer/LRCFixer.js'
 import { Switch, Route } from "react-router-dom";
 import ForOFor from './components/forofor/ForOFor.js';
@@ -37,6 +38,7 @@ class App extends Component {
               <Route path="/lrcfixer/:id" component={LRCFixer} />
               <Route path="/game" exact component={Games} />
               <Route path="/guessthesong" exact component={GuessSong} />
+              <Route path="/popularline" exact component={PopularLine} />
               <Route path="/cls" exact component={CompleteTheLyrics}/>
               <Route path="/annotationfixer/:id" component={AnnotationFixer} />
               <Route path="/scoreboardguesssong" component={ScoreboardGuessSong} />

@@ -46,7 +46,20 @@ class Firebase {
     })
   }
 
-
+  getScoreBoardPopularLine = () =>{
+    return new Promise(resolve => {
+      firebase.database()
+      .ref('/scoreboardguesssongline/')
+      .once('value')
+      .then(snapshot => {
+        if (snapshot.val()){
+          resolve(snapshot.val())
+        }else{
+          resolve({})
+        }
+      })
+    })
+  }
 
   getLyricsById = (id) =>{
     return new Promise(resolve => {
@@ -361,6 +374,23 @@ class Firebase {
       })
     })
   }
+
+  updateScoreBoardPopularLine = (scoreBoardObject) => {
+    return new Promise(resolve => {
+      firebase.database()
+      .ref('/scoreboardguesssongline/')
+      .set(
+        scoreBoardObject
+      )
+      .then((response) => {
+        resolve(true)
+      })
+      .catch(error => {
+        console.warn("error", error)
+      })
+    })
+  }
+
 }
 
 export default new Firebase();

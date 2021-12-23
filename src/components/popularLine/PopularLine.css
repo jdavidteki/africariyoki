@@ -1,0 +1,267 @@
+.PopularLine{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #5fa0eb;
+}
+
+.PopularLine-wrapper{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: 100%;
+    z-index: 4;
+    align-items: center;
+    border: 4px;
+    position: relative;
+}
+
+.PopularLine-lyricInQuestion{
+    font-style: italic;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    margin: 8px 0;
+    border-radius: 4px;
+    color: #131c96;
+    padding: 16px 8px;
+    background-color: #e5e6f3;
+}
+
+.PopularLine-setGameModel{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.PopularLine-comment{
+    font-style: italic;
+}
+
+.PopularLine-setGameModel-close{
+    display: flex;
+    justify-self: right;
+    max-height: 40px;
+    margin-left: auto;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.PopularLine-results,
+.PopularLine-setGameModel-container{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #f0f1ff;
+}
+
+.PopularLine-results{
+    margin: auto;
+    width: 320px;
+}
+
+.PopularLine-results-title{
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.PopularLine .Song-title{
+    margin-right: 24px;
+}
+
+.PopularLine .Song{
+    justify-content: start;
+}
+
+
+.PopularLine-gameOption{
+    padding: 15px 0;
+}
+
+.PopularLine-controlMenuInfoChild{
+    padding: 0 10px;
+}
+
+.PopularLine-controlMenuInfo{
+    margin-top: 16px;
+    display: flex;
+}
+
+.PopularLine-controlMenu{
+    font-weight: bold;
+    padding: 15px 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.PopularLine-playArrowIcon
+{
+    background-color: #131c96;
+    color: white;
+    margin-bottom: 15px;
+    height: 100px;
+    width: 100px;
+    border-radius: 4px;
+    box-shadow: none;
+}
+
+.PopularLine-controlMenu
+.css-2b097c-container{
+    width: 100px;
+}
+
+.PopularLine-lowerMenu{
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+.PopularLine-options{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.PopularLine-options .Song{
+    flex-basis: 45%;
+    border-radius: 4px;
+    height: auto;
+}
+
+.PopularLine-title{
+    font-weight: bold;
+    text-transform: uppercase;
+    padding-bottom: 15px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.PopularLine-display{
+    width: 100%;
+    background-color: #e1eaf8;
+    padding: 20px;
+    border-radius: 16px;
+    margin: auto;
+    flex-grow: 1;
+}
+
+.PopularLine .rhap_progress-section{
+    pointer-events: none;
+}
+
+.PopularLine .rhap_time.rhap_total-time,
+.PopularLine .rhap_current-time{
+    display: none;
+}
+
+.PopularLine-table{
+    padding: 20px;
+}
+
+.MuiButton-label{
+    font-family: JosefinSans;
+}
+
+.PopularLine-openyokis
+{
+    color: #131c96;
+    text-decoration: underline;
+}
+
+@media only screen and (max-width: 600px) {
+    .PopularLine-infoPane{
+      padding-top: 20%;
+    }
+
+    .PopularLine-options .Song{
+        width: 100%;
+    }
+
+    .PopularLine .Song-title,
+    .PopularLine .Song-singer{
+        max-height: none;
+    }
+
+    .PopularLine-controlMenu{
+        flex-direction: column;
+        order: -1;
+    }
+
+    .PopularLine-display{
+        margin: 0;
+    }
+
+    .PopularLine-controlMenuInfo{
+        flex-wrap: wrap;
+    }
+
+    .PopularLine-wrapper{
+        margin-top: 60px;
+        height: calc(100% - 60px);
+        position: fixed;
+    }
+
+    .PopularLine-wrapper,
+    .PopularLine-results{
+        width: 100%;
+    }
+
+    .PopularLine-controlMenuInfoChild{
+        flex-grow: 1;
+        width: 50%;
+    }
+}
+
+/* bigger screen */
+@media only screen and (min-width: 601px) {
+    .PopularLine-display{
+        position: absolute;
+        top: 20%;
+        right: 0;
+    }
+}
+
+.pulse {
+    animation: pulse-animation 0.5s infinite;
+}
+
+.shaking {
+    animation: shake 0.8s infinite;
+    -webkit-animation-name:              shake;
+    -webkit-animation-duration:          0.8s;
+    -webkit-animation-iteration-count:   infinite;
+    -webkit-animation-timing-function:   linear;
+    -webkit-transform-origin:            50% 100%;
+}
+
+
+@keyframes pulse-animation {
+    0% {
+      box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.2);
+    }
+
+    100% {
+      box-shadow: 0 0 0 20px rgba(0, 0, 0, 0);
+    }
+}
+
+@-webkit-keyframes shake {
+    0%  { -webkit-transform:     translate(2px, 1px) rotate(0deg); }
+    10% { -webkit-transform:     translate(-1px, -2px) rotate(-2deg); }
+    20% { -webkit-transform:     translate(-3px, 0px) rotate(3deg); }
+    30% { -webkit-transform:     translate(0px, 2px) rotate(0deg); }
+    40% { -webkit-transform:     translate(1px, -1px) rotate(1deg); }
+    50% { -webkit-transform:     translate(-1px, 2px) rotate(-1deg); }
+    60% { -webkit-transform:     translate(-3px, 1px) rotate(0deg); }
+    70% { -webkit-transform:     translate(2px, 1px) rotate(-2deg); }
+    80% { -webkit-transform:     translate(-1px, -1px) rotate(4deg); }
+    90% { -webkit-transform:     translate(2px, 2px) rotate(0deg); }
+    100%{ -webkit-transform:     translate(1px, -2px) rotate(-1deg); }
+}
