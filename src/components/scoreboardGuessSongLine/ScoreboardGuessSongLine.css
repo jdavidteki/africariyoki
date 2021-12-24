@@ -1,0 +1,141 @@
+.ScoreboardGuessSongLine{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 80px;
+    background-color: #5fa0eb;
+    position: fixed;
+    overflow: hidden;
+    height: 100%;
+    top: 0;
+    left: 0;
+    font-weight: bold;
+}
+
+.ScoreboardGuessSongLine-wrapper
+{
+    overflow-y: auto;
+    height: 95%;
+    padding-right: 16px;
+}
+
+.ScoreboardGuessSongLine-guessTheSong
+{
+    display: flex;
+    flex-direction: column;
+    height: 100%
+}
+
+.ScoreboardGuessSongLine-title
+{
+    text-align: center;
+    font-size: 32px;
+    color: white;
+    font-weight: bold;
+}
+
+.ScoreboardGuessSongLine-scoreInfo--beginner,
+.ScoreboardGuessSongLine-scoreInfo--amateur,
+.ScoreboardGuessSongLine-scoreInfo--professional,
+.ScoreboardGuessSongLine-scoreInfo--master
+{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+}
+
+.ScoreboardGuessSongLine-scoreInfoWrapper
+{
+    display: flex;
+}
+
+.ScoreboardGuessSongLine-scoreInfo--title
+{
+    padding: 12px 8px;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    background-color: #5fa0eb;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.ScoreboardGuessSongLine-arrow--beginner,
+.ScoreboardGuessSongLine-arrow--amateur,
+.ScoreboardGuessSongLine-arrow--professional,
+.ScoreboardGuessSongLine-arrow--master
+{
+    cursor: pointer;
+    transform: rotate(180deg);
+}
+
+.ScoreboardGuessSongLine-arrow--beginner.open,
+.ScoreboardGuessSongLine-arrow--amateur.open,
+.ScoreboardGuessSongLine-arrow--professional.open,
+.ScoreboardGuessSongLine-arrow--master.open
+{
+    transform: rotate(0);
+}
+
+.ScoreboardGuessSongLine-scoreInfo--beginner.open,
+.ScoreboardGuessSongLine-scoreInfo--amateur.open,
+.ScoreboardGuessSongLine-scoreInfo--professional.open,
+.ScoreboardGuessSongLine-scoreInfo--master.open
+{
+    min-height: 62px;
+    height: 62px;
+    overflow: hidden;
+}
+
+
+.ScoreboardGuessSongLine-wrapper
+{
+    width: 80%;
+}
+
+.gray
+{
+    background-color: #f2f2f280;
+}
+
+.ScoreboardGuessSongLine-scoreInfo--subTitle
+{
+    display: flex;
+    width: 100%;
+    background-color: #f7f8e4;
+    font-weight: bold;
+    padding: 4px 0;
+}
+
+
+.ScoreboardGuessSongLine-scoreInfo--subTitle > *,
+.ScoreboardGuessSongLine-scoreInfoWrapper > *
+{
+    width: 15%;
+    margin-left: 8px;
+}
+
+.ScoreboardGuessSongLine-scoreInfo--subTitle > *:not(:last-child)
+{
+    border-right: 1px solid gray;
+}
+
+.ScoreboardGuessSongLine-scoreInfo--subTitle > *:nth-child(2),
+.ScoreboardGuessSongLine-scoreInfoWrapper > *:nth-child(2)
+{
+    width: 40%;
+    margin-left: 8px;
+}
+
+.ScoreboardGuessSongLine-scoreInfo--rank,
+.ScoreboardGuessSongLine-scoreInfo--name,
+.ScoreboardGuessSongLine-scoreInfo--score,
+.ScoreboardGuessSongLine-scoreInfo--duration,
+.ScoreboardGuessSongLine-scoreInfo--averageScore
+{
+    margin-left: 8px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}

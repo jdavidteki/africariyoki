@@ -31,6 +31,21 @@ class Firebase {
     })
   }
 
+  getScoreboardGuessSongLine = () =>{
+    return new Promise(resolve => {
+      firebase.database()
+      .ref('/scoreboardguesssongline/')
+      .once('value')
+      .then(snapshot => {
+        if (snapshot.val()){
+          resolve(snapshot.val())
+        }else{
+          resolve({})
+        }
+      })
+    })
+  }
+
   getScoreBoardNextLine = () =>{
     return new Promise(resolve => {
       firebase.database()

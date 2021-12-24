@@ -11,11 +11,11 @@ import { Switch, Route } from "react-router-dom";
 import ForOFor from './components/forofor/ForOFor.js';
 import CompleteTheLyrics from './components/completelyrics/CompleteLyrics.js';
 import Games from './components/games/Games.js';
-import ScoreboardGuessSong from './components/scoreboardGuessSong/ScoreboardGuessSong.js'
-import ScoreboardNextLine from './components/scoreboardNextLine/ScoreboardNextLine.js'
+import ScoreboardGuessSong from './components/scoreboardGuessSong/ScoreboardGuessSong.js';
+import ScoreboardNextLine from './components/scoreboardNextLine/ScoreboardNextLine.js';
+import ScoreboardGuessSongLine from './components/scoreboardGuessSongLine/ScoreboardGuessSongLine.js';
 
 import "./App.css";
-import * as serviceWorkerRegistration from "./serviceWorkerRegistration.js";
 
 window.onresize = function() {
   document.getElementsByClassName("App").height = window.innerHeight;
@@ -43,6 +43,7 @@ class App extends Component {
               <Route path="/annotationfixer/:id" component={AnnotationFixer} />
               <Route path="/scoreboardguesssong" component={ScoreboardGuessSong} />
               <Route path="/scoreboardnextline" component={ScoreboardNextLine} />
+              <Route path="/scoreboardguesssongline" component={ScoreboardGuessSongLine} />
               <Route component={ForOFor}/>
             </Switch>
           </div>

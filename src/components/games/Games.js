@@ -57,6 +57,9 @@ class Games extends Component {
                         <div onClick={()=>this.goToGame("popularline")}>
                             choose the right song after reading familiar lines. click to play
                         </div>
+                        <div className="Games-scoreboard" onClick={()=>this.goToScoreboard("scoreboardguesssongline")}>
+                           scores
+                        </div>
                     </div>
 
                     <div className="Games-nextLine" style={styles.bounce}>
