@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import SongList from '../songLIst/SongList';
-import ReactFlagsSelect from 'react-flags-select';
 import Firebase from "../../firebase/firebase.js";
 import TextField from "@material-ui/core/TextField";
 import ReactTypingEffect from 'react-typing-effect';
@@ -402,6 +401,15 @@ class Searcher extends Component {
             {window.innerWidth < 767 &&
               <YokiPhone />
             }
+            <a
+              className="Searcher-yokiNFTLink"
+              variant="outlined"
+              color="primary"
+              href="https://opensea.io/collection/yokithoughtsnfts"
+              target="_blank"
+            >
+              NFTs
+            </a>
             <Yokis songs={this.state.songs}/>
             <Sbta useDefaultImage={false} imageBckNum={this.state.bckImageNum} />
           </div>
