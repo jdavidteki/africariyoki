@@ -58,6 +58,10 @@ const columns = [{
     key: 'turnedOn',
     name: 'Turned On',
     editable: true,
+},{
+    key: 'useForGames',
+    name: 'Use For Game',
+    editable: true,
 }].map(c => ({ ...c, ...defaultColumnProperties }));
 
 class ConnectedAdmin extends Component {

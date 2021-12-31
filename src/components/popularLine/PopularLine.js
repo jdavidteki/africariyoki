@@ -196,6 +196,7 @@ class ConnectedPopularLine extends Component {
         }else{
             Firebase.getLyrics().then(
                 val => {
+                    val = val.filter(v => v.useForGames == 1);
                     let songInQuestionIndex = Math.floor(Math.random() * (val.length - 0) + 0);
 
                     this.setState({
@@ -206,42 +207,6 @@ class ConnectedPopularLine extends Component {
                     })
                 }
             )
-        }
-    }
-
-    play(){
-        var transaction = this.state.db.transaction(["yokis"], 'readwrite');
-
-        transaction.objectStore("yokis").get(this.state.songInQuestion.id).onsuccess = event => {
-            var soundFile = event.target.result;
-
-            // Get window.URL object
-            var URL = window.URL || window.webkitURL;
-
-            if(this.audio != null){
-                if (soundFile != undefined){
-                    var soundURL = URL.createObjectURL(soundFile);
-                    this.audio.setAttribute("src", soundURL)
-                }
-
-                this.audio.play();
-                this.setState({audioPaused: false})
-
-                //update song plays
-                Firebase.getLyricsById(this.state.songInQuestion.id).then(
-                    val => {
-                        Firebase.updateNumPlays(this.state.songInQuestion.id, val.numPlays +=1)
-                    }
-                )
-
-                var int = setInterval(() => {
-                    if (this.audio != null && this.audio.currentTime > selectedStartTime + levelToPlaySec[this.state.selectedOptionDifficulty.label]) {
-                        this.audio.pause();
-                        this.setState({audioPaused: true})
-                        clearInterval(int);
-                    }
-                }, 10);
-            }
         }
     }
 

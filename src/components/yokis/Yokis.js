@@ -13,7 +13,7 @@ class ConnectedYokis extends Component {
     constructor(props){
       super(props);
       this.state = {
-        songs: this.props.songs,
+        songs: this.props.songs.filter(v => v.useForGames == 1),
         loadingUpdates: false,
         updateSongIndex: 0,
         stopUpdating: true,

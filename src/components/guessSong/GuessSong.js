@@ -185,7 +185,7 @@ class ConnectedGuessSong extends Component {
         //if there are atleast ten yokis downloaded
         let localYokis = JSON.parse(localStorage.getItem('yokis'));
         if (localYokis != null && localYokis['yokis'].length >=  10){
-            let localYokisArray = Object.values(localYokis['yokis'])
+            let localYokisArray = Object.values(localYokis['yokis']).filter(v => v.useForGames == 1);
             let songInQuestionIndex = Math.floor(Math.random() * (localYokisArray.length - 0) + 0);
 
             this.setState({
@@ -197,6 +197,7 @@ class ConnectedGuessSong extends Component {
         }else{
             Firebase.getLyrics().then(
                 val => {
+                    val = val.filter(v => v.useForGames == 1);
                     let songInQuestionIndex = Math.floor(Math.random() * (val.length - 0) + 0);
 
                     this.setState({

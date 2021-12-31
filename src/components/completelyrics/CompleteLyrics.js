@@ -148,6 +148,7 @@ class ConnectedCompleteLyrics extends Component {
 
         Firebase.getLyrics().then(
             val => {
+                val = val.filter(v => v.useForGames == 1);
                 let songInQuestionIndex = Math.floor(Math.random() * (val.length - 0) + 0);
 
                 this.setState({
@@ -448,8 +449,7 @@ class ConnectedCompleteLyrics extends Component {
                                     className="CompleteLyrics-display"
                                     style={{ margin: 'auto' }}
                                 >
-
-                                    <div className="CompleteLyrics-title">what is the next line?</div>
+                                    <div className="CompleteLyrics-title">[wip] what is the next line? </div>
                                     <div className="CompleteLyrics-lyricInQuestion">
                                         {this.state.lyricAndOptionObj["question"] ? this.state.lyricAndOptionObj["question"] : this.state.songInQuestion.title }
                                     </div>
