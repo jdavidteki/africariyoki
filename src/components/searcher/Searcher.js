@@ -297,6 +297,16 @@ class Searcher extends Component {
     })
   }
 
+  getSongDetails(){
+    let metaDes = "sing along to your favourite afrobeat songs --- "
+
+    for (var i = 0; i < this.state.songs.length; i++) {
+      metaDes += `${this.state.songs[i].title}, ${this.state.songs[i].singer}, `
+    }
+
+    return metaDes
+  }
+
   render() {
     return (
       <div className="Searcher">
@@ -306,19 +316,24 @@ class Searcher extends Component {
               fontSize={'large'}
               className={"Searcher-openSuggestionModal-close"}
               style={{ color: '#f7f8e4' }}
-              onClick={()=>{    this.setState({openSuggestionModal: false})}}
+              onClick={()=>{this.setState({openSuggestionModal: false})}}
             />
             <Suggestions />
           </div>
         }
         <MetaTags>
           <title>africariyoki - karaoke with africa!</title>
-          <meta name="description" content="sing along to your favourite afro beat songs" />
+          <meta name="description" content={this.getSongDetails()} />
           <meta property="og:title" content="africariyoki" />
           <meta http-equiv='cache-control' content='no-cache' />
           <meta http-equiv='expires' content='0' />
           <meta http-equiv='pragma' content='no-cache' />
         </MetaTags>
+
+        {/* these will remain for SEO purposes */}
+          <h1 itemprop="headline" style={{ display: "none" }}>#karaokewithafrica - #karaoke, #africankaraoke, #nigeriankaraoke, #lagoskaraoke, #ghanaiankaraoke</h1>
+        {/* ******** */}
+
         <div
           style={{ backgroundImage: `url(${this.state.background})` }}
           className="Searcher-background">

@@ -276,7 +276,8 @@ class Firebase {
           countries: detailsToUpdate?.countries?.length > 0 ? detailsToUpdate.countries : '',
           dateAdded: detailsToUpdate?.dateAdded?.length > 0 ? detailsToUpdate.dateAdded : '',
           albumName: detailsToUpdate?.albumName?.length > 0 ? detailsToUpdate.albumName : '',
-          turnedOn: detailsToUpdate?.turnedOn?.length > 0 ? detailsToUpdate.turnedOn : 0
+          turnedOn: detailsToUpdate?.turnedOn?.length > 0 ? detailsToUpdate.turnedOn : 0,
+          useForGames: detailsToUpdate?.useForGames?.length > 0 ? detailsToUpdate.useForGames : 0
         },
       )
       .then((response) => {
