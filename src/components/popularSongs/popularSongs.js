@@ -18,6 +18,19 @@ class PopularSongs extends Component {
         document.addEventListener("load", this.isCardVisible, true);
         window.addEventListener("scroll", this.isCardVisible, true);
         window.addEventListener("resize", this.isCardVisible, true);
+
+        setInterval( () => {
+            const popSongs = document.getElementById("js-popularSongs");
+            let randomCardIndex = Math.floor(Math.random() * (this.state.cards.length - 0) + 0);
+            let randomCardToShow = popSongs.childNodes[randomCardIndex]
+
+            if (randomCardToShow != undefined){
+                randomCardToShow.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center',
+                })
+            }
+        }, 20000);
     }
 
     isCardVisible() {
@@ -30,7 +43,7 @@ class PopularSongs extends Component {
 
   render() {
     return (
-        <div className="PopularSongs wrapper">
+        <div id="js-popularSongs" className="PopularSongs wrapper">
             {this.state.cards.map((song) =>
                 song.turnedOn == 1 &&
                 song.id != this.state.thisSongId &&
