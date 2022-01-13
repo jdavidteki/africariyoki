@@ -153,7 +153,7 @@ class ConnectedGuessSong extends Component {
     componentDidMount(){
         //open indexdb to read yokis
         var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || window.OIndexedDB || window.msIndexedDB,
-            dbVersion = 1.0;
+            dbVersion = 4;
         // Create/open database --this is like a variable block in javascript
         var request = indexedDB.open("yokisFolder", dbVersion),
             db

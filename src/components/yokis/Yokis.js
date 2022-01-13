@@ -59,7 +59,7 @@ class ConnectedYokis extends Component {
       })
     }
 
-    async getAudioFiles(yokis, db){
+    async getAudioFilesAndPutInLocalDB(yokis, db){
       var requestOptions = {
         method: 'GET',
         redirect: 'follow',
@@ -94,7 +94,7 @@ class ConnectedYokis extends Component {
 
     indexedDBGet(yokis){
       var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || window.OIndexedDB || window.msIndexedDB,
-        dbVersion = 1.0;
+        dbVersion = 4;
 
       // Create/open database --this is like a variable block in javascript
       var request = indexedDB.open("yokisFolder", dbVersion),
@@ -122,15 +122,15 @@ class ConnectedYokis extends Component {
             var setVersion = db.setVersion(dbVersion);
             setVersion.onsuccess = function () {
                 createObjectStore(db);
-                this.getAudioFiles(yokis, db);
+                this.getAudioFilesAndPutInLocalDB(yokis, db);
             };
           }
           else {
-            this.getAudioFiles(yokis, db);
+            this.getAudioFilesAndPutInLocalDB(yokis, db);
           }
         }
         else {
-          this.getAudioFiles(yokis, db);
+          this.getAudioFilesAndPutInLocalDB(yokis, db);
         }
       }
 
