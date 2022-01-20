@@ -100,7 +100,7 @@ class ConnectedYokis extends Component {
       var request = indexedDB.open("yokisFolder", dbVersion),
           createObjectStore = function (dataBase) {
 
-            if(!dataBase.objectStoreNames.contain('yokis')) {
+            if(dataBase.objectStoreNames.length == 0) { //TODO: if we ever have to add more dbs, then we will need have to rethink this. sorry, whichever dev has to work on this
               // Create an objectStore
               console.log("Creating objectStore")
               dataBase.createObjectStore("yokis");
