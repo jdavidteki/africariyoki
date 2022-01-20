@@ -99,9 +99,12 @@ class ConnectedYokis extends Component {
       // Create/open database --this is like a variable block in javascript
       var request = indexedDB.open("yokisFolder", dbVersion),
           createObjectStore = function (dataBase) {
-            // Create an objectStore
-            console.log("Creating objectStore")
-            dataBase.createObjectStore("yokis");
+
+            if(!dataBase.objectStoreNames.contain('yokis')) {
+              // Create an objectStore
+              console.log("Creating objectStore")
+              dataBase.createObjectStore("yokis");
+            }
           }
 
       request.onerror = (event) => {
