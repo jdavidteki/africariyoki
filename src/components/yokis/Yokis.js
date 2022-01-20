@@ -94,7 +94,7 @@ class ConnectedYokis extends Component {
 
     indexedDBGet(yokis){
       var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || window.OIndexedDB || window.msIndexedDB,
-        dbVersion = 4;
+          dbVersion =  Math.floor(Math.random() * (11 - 1 + 1) + 1)
 
       // Create/open database --this is like a variable block in javascript
       var request = indexedDB.open("yokisFolder", dbVersion),
