@@ -26,6 +26,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import CloseIcon from '@material-ui/icons/Close';
 import { Emoji } from 'emoji-mart'
 import { Link } from 'react-router-dom'
+import { GetComments, GetEmojiFromComments } from "../helpers/Helpers.js";
 
 TweenOne.plugins.push(SvgMorphPlugin);
 
@@ -153,7 +154,7 @@ class ConnectedGuessSong extends Component {
     componentDidMount(){
         //open indexdb to read yokis
         var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || window.OIndexedDB || window.msIndexedDB,
-            dbVersion =  Math.floor(Math.random() * (11 - 1 + 1) + 1)
+            dbVersion =  1000000000
 
         // Create/open database --this is like a variable block in javascript
         var request = indexedDB.open("yokisFolder", dbVersion),
@@ -352,36 +353,6 @@ class ConnectedGuessSong extends Component {
         })
     }
 
-    getComment(){
-        if(this.state.score <= 5){
-            return "you are just embarrrrassing yourself!"
-        }
-
-        if(this.state.score >= 5 && this.state.score < 10){
-            return "see, you will end up in mcdonalds!"
-        }
-
-        if(this.state.score >= 10 && this.state.score < 15){
-            return "baldadashhh mtchew"
-        }
-
-        if(this.state.score >= 15 && this.state.score < 20){
-            return "like mr macaroni, you are doing well"
-        }
-
-        if(this.state.score >= 20 && this.state.score < 25){
-            return "fantabulous"
-        }
-
-        if(this.state.score >= 25 && this.state.score < 30){
-            return "you have too much pride, try to be calming down"
-        }
-
-        if(this.state.score >= 30 && this.state.score < 35){
-            return "nice, we love to see it!"
-        }
-    }
-
     render() {
         if (this.state.songInQuestion.title != "") {
             return (
@@ -457,9 +428,9 @@ class ConnectedGuessSong extends Component {
                                     <div className="GuessSong-gameOption"><TrendingUpOutlinedIcon /> {this.state.score}</div>
                                     <div className="GuessSong-gameOption"><AccessAlarmOutlinedIcon /> {this.state.selectedOptionDuration.label}</div>
                                     <div className="GuessSong-gameOption GuessSong-comment">
-                                        {this.getComment()}
+                                        {GetComments(this.state.score) + " "}
                                         <Emoji
-                                            emoji={'grapes'}
+                                            emoji={GetEmojiFromComments(GetComments(this.state.score))}
                                             set='apple'
                                             size={18}
                                         />

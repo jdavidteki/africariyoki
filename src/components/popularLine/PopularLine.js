@@ -150,17 +150,6 @@ class ConnectedPopularLine extends Component {
     }
 
     componentDidMount(){
-        //open indexdb to read yokis
-        var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || window.OIndexedDB || window.msIndexedDB,
-            dbVersion = 1.0;
-        // Create/open database --this is like a variable block in javascript
-        var request = indexedDB.open("yokisFolder", dbVersion),
-            db
-        request.onsuccess = (event) =>  {
-            db = request.result;
-            this.setState({db: db})
-        }
-
         const analytics = new Analytics('UA-187038287-1');
         analytics.hit(new PageHit('Game'))
             .then(() => console.log("google analytics on game"))
@@ -310,10 +299,6 @@ class ConnectedPopularLine extends Component {
         })
     }
 
-    getComment(){
-        return GetComments(this.state.score);
-    }
-
     render() {
         if (this.state.songInQuestion.title != "") {
             return (
@@ -389,9 +374,9 @@ class ConnectedPopularLine extends Component {
                                     <div className="PopularLine-gameOption"><TrendingUpOutlinedIcon /> {this.state.score}</div>
                                     <div className="PopularLine-gameOption"><AccessAlarmOutlinedIcon /> {this.state.selectedOptionDuration.label}</div>
                                     <div className="PopularLine-gameOption PopularLine-comment">
-                                        {this.getComment()}
+                                        {GetComments(this.state.score)}
                                         <Emoji
-                                            emoji={'grapes'}
+                                            emoji={GetEmojiFromComments(GetComments(this.state.score))}
                                             set='apple'
                                             size={18}
                                         />

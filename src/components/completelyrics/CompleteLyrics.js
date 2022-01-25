@@ -292,36 +292,6 @@ class ConnectedCompleteLyrics extends Component {
         })
     }
 
-    getComment(){
-        if(this.state.score <= 5){
-            return "you are just embarrrrassing yourself!"
-        }
-
-        if(this.state.score >= 5 && this.state.score < 10){
-            return "see, you will end up in mcdonalds!"
-        }
-
-        if(this.state.score >= 10 && this.state.score < 15){
-            return "baldadashhh mtchew"
-        }
-
-        if(this.state.score >= 15 && this.state.score < 20){
-            return "you are doing wehhll"
-        }
-
-        if(this.state.score >= 20 && this.state.score < 25){
-            return "fantabulous"
-        }
-
-        if(this.state.score >= 25 && this.state.score < 30){
-            return "you have too much pride, try to be calming down"
-        }
-
-        if(this.state.score >= 30 && this.state.score < 35){
-            return "nice, we love to see it!"
-        }
-    }
-
     toggleChoks(){
         if(this.state.showChoks){
             this.setState({showChoks: false})
@@ -426,9 +396,9 @@ class ConnectedCompleteLyrics extends Component {
                                     <div className="CompleteLyrics-gameOption"><TrendingUpOutlinedIcon /> {this.state.score}</div>
                                     <div className="CompleteLyrics-gameOption"><AccessAlarmOutlinedIcon /> {this.state.selectedOptionDuration.label}</div>
                                     <div className="CompleteLyrics-gameOption CompleteLyrics-comment">
-                                        {this.getComment()}
+                                        {GetComments(this.state.score) + " "}
                                         <Emoji
-                                            emoji={'grapes'}
+                                            emoji={GetEmojiFromComments(GetComments(this.state.score))}
                                             set='apple'
                                             size={18}
                                         />

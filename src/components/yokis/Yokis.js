@@ -94,7 +94,7 @@ class ConnectedYokis extends Component {
 
     indexedDBGet(yokis){
       var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || window.OIndexedDB || window.msIndexedDB,
-          dbVersion =  Math.floor(Math.random() * (11 - 1 + 1) + 1)
+          dbVersion =  1000000000
 
       // Create/open database --this is like a variable block in javascript
       var request = indexedDB.open("yokisFolder", dbVersion),
@@ -108,24 +108,27 @@ class ConnectedYokis extends Component {
           }
 
       request.onerror = (event) => {
-        console.log("Error creating/accessing IndexedDB database");
+        console.log("Error creating/accessing IndexedDB database", event);
       };
 
       request.onsuccess = (event) =>  {
-        console.log("Success creating/accessing IndexedDB database");
+        console.log("Success creating/accessing IndexedDB database", event);
         var db = request.result;
 
         db.onerror = function (event) {
-          console.log("Error creating/accessing IndexedDB database");
+          console.log("Error creating/accessing IndexedDB database", event);
         };
 
         // Interim solution for Google Chrome to create an objectStore. Will be deprecated
         if (db.setVersion) {
           if (db.version != dbVersion) {
-            var setVersion = db.setVersion(dbVersion);
+            var setVersion = db.setVersion(db.version + 1); //always make sure to update to current version + 1
             setVersion.onsuccess = function () {
-                createObjectStore(db);
+              createObjectStore(db);
+
+              setTime(() => {
                 this.getAudioFilesAndPutInLocalDB(yokis, db);
+              }, 2000)
             };
           }
           else {

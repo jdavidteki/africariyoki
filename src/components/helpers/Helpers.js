@@ -8,7 +8,7 @@ export function GetComments(score) {
     }
 
     if(score >= 10 && score < 15){
-        return "baldadashhh mtchew"
+        return "you are a failure, you will never make it!"
     }
 
     if(score >= 15 && score < 20){
@@ -41,4 +41,27 @@ export function ShuffleArray(array) {
         [array[i], array[j]] = [array[j], array[i]];
     }
     return array
+}
+
+export function GetEmojiFromComments(comment) {
+    switch(comment) {
+        case "you are just embarrrrassing yourself!":
+          return "face_vomiting"
+        case "you are a failure, you will never make it!":
+          return "hamburger"
+        case "see, you will end up in mcdonalds!":
+          return "broken_heart"
+        case "you are doing wehhll":
+          return 'confetti_ball'
+        case "fantabulous":
+          return 'raised_hands'
+        case "you have too much pride, try to be calming down":
+          return '100'
+        case "you have too much pride, try to be calming down":
+          return 'cupcake'
+        case "nice, we love to see it!":
+          return 'blush'
+        default:
+          return 'blush'
+    }
 }
