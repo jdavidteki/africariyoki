@@ -4,11 +4,11 @@ export function GetComments(score) {
     }
 
     if(score >= 5 && score < 10){
-        return "see, you will end up in mcdonalds!"
+        return "you are a failure, you will never make it!"
     }
 
     if(score >= 10 && score < 15){
-        return "you are a failure, you will never make it!"
+        return "see, you will end up in mcdonalds!"
     }
 
     if(score >= 15 && score < 20){
@@ -48,17 +48,15 @@ export function GetEmojiFromComments(comment) {
         case "you are just embarrrrassing yourself!":
           return "face_vomiting"
         case "you are a failure, you will never make it!":
-          return "hamburger"
-        case "see, you will end up in mcdonalds!":
           return "broken_heart"
+        case "see, you will end up in mcdonalds!":
+          return "hamburger"
         case "you are doing wehhll":
           return 'confetti_ball'
         case "fantabulous":
           return 'raised_hands'
         case "you have too much pride, try to be calming down":
           return '100'
-        case "you have too much pride, try to be calming down":
-          return 'cupcake'
         case "nice, we love to see it!":
           return 'blush'
         default:

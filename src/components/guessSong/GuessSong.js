@@ -295,6 +295,8 @@ class ConnectedGuessSong extends Component {
         })
 
         setTimeout( () => {
+            document.getElementById(song.id).style.backgroundColor = '#c0f0c0'
+
             //make it so that if they dont have the song locally, they can still fetch from the network
             this.setState({
                 songsInOption: this.generateSongsInOptions(this.state.songs, this.state.songs[songInQuestionIndex])
@@ -422,7 +424,7 @@ class ConnectedGuessSong extends Component {
                             {this.state.printResult
                             ?
                                 <div className="GuessSong-results pulse">
-                                    <div className="GuessSong-results-title">Result:</div>
+                                    <div className="GuessSong-results-title">Result</div>
                                     <div className="GuessSong-gameOption"><PersonIcon /> {this.state.selectedOptionPlayerName == "" ? 'anonimo' : this.state.selectedOptionPlayerName}</div>
                                     <div className="GuessSong-gameOption"><BarChartOutlinedIcon /> {this.state.selectedOptionDifficulty.label}</div>
                                     <div className="GuessSong-gameOption"><TrendingUpOutlinedIcon /> {this.state.score}</div>

@@ -22,7 +22,7 @@ import SvgMorphPlugin from 'rc-tween-one/lib/plugin/SvgMorphPlugin';
 import AccessAlarmOutlinedIcon from '@material-ui/icons/AccessAlarmOutlined';
 import { Analytics, PageHit } from 'expo-analytics';
 import { Emoji } from 'emoji-mart'
-import { GetComments, ShuffleArray, CleanLine } from "../helpers/Helpers.js";
+import { GetComments, GetEmojiFromComments, ShuffleArray, CleanLine } from "../helpers/Helpers.js";
 
 TweenOne.plugins.push(SvgMorphPlugin);
 
@@ -241,6 +241,8 @@ class ConnectedPopularLine extends Component {
         let nthLongestLineToShow = Math.floor(Math.random() * 5);
 
         setTimeout( () => {
+            document.getElementById(song.id).style.backgroundColor = '#d5c0f0'
+
             //make it so that if they dont have the song locally, they can still fetch from the network
             this.setState({
                 nthLongestLineToShow: nthLongestLineToShow,
@@ -368,13 +370,13 @@ class ConnectedPopularLine extends Component {
                             {this.state.printResult
                             ?
                                 <div className="PopularLine-results pulse">
-                                    <div className="PopularLine-results-title">Result:</div>
+                                    <div className="PopularLine-results-title">Result</div>
                                     <div className="PopularLine-gameOption"><PersonIcon /> {this.state.selectedOptionPlayerName == "" ? 'anonimo' : this.state.selectedOptionPlayerName}</div>
                                     <div className="PopularLine-gameOption"><BarChartOutlinedIcon /> {this.state.selectedOptionDifficulty.label}</div>
                                     <div className="PopularLine-gameOption"><TrendingUpOutlinedIcon /> {this.state.score}</div>
                                     <div className="PopularLine-gameOption"><AccessAlarmOutlinedIcon /> {this.state.selectedOptionDuration.label}</div>
                                     <div className="PopularLine-gameOption PopularLine-comment">
-                                        {GetComments(this.state.score)}
+                                        {GetComments(this.state.score) + " "}
                                         <Emoji
                                             emoji={GetEmojiFromComments(GetComments(this.state.score))}
                                             set='apple'

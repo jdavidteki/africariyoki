@@ -22,6 +22,7 @@ import SvgMorphPlugin from 'rc-tween-one/lib/plugin/SvgMorphPlugin';
 import AccessAlarmOutlinedIcon from '@material-ui/icons/AccessAlarmOutlined';
 import { Analytics, PageHit } from 'expo-analytics';
 import { Emoji } from 'emoji-mart'
+import { GetComments, GetEmojiFromComments } from "../helpers/Helpers.js";
 
 TweenOne.plugins.push(SvgMorphPlugin);
 
@@ -125,7 +126,6 @@ class ConnectedCompleteLyrics extends Component {
 
             for (let step = 0; step < val[this.state.selectedOptionDifficulty.label].length; step++) {
                 if(val[this.state.selectedOptionDifficulty.label][step]){
-                    console.log("val[this.", step, this.state.selectedOptionDifficulty.label, val[this.state.selectedOptionDifficulty.label].length)
                     if(step > 0 && val[this.state.selectedOptionDifficulty.label][step].averageScore == val[this.state.selectedOptionDifficulty.label][step-1].averageScore){
                         val[this.state.selectedOptionDifficulty.label][step].rank = val[this.state.selectedOptionDifficulty.label][step-1].rank
                     }else{
@@ -390,7 +390,7 @@ class ConnectedCompleteLyrics extends Component {
                             {this.state.printResult
                             ?
                                 <div className="CompleteLyrics-results pulse">
-                                    <div className="CompleteLyrics-results-title">Result:</div>
+                                    <div className="CompleteLyrics-results-title">Result</div>
                                     <div className="CompleteLyrics-gameOption"><PersonIcon /> {this.state.selectedOptionPlayerName == "" ? 'anonimo' : this.state.selectedOptionPlayerName}</div>
                                     <div className="CompleteLyrics-gameOption"><BarChartOutlinedIcon /> {this.state.selectedOptionDifficulty.label}</div>
                                     <div className="CompleteLyrics-gameOption"><TrendingUpOutlinedIcon /> {this.state.score}</div>
