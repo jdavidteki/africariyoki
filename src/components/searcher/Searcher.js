@@ -4,7 +4,6 @@ import Firebase from "../../firebase/firebase.js";
 import TextField from "@material-ui/core/TextField";
 import codeToCountries from "./codeToCountry.js";
 import CloseIcon from '@material-ui/icons/Close';
-import blankBack from "./assets/blankBack.jpeg"
 import MetaTags from 'react-meta-tags';
 import Sbta from '../sbta/Sbta.js'
 import Yokis from '../Yokis/Yokis.js'
@@ -14,8 +13,12 @@ import Suggestions from "../suggestions/Suggestions";
 import { SocialIcon } from 'react-social-icons';
 import PopularSongs  from '../popularSongs/PopularSongs.js';
 import Games from '../games/Games.js';
+import { View } from 'react-native';
 
-import './Searcher.css';
+// import './Searcher.css';
+
+import { styles } from './SearcherStyle.js'
+
 class Searcher extends Component {
   constructor(props){
     super(props);
@@ -30,7 +33,7 @@ class Searcher extends Component {
       count:0,
       query: '',
       expandResults: false,
-      background: blankBack,
+      background: "",
       selectedCode: '',
       countryToBackgroundImage: {},
       bckImageNum: '',
@@ -266,7 +269,7 @@ class Searcher extends Component {
     }
   }
 
-  playSong= (songId) => {
+  playSong = (songId) => {
     let chooseSong = this.state.songs.filter(song => songId === song.id)
 
     if(this.props.history == undefined){
@@ -310,9 +313,9 @@ class Searcher extends Component {
 
   render() {
     return (
-      <div className="Searcher">
+      <View style={styles.container} className="Searcher">
         {this.state.openSuggestionModal &&
-          <div className="Searcher-openSuggestionModal">
+          <View className="Searcher-openSuggestionModal">
             <CloseIcon
               fontSize={'large'}
               className={"Searcher-openSuggestionModal-close"}
@@ -320,7 +323,7 @@ class Searcher extends Component {
               onClick={()=>{this.setState({openSuggestionModal: false})}}
             />
             <Suggestions />
-          </div>
+          </View>
         }
         <MetaTags>
           <title>africariyoki - karaoke with africa!</title>
@@ -335,30 +338,13 @@ class Searcher extends Component {
           <h1 itemprop="headline" style={{ display: "none" }}>#karaokewithafrica - #karaoke, african karaoke, #nigeriankaraoke, #lagoskaraoke, #ghanaian karaoke</h1>
         {/* ******** */}
 
-        <div className="Searcher-metastuff" style={{ display: "none" }}>
-          <div>{this.getSongDetails()}</div>
-          <div>african karaoke and games. other features include afrobeat app guess the song </div>
-          <div itemscope itemtype="https://schema.org/SoftwareApplication">
-            <span itemprop="name">africariyoki</span> -
-
-            <span itemprop="applicationCategory" content="WebApplication">
-              our fun games to play with friends include guess the song, guess song line, and next line. tags - african karaoke, #nigeriankaraoke, #lagoskaraoke, #ghanaian karaoke, toto, karaoke genre.
-            </span>
-
-            <div itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-              <span itemprop="ratingValue">5</span> (
-              <span itemprop="ratingCount">8864</span> ratings )
-            </div>
-          </div>
-        </div>
-
-        <div
+        <View
           style={{ backgroundImage: `url(${this.state.background})` }}
           className="Searcher-background">
-            <div className="Searcher-backgroundOverlay"></div>
-        </div>
-        <div className="Searcher-container">
-          <div className="Searcher-inputWrapper">
+            <View className="Searcher-backgroundOverlay"></View>
+        </View>
+        <View className="Searcher-container">
+          <View className="Searcher-inputWrapper">
             <TextField
               className="Searcher-input"
               shrink='true'
@@ -372,7 +358,7 @@ class Searcher extends Component {
             />
 
             {/* NOTE: dont remove this. incase we want to add search by country in the future */}
-            {/* <div className="Searcher-flagClose">
+            {/* <View className="Searcher-flagClose">
               { this.state.selectedCode != "" &&
 
                 <Button
@@ -393,8 +379,8 @@ class Searcher extends Component {
                 showSelectedLabel={false}
                 countries={["DZ","AO","SH","BJ","BW","BF","BI","CM","CV","CF","TD","KM","CG","CD","DJ","EG","GQ","ER","SZ","ET","GA","GM","GH","GN","GW","CI","KE","LS","LR","LY","MG","MW","ML","MR","MU","YT","MA","MZ","NA","NE","NG","ST","RE","RW","ST","SN","SC","SL","SO","ZA","SS","SH","SD","SZ","TZ","TG","TN","UG","CD","ZM","TZ","ZW"]}
               />
-            </div> */}
-          </div>
+            </View> */}
+          </View>
 
           {this.state.songs.length > 0 &&
             <SongList
@@ -417,14 +403,14 @@ class Searcher extends Component {
           {!this.props.onlySearcherBox &&
             <Games history={this.props.history} callerComponent={"Searcher"}/>
           }
-        </div>
+        </View>
 
-        <div className="Searcher-lowerPane">
-          <div className="Searcher-lowerPane--leftPane">
+        <View className="Searcher-lowerPane">
+          <View className="Searcher-lowerPane--leftPane">
             <SocialIcon bgColor={"#3413f1"} fgColor={"white"} className={"Searcher-socialMedia Searcher-instagram Searcher-lowerPaneIcon"}  url="https://www.instagram.com/africariyoki/" />
             <SocialIcon bgColor={"#3413f1"} fgColor={"white"} className={"Searcher-socialMedia Searcher-twitter Searcher-lowerPaneIcon" }  url="https://www.twitter.com/africariyoki/" />
-          </div>
-          <div className="Searcher-lowerPane--rightPane">
+          </View>
+          <View className="Searcher-lowerPane--rightPane">
             {/* use microphone for only mobile so users can use their phones as a semi-megaphone */}
             {window.innerWidth < 767 &&
               <YokiPhone />
@@ -440,9 +426,9 @@ class Searcher extends Component {
             </a>
             <Yokis songs={this.state.songs}/>
             <Sbta useDefaultImage={false} imageBckNum={this.state.bckImageNum} />
-          </div>
-        </div>
-      </div>
+          </View>
+        </View>
+      </View>
     )
   }
 }

@@ -56,6 +56,7 @@
     "react-firebase-file-uploader": "^2.4.4",
     "react-flags-select": "^2.1.2",
     "react-h5-audio-player": "^3.7.0",
+    "react-image-and-background-image-fade": "^1.0.8",
     "react-internet-meter": "^1.0.6",
     "react-meta-tags": "^1.0.1",
     "react-native": "^0.66.0",

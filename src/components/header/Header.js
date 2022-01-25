@@ -1,15 +1,20 @@
 import React, { Component } from "react";
-import { Link } from 'react-router-dom'
 import logo from './assets/logo.png';
 import Firebase from "../../firebase/firebase.js";
+import { View, Image, Text } from 'react-native';
+import DropDown from '../dropDown/DropDown.js';
 
-import './Header.css';
+import { styles } from './HeaderStyle'
 
 
 class Header extends Component {
 
   state={
     shake: "shake",
+    styleSettings: {
+      mode: this.props.mode,
+      karoakeTabClicked: false,
+    },
   }
 
   componentDidMount(){
@@ -54,17 +59,35 @@ class Header extends Component {
 
   render() {
     return (
-      <div className="Header chrome">
-        <div className="Header-container">
-          <div className="Header-left" id="headerLogoImage">
-            <Link
-              to = "/"
-            >
-              <img className={`Header-logo ${this.state.shake}`} src={logo} alt="Logo" />
-            </Link>
-          </div>
-        </div>
-      </div>
+      <View style={styles(this.state.styleSettings).header} className="Header chrome">
+        <View style={styles(this.state.styleSettings).container} className="Header-container">
+          <View style={styles(this.state.styleSettings).left} className="Header-left">
+            <Image style={styles(this.state.styleSettings).logo} className={`Header-logo ${this.state.shake}`} source={logo} alt="Logo" />
+          </View>
+
+          {this.state.styleSettings.mode != "simple" &&
+            <View style={styles(this.state.styleSettings).right} className="Header-right">
+              <Text
+                style={styles(this.state.styleSettings).navLink}
+                className="Header-navLink"
+                onPress={() => this.setState({styleSettings: {karoakeTabClicked: true}})}
+              >
+                karaoke
+              </Text>
+              <DropDown
+                style={styles(this.state.styleSettings).navLink}
+                className="Header-navLink" title="games" options={['Apple', 'Orange', 'Pear', 'Mango']}
+              />
+              {/* <Text
+                style={styles(this.state.styleSettings).games}
+                className="Header-navLink"
+              >
+                games
+              </Text> */}
+            </View>
+          }
+        </View>
+      </View>
     );
   }
 }

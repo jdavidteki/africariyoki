@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from './components/header/Header';
 import Searcher from './components/searcher/Searcher.js';
+import Composer from './components/composer/Composer.js';
 import KaraokeDisplay from './components/karaokedisplay/KaraokeDisplay.js'
 import Admin from './components/admin/Admin.js'
 import GuessSong from './components/guessSong/GuessSong.js'
@@ -27,11 +28,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header />
         <div className="App-body">
           <div className="content">
             <Switch>
-              <Route path="/" exact component={Searcher} />
+              <Route path="/" exact component={Composer} />
               <Route path="/africariyoki" exact component={Searcher} />
               <Route path="/admin" exact component={Admin} />
               <Route path="/guesssong" exact component={GuessSong} />
