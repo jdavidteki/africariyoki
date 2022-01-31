@@ -119,6 +119,7 @@ class ConnectedYokis extends Component {
           console.log("Error creating/accessing IndexedDB database", event);
         };
 
+        //TODO: this is not necessary anymore so lets remove after thorough research
         // Interim solution for Google Chrome to create an objectStore. Will be deprecated
         if (db.setVersion) {
           if (db.version != dbVersion) {
@@ -134,8 +135,7 @@ class ConnectedYokis extends Component {
           else {
             this.getAudioFilesAndPutInLocalDB(yokis, db);
           }
-        }
-        else {
+        } else {
           this.getAudioFilesAndPutInLocalDB(yokis, db);
         }
       }

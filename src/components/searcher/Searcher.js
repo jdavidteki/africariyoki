@@ -106,9 +106,6 @@ class Searcher extends Component {
     };
     //download all the images for caching purposes
     for(var i = 0; i < 11; i++) {
-
-      console.log("downloading background image", i)
-
       fetch(`https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/searchBackgrounds%2Fbck${i}bck.jpeg?alt=media`, requestOptions)
       .then(response => response.text())
       .then(result => console.log(result))

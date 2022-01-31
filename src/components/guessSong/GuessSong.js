@@ -157,10 +157,18 @@ class ConnectedGuessSong extends Component {
         // Create/open database --this is like a variable block in javascript
         var request = indexedDB.open("yokisFolder", dbVersion),
             db
+
         request.onsuccess = (event) =>  {
             db = request.result;
             this.setState({db: db})
         }
+
+        request.onupgradeneeded = function (event) {
+            //TODO: re-write this entire function pls
+            db = event.target.result
+            console.log("Creating objectStore", db)
+            db.createObjectStore("yokis");
+        };
 
         const analytics = new Analytics('UA-187038287-1');
         analytics.hit(new PageHit('Game'))
