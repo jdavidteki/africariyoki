@@ -5,7 +5,6 @@ import moment from "moment"
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Firebase from "../../firebase/firebase.js";
 import TextField from "@material-ui/core/TextField";
-import Song from '../song/Song'
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import Button from "@material-ui/core/Button";
 import ReplayIcon from '@material-ui/icons/Replay';
@@ -13,7 +12,6 @@ import CheckBoxOutlinedIcon from '@material-ui/icons/CheckBoxOutlined';
 import CancelPresentationIcon from '@material-ui/icons/CancelPresentation';
 import Select  from 'react-select';
 import ArrowForward from '@material-ui/icons/ArrowForward'
-import TrendingUpOutlinedIcon from '@material-ui/icons/TrendingUpOutlined';
 import BarChartOutlinedIcon from '@material-ui/icons/BarChartOutlined';
 import PersonIcon from '@material-ui/icons/Person';
 import MetaTags from 'react-meta-tags';
@@ -21,8 +19,7 @@ import TweenOne from 'rc-tween-one';
 import SvgMorphPlugin from 'rc-tween-one/lib/plugin/SvgMorphPlugin';
 import AccessAlarmOutlinedIcon from '@material-ui/icons/AccessAlarmOutlined';
 import { Analytics, PageHit } from 'expo-analytics';
-import { Emoji } from 'emoji-mart'
-import { GetComments, GetEmojiFromComments } from "../helpers/Helpers.js";
+import  Result from '../result/Result.js'
 
 TweenOne.plugins.push(SvgMorphPlugin);
 
@@ -112,7 +109,7 @@ class ConnectedCompleteLyrics extends Component {
     updateFirebaseScoreBoard(){
         Firebase.getScoreBoardNextLine()
         .then(val => {
-            let playerName = this.state.selectedOptionPlayerName === "" ? "anonimo" : this.state.selectedOptionPlayerName
+            let playerName = this.state.selectedOptionPlayerName === "" ? "yokibot" : this.state.selectedOptionPlayerName
 
             val[this.state.selectedOptionDifficulty.label].push({
                 "rank": 1,
@@ -389,24 +386,17 @@ class ConnectedCompleteLyrics extends Component {
                         <div className="CompleteLyrics-wrapper">
                             {this.state.printResult
                             ?
-                                <div className="CompleteLyrics-results pulse">
-                                    <div className="CompleteLyrics-results-title">Result</div>
-                                    <div className="CompleteLyrics-gameOption"><PersonIcon /> {this.state.selectedOptionPlayerName == "" ? 'anonimo' : this.state.selectedOptionPlayerName}</div>
-                                    <div className="CompleteLyrics-gameOption"><BarChartOutlinedIcon /> {this.state.selectedOptionDifficulty.label}</div>
-                                    <div className="CompleteLyrics-gameOption"><TrendingUpOutlinedIcon /> {this.state.score}</div>
-                                    <div className="CompleteLyrics-gameOption"><AccessAlarmOutlinedIcon /> {this.state.selectedOptionDuration.label}</div>
-                                    <div className="CompleteLyrics-gameOption CompleteLyrics-comment">
-                                        {GetComments(this.state.score) + " "}
-                                        <Emoji
-                                            emoji={GetEmojiFromComments(GetComments(this.state.score))}
-                                            set='apple'
-                                            size={18}
-                                        />
-                                    </div>
-                                    <Button style={{backgroundColor: '#3413f1', color: 'white', marginTop: '30px'}} variant="contained" color="primary" onClick={() => this.restartGame()}>
-                                        play again
-                                    </Button>
-                                </div>
+                                <Result
+                                    playerName = {this.state.selectedOptionPlayerName == "" ? 'yokibot' : this.state.selectedOptionPlayerName}
+                                    difficultyLevel = {this.state.selectedOptionDifficulty.label}
+                                    score = {this.state.score}
+                                    optionDuration = {this.state.selectedOptionDuration.label}
+                                    restartGame = {() => this.restartGame()}
+                                    btnBackgroundColor = {'#3413f1'}
+                                    btnTextColor = {'white'}
+                                    modifier = {'CompleteLyrics'}
+                                    backgroundColor = {'#f7f8e4'}
+                                />
                             :
                                 <TweenOne
                                     animation={
@@ -428,7 +418,7 @@ class ConnectedCompleteLyrics extends Component {
                                             <PlayArrowIcon />
                                         </Button>
                                         <div className="CompleteLyrics-controlMenuInfo">
-                                            <div className="CompleteLyrics-controlMenuInfoChild"> <PersonIcon /> {this.state.selectedOptionPlayerName == "" ? 'anonimo' : this.state.selectedOptionPlayerName}</div>
+                                            <div className="CompleteLyrics-controlMenuInfoChild"> <PersonIcon /> {this.state.selectedOptionPlayerName == "" ? 'yokibot' : this.state.selectedOptionPlayerName}</div>
                                             <div className="CompleteLyrics-controlMenuInfoChild">top score/min: {this.state.highestscore}</div>
                                             <div className="CompleteLyrics-controlMenuInfoChild"><BarChartOutlinedIcon /> {this.state.selectedOptionDifficulty.label}</div>
                                             <div className="CompleteLyrics-controlMenuInfoChild">

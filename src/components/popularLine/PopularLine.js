@@ -13,7 +13,6 @@ import CheckBoxOutlinedIcon from '@material-ui/icons/CheckBoxOutlined';
 import CancelPresentationIcon from '@material-ui/icons/CancelPresentation';
 import Select  from 'react-select';
 import ArrowForward from '@material-ui/icons/ArrowForward'
-import TrendingUpOutlinedIcon from '@material-ui/icons/TrendingUpOutlined';
 import BarChartOutlinedIcon from '@material-ui/icons/BarChartOutlined';
 import PersonIcon from '@material-ui/icons/Person';
 import MetaTags from 'react-meta-tags';
@@ -21,8 +20,8 @@ import TweenOne from 'rc-tween-one';
 import SvgMorphPlugin from 'rc-tween-one/lib/plugin/SvgMorphPlugin';
 import AccessAlarmOutlinedIcon from '@material-ui/icons/AccessAlarmOutlined';
 import { Analytics, PageHit } from 'expo-analytics';
-import { Emoji } from 'emoji-mart'
 import { GetComments, GetEmojiFromComments, ShuffleArray, CleanLine } from "../helpers/Helpers.js";
+import  Result from '../result/Result.js'
 
 TweenOne.plugins.push(SvgMorphPlugin);
 
@@ -121,7 +120,7 @@ class ConnectedPopularLine extends Component {
     updateFirebaseScoreBoard(){
         Firebase.getScoreBoardPopularLine()
         .then(val => {
-            let playerName = this.state.selectedOptionPlayerName === "" ? "anonimo" : this.state.selectedOptionPlayerName
+            let playerName = this.state.selectedOptionPlayerName === "" ? "yokibot" : this.state.selectedOptionPlayerName
 
             val[this.state.selectedOptionDifficulty.label].push({
                 "rank": 1,
@@ -369,24 +368,17 @@ class ConnectedPopularLine extends Component {
                         <div className="PopularLine-wrapper">
                             {this.state.printResult
                             ?
-                                <div className="PopularLine-results pulse">
-                                    <div className="PopularLine-results-title">Result</div>
-                                    <div className="PopularLine-gameOption"><PersonIcon /> {this.state.selectedOptionPlayerName == "" ? 'anonimo' : this.state.selectedOptionPlayerName}</div>
-                                    <div className="PopularLine-gameOption"><BarChartOutlinedIcon /> {this.state.selectedOptionDifficulty.label}</div>
-                                    <div className="PopularLine-gameOption"><TrendingUpOutlinedIcon /> {this.state.score}</div>
-                                    <div className="PopularLine-gameOption"><AccessAlarmOutlinedIcon /> {this.state.selectedOptionDuration.label}</div>
-                                    <div className="PopularLine-gameOption PopularLine-comment">
-                                        {GetComments(this.state.score) + " "}
-                                        <Emoji
-                                            emoji={GetEmojiFromComments(GetComments(this.state.score))}
-                                            set='apple'
-                                            size={18}
-                                        />
-                                    </div>
-                                    <Button style={{backgroundColor: '#131c96', color: 'white', marginTop: '30px'}} variant="contained" color="primary" onClick={() => this.restartGame()}>
-                                        play again
-                                    </Button>
-                                </div>
+                                <Result
+                                    playerName = {this.state.selectedOptionPlayerName == "" ? 'yokibot' : this.state.selectedOptionPlayerName}
+                                    difficultyLevel = {this.state.selectedOptionDifficulty.label}
+                                    score = {this.state.score}
+                                    optionDuration = {this.state.selectedOptionDuration.label}
+                                    restartGame = {() => this.restartGame()}
+                                    btnBackgroundColor = {'#131c96'}
+                                    btnTextColor = {'white'}
+                                    modifier = {'CompleteLyrics'}
+                                    backgroundColor = {'#f0ffff'}
+                                />
                             :
                                 <TweenOne
                                     animation={
@@ -406,7 +398,7 @@ class ConnectedPopularLine extends Component {
                                     </div>
                                     <div className="PopularLine-controlMenu">
                                         <div className="PopularLine-controlMenuInfo">
-                                            <div className="PopularLine-controlMenuInfoChild"> <PersonIcon /> {this.state.selectedOptionPlayerName == "" ? 'anonimo' : this.state.selectedOptionPlayerName}</div>
+                                            <div className="PopularLine-controlMenuInfoChild"> <PersonIcon /> {this.state.selectedOptionPlayerName == "" ? 'yokibot' : this.state.selectedOptionPlayerName}</div>
                                             <div className="PopularLine-controlMenuInfoChild">top score/min: {this.state.highestscore}</div>
                                             <div className="PopularLine-controlMenuInfoChild"><BarChartOutlinedIcon /> {this.state.selectedOptionDifficulty.label}</div>
                                             <div className="PopularLine-controlMenuInfoChild">

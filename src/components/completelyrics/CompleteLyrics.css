@@ -183,8 +183,7 @@
         height: calc(100% - 60px);
     }
 
-    .CompleteLyrics-wrapper,
-    .CompleteLyrics-results{
+    .CompleteLyrics-wrapper{
         width: 100%;
     }
 

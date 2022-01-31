@@ -14,7 +14,6 @@ import CheckBoxOutlinedIcon from '@material-ui/icons/CheckBoxOutlined';
 import CancelPresentationIcon from '@material-ui/icons/CancelPresentation';
 import Select  from 'react-select';
 import ArrowForward from '@material-ui/icons/ArrowForward'
-import TrendingUpOutlinedIcon from '@material-ui/icons/TrendingUpOutlined';
 import BarChartOutlinedIcon from '@material-ui/icons/BarChartOutlined';
 import PersonIcon from '@material-ui/icons/Person';
 import MetaTags from 'react-meta-tags';
@@ -24,9 +23,8 @@ import AccessAlarmOutlinedIcon from '@material-ui/icons/AccessAlarmOutlined';
 import { Analytics, PageHit } from 'expo-analytics';
 import InfoIcon from '@mui/icons-material/Info';
 import CloseIcon from '@material-ui/icons/Close';
-import { Emoji } from 'emoji-mart'
+import  Result from '../result/Result.js'
 import { Link } from 'react-router-dom'
-import { GetComments, GetEmojiFromComments } from "../helpers/Helpers.js";
 
 TweenOne.plugins.push(SvgMorphPlugin);
 
@@ -123,7 +121,7 @@ class ConnectedGuessSong extends Component {
     updateFirebaseScoreBoard(){
         Firebase.getScoreBoardGuessSong()
         .then(val => {
-            let playerName = this.state.selectedOptionPlayerName === "" ? "anonimo" : this.state.selectedOptionPlayerName
+            let playerName = this.state.selectedOptionPlayerName === "" ? "yokibot" : this.state.selectedOptionPlayerName
 
             val[this.state.selectedOptionDifficulty.label].push({
                 "rank": 1,
@@ -423,24 +421,17 @@ class ConnectedGuessSong extends Component {
                         <div className="GuessSong-wrapper">
                             {this.state.printResult
                             ?
-                                <div className="GuessSong-results pulse">
-                                    <div className="GuessSong-results-title">Result</div>
-                                    <div className="GuessSong-gameOption"><PersonIcon /> {this.state.selectedOptionPlayerName == "" ? 'anonimo' : this.state.selectedOptionPlayerName}</div>
-                                    <div className="GuessSong-gameOption"><BarChartOutlinedIcon /> {this.state.selectedOptionDifficulty.label}</div>
-                                    <div className="GuessSong-gameOption"><TrendingUpOutlinedIcon /> {this.state.score}</div>
-                                    <div className="GuessSong-gameOption"><AccessAlarmOutlinedIcon /> {this.state.selectedOptionDuration.label}</div>
-                                    <div className="GuessSong-gameOption GuessSong-comment">
-                                        {GetComments(this.state.score) + " "}
-                                        <Emoji
-                                            emoji={GetEmojiFromComments(GetComments(this.state.score))}
-                                            set='apple'
-                                            size={18}
-                                        />
-                                    </div>
-                                    <Button style={{backgroundColor: '#0f750f', color: 'white', marginTop: '30px'}} variant="contained" color="primary" onClick={() => this.restartGame()}>
-                                        play again
-                                    </Button>
-                                </div>
+                                <Result
+                                    playerName = {this.state.selectedOptionPlayerName == "" ? 'yokibot' : this.state.selectedOptionPlayerName}
+                                    difficultyLevel = {this.state.selectedOptionDifficulty.label}
+                                    score = {this.state.score}
+                                    optionDuration = {this.state.selectedOptionDuration.label}
+                                    restartGame = {() => this.restartGame()}
+                                    btnBackgroundColor = {'#0f750f'}
+                                    btnTextColor = {'white'}
+                                    modifier = {'GuessSong'}
+                                    backgroundColor = {'#f7f8e4'}
+                                />
                             :
                                 <TweenOne
                                     animation={
@@ -494,7 +485,7 @@ class ConnectedGuessSong extends Component {
                                         </Button>
 
                                         <div className="GuessSong-controlMenuInfo">
-                                            <div className="GuessSong-controlMenuInfoChild"> <PersonIcon /> {this.state.selectedOptionPlayerName == "" ? 'anonimo' : this.state.selectedOptionPlayerName}</div>
+                                            <div className="GuessSong-controlMenuInfoChild"> <PersonIcon /> {this.state.selectedOptionPlayerName == "" ? 'yokibot' : this.state.selectedOptionPlayerName}</div>
                                             <div className="GuessSong-controlMenuInfoChild">top score/min: {this.state.highestscore}</div>
                                             <div className="GuessSong-controlMenuInfoChild"><BarChartOutlinedIcon /> {this.state.selectedOptionDifficulty.label}</div>
                                             <div className="GuessSong-controlMenuInfoChild">
