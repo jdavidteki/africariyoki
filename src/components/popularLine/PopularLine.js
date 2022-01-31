@@ -150,7 +150,7 @@ class ConnectedPopularLine extends Component {
 
     componentDidMount(){
         const analytics = new Analytics('UA-187038287-1');
-        analytics.hit(new PageHit('Game'))
+        analytics.hit(new PageHit('Popular Line'))
             .then(() => console.log("google analytics on game"))
             .catch(e => console.log(e.message));
 

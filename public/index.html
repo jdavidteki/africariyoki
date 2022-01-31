@@ -26,11 +26,8 @@
       // When the single page app is loaded further down in this file,
       // the correct url will be waiting in the browser's history for
       // the single page app to route accordingly.
-      console.log("we in indexhtml before")
       (function(l) {
-        console.log("we in indexhtml before")
         if (l.search[1] === '/' ) {
-          console.log("we in indexhtml")
           var decoded = l.search.slice(1).split('&').map(function(s) {
             return s.replace(/~and~/g, '&')
           }).join('?');
@@ -58,6 +55,21 @@
       You need to enable JavaScript to run this app.
     </noscript>
     <div id="root"></div>
+    <div style="display: none">
+      <div>african karaoke and games. features include afrobeat app guess the song </div>
+      <div itemscope itemtype="https://schema.org/SoftwareApplication">
+        <span itemprop="name">africariyoki</span> -
+
+        <span itemprop="applicationCategory" content="WebApplication">
+          our fun games to play with friends include guess the song, guess song line, and next line.
+        </span>
+
+        <div itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+          <span itemprop="ratingValue">5</span> (
+          <span itemprop="ratingCount">8864</span> ratings )
+        </div>
+      </div>
+    </div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

@@ -328,8 +328,25 @@ class Searcher extends Component {
         </MetaTags>
 
         {/* these will remain for SEO purposes */}
-          <h1 itemprop="headline" style={{ display: "none" }}>#karaokewithafrica - #karaoke, #africankaraoke, #nigeriankaraoke, #lagoskaraoke, #ghanaiankaraoke</h1>
+          <h1 itemprop="headline" style={{ display: "none" }}>#karaokewithafrica - #karaoke, african karaoke, #nigeriankaraoke, #lagoskaraoke, #ghana iankaraoke</h1>
         {/* ******** */}
+
+        <div className="Searcher-metastuff" style={{ display: "none" }}>
+          <div>{this.getSongDetails()}</div>
+          <div>african karaoke and games. other features include afrobeat app guess the song </div>
+          <div itemscope itemtype="https://schema.org/SoftwareApplication">
+            <span itemprop="name">africariyoki</span> -
+
+            <span itemprop="applicationCategory" content="WebApplication">
+              our fun games to play with friends include guess the song, guess song line, and next line.
+            </span>
+
+            <div itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+              <span itemprop="ratingValue">5</span> (
+              <span itemprop="ratingCount">8864</span> ratings )
+            </div>
+          </div>
+        </div>
 
         <div
           style={{ backgroundImage: `url(${this.state.background})` }}
