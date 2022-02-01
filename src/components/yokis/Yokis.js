@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import InsertCommentIcon from '@material-ui/icons/InsertComment';
 import CloseIcon from '@material-ui/icons/Close';
-import CircularProgress from "@material-ui/core/CircularProgress";
 import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -14,7 +13,6 @@ class ConnectedYokis extends Component {
       super(props);
       this.state = {
         songs: this.props.songs.filter(v => v.useForGames == 1),
-        loadingUpdates: false,
         updateSongIndex: 0,
         stopUpdating: true,
         updateDownloadCTA: 'start update',
@@ -48,14 +46,12 @@ class ConnectedYokis extends Component {
         this.setState({
           yokis: [],
           stopUpdating: false,
-          loadingUpdates: true,
         }, ()=>{this.indexedDBGet(this.state.songs)})
     }
 
     pauseUpdating = () =>{
       this.setState({
-        stopUpdating: true,
-        loadingUpdates: false,
+        stopUpdating: true
       })
     }
 
@@ -191,14 +187,14 @@ class ConnectedYokis extends Component {
                                 </Button>
                             </div>
                             <div className="Yokis-updatedSongs">
-                                <div className="Yokis-updateProgress">
-                                  {this.state.loadingUpdates &&
-                                    <CircularProgress size={15} />
-                                  }
-                                </div>
-                                {this.state.yokis.map((song, index) =>
-                                    <div key={index}>updated - {song.title}</div>
-                                )}
+                              <div className="Yokis-updateProgress">
+                                {this.state.yokis.length > 0 &&
+                                  <p>downloaded {this.state.yokis.length} yoki(s)</p>
+                                }
+                              </div>
+                              {this.state.yokis.map((song, index) =>
+                                <div key={index}>{song.title}</div>
+                              )}
                             </div>
                         </div>
                     </div>

@@ -438,7 +438,7 @@ class ConnectedGuessSong extends Component {
                                     btnBackgroundColor = {'#0f750f'}
                                     btnTextColor = {'white'}
                                     modifier = {'GuessSong'}
-                                    backgroundColor = {'#f7f8e4'}
+                                    backgroundColor = {'#f0ffff'}
                                 />
                             :
                                 <TweenOne
