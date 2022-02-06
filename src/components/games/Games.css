@@ -6,7 +6,6 @@
     align-items: center;
 }
 
-
 .Games-instruction{
     color: white;
     text-align: center;
@@ -54,8 +53,8 @@
 .Games-scoreboard
 {
     position: absolute;
-    bottom: 3px;
-    right: 10px;
+    top: 0;
+    right: 0;
     color: black;
     font-weight: bold;
     z-index: 99;
@@ -66,4 +65,53 @@
     .Games-wrapper{
       width: 90%;
     }
+}
+
+/* styling for when we are calling from searcher */
+
+.Games.Games-Searcher{
+    background-color: transparent;
+    overflow-x: scroll;
+}
+
+.Games.Games-Searcher .Games-wrapper{
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    width: 100%;
+    justify-content: center;
+}
+
+.Games-Searcher .Games-nextLine,
+.Games-Searcher .Games-guessTheSong,
+.Games-Searcher .Games-guesssongline{
+    padding: 8px;
+    padding-top: 16px;
+}
+
+.Games-Searcher .Games-gameTitle{
+    font-weight: lighter;
+    font-size: 20px;
+}
+
+.Games.Games-Searcher {
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin-top: 16px;
+}
+
+.Games.Games-Searcher::-webkit-scrollbar-track {
+    -webkit-box-shadow: none !important;
+    background-color: transparent;
+}
+
+.Games.Games-Searcher::-webkit-scrollbar {
+    width: 3px !important;
+    background-color: transparent;
+}
+
+.Games.Games-Searcher::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    background: none !important;
 }

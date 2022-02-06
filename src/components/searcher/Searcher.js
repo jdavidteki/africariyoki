@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import SongList from '../songLIst/SongList';
 import Firebase from "../../firebase/firebase.js";
 import TextField from "@material-ui/core/TextField";
-import ReactTypingEffect from 'react-typing-effect';
 import codeToCountries from "./codeToCountry.js";
 import CloseIcon from '@material-ui/icons/Close';
 import blankBack from "./assets/blankBack.jpeg"
@@ -13,6 +12,8 @@ import YokiPhone from '../yokiPhone/YokiPhone.js'
 import { Analytics, PageHit } from 'expo-analytics';
 import Suggestions from "../suggestions/Suggestions";
 import { SocialIcon } from 'react-social-icons';
+import PopularSongs  from '../popularSongs/popularSongs.js';
+import Games from '../games/Games.js';
 
 import './Searcher.css';
 class Searcher extends Component {
@@ -24,6 +25,7 @@ class Searcher extends Component {
       filteredSongs: [],
       currentSong: '',
       songsCopy:[],
+      popularSongs:[],
       typingEffectSongs: [''],
       count:0,
       query: '',
@@ -76,6 +78,7 @@ class Searcher extends Component {
     if (localSongs != null){
       let localLyrics = localSongs['lyrics']
       this.setState({
+        popularSongs: localLyrics,
         songs: localLyrics,
         songsCopy: localLyrics,
         typingEffectSongs: shuffleArray(localLyrics.map(a => a.turnedOn == 1 ? a.title : '').filter(a => a != '')),
@@ -87,6 +90,7 @@ class Searcher extends Component {
     Firebase.getLyrics().then(
       val => {
         this.setState({
+          popularSongs: val,
           songs: val,
           songsCopy: val,
           typingEffectSongs: shuffleArray(val.map(a => a.turnedOn == 1 ? a.title : '').filter(a => a != '')),
@@ -328,7 +332,7 @@ class Searcher extends Component {
         </MetaTags>
 
         {/* these will remain for SEO purposes */}
-          <h1 itemprop="headline" style={{ display: "none" }}>#karaokewithafrica - #karaoke, african karaoke, #nigeriankaraoke, #lagoskaraoke, #ghana iankaraoke</h1>
+          <h1 itemprop="headline" style={{ display: "none" }}>#karaokewithafrica - #karaoke, african karaoke, #nigeriankaraoke, #lagoskaraoke, #ghanaian karaoke</h1>
         {/* ******** */}
 
         <div className="Searcher-metastuff" style={{ display: "none" }}>
@@ -338,7 +342,7 @@ class Searcher extends Component {
             <span itemprop="name">africariyoki</span> -
 
             <span itemprop="applicationCategory" content="WebApplication">
-              our fun games to play with friends include guess the song, guess song line, and next line.
+              our fun games to play with friends include guess the song, guess song line, and next line. tags - african karaoke, #nigeriankaraoke, #lagoskaraoke, #ghanaian karaoke.
             </span>
 
             <div itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
@@ -392,7 +396,6 @@ class Searcher extends Component {
             </div> */}
           </div>
 
-
           {this.state.songs.length > 0
           ?
             <SongList
@@ -407,17 +410,14 @@ class Searcher extends Component {
             <div></div>
           }
 
-          {this.state.typingEffectSongs.length > 20 &&
-            <div className="Searcher-typeEffectWrapper">
-              <ReactTypingEffect
-                style={{ marginTop: 50, fontSize: 12, color: '#3F51B5' }}
-                text={this.state.typingEffectSongs.slice(0, 20)[this.state.count]}
-                speed={150}
-                eraseDelay={150}
-                typingDelay={150}
-              />
-            </div>
+          {this.state.popularSongs.length &&
+            <PopularSongs
+              cards = {this.state.popularSongs.sort(( )=> Math.random() - 0.5).slice(0, 50)}
+              playSong = {this.playSong}
+            />
           }
+
+          <Games history={this.props.history} callerComponent={"Searcher"}/>
         </div>
 
         <div className="Searcher-lowerPane">

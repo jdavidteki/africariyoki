@@ -20,15 +20,17 @@ class PopularSongs extends Component {
         window.addEventListener("resize", this.isCardVisible, true);
 
         setInterval( () => {
-            const popSongs = document.getElementById("js-popularSongs");
-            let randomCardIndex = Math.floor(Math.random() * (this.state.cards.length - 0) + 0);
-            let randomCardToShow = popSongs.childNodes[randomCardIndex]
+            let popSongs = document.getElementById("js-popularSongs");
+            if (popSongs != undefined){
+                let randomCardIndex = Math.floor(Math.random() * (this.state.cards.length - 0) + 0);
+                let randomCardToShow = popSongs.childNodes[randomCardIndex]
 
-            if (randomCardToShow != undefined){
-                randomCardToShow.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'center',
-                })
+                if (randomCardToShow != undefined){
+                    randomCardToShow.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center',
+                    })
+                }
             }
         }, 20000);
     }

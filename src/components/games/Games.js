@@ -1,24 +1,15 @@
 
 import React, { Component } from 'react';
-import { bounce } from 'react-animations'
-import Radium, {StyleRoot} from 'radium';
+import AssessmentOutlinedIcon from '@mui/icons-material/AssessmentOutlined';
 
 import './Games.css';
-
-const styles = {
-    bounce: {
-      animation: 'x 10s',
-      animationName: Radium.keyframes(bounce, 'bounce')
-    }
-  }
 
 class Games extends Component {
   constructor(props){
     super(props);
 
     this.state= {
-        cards: this.props.cards,
-        thisSongId: this.props.thisSongId
+        callerComponent: this.props.callerComponent,
     }
   }
 
@@ -36,45 +27,51 @@ class Games extends Component {
 
     render() {
         return (
-            <StyleRoot className="Games">
+            <div className={this.state.callerComponent ? "Games Games-Searcher" : "Games"}>
                 <div className="Games-wrapper">
-                    <div className="Games-guessTheSong" style={styles.bounce}>
+                    <div className="Games-guessTheSong">
                         <div onClick={()=>this.goToGame("guessthesong")} className="Games-gameTitle">
                             guess the song
                         </div>
-                        <div onClick={()=>this.goToGame("guessthesong")}>
+                        {this.state.callerComponent !="Searcher" &&
+                            <div onClick={()=>this.goToGame("guessthesong")}>
                             listen to snippets of song instrumentals and select correct song from list of options. click to play
-                        </div>
+                            </div>
+                        }
                         <div className="Games-scoreboard" onClick={()=>this.goToScoreboard("scoreboardguesssong")}>
-                           scores
+                           <AssessmentOutlinedIcon />
                         </div>
                     </div>
 
-                    <div className="Games-guesssongline" style={styles.bounce}>
+                    <div className="Games-guesssongline">
                         <div onClick={()=>this.goToGame("popularline")} className="Games-gameTitle">
                             guess song line
                         </div>
-                        <div onClick={()=>this.goToGame("popularline")}>
-                            choose the right song after reading familiar lines. click to play
-                        </div>
+                        {this.state.callerComponent !="Searcher" &&
+                            <div onClick={()=>this.goToGame("popularline")}>
+                                choose the right song after reading familiar lines. click to play
+                            </div>
+                        }
                         <div className="Games-scoreboard" onClick={()=>this.goToScoreboard("scoreboardguesssongline")}>
-                           scores
+                            <AssessmentOutlinedIcon />
                         </div>
                     </div>
 
-                    <div className="Games-nextLine" style={styles.bounce}>
+                    <div className="Games-nextLine">
                         <div onClick={()=>this.goToGame("cls")} className="Games-gameTitle">
                             next line
                         </div>
-                        <div onClick={()=>this.goToGame("cls")}>
-                            select the next line of your favourite songs. click to play
-                        </div>
+                        {this.state.callerComponent !="Searcher" &&
+                            <div onClick={()=>this.goToGame("cls")}>
+                                select the next line of your favourite songs. click to play
+                            </div>
+                        }
                         <div className="Games-scoreboard" onClick={()=>this.goToScoreboard("scoreboardnextline")}>
-                           scores
+                            <AssessmentOutlinedIcon />
                         </div>
                     </div>
                 </div>
-            </StyleRoot>
+            </div>
         );
     }
 }
