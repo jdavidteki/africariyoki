@@ -21,17 +21,28 @@ class PopularSongs extends Component {
 
         setInterval( () => {
             let popSongs = document.getElementById("js-popularSongs");
-            if (popSongs != undefined){
-                let randomCardIndex = Math.floor(Math.random() * (this.state.cards.length - 0) + 0);
-                let randomCardToShow = popSongs.childNodes[randomCardIndex]
 
-                if (randomCardToShow != undefined){
-                    randomCardToShow.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'center',
-                    })
-                }
+            let randomCardIndex = Math.floor(Math.random() * (this.state.cards.length - 0) + 0);
+            let randomCardToShow = popSongs.childNodes[randomCardIndex]
+
+            if (randomCardToShow != undefined){
+                randomCardToShow.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center',
+                })
             }
+
+            // if (popSongs != undefined){ //TODO: come back to fix this bug
+            //     let randomCardIndex = Math.floor(Math.random() * (this.state.cards.length - 0) + 0);
+            //     let randomCardToShow = popSongs.childNodes[randomCardIndex]
+
+            //     if (randomCardToShow != undefined){
+            //         randomCardToShow.scrollIntoView({
+            //             behavior: 'smooth',
+            //             block: 'center',
+            //         })
+            //     }
+            // }
         }, this.props.scrollSeconds ? this.props.scrollSeconds : 20000);
     }
 

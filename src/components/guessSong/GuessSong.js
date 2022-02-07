@@ -244,6 +244,8 @@ class ConnectedGuessSong extends Component {
                     }
                 )
 
+                console.log("this.state.songInQuestion", this.state.songInQuestion)
+
                 var int = setInterval(() => {
                     if (this.audio != null && this.audio.currentTime > selectedStartTime + levelToPlaySec[this.state.selectedOptionDifficulty.label]) {
                         this.audio.pause();
@@ -300,10 +302,15 @@ class ConnectedGuessSong extends Component {
             songInQuestion: this.state.songs[songInQuestionIndex],
         })
 
+        console.log("songInQuestionIndexbeforee", songInQuestionIndex)
+
         setTimeout( () => {
-            if( document.getElementById(song.id) != undefined){
-                document.getElementById(song.id).style.backgroundColor = '#c0f0c0'
-            }
+            document.getElementById(song.id).style.backgroundColor = '#c0f0c0'
+            // if( document.getElementById(song.id) != undefined){ //TODO: this is tied to popularSongs #35 todo
+            //     document.getElementById(song.id).style.backgroundColor = '#c0f0c0'
+            // }
+
+            console.log("songInQuestionIndex", songInQuestionIndex)
 
             //make it so that if they dont have the song locally, they can still fetch from the network
             this.setState({
