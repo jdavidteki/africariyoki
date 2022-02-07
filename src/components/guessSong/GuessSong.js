@@ -52,7 +52,7 @@ const levelToPlaySec = {
     "master": 2.5,
 }
 
-const startTimes = [45, 50, 55];
+const startTimes = [50, 55, 60];
 const selectedStartTime = Math.floor(Math.random() * startTimes.length);
 
 class ConnectedGuessSong extends Component {
@@ -244,7 +244,6 @@ class ConnectedGuessSong extends Component {
                     }
                 )
 
-                console.log("this.state.songInQuestion", this.state.songInQuestion)
 
                 var int = setInterval(() => {
                     if (this.audio != null && this.audio.currentTime > selectedStartTime + levelToPlaySec[this.state.selectedOptionDifficulty.label]) {
@@ -300,25 +299,20 @@ class ConnectedGuessSong extends Component {
             audioPaused: true,
             songInQuestionIndex: songInQuestionIndex,
             songInQuestion: this.state.songs[songInQuestionIndex],
+        }, () => {
+            setTimeout( () => {
+                if( document.getElementById(song.id) != undefined){
+                    document.getElementById(song.id).style.backgroundColor = '#c0f0c0'
+                }
+
+                //make it so that if they dont have the song locally, they can still fetch from the network
+                this.setState({
+                    songsInOption: this.generateSongsInOptions(this.state.songs, this.state.songs[songInQuestionIndex])
+                },() => {
+                    this.play() //play next song immediately after old song
+                });
+            }, 700);
         })
-
-        console.log("songInQuestionIndexbeforee", songInQuestionIndex)
-
-        setTimeout( () => {
-            document.getElementById(song.id).style.backgroundColor = '#c0f0c0'
-            // if( document.getElementById(song.id) != undefined){ //TODO: this is tied to popularSongs #35 todo
-            //     document.getElementById(song.id).style.backgroundColor = '#c0f0c0'
-            // }
-
-            console.log("songInQuestionIndex", songInQuestionIndex)
-
-            //make it so that if they dont have the song locally, they can still fetch from the network
-            this.setState({
-                songsInOption: this.generateSongsInOptions(this.state.songs, this.state.songs[songInQuestionIndex])
-            },() => {
-                this.play() //play next song immediately after old song
-            });
-        }, 700);
     }
 
     startGame(){

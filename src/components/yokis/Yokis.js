@@ -63,7 +63,8 @@ class ConnectedYokis extends Component {
 
       for(var i = 0; i < yokis.length; i++){
         if (!this.state.stopUpdating){
-          await fetch(`https://storage.googleapis.com/africariyoki-4b634.appspot.com/music/${yokis[i].id}.mp3`, requestOptions)
+          let yokisId = yokis[i].id
+          await fetch(`https://storage.googleapis.com/africariyoki-4b634.appspot.com/music/${yokisId}.mp3`, requestOptions)
           .then(response => response.blob())
           .then(async result => {
             var blob = result;
@@ -71,7 +72,7 @@ class ConnectedYokis extends Component {
             // Open a transaction to the database
             //TODO: figure out how to make this check local yokis before adding new ones to reduce waist of bandwidth
             var transaction = db.transaction(["yokis"], "readwrite");
-            transaction.objectStore("yokis").put(blob, yokis[i].id);
+            transaction.objectStore("yokis").put(blob, yokisId);
 
             if(this.state.songs[this.state.updateSongIndex] != undefined){
               this.setState(previousState => ({
@@ -83,8 +84,9 @@ class ConnectedYokis extends Component {
               });
             }
           })
-          .catch(error => console.log('error',error));
+          .catch(error => console.log('error', error));
         }
+        setTimeout(()=>{}, 500)
       }
     }
 
