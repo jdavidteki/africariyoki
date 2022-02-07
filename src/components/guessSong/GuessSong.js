@@ -301,7 +301,9 @@ class ConnectedGuessSong extends Component {
         })
 
         setTimeout( () => {
-            document.getElementById(song.id).style.backgroundColor = '#c0f0c0'
+            if( document.getElementById(song.id) != undefined){
+                document.getElementById(song.id).style.backgroundColor = '#c0f0c0'
+            }
 
             //make it so that if they dont have the song locally, they can still fetch from the network
             this.setState({

@@ -240,7 +240,9 @@ class ConnectedPopularLine extends Component {
         let nthLongestLineToShow = Math.floor(Math.random() * 5);
 
         setTimeout( () => {
-            document.getElementById(song.id).style.backgroundColor = '#d5c0f0'
+            if(document.getElementById(song.id) != undefined){
+                document.getElementById(song.id).style.backgroundColor = '#d5c0f0'
+            }
 
             //make it so that if they dont have the song locally, they can still fetch from the network
             this.setState({

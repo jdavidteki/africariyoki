@@ -40,7 +40,6 @@
 .Games-nextLine.hover,
 .Games-guessTheSong.hover,
 .Games-guesssongline.hover{
-    cursor: pointer;
     background-color: aliceblue;
     transition: background-color 0.25s ease-in;
 }
