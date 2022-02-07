@@ -10,7 +10,7 @@ class PopularSongs extends Component {
 
     this.state= {
         cards: this.props.cards,
-        thisSongId: this.props.thisSongId
+        thisSongId: this.props.thisSongId,
     }
   }
 
@@ -32,7 +32,7 @@ class PopularSongs extends Component {
                     })
                 }
             }
-        }, 20000);
+        }, this.props.scrollSeconds ? this.props.scrollSeconds : 20000);
     }
 
     isCardVisible() {

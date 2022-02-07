@@ -25,6 +25,34 @@ class Games extends Component {
         });
     }
 
+    componentDidMount(){
+        if(this.state.callerComponent == "Searcher"){
+            setInterval(() => {
+                if(document.querySelector(".Games-guessTheSong") != undefined){
+                    document.querySelector(".Games-guessTheSong").classList.toggle("hover")
+                    setTimeout(()=>{},1000);
+                }
+
+            }, 3000);
+
+            setInterval(() => {
+                if(document.querySelector(".Games-guesssongline") != undefined){
+                    document.querySelector(".Games-guesssongline").classList.toggle("hover")
+                    setTimeout(()=>{},1000);
+                }
+
+            }, 6000);
+
+            setInterval(() => {
+                if(document.querySelector(".Games-nextLine") != undefined){
+                    document.querySelector(".Games-nextLine").classList.toggle("hover")
+                    setTimeout(()=>{},1000);
+                }
+
+            }, 9000);
+        }
+    }
+
     render() {
         return (
             <div className={this.state.callerComponent ? "Games Games-Searcher" : "Games"}>

@@ -12,7 +12,7 @@ import YokiPhone from '../yokiPhone/YokiPhone.js'
 import { Analytics, PageHit } from 'expo-analytics';
 import Suggestions from "../suggestions/Suggestions";
 import { SocialIcon } from 'react-social-icons';
-import PopularSongs  from '../popularSongs/popularSongs.js';
+import PopularSongs  from '../popularSongs/PopularSongs.js';
 import Games from '../games/Games.js';
 
 import './Searcher.css';
@@ -342,7 +342,7 @@ class Searcher extends Component {
             <span itemprop="name">africariyoki</span> -
 
             <span itemprop="applicationCategory" content="WebApplication">
-              our fun games to play with friends include guess the song, guess song line, and next line. tags - african karaoke, #nigeriankaraoke, #lagoskaraoke, #ghanaian karaoke.
+              our fun games to play with friends include guess the song, guess song line, and next line. tags - african karaoke, #nigeriankaraoke, #lagoskaraoke, #ghanaian karaoke, toto, karaoke genre.
             </span>
 
             <div itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
@@ -414,6 +414,7 @@ class Searcher extends Component {
             <PopularSongs
               cards = {this.state.popularSongs.sort(( )=> Math.random() - 0.5).slice(0, 50)}
               playSong = {this.playSong}
+              scrollSeconds = {5000}
             />
           }
 

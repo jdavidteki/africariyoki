@@ -28,9 +28,18 @@
     position: relative;
 }
 
+/* dont try this at home, kids */
 .Games-nextLine:hover,
 .Games-guessTheSong:hover,
 .Games-guesssongline:hover{
+    cursor: pointer;
+    background-color: aliceblue;
+    transition: background-color 0.25s ease-in;
+}
+
+.Games-nextLine.hover,
+.Games-guessTheSong.hover,
+.Games-guesssongline.hover{
     cursor: pointer;
     background-color: aliceblue;
     transition: background-color 0.25s ease-in;
@@ -98,7 +107,7 @@
     overflow-x: scroll;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    margin-top: 16px;
+    margin-top: 32px;
 }
 
 .Games.Games-Searcher::-webkit-scrollbar-track {

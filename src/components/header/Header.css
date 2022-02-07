@@ -84,8 +84,10 @@
     .Header {
       font-size: 18px;
     }
+
     .Header-container {
       width: 100%;
+      padding-top: 40px;
     }
 
     .Header-logo {
