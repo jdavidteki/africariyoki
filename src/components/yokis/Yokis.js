@@ -153,7 +153,7 @@ class ConnectedYokis extends Component {
                 ?
                     <InsertCommentIcon className={"Yokis-insertCommentIcon"} style={{ color: '#3413f1' }} />
                 :
-                    <span id="js-yokisCTA" className="Yokis-cta">yokis</span>
+                    <span id="js-yokisCTA" className="Yokis-cta">offline?</span>
                 }
             </div>
             {this.state.showArtDesc &&
@@ -166,10 +166,10 @@ class ConnectedYokis extends Component {
                         </div>
                         <div className="Yokis-content">
                             <div className="Yokis-title">
-                                <p className="Yokis-title-super">update all yokis to enjoy africariyoki offline. </p>
+                                <p className="Yokis-title-super">download yokis to enjoy africariyoki offline</p>
                                 <p className="Yokis-title-sub">
-                                    you need to download atleast 10 yokis to enjoy games.
-                                    if you ever clear your browser (chrome) cache, you will need to download yokis again.
+                                    you go need to download as many yokis as possible so the games fit work well.
+                                    if you ever clear your browser (chrome) cache, you go need to come download again. no vex!
                                 </p>
                             </div>
                             <div className="Yokis-controlMenu">
