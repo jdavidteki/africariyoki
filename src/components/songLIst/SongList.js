@@ -19,7 +19,7 @@ const SongList = (props) => {
         :
           <div className="SongList-emptySearch-wrapper">
             <span className="SongList-emptySearch">
-              you too search something we have, mtchewww
+              you too, search something we have! mtchewww
               <Emoji
                 emoji={'face_with_rolling_eyes'}
                 set='apple'
