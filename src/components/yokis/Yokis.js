@@ -86,7 +86,7 @@ class ConnectedYokis extends Component {
           })
           .catch(error => console.log('error', error));
         }
-        setTimeout(()=>{}, 500)
+        setTimeout(()=>{}, 250)
       }
     }
 
