@@ -57,7 +57,7 @@ class Games extends Component {
         }
     }
 
-    componentDidMount(){
+    componentWillUnmount(){
         clearInterval(this.int1)
         clearInterval(this.int2)
         clearInterval(this.int3)
