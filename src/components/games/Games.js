@@ -13,6 +13,10 @@ class Games extends Component {
     }
   }
 
+  int1 = null
+  int2 = null
+  int3 = null
+
     goToGame(game){
         this.props.history.push({
             pathname: `/${game}/`
@@ -27,7 +31,7 @@ class Games extends Component {
 
     componentDidMount(){
         if(this.state.callerComponent == "Searcher"){
-            setInterval(() => {
+            this.int1 = setInterval(() => {
                 if(document.querySelector(".Games-guessTheSong") != undefined){
                     document.querySelector(".Games-guessTheSong").classList.toggle("hover")
                     setTimeout(()=>{},1000);
@@ -35,7 +39,7 @@ class Games extends Component {
 
             }, 3000);
 
-            setInterval(() => {
+            this.int2 = setInterval(() => {
                 if(document.querySelector(".Games-guesssongline") != undefined){
                     document.querySelector(".Games-guesssongline").classList.toggle("hover")
                     setTimeout(()=>{},1000);
@@ -43,7 +47,7 @@ class Games extends Component {
 
             }, 6000);
 
-            setInterval(() => {
+            this.int3 = setInterval(() => {
                 if(document.querySelector(".Games-nextLine") != undefined){
                     document.querySelector(".Games-nextLine").classList.toggle("hover")
                     setTimeout(()=>{},1000);
@@ -51,6 +55,12 @@ class Games extends Component {
 
             }, 9000);
         }
+    }
+
+    componentDidMount(){
+        clearInterval(this.int1)
+        clearInterval(this.int2)
+        clearInterval(this.int3)
     }
 
     render() {
