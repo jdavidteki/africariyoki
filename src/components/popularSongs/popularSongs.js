@@ -13,13 +13,14 @@ class PopularSongs extends Component {
         thisSongId: this.props.thisSongId,
     }
   }
+  timer = null
 
     componentDidMount() {
         document.addEventListener("load", this.isCardVisible, true);
         window.addEventListener("scroll", this.isCardVisible, true);
         window.addEventListener("resize", this.isCardVisible, true);
 
-        setInterval( () => {
+        this.timer = setInterval( () => {
             let popSongs = document.getElementById("js-popularSongs");
             if (popSongs != undefined){
                 let randomCardIndex = Math.floor(Math.random() * (this.state.cards.length - 0) + 0);
@@ -33,6 +34,10 @@ class PopularSongs extends Component {
                 }
             }
         }, this.props.scrollSeconds ? this.props.scrollSeconds : 20000);
+    }
+
+    componentWillUnmount(){
+        clearInterval(this.timer)
     }
 
     isCardVisible() {
