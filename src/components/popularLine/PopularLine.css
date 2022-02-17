@@ -125,7 +125,6 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    min-height: 230px;
 }
 
 .PopularLine-options .Song{
@@ -136,8 +135,7 @@
 
 .PopularLine-title{
     font-weight: bold;
-    text-transform: uppercase;
-    padding-bottom: 15px;
+    padding-bottom: 12px;
     position: relative;
     display: flex;
     align-items: center;
@@ -204,9 +202,9 @@
     }
 
     .PopularLine-wrapper{
-        margin-top: 140px;
         height: calc(100% - 60px);
         position: fixed;
+        bottom: 0;
     }
 
     .PopularLine-wrapper,

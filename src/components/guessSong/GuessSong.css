@@ -113,7 +113,6 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    min-height: 230px;
 }
 
 .GuessSong-options .Song{
@@ -236,9 +235,9 @@
     }
 
     .GuessSong-wrapper{
-        margin-top: 140px;
         height: calc(100% - 60px);
         position: fixed;
+        bottom: 0;
     }
 
     .GuessSong-wrapper,
