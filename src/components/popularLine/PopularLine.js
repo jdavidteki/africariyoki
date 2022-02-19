@@ -158,9 +158,7 @@ class ConnectedPopularLine extends Component {
         Firebase.getPopularLines().then(
             val => {
                 if (val != undefined){
-                    this.setState({poplineObj: val}, () => {
-                        this.setState({randomTruePopLine: this.findRandomTruePopLine()})
-                    })
+                    this.setState({poplineObj: val})
                 }
             }
         )
@@ -172,6 +170,7 @@ class ConnectedPopularLine extends Component {
             let songInQuestionIndex = Math.floor(Math.random() * (localLyrics.length - 0) + 0);
 
             this.setState({
+                randomTruePopLine: this.findRandomTruePopLine(localLyrics[songInQuestionIndex].id),
                 songs: localLyrics,
                 songInQuestionIndex: songInQuestionIndex,
                 songInQuestion: localLyrics[songInQuestionIndex],
@@ -186,6 +185,7 @@ class ConnectedPopularLine extends Component {
             let songInQuestionIndex = Math.floor(Math.random() * (localYokisArray.length - 0) + 0);
 
             this.setState({
+                randomTruePopLine: this.findRandomTruePopLine(localYokisArray[songInQuestionIndex].id),
                 songs: localYokisArray,
                 songInQuestionIndex: songInQuestionIndex,
                 songInQuestion: localYokisArray[songInQuestionIndex],
@@ -198,6 +198,7 @@ class ConnectedPopularLine extends Component {
                     let songInQuestionIndex = Math.floor(Math.random() * (val.length - 0) + 0);
 
                     this.setState({
+                      randomTruePopLine: this.findRandomTruePopLine(val[songInQuestionIndex].id),
                       songs: val,
                       songInQuestionIndex: songInQuestionIndex,
                       songInQuestion: val[songInQuestionIndex],
@@ -221,12 +222,12 @@ class ConnectedPopularLine extends Component {
         this.setState({ selectedOptionDuration });
     };
 
-    findRandomTruePopLine = () => {
+    findRandomTruePopLine = (songInQuestionId) => {
         let randomTruePopLine = ""
 
-        if (this.state.poplineObj[this.state.songInQuestion.id]){
-            if (this.state.poplineObj[this.state.songInQuestion.id].content){
-                let content = this.state.poplineObj[this.state.songInQuestion.id].content
+        if (this.state.poplineObj[songInQuestionId]){
+            if (this.state.poplineObj[songInQuestionId].content){
+                let content = this.state.poplineObj[songInQuestionId].content
                 let popularLinesObj = JSON.parse(content.replaceAll("'", ""));
 
                 let truePopLines = []
@@ -239,7 +240,6 @@ class ConnectedPopularLine extends Component {
                 randomTruePopLine = truePopLines[Math.floor(Math.random()*truePopLines.length)];
             }
         }
-
         return randomTruePopLine
     }
 
@@ -278,7 +278,7 @@ class ConnectedPopularLine extends Component {
 
             //make it so that if they dont have the song locally, they can still fetch from the network
             this.setState({
-                randomTruePopLine: this.findRandomTruePopLine(),
+                randomTruePopLine: this.findRandomTruePopLine(this.state.songs[songInQuestionIndex].id),
                 nthLongestLineToShow: nthLongestLineToShow,
                 songInQuestionIndex: songInQuestionIndex,
                 songInQuestion: this.state.songs[songInQuestionIndex],
@@ -480,7 +480,7 @@ class ConnectedPopularLine extends Component {
 }
 
 function getPopularLine(randomTruePopLine, songObject, nthLongestLineToShow){
-    if(randomTruePopLine){
+    if(randomTruePopLine != ""){
         return randomTruePopLine
     }
 
