@@ -14,6 +14,7 @@ import Games from './components/games/Games.js';
 import ScoreboardGuessSong from './components/scoreboardGuessSong/ScoreboardGuessSong.js';
 import ScoreboardNextLine from './components/scoreboardNextLine/ScoreboardNextLine.js';
 import ScoreboardGuessSongLine from './components/scoreboardGuessSongLine/ScoreboardGuessSongLine.js';
+import UpdatePopline from './components/updatepopline/UpdatePopline.js'
 
 import "./App.css";
 
@@ -44,6 +45,7 @@ class App extends Component {
               <Route path="/scoreboardguesssong" component={ScoreboardGuessSong} />
               <Route path="/scoreboardnextline" component={ScoreboardNextLine} />
               <Route path="/scoreboardguesssongline" component={ScoreboardGuessSongLine} />
+              <Route path="/updatepopline" component={UpdatePopline} />
               <Route component={ForOFor}/>
             </Switch>
           </div>

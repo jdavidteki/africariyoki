@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -77,6 +76,8 @@ class ConnectedPopularLine extends Component {
         nthLongestLineToShow: 0,
         db: null,
         optionBackground: '#d5c0f0',
+        poplineObj: {},
+        randomTruePopLine: "",
         songInQuestion: {
             audiourl: '',
             singer: '',
@@ -154,6 +155,15 @@ class ConnectedPopularLine extends Component {
             .then(() => console.log("google analytics on game"))
             .catch(e => console.log(e.message));
 
+        Firebase.getPopularLines().then(
+            val => {
+                if (val != undefined){
+                    this.setState({poplineObj: val}, () => {
+                        this.setState({randomTruePopLine: this.findRandomTruePopLine()})
+                    })
+                }
+            }
+        )
 
         //try to load local songs file first
         let localSongs = JSON.parse(localStorage.getItem('lyrics'));
@@ -211,6 +221,28 @@ class ConnectedPopularLine extends Component {
         this.setState({ selectedOptionDuration });
     };
 
+    findRandomTruePopLine = () => {
+        let randomTruePopLine = ""
+
+        if (this.state.poplineObj[this.state.songInQuestion.id]){
+            if (this.state.poplineObj[this.state.songInQuestion.id].content){
+                let content = this.state.poplineObj[this.state.songInQuestion.id].content
+                let popularLinesObj = JSON.parse(content.replaceAll("'", ""));
+
+                let truePopLines = []
+                for (const [key, value] of Object.entries(popularLinesObj)) {
+                    if (value == true){
+                        truePopLines.push(key)
+                    }
+                }
+
+                randomTruePopLine = truePopLines[Math.floor(Math.random()*truePopLines.length)];
+            }
+        }
+
+        return randomTruePopLine
+    }
+
 
     generateSongsInOptions(allSongs, songInQuestion){
         let songsInOptions = [songInQuestion]
@@ -246,6 +278,7 @@ class ConnectedPopularLine extends Component {
 
             //make it so that if they dont have the song locally, they can still fetch from the network
             this.setState({
+                randomTruePopLine: this.findRandomTruePopLine(),
                 nthLongestLineToShow: nthLongestLineToShow,
                 songInQuestionIndex: songInQuestionIndex,
                 songInQuestion: this.state.songs[songInQuestionIndex],
@@ -396,7 +429,7 @@ class ConnectedPopularLine extends Component {
                                        <span>what song is this line from?</span>
                                     </div>
                                     <div className="PopularLine-lyricInQuestion">
-                                        {getPopularLine(this.state.songInQuestion, this.state.nthLongestLineToShow) }
+                                        {getPopularLine(this.state.randomTruePopLine, this.state.songInQuestion, this.state.nthLongestLineToShow) }
                                     </div>
                                     <div className="PopularLine-controlMenu">
                                         <div className="PopularLine-controlMenuInfo">
@@ -446,11 +479,9 @@ class ConnectedPopularLine extends Component {
     }
 }
 
-function getPopularLine(songObject, nthLongestLineToShow){
-    let popLines = songObject.popularLine
-
-    if (popLines != null && popLines.length > 0){
-        return popLines[0]
+function getPopularLine(randomTruePopLine, songObject, nthLongestLineToShow){
+    if(randomTruePopLine){
+        return randomTruePopLine
     }
 
     let lyricsArray = songObject.lyrics.split("\n").sort((a, b) => b.length - a.length);

@@ -1,0 +1,39 @@
+.UpdatePopline {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: calc(100% - 80px);
+    margin-top: 81px;
+    padding: 20px;
+  }
+
+  .UpdatePopline-textArea{
+    position: fixed;
+    top: 80;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: calc(100% - 80px);
+    padding: 20px;
+    background-color: white;
+  }
+
+  .UpdatePopline-annotation{
+    flex-grow: 1;
+  }
+
+  .UpdatePopline-controlPane{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .UpdatePopline-saveButton,
+  .UpdatePopline-closeIcon,
+  .UpdatePopline-line{
+    cursor: pointer;
+  }
+
+  .UpdatePopline-line:hover{
+    color: red;
+  }

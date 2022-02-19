@@ -143,7 +143,7 @@ class ConnectedAdmin extends Component {
 
     adminLogIn(){
         var tenure = prompt("Please enter master password to continue", "");
-        if (tenure != null && tenure == "1226") {
+        if (tenure != null && tenure == "7779") {
             this.setState({adminLoggedIn: true})
         }else{
           alert("you are a liar and a fraud!!!")
@@ -153,7 +153,7 @@ class ConnectedAdmin extends Component {
 
     deleteSong(){
         var tenure = prompt("Please enter master password", "");
-        if (tenure != null && tenure == "1226") {
+        if (tenure != null && tenure == "7779") {
             for (let i = 0; i < this.state.selectedSongIds.length; i++) {
                 Firebase.deleteRecp(this.state.selectedSongIds[i])
                 Firebase.storage().refFromURL(`gs://africariyoki-4b634.appspot.com/music/${this.state.selectedSongIds[i]}.mp3`).delete()
@@ -176,6 +176,16 @@ class ConnectedAdmin extends Component {
     updateAnnotation(){
         this.props.history.push({
             pathname: "/annotationfixer/" + this.state.selectedSongIds[0],
+            state: {
+                lyrics: this.state.selectedSongLyrics,
+                songId: this.state.selectedSongIds[0],
+            }
+        });
+    }
+
+    updatePopLine(){
+        this.props.history.push({
+            pathname: "/updatepopline/" + this.state.selectedSongIds[0],
             state: {
                 lyrics: this.state.selectedSongLyrics,
                 songId: this.state.selectedSongIds[0],
@@ -287,6 +297,17 @@ class ConnectedAdmin extends Component {
                                     }}
                                 >
                                     Update Annotation - ({this.state.selectedSongIds[0]})
+                                </Button>
+                                {" "}
+                                <Button
+                                    style={{ marginTop: 20, width: 200 }}
+                                    variant="outlined"
+                                    color="primary"
+                                    onClick={() => {
+                                        this.updatePopLine()
+                                    }}
+                                >
+                                    popLine - ({this.state.selectedSongIds[0]})
                                 </Button>
                             </div>
                         )

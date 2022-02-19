@@ -83,7 +83,7 @@ class Games extends Component {
 
                     <div className="Games-guesssongline">
                         <div onClick={()=>this.goToGame("popularline")} className="Games-gameTitle">
-                            guess song line
+                           popular lines
                         </div>
                         {this.state.callerComponent !="Searcher" &&
                             <div onClick={()=>this.goToGame("popularline")}>

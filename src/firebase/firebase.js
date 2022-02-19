@@ -106,6 +106,36 @@ class Firebase {
     })
   }
 
+  getPopularLines = () => {
+    return new Promise(resolve => {
+      firebase.database()
+      .ref('/popularlines/')
+      .once('value')
+      .then(snapshot => {
+        if (snapshot.val()){
+          resolve(snapshot.val())
+        }else{
+          resolve({})
+        }
+      })
+    })
+  }
+
+  getPopularLinesById = (id) =>{
+    return new Promise(resolve => {
+      firebase.database()
+      .ref('/popularlines/'+id)
+      .once('value')
+      .then(snapshot => {
+        if (snapshot.val()){
+          resolve(snapshot.val())
+        }else{
+          resolve({})
+        }
+      })
+    })
+  }
+
   getStoryFromID = (id) =>{
     return new Promise(resolve => {
       firebase.database()
@@ -314,6 +344,25 @@ class Firebase {
     return new Promise(resolve => {
       firebase.database()
       .ref('/annotations/' + songId + '/')
+      .update(
+        {
+          content: content,
+        },
+      )
+      .then((response) => {
+        console.log("response", response)
+        resolve(true)
+      })
+      .catch(error => {
+        console.log("error", error)
+      })
+    })
+  }
+
+  updatePopularline = (songId, content) => {
+    return new Promise(resolve => {
+      firebase.database()
+      .ref('/popularlines/' + songId + '/')
       .update(
         {
           content: content,
