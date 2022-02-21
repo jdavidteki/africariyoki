@@ -331,6 +331,7 @@ class ConnectedPopularLine extends Component {
             answerCorrect: true,
             songInQuestionIndex: songInQuestionIndex,
             songInQuestion: this.state.songs[songInQuestionIndex],
+            randomTruePopLine: this.findRandomTruePopLine(this.state.songs[songInQuestionIndex].id),
             songsInOption: this.generateSongsInOptions(this.state.songs, this.state.songs[songInQuestionIndex])
         })
     }
