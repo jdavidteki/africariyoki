@@ -51,7 +51,7 @@ class ScoreboardGuessSongLine extends Component {
                     <div className="ScoreboardGuessSongLine-wrapper">
                         <div className="ScoreboardGuessSongLine-guessTheSong">
                             <div className="ScoreboardGuessSongLine-title">
-                                guess the song line top 10
+                                popular lines top 10
                             </div>
                             <div className="ScoreboardGuessSongLine-scoreInfo--beginner">
                                 <div className="ScoreboardGuessSongLine-scoreInfo--title">
