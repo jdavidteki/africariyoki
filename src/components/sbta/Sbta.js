@@ -4,6 +4,7 @@ import Button from "@material-ui/core/Button";
 import Firebase from "../../firebase/firebase.js";
 import InsertCommentIcon from '@material-ui/icons/InsertComment';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import KeyboardTabIcon from '@mui/icons-material/KeyboardTab';
 
 import "./Sbta.css";
 
@@ -20,6 +21,7 @@ class Sbta extends Component {
             useIcon: this.props.useIcon,
             storyAvailable: false,
             openOnLoad: this.props.openOnLoad,
+            stories: [],
         }
     }
 
@@ -29,6 +31,12 @@ class Sbta extends Component {
         if(this.state.openOnLoad){
             this.setState({showArtDesc: true})
         }
+
+        Firebase.getSBTAs().then(val => {
+            this.setState({
+                stories: Object.keys(val)
+            })
+        })
     }
 
     componentDidUpdate(prevProps, prevState){
@@ -55,6 +63,11 @@ class Sbta extends Component {
         })
     }
 
+    nextSongWithSBTA(){
+        let randomSBTAId = this.state.stories[Math.floor(Math.random()*this.state.stories.length)];
+        window.location.href = "/karaokedisplay/" + randomSBTAId.replaceAll('bck', '') + '/?withsbta=1';
+    }
+
     render() {
         if (this.state.storyAvailable && this.state.storyContent != undefined){
             return (
@@ -72,6 +85,9 @@ class Sbta extends Component {
                             <div className="Sbta-artDesc">
                                 <div className="Sbta-artDescWrapper">
                                     <div className="Sbta-closeIcon">
+                                        <Button onClick={() => this.nextSongWithSBTA()}>
+                                            <KeyboardTabIcon fontSize="small" style={{ color: '#f7c99e'}} />
+                                        </Button>
                                         <Button onClick={() => {
                                             navigator.clipboard.writeText(window.location.href + '?withsbta=1')
                                         }}>

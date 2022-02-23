@@ -339,21 +339,21 @@ class ConnectedKaraokeDisplay extends Component {
           <SpaceBackground />
 
           <div className="KaraokeDisplay-container">
-
             <div className="KaraokeDisplay-topContainer">
-              <AudioPlayer
-                autoPlay
-                src={this.state.singer.audiourl.includes('africariyoki-4b634') ? this.state.singer.audiourl : this.state.singer.audiourl.replace('africariyoki', 'africariyoki-4b634')} //because im cheap and im not paying for firebase
-                controlsList="nodownload"
-                className={"KaraokeDisplay-audio"}
-                onEnded={this.playAnotherSong}
-                onPause={ () => {this.setState({pauseSong: true})}}
-                onPlay = {() => {this.setState({pauseSong: false})}}
-                onListen = {(event) => {this.setState({currentTime: event.target.currentTime})}}
-                listenInterval = {1}
-                ref={ref => this.player = ref}
-              />
-
+              {this.state.singer.audiourl &&
+                <AudioPlayer
+                  autoPlay
+                  src={this.state.singer.audiourl.includes('africariyoki-4b634') ? this.state.singer.audiourl : this.state.singer.audiourl.replace('africariyoki', 'africariyoki-4b634')} //because im cheap and im not paying for firebase
+                  controlsList="nodownload"
+                  className={"KaraokeDisplay-audio"}
+                  onEnded={this.playAnotherSong}
+                  onPause={ () => {this.setState({pauseSong: true})}}
+                  onPlay = {() => {this.setState({pauseSong: false})}}
+                  onListen = {(event) => {this.setState({currentTime: event.target.currentTime})}}
+                  listenInterval = {1}
+                  ref={ref => this.player = ref}
+                />
+              }
               {this.state.showTimer &&
                 <div className="KaraokeDisplay-showTimer">
                   <span>playing a yoki you will like in {` ${this.state.secs}`}</span>

@@ -176,6 +176,21 @@ class Firebase {
     })
   }
 
+  getSBTAs = () => {
+    return new Promise(resolve => {
+      firebase.database()
+      .ref('/bckStory/')
+      .once('value')
+      .then(snapshot => {
+        if (snapshot.val()){
+          resolve(snapshot.val())
+        }else{
+          resolve({})
+        }
+      })
+    })
+  }
+
   storage = () => {
     return firebase.storage()
   }
