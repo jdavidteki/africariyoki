@@ -23,6 +23,11 @@ class ScoreboardGuessSongLine extends Component {
                 scores: ScoreboardGuessSongLine,
             })
         })
+
+        const analytics = new Analytics('UA-187038287-1');
+        analytics.hit(new PageHit('Scoreboard Popular Lines'))
+            .then(() => console.log("google analytics on game"))
+            .catch(e => console.log(e.message));
     }
 
     scoreSubTitiles(){

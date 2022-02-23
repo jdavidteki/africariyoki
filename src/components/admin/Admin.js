@@ -84,6 +84,12 @@ class ConnectedAdmin extends Component {
         Firebase.getLyrics().then( val => {
             this.setState({songs: val, filteredRows: this.getRows(val)})
         })
+
+        const analytics = new Analytics('UA-187038287-1');
+        analytics.hit(new PageHit('Admin'))
+            .then(() => console.log("google analytics on game"))
+            .catch(e => console.log(e.message));
+
     }
 
     handleFilterChange=(filter)=>{
