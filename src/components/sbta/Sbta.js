@@ -34,7 +34,7 @@ class Sbta extends Component {
 
         Firebase.getSBTAs().then(val => {
             this.setState({
-                stories: Object.keys(val)
+                stories: Object.keys(val).filter((element) => { return element.length >  7} )
             })
         })
     }
