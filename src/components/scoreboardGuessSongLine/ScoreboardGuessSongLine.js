@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Firebase from "../../firebase/firebase.js";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { Analytics, PageHit } from 'expo-analytics';
 
 import './ScoreboardGuessSongLine.css';
 

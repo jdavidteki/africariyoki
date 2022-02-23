@@ -8,6 +8,7 @@ import Button from "@material-ui/core/Button";
 import UploadContent from '../uploadcontent/UploadContent.js'
 import UploadSearcherBck from '../uploadSearcherBck/UploadSearcherBck.js'
 import UploadImgStory from '../uploadImgStory/UploadImgStory.js'
+import { Analytics, PageHit } from 'expo-analytics';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import "./Admin.css"
