@@ -396,8 +396,7 @@ class Searcher extends Component {
             </div> */}
           </div>
 
-          {this.state.songs.length > 0
-          ?
+          {this.state.songs.length > 0 &&
             <SongList
               songs={this.state.songs}
               filteredSongs={this.state.filteredSongs}
@@ -405,12 +404,9 @@ class Searcher extends Component {
               suggestSong={this.suggestSong}
               expandResults={this.state.expandResults}
             />
-
-          :
-            <div></div>
           }
 
-          {this.state.popularSongs.length &&
+          {this.state.popularSongs.length && !this.props.onlySearcherBox &&
             <PopularSongs
               cards = {this.state.popularSongs.sort(( )=> Math.random() - 0.5).slice(0, 50)}
               playSong = {this.playSong}
@@ -418,7 +414,9 @@ class Searcher extends Component {
             />
           }
 
-          <Games history={this.props.history} callerComponent={"Searcher"}/>
+          {!this.props.onlySearcherBox &&
+            <Games history={this.props.history} callerComponent={"Searcher"}/>
+          }
         </div>
 
         <div className="Searcher-lowerPane">

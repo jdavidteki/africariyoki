@@ -309,7 +309,7 @@ class ConnectedKaraokeDisplay extends Component {
                 style={{ color: '#f7f8e4' }}
                 onClick={()=>{this.setState({openSearcherModal: false})}}
               />
-              <Searcher />
+              <Searcher onlySearcherBox={true} />
             </div>
           }
           {this.state.openSuggestionModal &&
