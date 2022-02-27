@@ -32,9 +32,16 @@ class Sbta extends Component {
             this.setState({showArtDesc: true})
         }
 
-        Firebase.getSBTAs().then(val => {
-            this.setState({
-                stories: Object.keys(val).filter((element) => { return element.length >  7} )
+        Firebase.getLyricsRawJSON().then(songs => {
+            Firebase.getSBTAs().then(val => {
+                let stories =  Object.keys(val).filter((element) => { return element.length >  7} )
+
+                //check to make sure song is turned on before pushing things and making next song actually play the right song
+                stories = stories.filter((element) => { return songs[element.replaceAll('bck', '')].turnedOn == 1 }  )
+
+                this.setState({
+                    stories: stories
+                })
             })
         })
     }
@@ -44,7 +51,6 @@ class Sbta extends Component {
             this.grabStoryFromFirebase(this.props.imageBckNum)
         }
     }
-
 
     grabStoryFromFirebase(storyID){
         Firebase.getStoryFromID(storyID).then(val => {
@@ -65,7 +71,7 @@ class Sbta extends Component {
 
     nextSongWithSBTA(){
         let randomSBTAId = this.state.stories[Math.floor(Math.random()*this.state.stories.length)];
-        window.location.href = "/karaokedisplay/" + randomSBTAId.replaceAll('bck', '') + '/?withsbta=1';
+        window.location.href = "/karaokedisplay/" + randomSBTAId.replaceAll('bck', '') + '?withsbta=1';
     }
 
     render() {
@@ -87,11 +93,6 @@ class Sbta extends Component {
                                     <div className="Sbta-closeIcon">
                                         <Button onClick={() => this.nextSongWithSBTA()}>
                                             <KeyboardTabIcon fontSize="small" style={{ color: '#f7c99e'}} />
-                                        </Button>
-                                        <Button onClick={() => {
-                                            navigator.clipboard.writeText(window.location.href + '?withsbta=1')
-                                        }}>
-                                            <ContentCopyIcon fontSize="small" style={{ color: '#f7c99e'}} />
                                         </Button>
                                         <Button onClick={() => this.setState({showArtDesc: false})}>
                                             <CloseIcon fontSize="small" style={{ color: '#f7c99e'}} />

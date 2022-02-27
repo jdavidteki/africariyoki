@@ -16,6 +16,21 @@ class Firebase {
     })
   }
 
+  getLyricsRawJSON = () =>{
+    return new Promise(resolve => {
+      firebase.database()
+      .ref('/lyrics/')
+      .once('value')
+      .then(snapshot => {
+        if (snapshot.val()){
+          resolve(snapshot.val())
+        }else{
+          resolve({})
+        }
+      })
+    })
+  }
+
   getScoreBoardGuessSong = () =>{
     return new Promise(resolve => {
       firebase.database()
