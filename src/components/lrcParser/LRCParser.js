@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Recorder from '../recorder/Recorder.js'
 import { Emoji } from 'emoji-mart'
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
+import { HmsToSecondsOnly, CleanLine } from "../helpers/Helpers.js";
 
 import './LRCParser.css';
 
@@ -50,7 +51,7 @@ class LRCParser extends Component {
   getLyricsArrayWithMs(rawArray){
     var msToLine = new Map()
     for( var i = 0; i < rawArray.length; i++ ){
-      var lyricTimeMilliSec = hmsToSecondsOnly(rawArray[i].substring(1, 6)) + parseInt(rawArray[i].substring(7, 9), 10)
+      var lyricTimeMilliSec = HmsToSecondsOnly(rawArray[i].substring(1, 6)) + parseInt(rawArray[i].substring(7, 9), 10)
       msToLine.set(lyricTimeMilliSec, rawArray[i])
     }
     return msToLine
@@ -112,12 +113,12 @@ class LRCParser extends Component {
           </div>
 
           <p className="LRCParser-previousLine">
-            {this.state.prevLine ? cleanLine(this.state.prevLine) : ''}
+            {this.state.prevLine ? CleanLine(this.state.prevLine) : ''}
           </p>
           <p className="LRCParser-currentLine">
             {this.state.currentLine
             ?
-             <span onClick={()=>{this.showAnotation(cleanLine(this.state.currentLine))}} className={this.hasAnotation(cleanLine(this.state.currentLine)) ? "LRCParser-hasAnotation" : ""}>{cleanLine(this.state.currentLine)}</span>
+             <span onClick={()=>{this.showAnotation(CleanLine(this.state.currentLine))}} className={this.hasAnotation(CleanLine(this.state.currentLine)) ? "LRCParser-hasAnotation" : ""}>{CleanLine(this.state.currentLine)}</span>
             :
               <span>
                 loading din din...
@@ -130,7 +131,7 @@ class LRCParser extends Component {
             }
           </p>
           <p className="LRCParser-nextLine">
-            {this.state.nextLine ? cleanLine(this.state.nextLine) : ''}
+            {this.state.nextLine ? CleanLine(this.state.nextLine) : ''}
           </p>
         </div>
         {
@@ -163,22 +164,6 @@ class LRCParser extends Component {
       </div>
     );
   }
-}
-
-function cleanLine(string){
-  return string.substr(10).toLowerCase().replace("by rentanadvisercom", '***')
-}
-
-function hmsToSecondsOnly(str) {
-  var p = str.split(':'),
-      s = 0, m = 1;
-
-  while (p.length > 0) {
-      s += m * parseInt(p.pop(), 10);
-      m *= 60;
-  }
-
-  return s*1000;
 }
 
 export default LRCParser;

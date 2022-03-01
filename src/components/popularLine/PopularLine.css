@@ -118,7 +118,7 @@
 .PopularLine-lowerMenu{
     margin-top: 15px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 .PopularLine-options{

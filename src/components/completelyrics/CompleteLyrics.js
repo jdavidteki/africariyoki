@@ -460,7 +460,7 @@ class ConnectedCompleteLyrics extends Component {
                                     </div>
                                     <div className="CompleteLyrics-lowerMenu">
                                         <Button variant="contained" style={{backgroundColor: '#3413f1', color: 'white'}} onClick={() => this.toggleChoks()}>
-                                            Chokolo
+                                            choks
                                         </Button>
 
                                         {this.state.showChoks &&

@@ -19,7 +19,7 @@ import TweenOne from 'rc-tween-one';
 import SvgMorphPlugin from 'rc-tween-one/lib/plugin/SvgMorphPlugin';
 import AccessAlarmOutlinedIcon from '@material-ui/icons/AccessAlarmOutlined';
 import { Analytics, PageHit } from 'expo-analytics';
-import { GetComments, GetEmojiFromComments, ShuffleArray, CleanLine } from "../helpers/Helpers.js";
+import {ShuffleArray, CleanLine, HmsToSecondsOnly } from "../helpers/Helpers.js";
 import  Result from '../result/Result.js'
 
 TweenOne.plugins.push(SvgMorphPlugin);
@@ -43,10 +43,10 @@ const DurationOptions = [
 ];
 
 const levelToPlaySec = {
-    "beginner": 5,
-    "amateur": 4,
-    "professional": 3,
-    "master": 2.5,
+    "beginner": 3.5,
+    "amateur": 3,
+    "professional": 2.5,
+    "master": 2,
 }
 
 const startTimes = [45, 50, 55];
@@ -101,6 +101,7 @@ class ConnectedPopularLine extends Component {
                 eventDate: moment.duration().add({days:0,hours:0,minutes:this.state.selectedOptionDuration.value,seconds:0}),
                 secs:0,
                 mins:this.state.selectedOptionDuration.value,
+                audioPaused: true,
                 printResult: true,
             })
             clearInterval(x)
@@ -282,7 +283,8 @@ class ConnectedPopularLine extends Component {
                 nthLongestLineToShow: nthLongestLineToShow,
                 songInQuestionIndex: songInQuestionIndex,
                 songInQuestion: this.state.songs[songInQuestionIndex],
-                songsInOption: this.generateSongsInOptions(this.state.songs, this.state.songs[songInQuestionIndex])
+                songsInOption: this.generateSongsInOptions(this.state.songs, this.state.songs[songInQuestionIndex]),
+                audioPaused: true
             });
         }, 400);
     }
@@ -336,6 +338,58 @@ class ConnectedPopularLine extends Component {
         })
     }
 
+    playVocal(){
+        if(this.audio != null && this.audio.duration > 0){
+            var timeToStart = this.getPopLineTime(this.state.randomTruePopLine)
+
+            if (timeToStart == 0){
+                timeToStart = this.audio.duration * 0.7
+            }
+
+            if (!this.audio.src.includes("#t")){
+                this.audio.src = this.audio.src += `#t=${timeToStart}`
+            }
+
+            //wait for like 0.5sec before actually playing just incase it is paused
+            setTimeout(()=>{
+                this.audio.play();
+                this.setState({audioPaused: false})
+            },
+            500);
+
+            //update song plays
+            Firebase.getLyricsById(this.state.songInQuestion.id).then(
+                val => {
+                    Firebase.updateNumPlays(this.state.songInQuestion.id, val.numPlays +=1)
+                }
+            )
+
+            var int = setInterval(() => {
+                if (this.audio != null && this.audio.currentTime > timeToStart + levelToPlaySec[this.state.selectedOptionDifficulty.label]) {
+                    this.audio.currentTime = timeToStart
+                    this.audio.pause();
+                    this.setState({audioPaused: true})
+                    clearInterval(int)
+                }
+            }, 10);
+        }
+    }
+
+    getPopLineTime(popularLine){
+        let lyricsArray = this.state.songInQuestion.lyrics.split("\n")
+        let secTime = 0
+
+        for( var i = 0; i < lyricsArray.length; i++ ){
+            let lyric = lyricsArray[i]
+            if(lyric.substr(10).toLowerCase().includes(popularLine)){
+                secTime = HmsToSecondsOnly(lyric.substring(1, 6)) + parseInt(lyric.substring(7, 9), 10)
+                break
+            }
+        }
+
+        return Math.round(secTime/1000)
+    }
+
     render() {
         if (this.state.songInQuestion.title != "") {
             return (
@@ -348,6 +402,20 @@ class ConnectedPopularLine extends Component {
                       <meta http-equiv='expires' content='0' />
                       <meta http-equiv='pragma' content='no-cache' />
                     </MetaTags>
+                    <div className="PopularLine-audioPlayer">
+                        <audio
+                            style={{display:"none"}}
+                            className={"PopularLine-audio"}
+                            ref={ref => this.audio = ref}
+                            id="sample"
+                            controls
+                            src={
+                                this.state.songInQuestion.audiourl.includes('africariyoki-4b634') ?
+                                this.state.songInQuestion.audiourl.replace('/music/', '/vocals/') :
+                                this.state.songInQuestion.audiourl.replace('africariyoki', 'africariyoki-4b634').replace('/music/', '/vocals/') //TODO: jesuye come back and do this bettter lol
+                            }
+                        />
+                    </div>
                     {this.state.setGameModel
                     ?
                         <TweenOne
@@ -463,6 +531,9 @@ class ConnectedPopularLine extends Component {
                                     <div className="PopularLine-lowerMenu">
                                         <Button variant="contained" style={{backgroundColor: '#131c96', color: 'white'}} onClick={() => this.restartGame()}>
                                             <ReplayIcon />
+                                        </Button>
+                                        <Button variant="contained" className={this.state.audioPaused ? '' : 'shaking'} style={{backgroundColor: '#131c96', color: 'white'}} onClick={() => this.playVocal()}>
+                                            choks
                                         </Button>
                                     </div>
                                 </TweenOne>

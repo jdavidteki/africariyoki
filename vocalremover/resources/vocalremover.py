@@ -28,19 +28,26 @@ def uploadToFirebase(path):
     cred = credentials.Certificate("firebasecloudredentials.json")
     initialize_app(cred, {'storageBucket': 'africariyoki-4b634.appspot.com'})
 
+  ###edited area
   #compress wav into mp3
-  AudioSegment.from_wav(path+"_Instruments.wav").export(path+"_Instruments.mp3", format="mp3")
+  # AudioSegment.from_wav(path+"_Instruments.wav").export(path+"_Instruments.mp3", format="mp3")
+  AudioSegment.from_wav(path+"_Vocals.wav").export(path+"_Vocals.mp3", format="mp3")
 
   # Put your local file path
-  fileName = path+"_Instruments.mp3"
+  # fileName = path+"_Instruments.mp3"
+  # bucket = storage.bucket()
+  # blob = bucket.blob("music/"+path+".mp3")
+  # blob.upload_from_filename(fileName)
+  # blob.make_public()
+
+  fileName = path+"_Vocals.mp3"
   bucket = storage.bucket()
-  blob = bucket.blob("music/"+path+".mp3")
-  blob.upload_from_filename(fileName)
+  blob1 = bucket.blob("vocals/"+path+".mp3")
+  blob1.upload_from_filename(fileName)
+  blob1.make_public()
 
-  # Opt : if you want to make public access from the URL
-  blob.make_public()
-
-  print("your file url", blob.public_url)
+  print("your file url", blob1.public_url, blob1.make_public())
+    ###edited area
   os.remove(fileName)
   os.remove(path+"_Instruments.wav")
   os.remove(path+"_Vocals.wav")

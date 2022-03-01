@@ -244,7 +244,6 @@ class ConnectedGuessSong extends Component {
                     }
                 )
 
-
                 var int = setInterval(() => {
                     if (this.audio != null && this.audio.currentTime > selectedStartTime + levelToPlaySec[this.state.selectedOptionDifficulty.label]) {
                         this.audio.pause();
