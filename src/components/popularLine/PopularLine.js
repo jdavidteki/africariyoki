@@ -21,6 +21,7 @@ import AccessAlarmOutlinedIcon from '@material-ui/icons/AccessAlarmOutlined';
 import { Analytics, PageHit } from 'expo-analytics';
 import {ShuffleArray, CleanLine, HmsToSecondsOnly } from "../helpers/Helpers.js";
 import  Result from '../result/Result.js'
+import FuzzySet from 'fuzzyset.js'
 
 TweenOne.plugins.push(SvgMorphPlugin);
 
@@ -354,8 +355,7 @@ class ConnectedPopularLine extends Component {
             setTimeout(()=>{
                 this.audio.play();
                 this.setState({audioPaused: false})
-            },
-            500);
+            }, 500);
 
             //update song plays
             Firebase.getLyricsById(this.state.songInQuestion.id).then(
@@ -364,27 +364,50 @@ class ConnectedPopularLine extends Component {
                 }
             )
 
+            this.audio.currentTime = timeToStart
             var int = setInterval(() => {
-                if (this.audio != null && this.audio.currentTime > timeToStart + levelToPlaySec[this.state.selectedOptionDifficulty.label]) {
-                    this.audio.currentTime = timeToStart
+                if (this.audio != null && this.audio.currentTime >= timeToStart + levelToPlaySec[this.state.selectedOptionDifficulty.label]) {
                     this.audio.pause();
+                    this.audio.currentTime = 0
+                    timeToStart = 0
+                    this.setState({audioPaused: true})
+                    clearInterval(int)
+                } else if(this.audio != null && this.audio.currentTime < timeToStart){
+                    this.audio.pause();
+                    this.audio.currentTime = 0
+                    timeToStart = 0
                     this.setState({audioPaused: true})
                     clearInterval(int)
                 }
-            }, 10);
+            }, 1000);
         }
     }
 
     getPopLineTime(popularLine){
-        let lyricsArray = this.state.songInQuestion.lyrics.split("\n")
         let secTime = 0
 
-        for( var i = 0; i < lyricsArray.length; i++ ){
-            let lyric = lyricsArray[i]
-            if(lyric.substr(10).toLowerCase().includes(popularLine)){
-                secTime = HmsToSecondsOnly(lyric.substring(1, 6)) + parseInt(lyric.substring(7, 9), 10)
-                break
+        let lyricsArray = this.state.songInQuestion.lyrics.split("\n")
+        lyricsArray = lyricsArray.map(element => {
+            return element.toLowerCase().replaceAll(' ', '');
+        });
+        let lyricsArrayFuzzy = FuzzySet(lyricsArray)
+
+        let popline = lyricsArrayFuzzy.get(popularLine)
+
+        if (popline!= null && popline.length > 0){
+            secTime = HmsToSecondsOnly(popline[0][1].substring(1, 6)) + parseInt(popline[0][1].substring(7, 9), 10)
+        } else{
+            for( var i = 0; i < lyricsArray.length; i++ ){
+                let lyric = lyricsArray[i]
+                if(lyric.substr(10).toLowerCase().replaceAll(' ', '').includes(popularLine)){
+                    secTime = HmsToSecondsOnly(lyric.substring(1, 6)) + parseInt(lyric.substring(7, 9), 10)
+                    break
+                }
             }
+        }
+
+        if (isNaN(secTime)){
+            secTime = 0
         }
 
         return Math.round(secTime/1000)
@@ -532,9 +555,11 @@ class ConnectedPopularLine extends Component {
                                         <Button variant="contained" style={{backgroundColor: '#131c96', color: 'white'}} onClick={() => this.restartGame()}>
                                             <ReplayIcon />
                                         </Button>
-                                        <Button variant="contained" className={this.state.audioPaused ? '' : 'shaking'} style={{backgroundColor: '#131c96', color: 'white'}} onClick={() => this.playVocal()}>
-                                            choks
-                                        </Button>
+                                        {this.audio != null && this.audio.duration > 0 &&
+                                            <Button variant="contained" className={this.state.audioPaused ? '' : 'shaking'} style={{backgroundColor: '#131c96', color: 'white'}} onClick={() => this.playVocal()}>
+                                                choks
+                                            </Button>
+                                        }
                                     </div>
                                 </TweenOne>
                             }
