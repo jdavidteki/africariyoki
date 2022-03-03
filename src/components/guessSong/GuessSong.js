@@ -52,8 +52,7 @@ const levelToPlaySec = {
     "master": 2.5,
 }
 
-const startTimes = [50, 55, 60];
-const selectedStartTime = Math.floor(Math.random() * startTimes.length);
+const startTimes = [0.25, 0.5, 0.75, 0.8];
 
 class ConnectedGuessSong extends Component {
 
@@ -78,6 +77,7 @@ class ConnectedGuessSong extends Component {
         answerCorrect: true,
         songInQuestionBlob: '',
         db: null,
+        prevTimeoutID: 0,
         songInQuestion: {
             audiourl: '',
             singer: '',
@@ -220,18 +220,25 @@ class ConnectedGuessSong extends Component {
     }
 
     play(){
+        //clear timeout to make sure that if user clicks play while something else was playing
+        clearTimeout(this.state.prevTimeoutID)
         var transaction = this.state.db.transaction(["yokis"], 'readwrite');
 
         transaction.objectStore("yokis").get(this.state.songInQuestion.id).onsuccess = event => {
             var soundFile = event.target.result;
-
+            var selectedStartTime = startTimes[Math.floor(Math.random()*startTimes.length)];
             // Get window.URL object
             var URL = window.URL || window.webkitURL;
 
-            if(this.audio != null){
+            if(this.audio != null && this.audio.duration > 0){
+                selectedStartTime = this.audio.duration * selectedStartTime
                 if (soundFile != undefined){
                     var soundURL = URL.createObjectURL(soundFile);
-                    this.audio.setAttribute("src", soundURL)
+                    this.audio.setAttribute("src", soundURL + `#t=${selectedStartTime}`)
+                }else{
+                    if (!this.audio.src.includes("#t")){
+                        this.audio.setAttribute("src", this.audio.src + `#t=${selectedStartTime}`)
+                    }
                 }
 
                 this.audio.play();
@@ -244,13 +251,19 @@ class ConnectedGuessSong extends Component {
                     }
                 )
 
-                var int = setInterval(() => {
-                    if (this.audio != null && this.audio.currentTime > selectedStartTime + levelToPlaySec[this.state.selectedOptionDifficulty.label]) {
+                const int = setTimeout(() => {
+                    if(this.audio != undefined &&
+                        !this.state.audioPaused &&
+                        selectedStartTime + levelToPlaySec[this.state.selectedOptionDifficulty.label] > this.audio.currentTime )
+                    {
                         this.audio.pause();
+                        this.audio.setAttribute("currentTime", selectedStartTime)
                         this.setState({audioPaused: true})
-                        clearInterval(int);
+                        clearTimeout(int)
                     }
-                }, 10);
+                }, levelToPlaySec[this.state.selectedOptionDifficulty.label] * 1000);
+
+                this.setState({prevTimeoutID: int})
             }
         }
     }
@@ -310,7 +323,7 @@ class ConnectedGuessSong extends Component {
                 },() => {
                     this.play() //play next song immediately after old song
                 });
-            }, 700);
+            }, 500);
         })
     }
 
@@ -562,7 +575,6 @@ function shuffleArray(array) {
     }
     return array
 }
-
 
 
 const mapStateToProps = state => {

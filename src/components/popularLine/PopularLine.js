@@ -79,6 +79,7 @@ class ConnectedPopularLine extends Component {
         optionBackground: '#d5c0f0',
         poplineObj: {},
         randomTruePopLine: "",
+        prevTimeoutID: 0,
         songInQuestion: {
             audiourl: '',
             singer: '',
@@ -340,15 +341,12 @@ class ConnectedPopularLine extends Component {
     }
 
     playVocal(){
+        clearTimeout(this.state.prevTimeoutID)
         if(this.audio != null && this.audio.duration > 0){
             var timeToStart = this.getPopLineTime(this.state.randomTruePopLine)
 
-            if (timeToStart == 0){
-                timeToStart = this.audio.duration * 0.7
-            }
-
             if (!this.audio.src.includes("#t")){
-                this.audio.src = this.audio.src += `#t=${timeToStart}`
+                this.audio.setAttribute("src", this.audio.src + `#t=${timeToStart}`)
             }
 
             //wait for like 0.5sec before actually playing just incase it is paused
@@ -365,21 +363,15 @@ class ConnectedPopularLine extends Component {
             )
 
             this.audio.currentTime = timeToStart
-            var int = setInterval(() => {
-                if (this.audio != null && this.audio.currentTime >= timeToStart + levelToPlaySec[this.state.selectedOptionDifficulty.label]) {
+            const int = setTimeout(() => {
+                if(this.audio != undefined){
                     this.audio.pause();
-                    this.audio.currentTime = 0
-                    timeToStart = 0
+                    this.audio.setAttribute("currentTime", timeToStart)
                     this.setState({audioPaused: true})
-                    clearInterval(int)
-                } else if(this.audio != null && this.audio.currentTime < timeToStart){
-                    this.audio.pause();
-                    this.audio.currentTime = 0
-                    timeToStart = 0
-                    this.setState({audioPaused: true})
-                    clearInterval(int)
+                    clearTimeout(int)
                 }
-            }, 1000);
+            }, levelToPlaySec[this.state.selectedOptionDifficulty.label] * 1000);
+            this.setState({prevTimeoutID: int})
         }
     }
 
@@ -406,8 +398,9 @@ class ConnectedPopularLine extends Component {
             }
         }
 
-        if (isNaN(secTime)){
-            secTime = 0
+        if (isNaN(secTime) || secTime == 0){
+            let midLyrics = lyricsArray[Math.round(lyricsArray.length / 2)]
+            secTime = HmsToSecondsOnly(midLyrics.substring(1, 6)) + parseInt(midLyrics.substring(7, 9), 10)
         }
 
         return Math.round(secTime/1000)
@@ -555,7 +548,7 @@ class ConnectedPopularLine extends Component {
                                         <Button variant="contained" style={{backgroundColor: '#131c96', color: 'white'}} onClick={() => this.restartGame()}>
                                             <ReplayIcon />
                                         </Button>
-                                        {this.audio != null && this.audio.duration > 0 &&
+                                        {this.audio.duration > 0 &&
                                             <Button variant="contained" className={this.state.audioPaused ? '' : 'shaking'} style={{backgroundColor: '#131c96', color: 'white'}} onClick={() => this.playVocal()}>
                                                 choks
                                             </Button>
