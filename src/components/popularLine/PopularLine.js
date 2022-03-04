@@ -44,7 +44,7 @@ const DurationOptions = [
 ];
 
 const levelToPlaySec = {
-    "beginner": 3.5,
+    "beginner": 4,
     "amateur": 3,
     "professional": 2.5,
     "master": 2,
@@ -366,7 +366,7 @@ class ConnectedPopularLine extends Component {
             const int = setTimeout(() => {
                 if(this.audio != undefined){
                     this.audio.pause();
-                    this.audio.setAttribute("currentTime", timeToStart)
+                    this.audio.currentTime = timeToStart
                     this.setState({audioPaused: true})
                     clearTimeout(int)
                 }
@@ -378,23 +378,16 @@ class ConnectedPopularLine extends Component {
     getPopLineTime(popularLine){
         let secTime = 0
 
+        if(popularLine == ""){ //TODO: figure out a better way to do this
+            popularLine = document.getElementById("PopularLine-lyricInQuestion").innerText;
+        }
+
         let lyricsArray = this.state.songInQuestion.lyrics.split("\n")
-        lyricsArray = lyricsArray.map(element => {
-            return element.toLowerCase().replaceAll(' ', '');
-        });
-        let lyricsArrayFuzzy = FuzzySet(lyricsArray)
+        let poplineFuzzySet = FuzzySet(lyricsArray).get(popularLine)
 
-        let popline = lyricsArrayFuzzy.get(popularLine)
-
-        if (popline!= null && popline.length > 0){
-            secTime = HmsToSecondsOnly(popline[0][1].substring(1, 6)) + parseInt(popline[0][1].substring(7, 9), 10)
-        } else{
-            for( var i = 0; i < lyricsArray.length; i++ ){
-                let lyric = lyricsArray[i]
-                if(lyric.substr(10).toLowerCase().replaceAll(' ', '').includes(popularLine)){
-                    secTime = HmsToSecondsOnly(lyric.substring(1, 6)) + parseInt(lyric.substring(7, 9), 10)
-                    break
-                }
+        if (poplineFuzzySet!= null && poplineFuzzySet.length > 0){
+            if (poplineFuzzySet[0].length > 0){
+                secTime = HmsToSecondsOnly(poplineFuzzySet[0][1].substring(1, 6)) + parseInt(poplineFuzzySet[0][1].substring(7, 9), 10)
             }
         }
 
@@ -406,7 +399,7 @@ class ConnectedPopularLine extends Component {
         return Math.round(secTime/1000)
     }
 
-    render() {
+    render(){
         if (this.state.songInQuestion.title != "") {
             return (
                 <div className="PopularLine">
@@ -513,7 +506,7 @@ class ConnectedPopularLine extends Component {
                                     <div className="PopularLine-title">
                                        <span>what song is this line from?</span>
                                     </div>
-                                    <div className="PopularLine-lyricInQuestion">
+                                    <div className="PopularLine-lyricInQuestion" id="PopularLine-lyricInQuestion">
                                         {getPopularLine(this.state.randomTruePopLine, this.state.songInQuestion, this.state.nthLongestLineToShow) }
                                     </div>
                                     <div className="PopularLine-controlMenu">
