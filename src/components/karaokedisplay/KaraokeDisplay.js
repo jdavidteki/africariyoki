@@ -205,7 +205,7 @@ class ConnectedKaraokeDisplay extends Component {
 
   displayLyrics(){
     let lyrics = ''
-    if (this.state.singer != undefined){
+    if (this.state.singer.lyrics != undefined){
       lyrics = this.state.singer.lyrics.replace("b\"", '')
     }
 
