@@ -87,6 +87,9 @@ class ConnectedKaraokeDisplay extends Component {
   }
 
   isSafari(){
+    if(navigator.userAgent.toLowerCase().indexOf('safari/') > -1){
+      console.log("is safari")
+    }
     return navigator.userAgent.toLowerCase().indexOf('safari/') > -1
   }
 
@@ -354,7 +357,7 @@ class ConnectedKaraokeDisplay extends Component {
             <div className="KaraokeDisplay-topContainer">
               {this.state.singer.audiourl &&
                 <AudioPlayer
-                  autoPlay={this.isSafari() ? true : false}
+                  autoPlay={this.isSafari() ? "true" : "false"}
                   id="songPlaying"
                   src={this.state.singer.audiourl.includes('africariyoki-4b634') ? this.state.singer.audiourl : this.state.singer.audiourl.replace('africariyoki', 'africariyoki-4b634')} //because im cheap and im not paying for firebase
                   controlsList="nodownload"
