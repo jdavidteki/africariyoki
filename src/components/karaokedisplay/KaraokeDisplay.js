@@ -399,7 +399,7 @@ class ConnectedKaraokeDisplay extends Component {
 
               <div className="KaraokeDisplay-lowerPane">
                 <div className="KaraokeDisplay-countryFlags">
-                  {this.state.singer.countries.split(",").map((country) =>
+                  {this.state.singer.countries!=undefined && this.state.singer.countries.split(",").map((country) =>
                     <Emoji
                       key={country}
                       emoji={"flag-" + getCodeFromCountryName(country.trim()).toLowerCase()}
