@@ -123,9 +123,11 @@ class ConnectedKaraokeDisplay extends Component {
       }
     }
 
-    Firebase.getLyricsById(this.props.match.params.id).then(
-      val => {
-        Firebase.updateNumPlays(this.props.match.params.id, val.numPlays +=1)
+    Firebase.getLyricsById(this.props.match.params.id)
+    .then(val => {
+        if (!isNaN(val.numPlays)){
+          Firebase.updateNumPlays(this.props.match.params.id, val.numPlays+1)
+        }
 
         this.setState(
           {
@@ -223,8 +225,10 @@ class ConnectedKaraokeDisplay extends Component {
   }
 
   lrcFormat(){
-    let lyrics = this.state.singer.lyrics
-    return lyrics.includes("[00")
+    if (this.state.singer.lyrics != undefined){
+      return this.state.singer.lyrics.includes("[00")
+    }
+    return false
   }
 
   playSong(songId) {

@@ -30,24 +30,25 @@ def uploadToFirebase(path):
 
   ###edited area
   #compress wav into mp3
-  # AudioSegment.from_wav(path+"_Instruments.wav").export(path+"_Instruments.mp3", format="mp3")
+  AudioSegment.from_wav(path+"_Instruments.wav").export(path+"_Instruments.mp3", format="mp3")
   AudioSegment.from_wav(path+"_Vocals.wav").export(path+"_Vocals.mp3", format="mp3")
 
   # Put your local file path
-  # fileName = path+"_Instruments.mp3"
-  # bucket = storage.bucket()
-  # blob = bucket.blob("music/"+path+".mp3")
-  # blob.upload_from_filename(fileName)
-  # blob.make_public()
-
-  fileName = path+"_Vocals.mp3"
+  fileName = path+"_Instruments.mp3"
   bucket = storage.bucket()
+  blob = bucket.blob("music/"+path+".mp3")
+  blob.upload_from_filename(fileName)
+  blob.make_public()
+
+  fileName1 = path+"_Vocals.mp3"
   blob1 = bucket.blob("vocals/"+path+".mp3")
-  blob1.upload_from_filename(fileName)
+  blob1.upload_from_filename(fileName1)
   blob1.make_public()
 
+  print("your file url", blob.public_url, blob.make_public())
   print("your file url", blob1.public_url, blob1.make_public())
-    ###edited area
+  ###edited area
+
   os.remove(fileName)
   os.remove(path+"_Instruments.wav")
   os.remove(path+"_Vocals.wav")
