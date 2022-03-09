@@ -86,20 +86,14 @@ class ConnectedKaraokeDisplay extends Component {
     this.updateTimer()
   }
 
+  isSafari(){
+    return navigator.userAgent.toLowerCase().indexOf('safari/') > -1
+  }
+
   componentDidMount(){
     let withsbta = getParameterByName('withsbta')
     if(withsbta != null && withsbta == 1){
       this.setState({openSbtaOnPageLoad: true})
-    }
-
-    if(navigator.userAgent.toLowerCase().indexOf('safari/') > -1){
-      console.log("safari")
-      setTimeout(()=>{
-        window.addEventListener('touchstart', () => {
-          document.getElementById('songPlaying').muted = false
-          document.getElementById('songPlaying').play()
-        })
-      }, 500)
     }
 
     const analytics = new Analytics('UA-187038287-1');
@@ -360,7 +354,7 @@ class ConnectedKaraokeDisplay extends Component {
             <div className="KaraokeDisplay-topContainer">
               {this.state.singer.audiourl &&
                 <AudioPlayer
-                  autoPlay
+                  autoPlay={this.isSafari() ? true : false}
                   id="songPlaying"
                   src={this.state.singer.audiourl.includes('africariyoki-4b634') ? this.state.singer.audiourl : this.state.singer.audiourl.replace('africariyoki', 'africariyoki-4b634')} //because im cheap and im not paying for firebase
                   controlsList="nodownload"
