@@ -204,7 +204,11 @@ class ConnectedKaraokeDisplay extends Component {
   }
 
   displayLyrics(){
-    let lyrics = this.state.singer.lyrics.replace("b\"", '')
+    let lyrics = ''
+    if (this.state.singer != undefined){
+      lyrics = this.state.singer.lyrics.replace("b\"", '')
+    }
+
     var newstr = "";
     var prevChar = '';
 
