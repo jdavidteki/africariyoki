@@ -19,7 +19,11 @@ class LRCParser extends Component {
       smileyToSet: '',
       openAnotationModel: false,
       mapLyricsToMs: this.getLyricsArrayWithMs(this.props.lyrics.split("\n")),
-      keysOfMapLyrics: Array.from(this.getLyricsArrayWithMs(this.props.lyrics.split("\n")).keys()),
+      keysOfMapLyrics: Array.from(
+          this.getLyricsArrayWithMs(this.props.lyrics.split("\n")).keys() != undefined ?
+          this.getLyricsArrayWithMs(this.props.lyrics.split("\n")).keys() :
+          []
+      ),
       audioDetails: {
         url: null,
         blob: null,
@@ -50,7 +54,7 @@ class LRCParser extends Component {
   }
 
   getLyricsArrayWithMs(rawArray){
-    var msToLine = new Map(['', ''])
+    var msToLine = new Map()
     for( var i = 0; i < rawArray.length; i++ ){
       var lyricTimeMilliSec = HmsToSecondsOnly(rawArray[i].substring(1, 6)) + parseInt(rawArray[i].substring(7, 9), 10)
       msToLine.set(lyricTimeMilliSec, rawArray[i])
