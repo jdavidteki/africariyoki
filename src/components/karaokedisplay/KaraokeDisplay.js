@@ -354,11 +354,10 @@ class ConnectedKaraokeDisplay extends Component {
             <div className="KaraokeDisplay-topContainer">
               {this.state.singer.audiourl &&
                 <AudioPlayer
-                  autoPlay={this.isSafari() ? false : true}
-                  autoPlayAfterSrcChange={this.isSafari() ? false : true}
-                  defaultDuration="yoki"
-                  defaultCurrentTime="yoki"
-                  id="songPlaying"
+                  autoPlay={true}
+                  autoPlayAfterSrcChange={this.isSafari() ? false : true}//set this for safari no matter what autoplay value is
+                  defaultCurrentTime="yo"
+                  defaultDuration="ki"
                   src={this.state.singer.audiourl.includes('africariyoki-4b634') ? this.state.singer.audiourl : this.state.singer.audiourl.replace('africariyoki', 'africariyoki-4b634')} //because im cheap and im not paying for firebase
                   controlsList="nodownload"
                   className={"KaraokeDisplay-audio"}
