@@ -12,6 +12,13 @@ class Header extends Component {
   }
 
   componentDidMount(){
+    //if you are on homepage, refresh page on icon logo click
+    document.getElementById("headerLogoImage").addEventListener('click', ()=>{
+      if(window.location.pathname == "/" || window.location.pathname == "/africariyoki"){
+        document.location.reload(true)
+      }
+    })
+
     setInterval(
       ()=>{
         if (this.state.shake == ""){
@@ -20,14 +27,14 @@ class Header extends Component {
           this.setState({shake: ""})
         }
       },
-    5000)
+    10000)
   }
 
   render() {
     return (
       <div className="Header chrome">
         <div className="Header-container">
-          <div className="Header-left">
+          <div className="Header-left" id="headerLogoImage">
             <Link
               to = "/"
             >
