@@ -1,0 +1,35 @@
+.trending-1 {
+  -webkit-backdrop-filter: blur(15px) brightness(100%);
+  align-items: flex-start;
+  backdrop-filter: blur(15px) brightness(100%);
+  background-color: var(--concord);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  height: 73px;
+  overflow: hidden;
+  padding: 12px 18px;
+  width: 205px;
+}
+
+.monalisa {
+  letter-spacing: 0;
+  line-height: 162px;
+  margin-bottom: -134px;
+  min-height: 28px;
+  white-space: nowrap;
+}
+
+.kida-cruse-ft-katampe {
+  letter-spacing: 0;
+  line-height: 162px;
+  margin-bottom: -143px;
+  margin-top: 2px;
+  min-height: 19px;
+  white-space: nowrap;
+}
+
+.trending-1.reveal-item {
+  margin-left: 23px;
+}
+

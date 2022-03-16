@@ -16,6 +16,7 @@ import ScoreboardGuessSong from './components/scoreboardGuessSong/ScoreboardGues
 import ScoreboardNextLine from './components/scoreboardNextLine/ScoreboardNextLine.js';
 import ScoreboardGuessSongLine from './components/scoreboardGuessSongLine/ScoreboardGuessSongLine.js';
 import UpdatePopline from './components/updatepopline/UpdatePopline.js'
+import HomePage from "./components/AfricariyokiHomepageReact/App.jsx";
 
 import "./App.css";
 
@@ -31,7 +32,7 @@ class App extends Component {
         <div className="App-body">
           <div className="content">
             <Switch>
-              <Route path="/" exact component={Composer} />
+              <Route path="/" exact component={HomePage} />
               <Route path="/africariyoki" exact component={Searcher} />
               <Route path="/admin" exact component={Admin} />
               <Route path="/guesssong" exact component={GuessSong} />

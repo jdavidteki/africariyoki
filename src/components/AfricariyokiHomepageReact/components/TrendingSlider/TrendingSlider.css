@@ -1,0 +1,18 @@
+.trending-slider {
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2px;
+  min-width: 796px;
+  position: relative;
+}
+
+.reveal {
+  align-items: flex-start;
+  display: flex;
+  height: 73px;
+  overflow: hidden;
+  position: relative;
+  width: 730px;
+}
+

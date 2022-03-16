@@ -1,0 +1,89 @@
+:root { 
+  --black: #000000;
+  --black-haze: #f4f6f9;
+  --chambray: #234b870d;
+  --champagne: #ffeccc;
+  --concord: #7b7b7b4c;
+  --fire-bush: #e2a130;
+  --java: #1dbdad;
+  --midnight: #010e3796;
+  --mint-tulip: #c1f6f640;
+  --mist-gray: #c4c4c4;
+  --santas-gray: #989eb3;
+  --white: #ffffff;
+ 
+  --font-size-l2: 17px;
+  --font-size-m2: 14px;
+  --font-size-s2: 12px;
+  --font-size-xl2: 20px;
+  --font-size-xxl: 24px;
+ 
+  --font-family-poppins: "Poppins", Helvetica;
+}
+.poppins-medium-white-17px {
+  color: var(--white);
+  font-family: var(--font-family-poppins);
+  font-size: var(--font-size-l2);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.poppins-normal-black-haze-12px {
+  color: var(--black-haze);
+  font-family: var(--font-family-poppins);
+  font-size: var(--font-size-s2);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.poppins-normal-white-17px {
+  color: var(--white);
+  font-family: var(--font-family-poppins);
+  font-size: var(--font-size-l2);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.poppins-normal-white-24px {
+  color: var(--white);
+  font-family: var(--font-family-poppins);
+  font-size: var(--font-size-xxl);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.poppins-normal-white-14px {
+  color: var(--white);
+  font-family: var(--font-family-poppins);
+  font-size: var(--font-size-m2);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.poppins-medium-white-20px {
+  color: var(--white);
+  font-family: var(--font-family-poppins);
+  font-size: var(--font-size-xl2);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.poppins-normal-santas-gray-24px {
+  color: var(--santas-gray);
+  font-family: var(--font-family-poppins);
+  font-size: var(--font-size-xxl);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.poppins-normal-white-20px {
+  color: var(--white);
+  font-family: var(--font-family-poppins);
+  font-size: var(--font-size-xl2);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.border-1-5px-fire-bush {
+  border: 1.5px solid var(--fire-bush);
+}

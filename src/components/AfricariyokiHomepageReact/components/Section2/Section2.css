@@ -1,0 +1,17 @@
+.section {
+  align-items: flex-start;
+  display: flex;
+  height: 39px;
+  min-width: 655px;
+  padding: 0 45px;
+  position: relative;
+}
+
+.title {
+  letter-spacing: 0;
+  line-height: 162px;
+  min-height: 39px;
+  min-width: 442px;
+  white-space: nowrap;
+}
+

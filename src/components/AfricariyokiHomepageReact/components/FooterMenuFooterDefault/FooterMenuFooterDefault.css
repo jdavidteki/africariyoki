@@ -1,0 +1,77 @@
+.footer-default {
+  align-items: center;
+  background-color: var(--chambray);
+  display: flex;
+  flex-direction: column;
+  height: 65px;
+  overflow: hidden;
+  width: 1440px;
+}
+
+.frame-142 {
+  align-items: center;
+  display: flex;
+  margin-top: 18px;
+  min-width: 686px;
+}
+
+.frame-255 {
+  align-items: flex-start;
+  display: flex;
+  height: 28px;
+  min-width: 378px;
+  padding: 0 8px;
+}
+
+.text-2 {
+  letter-spacing: 0;
+  line-height: 162px;
+  min-height: 28px;
+  min-width: 92px;
+  white-space: nowrap;
+}
+
+.text-3 {
+  letter-spacing: 0;
+  line-height: 162px;
+  margin-left: 56px;
+  min-height: 28px;
+  min-width: 117px;
+  white-space: nowrap;
+}
+
+.text-4 {
+  letter-spacing: 0;
+  line-height: 162px;
+  margin-left: 56px;
+  min-height: 28px;
+  white-space: nowrap;
+}
+
+.frame-140 {
+  align-items: center;
+  display: flex;
+  height: 40px;
+  margin-left: 216px;
+  min-width: 92px;
+  padding: 0 8px;
+}
+
+.twitter-negative {
+  height: 24px;
+  width: 24px;
+}
+
+.instagram-negative {
+  height: 24px;
+  margin-left: 28px;
+  width: 24px;
+}
+
+.rectangle-34 {
+  background-color: var(--mist-gray);
+  height: 128px;
+  margin-top: 7px;
+  width: 686px;
+}
+

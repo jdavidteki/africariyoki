@@ -1,0 +1,23 @@
+.section-1 {
+  align-items: center;
+  display: flex;
+  height: 39px;
+  min-width: 861px;
+  padding: 0 150px;
+}
+
+.trending {
+  letter-spacing: 0;
+  line-height: 162px;
+  min-height: 32px;
+  min-width: 113px;
+  white-space: nowrap;
+}
+
+.vector-18 {
+  height: 1px;
+  margin-left: 15px;
+  margin-top: 1.0px;
+  width: 433px;
+}
+
