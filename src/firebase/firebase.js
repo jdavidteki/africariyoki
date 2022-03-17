@@ -16,6 +16,37 @@ class Firebase {
     })
   }
 
+  getVersion = () =>{
+    return new Promise(resolve => {
+      firebase.database()
+      .ref('/version/')
+      .once('value')
+      .then(snapshot => {
+        if (snapshot.val()){
+          resolve(snapshot.val())
+        }else{
+          resolve({})
+        }
+      })
+    })
+  }
+
+  setVersion = (version) =>{
+    return new Promise(resolve => {
+      firebase.database()
+      .ref('/version/')
+      .set(
+        version
+      )
+      .then((response) => {
+        resolve(true)
+      })
+      .catch(error => {
+        console.warn("error", error)
+      })
+    })
+  }
+
   getLyricsRawJSON = () =>{
     return new Promise(resolve => {
       firebase.database()

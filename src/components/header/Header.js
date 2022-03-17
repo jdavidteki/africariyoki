@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom'
 import logo from './assets/logo.png';
+import Firebase from "../../firebase/firebase.js";
 
 import './Header.css';
 
@@ -15,7 +16,28 @@ class Header extends Component {
     //if you are on homepage, refresh page on icon logo click
     document.getElementById("headerLogoImage").addEventListener('click', ()=>{
       if(window.location.pathname == "/" || window.location.pathname == "/africariyoki"){
-        document.location.reload(true)
+        window.location.reload(false);
+
+        Firebase.getVersion().then(
+          val => {
+            let localVersion = localStorage.getItem('version')
+
+            if (localVersion == null || val > localVersion){
+              localStorage.setItem('version', val);
+
+              if(caches) {
+                // Service worker cache should be cleared with caches.delete()
+                console.log("caches", caches)
+                caches.keys().then(function(names) {
+                  for (let name of names) caches.delete(name);
+                });
+              }
+
+              browser.history.deleteAll()
+              window.location.href = window.location.href + `?hardrefresh=${val}`
+            }
+          }
+        )
       }
     })
 
