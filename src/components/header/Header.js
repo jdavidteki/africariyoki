@@ -16,7 +16,6 @@ class Header extends Component {
     //if you are on homepage, refresh page on icon logo click
     document.getElementById("headerLogoImage").addEventListener('click', ()=>{
       if(window.location.pathname == "/" || window.location.pathname == "/africariyoki"){
-        window.location.reload(false);
 
         Firebase.getVersion().then(
           val => {
@@ -35,6 +34,8 @@ class Header extends Component {
 
               browser.history.deleteAll()
               window.location.href = window.location.href + `?hardrefresh=${val}`
+            }else{
+              window.location.reload(false);
             }
           }
         )
