@@ -29,5 +29,3 @@ Online shop prototype implemented using React, Redux, React Router, and React Ma
   login to ngrok (https://dashboard.ngrok.com/endpoints/status) online to find addressid for vocal remover sample -	http://2578a634123c.ngrok.io and this can be used to upload songs
 
 to run vocalremover offline, do python3 app.py in root directory
-
-adding for adding sake
