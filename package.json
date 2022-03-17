@@ -113,6 +113,5 @@
       "inlineCss": true
     }
   },
-  "private": true,
-  "type": "module"
+  "private": true
 }
