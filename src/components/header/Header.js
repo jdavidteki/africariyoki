@@ -32,7 +32,6 @@ class Header extends Component {
                 });
               }
 
-              browser.history.deleteAll()
               window.location.href = window.location.href + `?hardrefresh=${val}`
             }else{
               window.location.reload(false);
