@@ -15,6 +15,7 @@ from bs4 import BeautifulSoup
 from firebase_admin import credentials, initialize_app, storage
 import firebase_admin
 from pydub import AudioSegment
+from pytube import YouTube
 
 from lib import dataset
 from lib import nets
@@ -50,6 +51,7 @@ def uploadToFirebase(path):
   ###edited area
 
   os.remove(fileName)
+  os.remove(fileName1)
   os.remove(path+"_Instruments.wav")
   os.remove(path+"_Vocals.wav")
 
@@ -134,21 +136,11 @@ def execute(path):
 #downloadmp3fromyoutube
 def downloadMp3FromYoutube(videoId):
   print('downloading song in mp3 format', videoId)
-  url = "https://www.yt-download.org/api/button/mp3/" + videoId
+  # url = " https://yt-download.org/api/button/mp3?url=https://www.youtube.com/watch?v=" + videoId
 
-  page = requests.get(url)
-  data = page.text
-  soup = BeautifulSoup(data, "html.parser")
-  links = []
+  yt = YouTube('https://youtube.com/watch?v=' + videoId)
+  yt.streams.first().download(filename= videoId + ".mp3")
 
-  for link in soup.find_all('a'):
-      links.append(link.get('href'))
-
-  r = requests.get(links[1])
-  with open(videoId+'.mp3',  'wb') as f:
-    f.write(r.content)
-
-  print('completed download in mp3 format')
   execute(videoId)
 
 

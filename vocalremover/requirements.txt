@@ -6,4 +6,5 @@ librosa>=0.6.3
 opencv_python>=4.2.0
 firebase_admin==2.8.0
 bs4
+torch
 # https://download.pytorch.org/whl/cpu/torch-1.0.1.post2-cp37-cp37m-linux_x86_64.whl
