@@ -1,12 +1,15 @@
 {
   "files": {
-    "app.js": "/static/js/app.0779e20e.chunk.js",
-    "app.js.map": "/static/js/app.0779e20e.chunk.js.map",
+    "app.js": "/static/js/app.515f6db3.chunk.js",
+    "app.js.map": "/static/js/app.515f6db3.chunk.js.map",
     "runtime~app.js": "/static/js/runtime~app.2e9f1821.js",
     "runtime~app.js.map": "/static/js/runtime~app.2e9f1821.js.map",
-    "static/js/2.edef5ee6.chunk.js": "/static/js/2.edef5ee6.chunk.js",
-    "static/js/2.edef5ee6.chunk.js.map": "/static/js/2.edef5ee6.chunk.js.map",
-    "fonts/JosefinSans-VariableFont_wght.ttf": "/./fonts/JosefinSans-VariableFont_wght.ttf",
+    "static/js/2.057260b6.chunk.js": "/static/js/2.057260b6.chunk.js",
+    "static/js/2.057260b6.chunk.js.map": "/static/js/2.057260b6.chunk.js.map",
+    "fonts/Comic Sans MS Bold.ttf": "/./fonts/Comic Sans MS Bold.ttf",
+    "fonts/Comic Sans MS.ttf": "/./fonts/Comic Sans MS.ttf",
+    "fonts/segoe-ui-semibold.ttf": "/./fonts/segoe-ui-semibold.ttf",
+    "fonts/segoeuib.ttf": "/./fonts/segoeuib.ttf",
     "favicon-16.png": "/favicon-16.png",
     "favicon-32.png": "/favicon-32.png",
     "favicon.ico": "/favicon.ico",
@@ -14,13 +17,21 @@
     "manifest.json": "/manifest.json",
     "serve.json": "/serve.json",
     "service-worker.js.map": "/service-worker.js.map",
-    "static/js/2.edef5ee6.chunk.js.LICENSE.txt": "/static/js/2.edef5ee6.chunk.js.LICENSE.txt",
-    "static/media/blankBack.jpeg": "/static/media/blankBack.36d09082.jpeg",
-    "static/media/logo.png": "/static/media/logo.610d1772.png"
+    "static/js/2.057260b6.chunk.js.LICENSE.txt": "/static/js/2.057260b6.chunk.js.LICENSE.txt",
+    "static/media/embarrassingyourself.png": "/static/media/embarrassingyourself.015f69eb.png",
+    "static/media/fantabulous.png": "/static/media/fantabulous.0d4c8d93.png",
+    "static/media/logo-1-2@2x.png": "/static/media/logo-1-2@2x.52ca1927.png",
+    "static/media/logo-1@2x.png": "/static/media/logo-1@2x.8da5f4a3.png",
+    "static/media/logo-2@2x.png": "/static/media/logo-2@2x.693bf367.png",
+    "static/media/toomuchpride.png": "/static/media/toomuchpride.e21daadd.png",
+    "static/media/welovetoseeit.png": "/static/media/welovetoseeit.b7152028.png",
+    "static/media/youareafailure.png": "/static/media/youareafailure.b31e1ba0.png",
+    "static/media/youaredoingwell.png": "/static/media/youaredoingwell.a8fbb188.png",
+    "static/media/youwillendupinmcdonalds.png": "/static/media/youwillendupinmcdonalds.2b5887a1.png"
   },
   "entrypoints": [
     "static/js/runtime~app.2e9f1821.js",
-    "static/js/2.edef5ee6.chunk.js",
-    "static/js/app.0779e20e.chunk.js"
+    "static/js/2.057260b6.chunk.js",
+    "static/js/app.515f6db3.chunk.js"
   ]
 }
