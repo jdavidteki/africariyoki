@@ -1,6 +1,5 @@
-import React from "react";
+import React, { Component } from "react";
 import Menu2 from "../Menu2";
-import { Component } from "react/cjs/react.development";
 import Section1 from "../Section1";
 import HomePageLogo from "../../../static/img/logo-2@2x.png";
 import EveryOtherLogo from "../../../static/img/logo-1-2@2x.png";

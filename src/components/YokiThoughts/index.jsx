@@ -1,6 +1,5 @@
-import React from "react";
+import React, { Component } from "react";
 import Frame261 from "../Frame261";
-import { Component } from "react/cjs/react.development";
 import Firebase from "../../firebase/firebase.js";
 
 import "./YokiThoughts.css";

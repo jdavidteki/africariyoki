@@ -577,8 +577,8 @@ const mapStateToProps = state => {
     return {};
 };
 
-const popularLine = withRouter(connect(mapStateToProps)(ConnectedPopularLine));
-export default popularLine;
+const PopularLine = withRouter(connect(mapStateToProps)(ConnectedPopularLine));
+export default PopularLine;
 
 
 //https://material-ui.com/components/material-icons/#material-icons

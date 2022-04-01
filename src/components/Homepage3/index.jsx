@@ -1,11 +1,10 @@
-import React from "react";
+import React, { Component } from "react";
 import Section1 from "../Section1";
 import Section2 from "../Section2";
 import Section3 from "../Section3";
 import Section from "../Section";
 import Game1 from "../Game1";
 import FooterMenuFooterDefault from "../FooterMenuFooterDefault";
-import { Component } from "react/cjs/react.development";
 import Searcher  from "../Searcher2";
 import PopularSongs  from '../PopularSongs2/PopularSongs2.js';
 import Firebase from "../../firebase/firebase.js";

@@ -1,5 +1,4 @@
-import React from "react";
-import { Component } from "react/cjs/react.development";
+import React, { Component }  from "react";
 import TextField from "@material-ui/core/TextField";
 import Firebase from "../../firebase/firebase.js";
 import sendIcon from "./send-1@2x.png"

@@ -511,8 +511,8 @@ const mapStateToProps = state => {
     return {};
 };
 
-const completeLyrics = withRouter(connect(mapStateToProps)(ConnectedCompleteLyrics));
-export default completeLyrics;
+const CompleteLyrics = withRouter(connect(mapStateToProps)(ConnectedCompleteLyrics));
+export default CompleteLyrics;
 
 
 //https://material-ui.com/components/material-icons/#material-icons

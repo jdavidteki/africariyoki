@@ -1,7 +1,6 @@
-import React from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { Component } from "react/cjs/react.development";
 import SetGameModal from "../SetGameModal";
 import GameResult from "../GameResult";
 import GTSPlay from "../GTSPlay";

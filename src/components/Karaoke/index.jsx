@@ -1,10 +1,9 @@
-import React from "react";
+import React, { Component } from "react";
 import Menu2 from "../Menu2";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import Text from "../Text";
 import Firebase from "../../firebase/firebase.js";
-import { Component } from "react/cjs/react.development";
 import PopularSongs  from '../PopularSongs2/PopularSongs2.js';
 import FooterMenuFooterDefault from "../FooterMenuFooterDefault";
 import { GetParameterByName, GetRandomBackground, GetCodeFromCountryName, CodeToCountries } from "../helpers/Helpers";

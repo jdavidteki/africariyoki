@@ -581,8 +581,8 @@ const mapStateToProps = state => {
     return {};
 };
 
-const guessSong = withRouter(connect(mapStateToProps)(ConnectedGuessSong));
-export default guessSong;
+const GuessSong = withRouter(connect(mapStateToProps)(ConnectedGuessSong));
+export default GuessSong;
 
 
 //https://material-ui.com/components/material-icons/#material-icons
