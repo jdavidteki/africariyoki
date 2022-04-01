@@ -1,6 +1,6 @@
 import React from 'react';
 import Song from '../song/Song'
-import './SongList.css';
+// import './SongList.css';
 import { Emoji } from 'emoji-mart'
 
 const SongList = (props) => {

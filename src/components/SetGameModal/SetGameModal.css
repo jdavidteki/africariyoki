@@ -1,0 +1,66 @@
+.set-game-modal {
+  align-items: flex-start;
+  background-color: var(--white-2);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: 100%;
+}
+
+.set-game-modal-2 {
+  align-items: flex-start;
+  background-color: var(--white);
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+}
+
+.overlap-group1-16 {
+  align-items: flex-start;
+  background-size: 100% 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+}
+
+.section2-6 {
+  align-items: flex-start;
+  display: flex;
+  height: 715px;
+  padding: 32px 361.5px;
+  width: 100%;
+}
+
+
+.set-game-modalheader {
+  align-items: center;
+  background-color: var(--sea-serpent);
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 24px 8px;
+}
+
+.progress {
+  background-color: var(--deep-sapphire);
+  height: 100px;
+  width: 2px;
+}
+
+.set-game-modal-4 {
+  height: 47px;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.set-game-modalbody-5 {
+  align-items: center;
+  background-color: var(--black-haze);
+  display: flex;
+  flex-direction: column;
+  padding: 40px 0;
+  position: relative;
+  width: 100%;
+}

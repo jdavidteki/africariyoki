@@ -25,9 +25,9 @@ import FuzzySet from 'fuzzyset.js'
 
 TweenOne.plugins.push(SvgMorphPlugin);
 
-import 'bootstrap/dist/css/bootstrap.css';
-import "./PopularLine.css"
-import "../karaokedisplay/KaraokeDisplay.css"
+// import 'bootstrap/dist/css/bootstrap.css';
+// import "./PopularLine.css"
+// import "../karaokedisplay/KaraokeDisplay.css"
 import { nil } from "ajv";
 
 const DifficultyOptions = [

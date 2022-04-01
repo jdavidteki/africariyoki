@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import logo from './assets/logo.png';
 import Firebase from "../../firebase/firebase.js";
 
-import './Header.css';
+// import './Header.css';
 
 
 class Header extends Component {

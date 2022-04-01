@@ -4,7 +4,7 @@ import { Emoji } from 'emoji-mart'
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import { HmsToSecondsOnly, CleanLine } from "../helpers/Helpers.js";
 
-import './LRCParser.css';
+// import './LRCParser.css';
 
 class LRCParser extends Component {
   constructor(props){

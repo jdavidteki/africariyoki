@@ -1,0 +1,23 @@
+.player-score {
+  align-items: center;
+  background-color: var(--riptide);
+  border-radius: 8px;
+  display: flex;
+  height: 48px;
+  margin-top: 12px;
+  min-width: 152px;
+  padding: 0 12px;
+  position: relative;
+}
+
+.player-1-3 {
+  height: 32px;
+  letter-spacing: 0;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.player-score.player-score-1 {
+  margin-left: 10px;
+  margin-top: unset;
+}

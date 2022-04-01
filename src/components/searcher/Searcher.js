@@ -15,7 +15,7 @@ import { SocialIcon } from 'react-social-icons';
 import PopularSongs  from '../popularSongs/PopularSongs.js';
 import Games from '../games/Games.js';
 
-import './Searcher.css';
+// import './Searcher.css';
 class Searcher extends Component {
   constructor(props){
     super(props);

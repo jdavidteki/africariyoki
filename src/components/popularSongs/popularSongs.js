@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import Song from '../song/Song'
 
-import './PopularSongs.css';
+// import './PopularSongs.css';
 
 class PopularSongs extends Component {
   constructor(props){

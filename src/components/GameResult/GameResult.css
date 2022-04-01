@@ -1,0 +1,83 @@
+.game-result-5 {
+  align-items: flex-start;
+  background-color: var(--white-2);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.overlap-group-45 {
+  width: 100%;
+}
+
+.overlap-group1-17 {
+  align-items: flex-start;
+  background-size: 100% 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.section2-7 {
+  align-items: flex-start;
+  display: flex;
+  height: 715px;
+  padding: 32px 361.5px;
+}
+
+.game-resultheader-1 {
+  align-items: flex-start;
+  background-color: var(--sea-serpent);
+  display: flex;
+  width: 100%;
+}
+
+.progress-1 {
+  background-color: var(--deep-sapphire);
+  height: 172px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 2px;
+}
+
+.left-2 {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 92px;
+  position: relative;
+}
+
+.right-3 {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 10px;
+  min-height: 92px;
+  position: relative;
+}
+
+.game-result-details
+{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  padding-top: 16px;
+  padding-bottom: 32px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.game-result-image
+{
+  height: 250px;
+  width: 300px;
+  object-fit: contain;
+  margin-top: 16px;
+}

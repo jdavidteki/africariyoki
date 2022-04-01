@@ -7,6 +7,8 @@ import store from "./src/Redux/Store";
 import firebase from "firebase";
 import config from './src/firebase/config.js';
 import * as serviceWorkerRegistration from "./src/serviceWorkerRegistration.js";
+import "./globals.css"
+import "./styleguide.css"
 
 if (!firebase.apps.length) {
   firebase.initializeApp(config);
