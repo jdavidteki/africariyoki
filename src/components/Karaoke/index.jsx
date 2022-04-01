@@ -19,6 +19,7 @@ import Searcher from "../Searcher2/index.jsx";
 import Suggest from "../Suggest";
 import Header from "../Header2";
 import { Analytics, PageHit } from 'expo-analytics';
+import TempBackground from "../../../static/img/whitebackground.png"
 
 import microphoneLogo from "../../../static/img/microphone-sing-svgrepo-com-1-2@2x.png"
 
@@ -36,7 +37,7 @@ class ConnectedKaraoke extends Component {
       trendingSliderProps: props.trendingSliderProps,
       footerMenuFooterDefaultProps: props.footerMenuFooterDefaultProps,
       popularSongs:[],
-      overlapGroup: props.overlapGroup,
+      overlapGroup: TempBackground,
       singer: {
         audiourl: '',
         singer: '',

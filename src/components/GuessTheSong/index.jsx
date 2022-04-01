@@ -10,6 +10,7 @@ import { GetRandomBackground, ShuffleArray } from "../helpers/Helpers";
 import Firebase from "../../firebase/firebase.js";
 import { Analytics, PageHit } from 'expo-analytics';
 import moment from "moment"
+import TempBackground from "../../../static/img/whitebackground.png"
 
 import "./GuessTheSong.css";
 
@@ -54,7 +55,7 @@ class ConnectedGuessTheSong extends Component {
           lyrics: '',
           id: '',
       },
-      overlapGroup: props.overlapGroup,
+      overlapGroup: TempBackground,
     }
   }
 

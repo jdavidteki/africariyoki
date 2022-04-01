@@ -10,6 +10,8 @@ import Firebase from "../../firebase/firebase.js";
 import moment from "moment"
 import { CleanLine, ShuffleArray, GetRandomBackground } from "../helpers/Helpers";
 import { Analytics, PageHit } from 'expo-analytics';
+import TempBackground from "../../../static/img/whitebackground.png"
+
 
 import "./NextLine.css";
 
@@ -44,6 +46,7 @@ class ConnectedNextLine extends Component {
       showChoks: false,
       answerCorrect: true,
       audioPaused: true,
+      overlapGroup: TempBackground,
       songInQuestion: {
           audiourl: '',
           singer: '',

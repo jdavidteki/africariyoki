@@ -13,6 +13,7 @@ import Header from "../Header2";
 import section12DataImage from "../../../static/img/logo-1@2x.png";
 import game15DataImage from "../../../static/img/icon-1@2x.png";
 import game16DataImage from "../../../static/img/icon-2@2x.png";
+import TempBackground from "../../../static/img/whitebackground.png"
 import { Analytics, PageHit } from 'expo-analytics';
 
 import "./Homepage3.css";
@@ -194,7 +195,7 @@ const footerMenuFooterDefault4Data = {
 };
 
 const homepage3Data = {
-  overlapGroup: "/static/img/background-1@2x.png",
+  overlapGroup: TempBackground,
   section1Props: section12Data,
   sectionProps: section5Data,
   game11Props: game15Data,

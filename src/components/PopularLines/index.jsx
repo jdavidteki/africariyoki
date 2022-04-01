@@ -11,7 +11,7 @@ import { ShuffleArray, GetRandomBackground, HmsToSecondsOnly } from "../helpers/
 import Firebase from "../../firebase/firebase.js";
 import { Analytics, PageHit } from 'expo-analytics';
 import moment from "moment"
-
+import TempBackground from "../../../static/img/whitebackground.png"
 import "./PopularLines.css";
 
 const levelToPlaySec = {
@@ -48,7 +48,7 @@ class ConnectedPopularLines extends Component {
       nthLongestLineToShow: 0,
       db: null,
       optionBackground: '#d5c0f0',
-      overlapGroup: props.overlapGroup,
+      overlapGroup: TempBackground,
       poplineObj: {},
       randomTruePopLine: "",
       prevTimeoutID: 0,
