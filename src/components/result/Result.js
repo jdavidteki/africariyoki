@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Emoji } from 'emoji-mart'
-import { GetComments, GetEmojiFromComments } from "../helpers/Helpers.js";
+import { GetComments, GetMemesFromComments } from "../helpers/Helpers.js";
 import Button from "@material-ui/core/Button";
 import TrendingUpOutlinedIcon from '@material-ui/icons/TrendingUpOutlined';
 import BarChartOutlinedIcon from '@material-ui/icons/BarChartOutlined';

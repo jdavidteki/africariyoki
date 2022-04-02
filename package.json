@@ -73,6 +73,7 @@
     "redux-thunk": "^2.3.0",
     "stripe": "^8.55.0",
     "styled-components": "^5.1.1",
+    "uuid": "^3.4.0",
     "workbox-background-sync": "^6.1.5",
     "workbox-broadcast-update": "^6.1.5",
     "workbox-cacheable-response": "^6.1.5",
