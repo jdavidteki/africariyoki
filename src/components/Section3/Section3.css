@@ -11,6 +11,8 @@
   min-height: 32px;
   min-width: 113px;
   white-space: nowrap;
+  display: flex;
+  align-items: center;
 }
 
 .vector-18-3,
