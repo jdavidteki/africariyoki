@@ -25,21 +25,7 @@
 .section1-4 {
   align-items: center;
   display: flex;
-  height: 120px;
   width: 90%;
-}
-
-.nav-bar,
-.nav-bar-1 {
-  -webkit-backdrop-filter: blur(44px) brightness(100%);
-  align-items: center;
-  backdrop-filter: blur(44px) brightness(100%);
-  background-color: var(--champagne);
-  box-shadow: 0px 4px 4px transparent;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 28px;
-  width: 100%;
 }
 
 .logo-4,
@@ -60,6 +46,7 @@
   padding: 32px 32px;
   width: 75%;
   justify-content: center;
+  margin-top: 20px;
 }
 
 .karaoki-1,
@@ -91,7 +78,7 @@
   display: flex;
   flex-direction: column;
   min-height: 350px;
-  padding: 20px 0;
+  padding: 8px 0;
   width: 90%;
 }
 
@@ -100,8 +87,8 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  min-height: 171px;
-  padding: 24px 0;
+  min-height: 200px;
+  padding: 8px 0;
   width: 100%;
 }
 
@@ -703,11 +690,6 @@
 
   .section1-3 {
     width: 100%;
-  }
-
-  .nav-bar,
-  .nav-bar-1 {
-    padding: 0 16px;
   }
 
   .section2-2,

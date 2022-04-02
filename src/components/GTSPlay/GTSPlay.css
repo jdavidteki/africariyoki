@@ -12,6 +12,10 @@
   width: 1440px;
 }
 
+.GTSPlay-wrapper .Song{
+  margin-bottom: 4px;
+}
+
 .overlap-group1-17 {
   align-items: flex-start;
   background-size: 100% 100%;
@@ -153,7 +157,7 @@
     padding: 16px;
   }
 
-  .overlap-group-45 {
+  .GuessTheSong .overlap-group-45 {
     height: 140px;
   }
 
