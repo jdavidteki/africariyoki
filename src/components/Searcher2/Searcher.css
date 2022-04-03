@@ -8,6 +8,10 @@
     align-items: center;
   }
 
+  .Searcher .Song{
+    margin: 4px;
+  }
+
   .Searcher-yokiNFTLink
   {
     cursor: pointer;

@@ -56,7 +56,6 @@
   border-radius: 12px;
   display: flex;
   flex-direction: column;
-  height: 431px;
   overflow: hidden;
   width: 100%;
   border-bottom-left-radius: 0;
@@ -77,7 +76,6 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  min-height: 350px;
   padding: 8px 0;
   width: 90%;
 }

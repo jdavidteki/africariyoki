@@ -9,9 +9,8 @@
   justify-content: center;
   background-color: var(--sunset-pearl);
   display: flex;
-  height: 98px;
   width: 100%;
-  padding: 0 16px;
+  padding: 16px;
 }
 
 .nav-bar,

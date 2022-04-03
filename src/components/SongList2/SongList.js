@@ -20,19 +20,8 @@ const SongList = (props) => {
         :
           <div className="SongList-emptySearch-wrapper">
             <span className="SongList-emptySearch">
-              you too, search something we have! mtchewww
-              <Emoji
-                emoji={'face_with_rolling_eyes'}
-                set='apple'
-                size={16}
-              />
-              <Emoji
-                emoji={'unamused'}
-                set='apple'
-                size={16}
-              />
+              you too, search something we have! mtchewww. lol.
             </span>
-            <span className="SongList-emptySearch">or you can <span onClick={()=>{props.suggestSong()}} className="SongList-suggestText">suggest</span> a song to us</span>
           </div>
       }
     </div>

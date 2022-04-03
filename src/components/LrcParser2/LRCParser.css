@@ -16,14 +16,18 @@
   font-size: var(--font-size-xxl);
   font-style: normal;
   font-weight: 500;
-  margin-top: 16px;
-  min-height: 45px;
-  line-height: 20px;
+  margin: 8px 0;
+  line-height: 22px;
+  min-height: 70px;
+  display: flex;
+  align-items: center;
 }
 
 .LRCParser-nextLine,
 .LRCParser-previousLine {
   overflow: hidden;
+  max-width: 300px;
+  max-height: 24px;
   text-overflow: ellipsis;
   color: var(--storm-gray);
   font-family: var(--font-family-poppins);
@@ -34,7 +38,7 @@
 }
 
 .LRCParser-containerWrapper{
-  padding: 20px;
+  padding: 8px;
   text-align: center;
   flex-grow: 1;
   display: flex;
@@ -69,12 +73,10 @@
   width: 0;
   z-index: 99999999;
   background-color: #c0f0c0;
-  border-radius: 5px;
-  font-weight: bold;
   font-size: 12px;
   color: black;
   transition: width 2s ease;
-  overflow-y: auto;
+  overflow: hidden;
 }
 
 .LRCParser-openAnotationModel.LRCParser-openAnotationModel-open
@@ -86,8 +88,6 @@
   width: 100%;
   z-index: 99999999;
   background-color: #c0f0c0;
-  border-radius: 5px;
-  font-weight: bold;
   font-size: 12px;
   color: black;
   transition: width 2s ease;
@@ -129,6 +129,6 @@
 
   .LRCParser-nextLine,
   .LRCParser-previousLine {
-    font-size: var(--font-size-m);
+    font-size: var(--font-size-s);
   }
 }

@@ -59,15 +59,18 @@ class YokiThoughts extends Component {
     openModal(){
       this.setState({showArtDesc: true})
       //TODO: hack to make prompt disappear when we open yokithought
-      document.getElementById("Searcher-input-label").style.display = 'none'
+      if(document.getElementById("Searcher-input-label") != undefined){
+        document.getElementById("Searcher-input-label").style.display = 'none'
+      }
     }
 
     closeModal(){
       this.setState({showArtDesc: false})
       //TODO: hack to make prompt disappear when we open yokithought
-      document.getElementById("Searcher-input-label").style.display = 'block'
+      if(document.getElementById("Searcher-input-label") != undefined){
+        document.getElementById("Searcher-input-label").style.display = 'block'
+      }
     }
-
 
     nextSongWithSBTA(){
       let randomSBTAId = this.state.stories[Math.floor(Math.random()*this.state.stories.length)];

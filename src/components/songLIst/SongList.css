@@ -1,4 +1,4 @@
-.SongList {
+/* .SongList {
   width: 100%;
   max-height: 0;
   overflow-y: hidden;
@@ -9,7 +9,7 @@
     max-height: 500px;
     transition: max-height 0.25s ease-in;
     padding: 10px 0;
-    /* min-height: 500px; */ }
+    }
   .SongList-container {
     display: flex;
     flex-wrap: wrap;
@@ -49,4 +49,4 @@
       flex-wrap: nowrap;
       min-height: 500px;
     }
-  }
+  } */
