@@ -44,7 +44,6 @@
 }
 
 .container-center-horizontal > * {
-  flex-shrink: 0;
   pointer-events: auto;
 }
 

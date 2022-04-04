@@ -5,7 +5,7 @@ function Game1(props) {
   const { icon, spanText1, spanText2, className } = props;
 
   return (
-    <div onClick={()=>window.location.href="/"+props.hreflink} className={`game1 ${className || ""}`}>
+    <div onClick={()=> setTimeout(function(){document.location.href = "/"+props.hreflink},500)} className={`game1 ${className || ""}`}>
       <div className="icon-bg">
         <div className="icon-1" style={{ backgroundImage: `url(${icon})` }}></div>
       </div>

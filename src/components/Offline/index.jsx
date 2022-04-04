@@ -165,10 +165,26 @@ class Offline extends Component {
     };
   }
 
+  openModal(){
+    this.setState({showOfflinePane: true})
+    //TODO: hack to make prompt disappear when we open yokithought
+    if(document.getElementById("Searcher-input-label") != undefined){
+      document.getElementById("Searcher-input-label").style.display = 'none'
+    }
+  }
+
+  closeModal(){
+    this.setState({showOfflinePane: false})
+    //TODO: hack to make prompt disappear when we open yokithought
+    if(document.getElementById("Searcher-input-label") != undefined){
+      document.getElementById("Searcher-input-label").style.display = 'block'
+    }
+  }
+
   render(){
     return (
       <div className="Offline">
-        <div className="Offline-icon" onClick={()=>this.setState({showOfflinePane: true})}>
+        <div className="Offline-icon" onClick={()=>this.openModal()}>
           {this.state.useIcon
             ?
               <InsertCommentIcon className={"Offline-insertCommentIcon"} style={{ color: '#3413f1' }} />
@@ -186,7 +202,7 @@ class Offline extends Component {
                     <span className="poppins-medium-martinique-35px">enjoy africariyoki offline</span>
                   </div>
                   <div className="play-games-and-sing poppins-normal-martinique-20px">
-                    <span className="poppins-normal-martinique-20px">play games and sing along offline</span>
+                    <span className="poppins-normal-martinique-20px">play games and sing along offline. this feature dey work for only chrome, no vex</span>
                   </div>
                   <div className="frame-237">
                     <div className="buttons-6" onClick={() => this.handleUpdatingYokis()}>
@@ -200,7 +216,7 @@ class Offline extends Component {
                     </div>
                   </div>
                 </div>
-                <div className="buttons-7" onClick={() => this.setState({showOfflinePane: false})}>
+                <div className="buttons-7" onClick={() => this.closeModal()}>
                   <div className="text-50 valign-text-middle poppins-medium-pine-green-20px">
                     <span>
                       <span className="poppins-medium-pine-green-20px">hide</span>
