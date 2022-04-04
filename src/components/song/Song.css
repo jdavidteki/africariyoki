@@ -39,7 +39,6 @@
 
   .Song-title,
   .Song-singer{
-    max-height: 20px;
     overflow: hidden;
   }
 }

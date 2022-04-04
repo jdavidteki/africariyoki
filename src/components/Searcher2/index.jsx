@@ -8,6 +8,20 @@ import { ShuffleArray } from "../helpers/Helpers";
 
 import './Searcher.css';
 
+//you can just come here and add a language
+const allPrompts=[
+  'pidgin: wetin you wan sing',
+  'twi: eh dwom ben na wo be to',
+  'yoruba: kini o fẹ lati kọrin si',
+  'hausa: me kuke so ku yi waka',
+  'swahili: unataka kuimba nini',
+  'afrikaans: waarvoor wil jy sing',
+  'amharic: ምን መዝፈን ትፈልጋለህ',
+  'igbo: kedu ihe ị chọrọ ịbụ abụ',
+  'zulu:  ufuna ukucula ini',
+  'shona: unoda kuimbira chii',
+]
+
 class Searcher extends Component {
   constructor(props){
     super(props);
@@ -25,7 +39,7 @@ class Searcher extends Component {
       selectedCode: '',
       countryToBackgroundImage: {},
       bckImageNum: '',
-      inputPromptMsg: 'english: what do you want to sing to',
+      inputPromptMsg: 'english: what do you want to sing',
     }
   }
 
@@ -84,37 +98,19 @@ class Searcher extends Component {
     //interval for chainging input prompt
     let nthPromptToShow = 0
     setInterval( () => {
+      let modPrompt = nthPromptToShow % (allPrompts.length + 3)
+      let promptToShow = 'english: what do you want to sing'
+
+      if(modPrompt > 2){
+        promptToShow = allPrompts[modPrompt - 3]
+      }
+
       nthPromptToShow += 1
+
       this.setState({
-        inputPromptMsg: this.getRandomPromptMsg(nthPromptToShow % 10)
+        inputPromptMsg: promptToShow
       })
     }, 2000);
-  }
-
-  getRandomPromptMsg(nthPromptToShow){
-    switch(nthPromptToShow) {
-      case 3:
-        return 'pidgin: wetin you wan sing' //pidgin
-      case 4:
-        return 'yoruba: kini o fẹ lati kọrin si' //yoruba
-      case 5:
-        return 'igbo: kedu ihe ị chọrọ ịbụ abụ' //igbo
-      case 6:
-        return 'hausa: me kuke so ku yi waka' //hausa
-      case 7:
-        return 'swahili: unataka kuimba nini' //swahili
-      case 8:
-        return 'afrikaans: waarvoor wil jy sing' //afrikaans
-      case 9:
-        return 'amharic: ምን መዝፈን ትፈልጋለህ' //amharic
-      case 10:
-        return 'zulu:  ufuna ukucula ini' //zulu
-      case 11:
-        return 'shona: unoda kuimbira chii' //shona
-      default:
-        //we want english to take more screen time
-        return 'english: what do you want to sing to' //english
-    }
   }
 
   filterSong = (song) => {
