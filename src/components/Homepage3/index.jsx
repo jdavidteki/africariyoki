@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Section1 from "../Section1";
 import Section2 from "../Section2";
 import Section3 from "../Section3";
 import Section from "../Section";
@@ -34,6 +33,15 @@ class Homepage3 extends Component{
   }
 
   componentDidMount(){
+    //hack: use this to fix github pages doing ?/ on pages
+    if (window.location.href.includes("?/")){
+      let actualDestination = window.location.href.split("?/")[1]
+
+      this.props.history.push({
+        pathname: "/" + actualDestination
+      });
+    }
+
     setTimeout( () => {
       this.setState({
         overlapGroup: GetRandomBackground(""),
