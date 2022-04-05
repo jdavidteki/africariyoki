@@ -1,7 +1,7 @@
 .about-2 {
   background-color: var(--midnight-2);
   display: flex;
-  height: 80%;
+  height: 90%;
   width: 100%;
   justify-content: center;
   align-items: center;
@@ -88,6 +88,7 @@
   .frame-243{
     width: 100%;
     padding: 32px 16px;
+    justify-content: flex-start;
   }
 
   .i-jumped-off-as-hot-content
