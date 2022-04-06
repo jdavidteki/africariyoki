@@ -22,26 +22,36 @@ class YokiThoughts extends Component {
     }
 
     componentDidMount(){
-      if(this.state.openOnLoad){
-        this.openModal()
-      }
+      var urlParams = new URLSearchParams(window.location.search);
+      var yokithoughtsId = urlParams.get('yokithoughts')
+      this.grabStoryFromFirebase(yokithoughtsId)
 
-      this.grabStoryFromFirebase()
+      setTimeout(() => {
+        if (yokithoughtsId != null ){
+          this.openModal()
+        }
+      }, 500)
     }
 
-    grabStoryFromFirebase(){
+    grabStoryFromFirebase(yokithoughtsId){
       Firebase.getLyrics().then(
         val => {
-          let songInQuestionIndex = Math.floor(Math.random() * (val.length - 0) + 0);
-          Firebase.getStoryFromID(val[songInQuestionIndex].id).then(val => {
+          let songId = yokithoughtsId
+          if (songId == null){
+            let songInQuestionIndex = Math.floor(Math.random() * (val.length - 0) + 0);
+            songId = val[songInQuestionIndex].id
+          }
+
+          Firebase.getStoryFromID(songId).then(val => {
             if (val.content == undefined){
-              this.grabStoryFromFirebase()
+              this.grabStoryFromFirebase(null)
             }else{
               this.setState({
                 storyContent: val.content,
                 storyTitle: val.title,
                 storyAuthor: val.author,
                 dateCreated: val.dateCreated,
+                storyId: songId,
                 storyAvailable: true,
               })
               return 0
@@ -104,8 +114,8 @@ class YokiThoughts extends Component {
                         <span className="lightfont poppins-medium-martinique-20px">{this.state.storyAuthor}</span>
                       </div>
                       <div className="poppins-normal-martinique-20px">
-                        <span className="lightfont poppins-normal-martinique-20px">created on: </span>
-                        <span className="lightfont poppins-medium-martinique-20px">{this.state.dateCreated}</span>
+                        <span className="lightfont poppins-normal-martinique-20px">content id: </span>
+                        <span className="lightfont poppins-medium-martinique-20px">{this.state.storyId}</span>
                       </div>
                     </div>
                     <div onClick={()=>this.closeModal()}>
@@ -122,3 +132,13 @@ class YokiThoughts extends Component {
 }
 
 export default YokiThoughts;
+
+
+function getParameterByName(name, url = window.location.href) {
+  name = name.replace(/[\[\]]/g, '\\$&');
+  var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+      results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
