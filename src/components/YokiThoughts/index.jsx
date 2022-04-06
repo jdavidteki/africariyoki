@@ -33,6 +33,17 @@ class YokiThoughts extends Component {
       }, 500)
     }
 
+    copyURL = () => {
+      var urlParams = new URLSearchParams(window.location.search);
+      var yokithoughtsId = urlParams.get('yokithoughts')
+
+      if(yokithoughtsId != null){
+        navigator.clipboard.writeText(window.location.href)
+      }else{
+        navigator.clipboard.writeText(window.location.href + "?yokithoughts=" + this.state.songId)
+      }
+    }
+
     grabStoryFromFirebase(yokithoughtsId){
       Firebase.getLyrics().then(
         val => {
@@ -104,7 +115,7 @@ class YokiThoughts extends Component {
                 <div className="about-3">
                   <img className="graphics-28" src={this.state.imageBck} />
                   <div className="frame-243">
-                    <div className="frame-245">
+                    <div className="frame-245" onClick={() => this.copyURL()}>
                       <div className="i-jumped-off-as-hot poppins-normal-martinique-14px">
                         <span className="i-jumped-off-as-hot-title">{this.state.storyTitle}</span>
                         <pre className="i-jumped-off-as-hot-content poppins-normal-martinique-14px">{this.state.storyContent}</pre>
