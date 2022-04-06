@@ -40,7 +40,7 @@ class YokiThoughts extends Component {
       if(yokithoughtsId != null){
         navigator.clipboard.writeText(window.location.href)
       }else{
-        navigator.clipboard.writeText(window.location.href + "?yokithoughts=" + this.state.songId)
+        navigator.clipboard.writeText(window.location.href + "?yokithoughts=" + this.state.storyId)
       }
     }
 
