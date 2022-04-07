@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Menu2 from "../Menu2";
+import MetaTags from 'react-meta-tags';
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import Text from "../Text";
@@ -338,6 +338,14 @@ class ConnectedKaraoke extends Component {
   render(){
     return (
       <div className="container-center-horizontal">
+        <MetaTags>
+          <title>{this.state.singer.title} - {this.state.singer.singer} ::: africariyoki</title>
+          <meta name="description" content={`karaoke to your favourite african songs! -- ${this.state.singer.title}, ${this.state.singer.singer}, ${this.state.singer.countries}`} />
+          <meta property="og:title" content="africariyoki" />
+          <meta httpEquiv='cache-control' content='no-cache' />
+          <meta httpEquiv='expires' content='0' />
+          <meta httpEquiv='pragma' content='no-cache' />
+        </MetaTags>
         {this.state.openCopyCliboardModal &&
           <div className="Karaoke-openCopyCliboardModal">
             <CloseIcon
