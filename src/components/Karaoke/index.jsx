@@ -53,6 +53,20 @@ class ConnectedKaraoke extends Component {
       this.setState({openSbtaOnPageLoad: true})
     }
 
+    //hack: use this to fix github pages doing ?/ on pages
+    if (window.location.href.includes("?/")){
+      let actualDestination = window.location.href.split("?/")[1]
+      if(this.props.history == undefined){
+        //TODO: figure out if it's possible to not have to do this
+        window.location.href = "/" + actualDestination
+      }else{
+        this.props.history.push({
+          pathname: "/" + actualDestination
+        });
+        window.location.reload(false);
+      }
+    }
+
     const analytics = new Analytics('UA-187038287-1');
     analytics.hit(new PageHit('Karaoke'))
       .then(() => console.log("google analytics on searcher"))

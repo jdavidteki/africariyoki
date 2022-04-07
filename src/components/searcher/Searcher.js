@@ -44,15 +44,6 @@ class Searcher extends Component {
       document.getElementById('js-yokisCTA').click();
     }
 
-    //hack: use this to fix github pages doing ?/ on pages
-    if (window.location.href.includes("?/")){
-      let actualDestination = window.location.href.split("?/")[1]
-
-      this.props.history.push({
-        pathname: "/" + actualDestination
-      });
-    }
-
     const analytics = new Analytics('UA-187038287-1');
     analytics.hit(new PageHit('Searcher'))
       .then(() => console.log("google analytics on searcher"))
