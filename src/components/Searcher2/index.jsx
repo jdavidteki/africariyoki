@@ -189,7 +189,7 @@ class Searcher extends Component {
     return (
       <div className="Searcher">
         <MetaTags>
-          <title>africariyoki - karaoke with africa!</title>
+          <title>africariyoki - play with africa!</title>
           <meta name="description" content={this.getSongDetails()} />
           <meta property="og:title" content="africariyoki" />
           <meta httpEquiv="cache-control" content="no-cache" />
@@ -198,7 +198,7 @@ class Searcher extends Component {
         </MetaTags>
 
         {/* these will remain for SEO purposes */}
-          <h1 itemProp="headline" style={{ display: "none" }}>#karaokewithafrica - #karaoke, african karaoke, #nigeriankaraoke, #lagoskaraoke, #ghanaian karaoke</h1>
+          <h1 itemProp="headline" style={{ display: "none" }}>#karaokewithafrica - #karaoke, african karaoke, #nigeriankaraoke, #lagoskaraoke, #ghanaian karaoke, #afrobeatskaraoke, afrobeatskaraoke, the african internet playhouse</h1>
         {/* ******** */}
 
         <div className="Searcher-container">

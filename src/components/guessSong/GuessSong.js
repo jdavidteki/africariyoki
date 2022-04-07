@@ -381,7 +381,7 @@ class ConnectedGuessSong extends Component {
             return (
                 <div className="GuessSong">
                     <MetaTags>
-                      <title>africariyoki - karaoke with africa!</title>
+                      <title>africariyoki - play with africa!</title>
                       <meta name="description" content="sing along to your favourite afro beat songs - guess the song" />
                       <meta property="og:title" content="africariyoki" />
                       <meta http-equiv='cache-control' content='no-cache' />

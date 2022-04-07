@@ -40,7 +40,7 @@ class ConnectedForOFor extends Component {
         return (
             <div className="ForOFor" id="ForOFor">
                 <MetaTags>
-                    <title>africariyoki - karaoke with africa! 404</title>
+                    <title>africariyoki - play with africa! 404</title>
                     <meta name="description" content="sing along to your favourite afro beat songs" />
                     <meta property="og:title" content="africariyoki" />
                     <meta http-equiv='cache-control' content='no-cache' />

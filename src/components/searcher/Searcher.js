@@ -323,7 +323,7 @@ class Searcher extends Component {
           </div>
         }
         <MetaTags>
-          <title>africariyoki - karaoke with africa!</title>
+          <title>africariyoki - play with africa!</title>
           <meta name="description" content={this.getSongDetails()} />
           <meta property="og:title" content="africariyoki" />
           <meta http-equiv='cache-control' content='no-cache' />
