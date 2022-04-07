@@ -30,6 +30,7 @@ class Homepage3 extends Component{
       game12Props: homepage3Data.game12Props,
       footerMenuFooterDefaultProps: homepage3Data.footerMenuFooterDefaultProps,
       popularSongs:[],
+      songs:[],
     }
   }
 
