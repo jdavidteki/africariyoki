@@ -242,6 +242,11 @@ class ConnectedNextLine extends Component {
     setTimeout( () => {
       let songInQuestionIndex = Math.floor(Math.random() * (this.state.songs.length - 0) + 0);
 
+      if(document.getElementById(songId) != undefined){
+        document.getElementById(lyricOption.replaceAll(' ', '')).classList.remove('correct-answer')
+        document.getElementById(lyricOption.replaceAll(' ', '')).classList.remove('wrong-answer')
+      }
+
       this.setState({
         songInQuestionIndex: songInQuestionIndex,
         songInQuestion: this.state.songs[songInQuestionIndex],

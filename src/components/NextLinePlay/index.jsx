@@ -28,11 +28,11 @@ function NextLine(props) {
               </div>
               <div className="right-3">
                 <div className="buttons1" onClick={() => props.play()}>
-                  {props.audioPaused ?
-                    <img className="play" src={playLogo} />
-                  :
-                    <img className="pause" src={pauseLogo} />
-                  }
+                    {props.audioPaused ?
+                        <img className="play" src={playLogo} />
+                      :
+                        <img className="pause" src={pauseLogo} />
+                    }
                 </div>
                 <Time timer={alarmLogo} spanText={`${props.mins} : ${props.secs}`} />
               </div>

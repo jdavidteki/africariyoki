@@ -6,6 +6,7 @@ import TextField from "@material-ui/core/TextField";
 import vector19DataImage from "../../../static/img/vector-18-10@2x.png";
 import beginnerImage from "../../../static/img/-level-1@2x.png";
 import amateurImage from "../../../static/img/-level-2@2x.png";
+import vector18Image from "../../../static/img/vector-18-11@2x.png";
 
 function Frame206(props) {
 
@@ -59,11 +60,11 @@ function Frame206(props) {
       </div>
       <div className="frame-205">
         <div className="frame-2">
-          <img className="vector-19-6" src="/img/vector-18-11@2x.png" />
+          <img className="vector-19-6" src={vector18Image} />
           <div className="set-duration poppins-normal-black-17px">
             <span className="poppins-normal-black-17px">set duration</span>
           </div>
-          <img className="vector-18-8" src="/img/vector-18-11@2x.png" />
+          <img className="vector-18-8" src={vector18Image} />
         </div>
         <div className="duration-2">
           <div className="beginner-container poppins-normal-martinique-20px">

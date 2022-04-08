@@ -29,13 +29,15 @@ function PopLinesPlay(props) {
                 />
               </div>
               <div className="right-3">
-                <div className="buttons1" onClick={() => props.play()}>
-                  {props.audioPaused ?
-                      <img className="play" src={playLogo} />
-                    :
-                      <img className="pause" src={pauseLogo} />
-                  }
-                </div>
+                {props.showAudio &&
+                  <div className="buttons1" onClick={() => props.play()}>
+                    {props.audioPaused ?
+                        <img className="play" src={playLogo} />
+                      :
+                        <img className="pause" src={pauseLogo} />
+                    }
+                  </div>
+                }
                 <Time timer={alarmLogo} spanText={`${props.mins} : ${props.secs}`} />
               </div>
             </div>
@@ -45,17 +47,19 @@ function PopLinesPlay(props) {
           </div>
         </div>
       </div>
-      <div className="PopLinesPlay-options">
-        {props.songsInOption.map((song) =>
-          <Song
-            key={song.id}
-            song={song}
-            playSong={props.checkAnswer}
-            backgroundColor={props.optionBackground}
-            countries={song.countries}
-          />
-        )}
-      </div>
+      {props.songsInOption.length > 0 &&
+        <div className="PopLinesPlay-options">
+          {props.songsInOption.map((song) =>
+            <Song
+              key={song.id}
+              song={song}
+              playSong={props.checkAnswer}
+              backgroundColor={props.optionBackground}
+              countries={song.countries}
+            />
+          )}
+        </div>
+      }
     </div>
   );
 }

@@ -28,6 +28,10 @@ function Song(props){
         }
       </div>
     )
+  }else{
+    return(
+      <div></div>
+    )
   }
 }
 

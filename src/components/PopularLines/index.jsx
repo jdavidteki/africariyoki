@@ -272,7 +272,8 @@ class ConnectedPopularLines extends Component {
 
     setTimeout( () => {
       if(document.getElementById(songId) != undefined){
-        document.getElementById(songId).style.backgroundColor = '#d5c0f0'
+        document.getElementById(songId).classList.remove('correct-answer')
+        document.getElementById(songId).classList.remove('wrong-answer')
       }
 
       //make it so that if they dont have the song locally, they can still fetch from the network
@@ -284,7 +285,7 @@ class ConnectedPopularLines extends Component {
         songsInOption: this.generateSongsInOptions(this.state.songs, this.state.songs[songInQuestionIndex]),
         audioPaused: true
       });
-    }, 400);
+    }, 500);
   }
 
   startGame = () => {
@@ -317,23 +318,23 @@ class ConnectedPopularLines extends Component {
   }
 
   restartGame = () => {
-      let songInQuestionIndex = Math.floor(Math.random() * (this.state.songs.length - 0) + 0);
-      this.setState({
-          count:0,
-          eventDate: moment.duration().add({days:0,hours:0,minutes:0,seconds:0}),
-          secs:0,
-          mins:0,
-          score: 0,
-          pauseSetGameModal: true,
-          setGameModel: true,
-          printResult: false,
-          audioPaused: true,
-          answerCorrect: true,
-          songInQuestionIndex: songInQuestionIndex,
-          songInQuestion: this.state.songs[songInQuestionIndex],
-          randomTruePopLine: this.findRandomTruePopLine(this.state.songs[songInQuestionIndex].id),
-          songsInOption: this.generateSongsInOptions(this.state.songs, this.state.songs[songInQuestionIndex])
-      })
+    let songInQuestionIndex = Math.floor(Math.random() * (this.state.songs.length - 0) + 0);
+    this.setState({
+        count:0,
+        eventDate: moment.duration().add({days:0,hours:0,minutes:0,seconds:0}),
+        secs:0,
+        mins:0,
+        score: 0,
+        pauseSetGameModal: true,
+        setGameModel: true,
+        printResult: false,
+        audioPaused: true,
+        answerCorrect: true,
+        songInQuestionIndex: songInQuestionIndex,
+        songInQuestion: this.state.songs[songInQuestionIndex],
+        randomTruePopLine: this.findRandomTruePopLine(this.state.songs[songInQuestionIndex].id),
+        songsInOption: this.generateSongsInOptions(this.state.songs, this.state.songs[songInQuestionIndex])
+    })
   }
 
   playVocal = () => {
@@ -437,6 +438,7 @@ class ConnectedPopularLines extends Component {
                     <div className="PopLinesPlay-wrapper">
                       <PopLinesPlay
                         play={this.playVocal}
+                        showAudio={this.audio != null && this.audio.duration > 0}
                         score={this.state.score}
                         playerName = {this.state.selectedOptionPlayerName === "" ? "yokibot" : this.state.selectedOptionPlayerName}
                         selectedOptionDifficulty = {this.state.selectedOptionDifficulty}

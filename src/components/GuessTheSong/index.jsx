@@ -315,7 +315,8 @@ class ConnectedGuessTheSong extends Component {
     }, () => {
       setTimeout( () => {
         if( document.getElementById(songId) != undefined){
-            document.getElementById(songId).style.backgroundColor = '#c0f0c0'
+          document.getElementById(songId).classList.remove('correct-answer')
+          document.getElementById(songId).classList.remove('wrong-answer')
         }
 
         //make it so that if they dont have the song locally, they can still fetch from the network
