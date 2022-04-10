@@ -348,8 +348,10 @@ class ConnectedPopularLines extends Component {
 
           //wait for like 0.5sec before actually playing just incase it is paused
           setTimeout(()=>{
+            if(this.audio != null) {
               this.audio.play();
               this.setState({audioPaused: false})
+            }
           }, 500);
 
           //update song plays

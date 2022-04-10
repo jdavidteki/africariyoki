@@ -227,7 +227,10 @@ class ConnectedKaraoke extends Component {
   }
 
   isSafari(){
-    return navigator.userAgent.toLowerCase().indexOf('safari/') > -1
+    return navigator.vendor && navigator.vendor.indexOf('Apple') > -1 &&
+    navigator.userAgent &&
+    navigator.userAgent.indexOf('CriOS') == -1 &&
+    navigator.userAgent.indexOf('FxiOS') == -1;
   }
 
   getHighestNumberOfPlays(val){
@@ -349,11 +352,19 @@ class ConnectedKaraoke extends Component {
     this.setState({openCopyCliboardModal:true})
   }
 
+  onCanPlay = () => {
+    setTimeout( () => {
+      if(!this.isSafari()){
+        this.player.audio.current.play()
+      }
+    }, 1000);
+  }
+
   render(){
     return (
       <div className="container-center-horizontal">
         <MetaTags>
-          <title>{this.state.singer.title} - {this.state.singer.singer} ::: africariyoki</title>
+          <title>{this.state.singer.title.toLowerCase()} - {this.state.singer.singer.toLowerCase()} ::: africariyoki</title>
           <meta name="description" content={`karaoke to your favourite african songs! -- ${this.state.singer.title}, ${this.state.singer.singer}, ${this.state.singer.countries}`} />
           <meta property="og:title" content="africariyoki" />
           <meta httpEquiv='cache-control' content='no-cache' />
@@ -436,7 +447,6 @@ class ConnectedKaraoke extends Component {
                   <div className="Karaoke-controls">
                     {this.state.singer.audiourl &&
                       <AudioPlayer
-                        autoPlay={true}
                         autoPlayAfterSrcChange={this.isSafari() ? false : true}//set this for safari no matter what autoplay value is
                         defaultCurrentTime="yo"
                         defaultDuration="ki"
@@ -449,6 +459,7 @@ class ConnectedKaraoke extends Component {
                         onListen = {(event) => {this.setState({currentTime: event.target.currentTime})}}
                         listenInterval = {1}
                         ref={ref => this.player = ref}
+                        onCanPlay={this.onCanPlay}
                       />
                     }
                   </div>

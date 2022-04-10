@@ -103,7 +103,7 @@
   align-items: flex-end;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   margin-left: 10px;
   min-height: 104px;
   position: relative;
