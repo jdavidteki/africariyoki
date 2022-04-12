@@ -32,30 +32,30 @@ class Header extends Component{
     //if you are on homepage, refresh page on icon logo click
     document.getElementById("headerLogoImage").addEventListener('click', ()=>{
       if(window.location.pathname == "/" || window.location.pathname == "/africariyoki"){
-
-        Firebase.getVersion().then(
-          val => {
-            let localVersion = localStorage.getItem('version')
-
-            if (localVersion == null || val > localVersion){
-              localStorage.setItem('version', val);
-
-              if(caches) {
-                // Service worker cache should be cleared with caches.delete()
-                console.log("caches", caches)
-                caches.keys().then(function(names) {
-                  for (let name of names) caches.delete(name);
-                });
-              }
-
-              window.location.href = window.location.href + `?hardrefresh=${val}`
-            }else{
-              window.location.reload(false);
-            }
-          }
-        )
+        window.location.reload(false);
       }
     })
+
+    if(window.location.pathname == "/" || window.location.pathname == "/africariyoki"){
+      Firebase.getVersion().then(
+        val => {
+          let localVersion = localStorage.getItem('version')
+
+          if (localVersion == null || val > localVersion){
+            localStorage.setItem('version', val);
+
+            if(caches) {
+              // Service worker cache should be cleared with caches.delete()
+              caches.keys().then(function(names) {
+                for (let name of names) caches.delete(name);
+              });
+            }
+
+            window.location.href = window.location.href + `?version=${val}`
+          }
+        }
+      )
+    }
   }
 
   render(){
