@@ -340,8 +340,6 @@ class ConnectedPopularLines extends Component {
   playVocal = () => {
       clearTimeout(this.state.prevTimeoutID)
       if(this.audio != null && this.audio.duration > 0){
-          this.audio.setAttribute('crossorigin', 'anonymous');
-
           var timeToStart = this.getPopLineTime(this.state.randomTruePopLine)
           this.audio.setAttribute("src", this.audio.src + `#t=${timeToStart}`)
 
@@ -461,6 +459,7 @@ class ConnectedPopularLines extends Component {
                           className={"PopularLine-audio"}
                           ref={ref => this.audio = ref}
                           id="sample"
+                          crossorigin="anonymous"
                           controls
                           src={
                               this.state.songInQuestion.audiourl.includes('africariyoki-4b634') ?
