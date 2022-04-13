@@ -340,11 +340,10 @@ class ConnectedPopularLines extends Component {
   playVocal = () => {
       clearTimeout(this.state.prevTimeoutID)
       if(this.audio != null && this.audio.duration > 0){
-          var timeToStart = this.getPopLineTime(this.state.randomTruePopLine)
+          this.audio.setAttribute('crossorigin', 'anonymous');
 
-          if (!this.audio.src.includes("#t")){
-              this.audio.setAttribute("src", this.audio.src + `#t=${timeToStart}`)
-          }
+          var timeToStart = this.getPopLineTime(this.state.randomTruePopLine)
+          this.audio.setAttribute("src", this.audio.src + `#t=${timeToStart}`)
 
           //wait for like 0.5sec before actually playing just incase it is paused
           setTimeout(()=>{
@@ -352,16 +351,15 @@ class ConnectedPopularLines extends Component {
               this.audio.play();
               this.setState({audioPaused: false})
             }
-          }, 500);
+          }, 700);
 
           //update song plays
           Firebase.getLyricsById(this.state.songInQuestion.id).then(
-              val => {
-                  Firebase.updateNumPlays(this.state.songInQuestion.id, val.numPlays +=1)
-              }
+            val => {
+                Firebase.updateNumPlays(this.state.songInQuestion.id, val.numPlays +=1)
+            }
           )
 
-          this.audio.currentTime = timeToStart
           const int = setTimeout(() => {
               if(this.audio != undefined){
                   this.audio.pause();
@@ -391,8 +389,10 @@ class ConnectedPopularLines extends Component {
       }
 
       if (isNaN(secTime) || secTime == 0){
-          let midLyrics = lyricsArray[Math.round(lyricsArray.length / 2)]
+        let midLyrics = lyricsArray[Math.round(lyricsArray.length / 2)]
+        if(midLyrics != undefined){
           secTime = HmsToSecondsOnly(midLyrics.substring(1, 6)) + parseInt(midLyrics.substring(7, 9), 10)
+        }
       }
 
       return Math.round(secTime/1000)
