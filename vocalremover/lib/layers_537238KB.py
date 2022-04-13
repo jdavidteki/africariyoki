@@ -86,7 +86,7 @@ class Decoder(nn.Module):
 
 class ASPPModule(nn.Module):
 
-    def __init__(self, nin, nout, dilations=(4, 8, 16), activ=nn.ReLU):
+    def __init__(self, nin, nout, dilations=(4, 8, 16, 32, 64), activ=nn.ReLU):
         super(ASPPModule, self).__init__()
         self.conv1 = nn.Sequential(
             nn.AdaptiveAvgPool2d((1, None)),
@@ -99,8 +99,12 @@ class ASPPModule(nn.Module):
             nin, nin, 3, 1, dilations[1], dilations[1], activ=activ)
         self.conv5 = SeperableConv2DBNActiv(
             nin, nin, 3, 1, dilations[2], dilations[2], activ=activ)
+        self.conv6 = SeperableConv2DBNActiv(
+            nin, nin, 3, 1, dilations[2], dilations[2], activ=activ)
+        self.conv7 = SeperableConv2DBNActiv(
+            nin, nin, 3, 1, dilations[2], dilations[2], activ=activ)
         self.bottleneck = nn.Sequential(
-            Conv2DBNActiv(nin * 5, nout, 1, 1, 0, activ=activ),
+            Conv2DBNActiv(nin * 7, nout, 1, 1, 0, activ=activ),
             nn.Dropout2d(0.1)
         )
 
@@ -111,6 +115,8 @@ class ASPPModule(nn.Module):
         feat3 = self.conv3(x)
         feat4 = self.conv4(x)
         feat5 = self.conv5(x)
-        out = torch.cat((feat1, feat2, feat3, feat4, feat5), dim=1)
+        feat6 = self.conv6(x)
+        feat7 = self.conv7(x)
+        out = torch.cat((feat1, feat2, feat3, feat4, feat5, feat6, feat7), dim=1)
         bottle = self.bottleneck(out)
         return bottle

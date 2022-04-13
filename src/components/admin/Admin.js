@@ -9,6 +9,7 @@ import UploadContent from '../uploadcontent/UploadContent.js'
 import UploadSearcherBck from '../uploadSearcherBck/UploadSearcherBck.js'
 import UploadImgStory from '../uploadImgStory/UploadImgStory.js'
 import { Analytics, PageHit } from 'expo-analytics';
+import Header from "../Header2";
 
 import 'bootstrap/dist/css/bootstrap.css';
 import "./Admin.css"
@@ -226,6 +227,7 @@ class ConnectedAdmin extends Component {
         }
         return (
             <div className="Admin">
+                <Header callerComponent={"karaokepage"} />
                 <div className="Admin-table">
                     <ReactDataGrid
                         rowKey="id"

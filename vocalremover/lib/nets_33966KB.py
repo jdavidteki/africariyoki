@@ -2,13 +2,13 @@ import torch
 from torch import nn
 import torch.nn.functional as F
 
-from lib import layers
+from lib import layers_33966KB as layers
 from lib import spec_utils
 
 
 class BaseASPPNet(nn.Module):
 
-    def __init__(self, nin, ch, dilations=(4, 8, 16)):
+    def __init__(self, nin, ch, dilations=(4, 8, 16, 32)):
         super(BaseASPPNet, self).__init__()
         self.enc1 = layers.Encoder(nin, ch, 3, 2, 1)
         self.enc2 = layers.Encoder(ch, ch * 2, 3, 2, 1)
@@ -83,7 +83,7 @@ class CascadedASPPNet(nn.Module):
             input=mask,
             pad=(0, 0, 0, self.output_bin - mask.size()[2]),
             mode='replicate')
- 
+
         if self.training:
             aux1 = torch.sigmoid(self.aux1_out(aux1))
             aux1 = F.pad(
@@ -96,7 +96,7 @@ class CascadedASPPNet(nn.Module):
                 pad=(0, 0, 0, self.output_bin - aux2.size()[2]),
                 mode='replicate')
             return mask * mix, aux1 * mix, aux2 * mix
-        else:       
+        else:
             if params.get('is_vocal_model'):
                 return (1.0 - spec_utils.adjust_aggr(mask, params)) * mix  
                 
