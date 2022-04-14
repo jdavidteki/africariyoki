@@ -348,6 +348,9 @@ class ConnectedPopularLines extends Component {
             if(this.audio != null) {
               this.audio.play();
               this.setState({audioPaused: false})
+              if (isFinite(timeToStart)){
+                this.audio.currentTime = timeToStart
+              }
             }
           }, 700);
 
@@ -361,7 +364,9 @@ class ConnectedPopularLines extends Component {
           const int = setTimeout(() => {
               if(this.audio != undefined){
                   this.audio.pause();
-                  this.audio.currentTime = timeToStart
+                  if (isFinite(timeToStart)){
+                    this.audio.currentTime = timeToStart
+                  }
                   this.setState({audioPaused: true})
                   clearTimeout(int)
               }
@@ -459,7 +464,7 @@ class ConnectedPopularLines extends Component {
                           className={"PopularLine-audio"}
                           ref={ref => this.audio = ref}
                           id="sample"
-                          crossorigin="anonymous"
+                          crossOrigin="anonymous"
                           controls
                           src={
                               this.state.songInQuestion.audiourl.includes('africariyoki-4b634') ?
