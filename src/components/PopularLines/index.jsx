@@ -206,7 +206,7 @@ class ConnectedPopularLines extends Component {
   }
 
   handleChangePlayerName = selectedOptionPlayerName => {
-    let playerName = selectedOptionPlayerName.target
+    let playerName = selectedOptionPlayerName.target.value
     if (playerName.length > 15) {
       playerName =  playerName.slice(15)
     }

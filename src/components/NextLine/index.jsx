@@ -212,7 +212,12 @@ class ConnectedNextLine extends Component {
   }
 
   handleChangePlayerName = selectedOptionPlayerName => {
-      this.setState({ selectedOptionPlayerName: selectedOptionPlayerName.target });
+    let playerName = selectedOptionPlayerName.target.value
+    if (playerName.length > 15) {
+      playerName =  playerName.slice(15)
+    }
+
+    this.setState({ selectedOptionPlayerName: playerName });
   };
 
 
