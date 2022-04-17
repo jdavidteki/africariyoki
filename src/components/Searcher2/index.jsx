@@ -152,10 +152,10 @@ class Searcher extends Component {
 
     if(this.props.history == undefined){
       //TODO: figure out if it's possible to not have to do this
-      window.location.href = "/karaokedisplay/" + songId
+      window.location.href = "/karaoke/" + songId
     }else{
       this.props.history.push({
-        pathname: "/karaokedisplay/" + songId,
+        pathname: "/karaoke/" + songId,
         state: { chooseSong: chooseSong, songs: this.state.songsCopy}
       });
     }
