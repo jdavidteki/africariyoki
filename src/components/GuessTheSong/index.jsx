@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import MetaTags from 'react-meta-tags';
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import SetGameModal from "../SetGameModal";
@@ -386,6 +387,14 @@ class ConnectedGuessTheSong extends Component {
     if (this.state.songInQuestion.title != "") {
       return (
         <div className="GuessTheSong">
+          <MetaTags>
+            <title>africariyoki ::: guess the song</title>
+            <meta name="description" content={`listen to afrobeats snippest and select right songs`} />
+            <meta property="og:title" content="africariyoki" />
+            <meta httpEquiv='cache-control' content='no-cache' />
+            <meta httpEquiv='expires' content='0' />
+            <meta httpEquiv='pragma' content='no-cache' />
+          </MetaTags>
           <div
             style={{ backgroundImage: `url(${this.state.overlapGroup})` }}
             className="overlap-group-40">

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import MetaTags from 'react-meta-tags';
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import SetGameModal from "../SetGameModal";
@@ -339,6 +340,14 @@ class ConnectedNextLine extends Component {
     if (this.state.songInQuestion.title != "") {
       return (
         <div className="NextLine">
+          <MetaTags>
+            <title>africariyoki ::: next line</title>
+            <meta name="description" content={`what is the next line`} />
+            <meta property="og:title" content="africariyoki" />
+            <meta httpEquiv='cache-control' content='no-cache' />
+            <meta httpEquiv='expires' content='0' />
+            <meta httpEquiv='pragma' content='no-cache' />
+          </MetaTags>
           <div
             style={{ backgroundImage: `url(${this.state.overlapGroup})` }}
             className="overlap-group-40">

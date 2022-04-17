@@ -197,6 +197,7 @@ class Searcher extends Component {
             <TextField
               className="Searcher-input"
               shrink='true'
+              autoComplete='off'
               id="Searcher-input"
               label={`${this.state.selectedCode != '' ? ' what do you want to sing from ' + codeToCountries[this.state.selectedCode] + ' today??': '     ' + this.state.inputPromptMsg}?`}
               variant="outlined"
