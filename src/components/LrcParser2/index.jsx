@@ -16,6 +16,7 @@ class LRCParser extends Component {
       nextLine: "",
       prevTimeStamp: "",
       smileyToSet: '',
+      currentLineIndex: 0,
       openAnotationModel: false,
       mapLyricsToMs: this.getLyricsArrayWithMs(this.props.lyrics.split("\n")),
       keysOfMapLyrics: Array.from(
@@ -96,7 +97,27 @@ class LRCParser extends Component {
     let prevLine = this.state.keysOfMapLyrics[this.state.keysOfMapLyrics.indexOf(closest) - 1]
     let nextLine = this.state.keysOfMapLyrics[this.state.keysOfMapLyrics.indexOf(closest) + 1]
 
+    //check if currentline has changed
+    if(closest != this.state.currentLineIndex){
+      if(document.getElementById("LRCParser-currentLine") != null){
+        document.getElementById("LRCParser-currentLine").classList.add('bottomFadeOutCurrentLine')
+
+        setTimeout(()=>{
+          document.getElementById("LRCParser-currentLine").classList.remove('bottomFadeOutCurrentLine')
+        }, 500)
+      }
+
+      if(document.getElementById("LRCParser-previousLine") != null){
+        document.getElementById("LRCParser-previousLine").classList.add('bottomFadeOutPreviousLine')
+
+        setTimeout(()=>{
+          document.getElementById("LRCParser-previousLine").classList.remove('bottomFadeOutPreviousLine')
+        }, 500)
+      }
+    }
+
     this.setState({
+      currentLineIndex: closest,
       prevLine:  this.state.mapLyricsToMs.get(prevLine),
       currentLine: this.state.mapLyricsToMs.get(closest),
       nextLine:  this.state.mapLyricsToMs.get(nextLine),
@@ -111,16 +132,16 @@ class LRCParser extends Component {
             <KeyboardBackspaceIcon
               fontSize={'medium'}
               className={"LRCParser-openAnotationModel-back"}
-              style={{ color: '#3413f1' }}
+              style={{ color: '#080808' }}
               onClick={()=>{this.props.playThisSong(); this.setState({openAnotationModel: false})}}
             />
             <pre className={"LRCParser-annotationText"}>{this.state.currentLineAnotation}</pre>
           </div>
 
-          <p className="LRCParser-previousLine">
+          <p id={"LRCParser-previousLine"} className="LRCParser-previousLine">
             {this.state.prevLine ? CleanLine(this.state.prevLine) : ''}
           </p>
-          <p className="LRCParser-currentLine">
+          <p id={"LRCParser-currentLine"} className="LRCParser-currentLine">
             {this.state.currentLine
             ?
              <span onClick={()=>{this.showAnotation(CleanLine(this.state.currentLine))}} className={this.hasAnotation(CleanLine(this.state.currentLine)) ? "LRCParser-hasAnotation" : ""}>{CleanLine(this.state.currentLine)}</span>

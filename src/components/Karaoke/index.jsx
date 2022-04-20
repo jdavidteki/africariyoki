@@ -348,7 +348,8 @@ class ConnectedKaraoke extends Component {
   }
 
   copyURL = () => {
-    navigator.clipboard.writeText(window.location.href)
+    let textToCopy = `vibe to ${this.state.singer.title.toLowerCase()} by ${this.state.singer.singer.toLowerCase()} on africariyoki ::: ${window.location.href}`
+    navigator.clipboard.writeText(textToCopy)
     this.setState({openCopyCliboardModal:true})
   }
 

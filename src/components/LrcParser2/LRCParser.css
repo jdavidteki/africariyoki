@@ -16,11 +16,61 @@
   font-size: var(--font-size-xxl);
   font-style: normal;
   font-weight: 500;
-  margin: 8px 0;
   line-height: 22px;
   min-height: 70px;
   display: flex;
   align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  margin-top: 3px;
+}
+
+.bottomFadeOutCurrentLine{
+  animation-name: bottomFadeOutCurrentLine;
+  animation-duration: 0.4s;
+  white-space: normal;
+}
+
+@keyframes bottomFadeOutCurrentLine {
+  0% {
+    margin-top: 6px;
+    opacity: 0.3;
+  }
+
+  75% {
+    margin-top: 4px;
+    opacity: 0.6;
+  }
+
+  100% {
+    margin-top: 3px;
+    opacity: 1;
+  }
+}
+
+.LRCParser-previousLine{
+  margin-top: 0;
+}
+
+.bottomFadeOutPreviousLine{
+  animation-name: bottomFadeOutPreviousLine;
+  animation-duration: 0.4s;
+  white-space: normal;
+}
+
+@keyframes bottomFadeOutPreviousLine {
+  0% {
+    margin-top: 3px;
+  }
+
+  75% {
+    margin-top: 2px;
+  }
+
+  100% {
+    margin-top: 0;
+  }
 }
 
 .LRCParser-nextLine,
@@ -61,7 +111,8 @@
 
 .LRCParser-hasAnotation{
   cursor: pointer;
-  border-bottom: 1px dotted #c0f0c0;
+  color: var(--pine-green);
+  font-weight: 500;
 }
 
 .LRCParser-openAnotationModel
@@ -72,9 +123,10 @@
   height: 100%;
   width: 0;
   z-index: 99999999;
-  background-color: #c0f0c0;
+  background-color: var(--pine-green);
   font-size: 12px;
-  color: black;
+  font-weight: 500;
+  color: white;
   transition: width 2s ease;
   overflow: hidden;
 }
@@ -87,11 +139,13 @@
   height: 100%;
   width: 100%;
   z-index: 99999999;
-  background-color: #c0f0c0;
+  background-color: var(--pine-green);
   font-size: 12px;
-  color: black;
+  font-weight: 500;
+  color: white;
   transition: width 2s ease;
   overflow-y: auto;
+  border-radius: 4px;
 }
 
 .LRCParser-openAnotationModel-back
@@ -111,9 +165,13 @@
 
 .LRCParser-annotationText
 {
+  color: white;
   padding: 20px;
   text-align: left;
   width: 90%;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  line-height: 16px;
   overflow-x: auto;
   white-space: pre-wrap;
   white-space: -moz-pre-wrap;
