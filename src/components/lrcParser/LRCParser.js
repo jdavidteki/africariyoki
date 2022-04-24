@@ -56,7 +56,7 @@ class LRCParser extends Component {
   getLyricsArrayWithMs(rawArray){
     var msToLine = new Map()
     for( var i = 0; i < rawArray.length; i++ ){
-      var lyricTimeMilliSec = HmsToSecondsOnly(rawArray[i].substring(1, 6)) + parseInt(rawArray[i].substring(7, 9), 10)
+      var lyricTimeMilliSec = HmsToSecondsOnly(rawArray[i].substring(1, 9)) + parseInt(rawArray[i].substring(7, 9), 10)
       msToLine.set(lyricTimeMilliSec, rawArray[i])
     }
     return msToLine

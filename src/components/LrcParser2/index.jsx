@@ -56,7 +56,7 @@ class LRCParser extends Component {
   getLyricsArrayWithMs(rawArray){
     var msToLine = new Map()
     for( var i = 0; i < rawArray.length; i++ ){
-      var lyricTimeMilliSec = HmsToSecondsOnly(rawArray[i].substring(1, 6)) + parseInt(rawArray[i].substring(7, 9), 10)
+      var lyricTimeMilliSec = HmsToSecondsOnly(rawArray[i].substring(1, 9)) + parseInt(rawArray[i].substring(7, 9), 10)
       msToLine.set(lyricTimeMilliSec, rawArray[i])
     }
     return msToLine
@@ -79,19 +79,22 @@ class LRCParser extends Component {
 
   getCurrentLyricLine(){
     let currentTime = this.props.currentTime * 1000
+    let closest = 0
 
-    let closest = this.state.keysOfMapLyrics.reduce((a, b) => {
-      let aDiff = Math.abs(a - currentTime);
-      let bDiff = Math.abs(b - currentTime);
-      if (aDiff == bDiff) {
-          return a < b ? a : b;
-      } else {
-          return bDiff < aDiff ? b : a;
+    for (let i = 0; i < this.state.keysOfMapLyrics.length - 1; i++) {
+      let now = this.state.keysOfMapLyrics[i]
+      let later = this.state.keysOfMapLyrics[i + 1]
+      let biggestTime = this.state.keysOfMapLyrics[this.state.keysOfMapLyrics.length - 1]
+
+      if (currentTime >= biggestTime){
+        closest = biggestTime
+        break
       }
-    });
 
-    if (closest > 0 && closest > currentTime){
-      closest = this.state.keysOfMapLyrics[this.state.keysOfMapLyrics.indexOf(closest) - 1]
+      if (currentTime > now && currentTime < later){
+        closest = now
+        break
+      }
     }
 
     let prevLine = this.state.keysOfMapLyrics[this.state.keysOfMapLyrics.indexOf(closest) - 1]

@@ -140,7 +140,7 @@ class Homepage3 extends Component{
         </MetaTags>
 
         {/* these will remain for SEO purposes */}
-          <h1 itemProp="headline" style={{ display: "none" }}>#karaokewithafrica - #karaoke, african karaoke, #nigeriankaraoke, #lagoskaraoke, #ghanaian karaoke, #afrobeatskaraoke, afrobeatskaraoke, the african internet playhouse</h1>
+          <h1 itemProp="headline" style={{ display: "none" }}>#karaokewithafrica - #karaoke, african karaoke, #nigeriankaraoke, #lagoskaraoke, #ghanaian karaoke, #afrobeatskaraoke, afrobeatskaraoke, afro a.i playhouse</h1>
         {/* ******** */}
 
         <div className="homepage3 screen">

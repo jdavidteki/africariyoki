@@ -387,13 +387,13 @@ class ConnectedPopularLine extends Component {
 
         if (poplineFuzzySet!= null && poplineFuzzySet.length > 0){
             if (poplineFuzzySet[0].length > 0){
-                secTime = HmsToSecondsOnly(poplineFuzzySet[0][1].substring(1, 6)) + parseInt(poplineFuzzySet[0][1].substring(7, 9), 10)
+                secTime = HmsToSecondsOnly(poplineFuzzySet[0][1].substring(1, 9)) + parseInt(poplineFuzzySet[0][1].substring(7, 9), 10)
             }
         }
 
         if (isNaN(secTime) || secTime == 0){
             let midLyrics = lyricsArray[Math.round(lyricsArray.length / 2)]
-            secTime = HmsToSecondsOnly(midLyrics.substring(1, 6)) + parseInt(midLyrics.substring(7, 9), 10)
+            secTime = HmsToSecondsOnly(midLyrics.substring(1, 9)) + parseInt(midLyrics.substring(7, 9), 10)
         }
 
         return Math.round(secTime/1000)

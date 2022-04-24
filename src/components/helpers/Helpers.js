@@ -74,7 +74,8 @@ export function GetMemesFromComments(comment) {
   }
 }
 
-export function HmsToSecondsOnly(str) {
+export function HmsToSecondsOnly(totalSecs) {
+  var str = totalSecs.substr(0,5)
   var p = str.split(':'),
       s = 0, m = 1;
 
@@ -83,7 +84,7 @@ export function HmsToSecondsOnly(str) {
       m *= 60;
   }
 
-  return s*1000;
+  return s *1000 + ((parseInt(totalSecs.substr(6, 9), 10))/100);
 }
 
 

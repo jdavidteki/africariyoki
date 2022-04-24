@@ -354,6 +354,10 @@ class ConnectedKaraoke extends Component {
   }
 
   onCanPlay = () => {
+    setInterval(()=>{
+      this.setState({currentTime: this.player.audio.current.currentTime})
+    }, 0.1)
+
     setTimeout( () => {
       if(!this.isSafari()){
         this.player.audio.current.play()
@@ -457,7 +461,6 @@ class ConnectedKaraoke extends Component {
                         onEnded={this.playAnotherSong}
                         onPause={ () => {this.setState({pauseSong: true})}}
                         onPlay = {() => {this.setState({pauseSong: false})}}
-                        onListen = {(event) => {this.setState({currentTime: event.target.currentTime})}}
                         listenInterval = {1}
                         ref={ref => this.player = ref}
                         onCanPlay={this.onCanPlay}
