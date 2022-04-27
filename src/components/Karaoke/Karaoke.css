@@ -700,4 +700,9 @@
   {
     width: 100%;
   }
+
+  .wiz-kid-ft-burna-boy .poppins-normal-storm-gray-20px
+  {
+    font-size: var(--font-size-s);
+  }
 }
