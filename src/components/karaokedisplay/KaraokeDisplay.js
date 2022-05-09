@@ -96,10 +96,10 @@ class ConnectedKaraokeDisplay extends Component {
       this.setState({openSbtaOnPageLoad: true})
     }
 
-    const analytics = new Analytics('UA-187038287-1');
-    analytics.hit(new PageHit('KaraokeDisplay'))
-      .then(() => console.log("karaokeDisplay analytics setup"))
-      .catch(e => console.log(e.message));
+    // const analytics = new Analytics('UA-187038287-1');
+    // analytics.hit(new PageHit('KaraokeDisplay'))
+    //   .then(() => console.log("karaokeDisplay analytics setup"))
+    //   .catch(e => console.log(e.message));
 
     noSleep.enable();
 

@@ -18,10 +18,10 @@ class ScoreboardGuessSong extends Component {
     }
 
     componentDidMount(){
-        const analytics = new Analytics('UA-187038287-1');
-        analytics.hit(new PageHit('Scoreboard Guess Song'))
-            .then(() => console.log("google analytics on game"))
-            .catch(e => console.log(e.message));
+        // const analytics = new Analytics('UA-187038287-1');
+        // analytics.hit(new PageHit('Scoreboard Guess Song'))
+        //     .then(() => console.log("google analytics on game"))
+        //     .catch(e => console.log(e.message));
 
         Firebase.getScoreBoardGuessSong()
         .then(scoreboardGuessSong => {

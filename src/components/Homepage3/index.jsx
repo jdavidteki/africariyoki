@@ -50,10 +50,10 @@ class Homepage3 extends Component{
       })
     }, 500);
 
-    const analytics = new Analytics('UA-187038287-1');
-    analytics.hit(new PageHit('HomePage'))
-      .then(() => console.log("google analytics on searcher"))
-      .catch(e => console.log(e.message));
+    // const analytics = new Analytics('UA-187038287-1');
+    // analytics.hit(new PageHit('HomePage'))
+    //   .then(() => console.log("google analytics on searcher"))
+    //   .catch(e => console.log(e.message));
 
 
     //download all the images for caching purposes

@@ -141,10 +141,10 @@ class ConnectedGuessTheSong extends Component {
       })
     }, 500);
 
-    const analytics = new Analytics('UA-187038287-1');
-    analytics.hit(new PageHit('GuessTheSong'))
-      .then(() => console.log("google analytics on searcher"))
-      .catch(e => console.log(e.message));
+    // const analytics = new Analytics('UA-187038287-1');
+    // analytics.hit(new PageHit('GuessTheSong'))
+    //   .then(() => console.log("google analytics on searcher"))
+    //   .catch(e => console.log(e.message));
 
 
     //open indexdb to read yokis

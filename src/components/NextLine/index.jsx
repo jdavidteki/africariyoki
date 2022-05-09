@@ -134,10 +134,10 @@ class ConnectedNextLine extends Component {
       }
     }
 
-    const analytics = new Analytics('UA-187038287-1');
-    analytics.hit(new PageHit('NextLine'))
-      .then(() => console.log("google analytics on searcher"))
-      .catch(e => console.log(e.message));
+    // const analytics = new Analytics('UA-187038287-1');
+    // analytics.hit(new PageHit('NextLine'))
+    //   .then(() => console.log("google analytics on searcher"))
+    //   .catch(e => console.log(e.message));
 
     setTimeout( () => {
       this.setState({

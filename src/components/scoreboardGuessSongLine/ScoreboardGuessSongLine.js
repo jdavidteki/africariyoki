@@ -25,10 +25,10 @@ class ScoreboardGuessSongLine extends Component {
             })
         })
 
-        const analytics = new Analytics('UA-187038287-1');
-        analytics.hit(new PageHit('Scoreboard Popular Lines'))
-            .then(() => console.log("google analytics on game"))
-            .catch(e => console.log(e.message));
+        // const analytics = new Analytics('UA-187038287-1');
+        // analytics.hit(new PageHit('Scoreboard Popular Lines'))
+        //     .then(() => console.log("google analytics on game"))
+        //     .catch(e => console.log(e.message));
     }
 
     scoreSubTitiles(){

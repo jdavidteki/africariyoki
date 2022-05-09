@@ -138,10 +138,10 @@ class ConnectedCompleteLyrics extends Component {
     }
 
     componentDidMount(){
-        const analytics = new Analytics('UA-187038287-1');
-        analytics.hit(new PageHit('CompleteTheLyrics'))
-            .then(() => console.log("google analytics on complete the lyric"))
-            .catch(e => console.log(e.message));
+        // const analytics = new Analytics('UA-187038287-1');
+        // analytics.hit(new PageHit('CompleteTheLyrics'))
+        //     .then(() => console.log("google analytics on complete the lyric"))
+        //     .catch(e => console.log(e.message));
 
         Firebase.getLyrics().then(
             val => {

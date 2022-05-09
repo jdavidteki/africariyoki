@@ -170,10 +170,10 @@ class ConnectedGuessSong extends Component {
             db.createObjectStore("yokis");
         };
 
-        const analytics = new Analytics('UA-187038287-1');
-        analytics.hit(new PageHit('Guess Song'))
-            .then(() => console.log("google analytics on game"))
-            .catch(e => console.log(e.message));
+        // const analytics = new Analytics('UA-187038287-1');
+        // analytics.hit(new PageHit('Guess Song'))
+        //     .then(() => console.log("google analytics on game"))
+        //     .catch(e => console.log(e.message));
 
 
         //try to load local songs file first

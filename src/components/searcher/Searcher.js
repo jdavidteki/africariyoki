@@ -44,10 +44,10 @@ class Searcher extends Component {
       document.getElementById('js-yokisCTA').click();
     }
 
-    const analytics = new Analytics('UA-187038287-1');
-    analytics.hit(new PageHit('Searcher'))
-      .then(() => console.log("google analytics on searcher"))
-      .catch(e => console.log(e.message));
+    // const analytics = new Analytics('UA-187038287-1');
+    // analytics.hit(new PageHit('Searcher'))
+    //   .then(() => console.log("google analytics on searcher"))
+    //   .catch(e => console.log(e.message));
 
 
     Firebase.bckMappings().then(
