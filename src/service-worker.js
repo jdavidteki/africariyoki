@@ -77,7 +77,7 @@ const matchFunction = ({url, request, event}) => {
 //come back and fix this jesuyye. but leave it on for now cos u is a lazy mofucker
 registerRoute(
   matchFunction,
-  new StaleWhileRevalidate({
+  new CacheFirst({
     cacheName: 'songs',
     plugins: [
       new ExpirationPlugin({
@@ -99,19 +99,19 @@ function checkUrl(url){
 
 // // An example runtime caching route for requests that aren't handled by the
 // // precache, in this case same-origin .png requests like those from in public/
-// registerRoute(
-//   ({ url }) => checkUrl(url),
-//      // Customize this strategy as needed, e.g., by changing to CacheFirst.
-//   new StaleWhileRevalidate({
-//     cacheName: 'firebase',
-//     plugins: [
-//       new ExpirationPlugin({
-//         maxEntries: 60,
-//         maxAgeSeconds: 30 * 24 * 60 * 60, // 30 Days
-//       }),
-//     ],
-//   })
-// );
+registerRoute(
+  ({ url }) => checkUrl(url),
+     // Customize this strategy as needed, e.g., by changing to CacheFirst.
+  new CacheFirst({
+    cacheName: 'firebase',
+    plugins: [
+      new ExpirationPlugin({
+        maxEntries: 60,
+        maxAgeSeconds: 30 * 24 * 60 * 60, // 30 Days
+      }),
+    ],
+  })
+);
 
 // This allows the web app to trigger skipWaiting via
 // registration.waiting.postMessage({type: 'SKIP_WAITING'})
