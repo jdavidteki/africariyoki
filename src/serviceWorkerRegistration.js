@@ -63,6 +63,7 @@ const isLocalhost = Boolean(
         registration.onupdatefound = () => {
           const installingWorker = registration.installing;
           if (installingWorker == null) {
+            console.log("checking why service not working on prod")
             return;
           }
           installingWorker.onstatechange = () => {
