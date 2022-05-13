@@ -22,20 +22,8 @@ class Header extends Component {
             let localVersion = localStorage.getItem('version')
 
             if (localVersion == null || val > localVersion){
-              setTimeout(()=>{console.log("waited 3 secs before clearing cache")}, 3000)
               localStorage.setItem('version', val);
-
-              // if(caches) {
-              //   // Service worker cache should be cleared with caches.delete()
-              //   console.log("caches", caches)
-              //   caches.keys().then(function(names) {
-              //     for (let name of names) caches.delete(name);
-              //   });
-              // }
-
-              // window.location.href = window.location.href + `?hardrefresh=${val}`
-            }else{
-              // window.location.reload(false);
+              window.location.href = window.location.href + `?hardrefresh=${val}`
             }
           }
         )

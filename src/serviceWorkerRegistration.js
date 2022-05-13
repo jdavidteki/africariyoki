@@ -60,7 +60,6 @@ const isLocalhost = Boolean(
     navigator.serviceWorker
       .register(swUrl)
       .then((registration) => {
-        console.log("checking why service not working on prod", registration)
         registration.onupdatefound = () => {
           const installingWorker = registration.installing;
           if (installingWorker == null) {
