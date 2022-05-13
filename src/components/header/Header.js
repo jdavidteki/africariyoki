@@ -35,7 +35,7 @@ class Header extends Component {
 
               // window.location.href = window.location.href + `?hardrefresh=${val}`
             }else{
-              window.location.reload(false);
+              // window.location.reload(false);
             }
           }
         )
