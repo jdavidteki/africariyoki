@@ -22,6 +22,7 @@ class Header extends Component {
             let localVersion = localStorage.getItem('version')
 
             if (localVersion == null || val > localVersion){
+              setTimeout(()=>{console.log("waited 3 secs before clearing cache")}, 3000)
               localStorage.setItem('version', val);
 
               // if(caches) {
@@ -32,7 +33,7 @@ class Header extends Component {
               //   });
               // }
 
-              window.location.href = window.location.href + `?hardrefresh=${val}`
+              // window.location.href = window.location.href + `?hardrefresh=${val}`
             }else{
               window.location.reload(false);
             }
