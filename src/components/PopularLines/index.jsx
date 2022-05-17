@@ -238,7 +238,13 @@ class ConnectedPopularLines extends Component {
                   }
               }
 
-              randomTruePopLine = truePopLines[Math.floor(Math.random()*truePopLines.length)];
+              let randomLineIndex = Math.floor(Math.random()*truePopLines.length)
+              randomTruePopLine = truePopLines[randomLineIndex];
+
+              if ((randomTruePopLine.length <= 25) && (truePopLines.length > (randomLineIndex + 1))){
+                randomTruePopLine += " " + truePopLines[randomLineIndex + 1]
+                console.log("randomTruePopLine", randomTruePopLine)
+              }
           }
       }
       return randomTruePopLine
