@@ -78,7 +78,7 @@ class LRCParser extends Component {
   }
 
   getCurrentLyricLine(){
-    let currentTime = (this.props.currentTime * 1000) - (window.innerWidth < 767 ? 1000 : 0)
+    let currentTime = (this.props.currentTime * 1000)
     let closest = 0
 
     for (let i = 0; i < this.state.keysOfMapLyrics.length - 1; i++) {
