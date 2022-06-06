@@ -178,10 +178,8 @@ class ConnectedKaraoke extends Component {
 
     if(this.props.history == undefined){
       //TODO: figure out if it's possible to not have to do this
-      console.log("we here niga")
       window.location.href = "/karaoke/" + songId
     }else{
-      console.log("we here niga---")
       this.props.history.push({
         pathname: "/karaoke/" + songId,
         state: { chooseSong: chooseSong, songs: this.state.songsCopy}

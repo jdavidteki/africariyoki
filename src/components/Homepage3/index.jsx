@@ -34,6 +34,10 @@ class Homepage3 extends Component{
     }
   }
 
+  int1 = null
+  int2 = null
+  int3 = null
+
   componentDidMount(){
     //hack: use this to fix github pages doing ?/ on pages
     if (window.location.href.includes("?/")){
@@ -43,6 +47,27 @@ class Homepage3 extends Component{
         pathname: "/" + actualDestination
       });
     }
+
+    this.int1 = setInterval(() => {
+      if(document.querySelector(".game1:nth-child(1)") != undefined){
+          document.querySelector(".game1:nth-child(1)").classList.toggle("hover")
+          setTimeout(()=>{},1000);
+      }
+    }, 3000);
+
+    this.int2 = setInterval(() => {
+      if(document.querySelector(".game1:nth-child(2)") != undefined){
+          document.querySelector(".game1:nth-child(2)").classList.toggle("hover")
+          setTimeout(()=>{},1000);
+      }
+    }, 6000);
+
+    this.int3 = setInterval(() => {
+      if(document.querySelector(".game1:nth-child(3)") != undefined){
+          document.querySelector(".game1:nth-child(3)").classList.toggle("hover")
+          setTimeout(()=>{},1000);
+      }
+    }, 9000);
 
     setTimeout( () => {
       this.setState({
@@ -96,6 +121,12 @@ class Homepage3 extends Component{
         songIds: localLyrics.map(a => a.id),
       })
     }
+  }
+
+  componentWillUnmount(){
+    clearInterval(this.int1)
+    clearInterval(this.int2)
+    clearInterval(this.int3)
   }
 
   getSongDetails(){

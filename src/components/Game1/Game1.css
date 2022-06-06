@@ -14,12 +14,14 @@
   transition: background-color 0.25s ease-in;
 }
 
+.game1.hover,
 .game1:hover{
   cursor: pointer;
   background-color: var(--java);
   transition: background-color 0.25s ease-in;
 }
 
+.game1.hover .icon-bg,
 .game1:hover .icon-bg {
   background-color: var(--pine-green);
   transition: background-color 0.25s ease-in;
