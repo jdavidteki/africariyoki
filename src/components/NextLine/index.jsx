@@ -322,7 +322,9 @@ class ConnectedNextLine extends Component {
       //update song plays
       Firebase.getLyricsById(this.state.songInQuestion.id).then(
         val => {
-          Firebase.updateNumPlays(this.state.songInQuestion.id, val.numPlays +=1)
+          if (!isNaN(val.numPlays)){
+            Firebase.updateNumPlays(this.state.songInQuestion.id, val.numPlays+1)
+          }
         }
       )
 

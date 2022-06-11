@@ -141,7 +141,7 @@ class LRCParser extends Component {
             <pre className={"LRCParser-annotationText"}>{this.state.currentLineAnotation}</pre>
           </div>
 
-          <p id={"LRCParser-previousLine"} className="LRCParser-previousLine">
+          <p id={"LRCParser-previousLine"} className="LRCParser-previousLine" onClick={()=>{this.props.openYokiLoveModel(this.state.prevLine)}}>
             {this.state.prevLine ? CleanLine(this.state.prevLine) : ''}
           </p>
           <p id={"LRCParser-currentLine"} className="LRCParser-currentLine">
@@ -159,7 +159,7 @@ class LRCParser extends Component {
               </span>
             }
           </p>
-          <p className="LRCParser-nextLine">
+          <p className="LRCParser-nextLine" onClick={()=>{this.props.openYokiLoveModel(this.state.nextLine)}}>
             {this.state.nextLine ? CleanLine(this.state.nextLine) : ''}
           </p>
         </div>

@@ -6,8 +6,10 @@ import Text from "../Text";
 import Firebase from "../../firebase/firebase.js";
 import PopularSongs  from '../PopularSongs2/PopularSongs2.js';
 import FooterMenuFooterDefault from "../FooterMenuFooterDefault";
-import { GetParameterByName, GetRandomBackground, GetCodeFromCountryName, CodeToCountries } from "../helpers/Helpers";
+import { GetParameterByName, GetRandomBackground, GetCodeFromCountryName, CleanLine } from "../helpers/Helpers";
 import LRCParser from '../LrcParser2';
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 import AudioPlayer from 'react-h5-audio-player';
 import AlbumIcon from '@material-ui/icons/Album';
 import ShareIcon from '@mui/icons-material/Share';
@@ -38,6 +40,12 @@ class ConnectedKaraoke extends Component {
       footerMenuFooterDefaultProps: props.footerMenuFooterDefaultProps,
       popularSongs:[],
       overlapGroup: TempBackground,
+      selectedOptionSenderName: "",
+      selectedOptionRecipientName: "",
+      selectedOptionYokiLoveMessage: "",
+      yokiLoveResponseMsg: "",
+      yokiLoveResponseMsgColor: "black",
+      yokiLoveLine: "",
       singer: {
         audiourl: '',
         singer: '',
@@ -260,6 +268,49 @@ class ConnectedKaraoke extends Component {
     noSleep.disable();
   }
 
+  openYokiLove = (line) => {
+    this.player.audio.current.pause()
+    this.setState({openYokiLoveModel: true, yokiLoveLine: line})
+  }
+
+  createYokiLove(){
+    if (this.state.selectedOptionSenderName != "" ||
+    this.state.selectedOptionRecipientName != "" ||
+    this.state.selectedOptionYokiLoveMessage != "") {
+
+      this.setState({yokiLoveResponseMsg: ''})
+
+      let expiryDate = new Date(new Date().getTime()+(5*24*60*60*1000));
+      let id = this.state.selectedOptionSenderName + this.state.selectedOptionRecipientName + Date.now()
+
+      let yokiLoveObj = {
+        "id": id,
+        "senderName": this.state.selectedOptionSenderName,
+        "recipientName": this.state.selectedOptionRecipientName,
+        "message": this.state.selectedOptionYokiLoveMessage,
+        "expiryDate": expiryDate,
+        "yokiSongId": this.props.match.params.id,
+        "yokiLoveLine": this.state.yokiLoveLine,
+      }
+
+      Firebase.createYokiLove(yokiLoveObj)
+      .then(() => {
+        let textToCopy = `https://www.africariyoki.com/yokilove/${id}`
+        navigator.clipboard.writeText(textToCopy)
+        this.setState({
+          yokiLoveResponseMsg: 'yokilove created! link has been copied to your clipboard. feel free to share',
+          yokiLoveResponseMsgColor: 'green'
+        })
+      })
+
+    }else{
+      this.setState({
+        yokiLoveResponseMsg: 'please make sure no field is empty',
+        yokiLoveResponseMsgColor: 'red'
+      })
+    }
+  }
+
   displayLyrics(){
     let lyrics = ''
     if (this.state.singer.lyrics != undefined){
@@ -363,6 +414,18 @@ class ConnectedKaraoke extends Component {
     }, 1000);
   }
 
+  handleChangeSenderName = selectedOptionSenderName => {
+    this.setState({ selectedOptionSenderName: selectedOptionSenderName.target.value });
+  };
+
+  handleChangeRecipientName = selectedOptionRecipientName => {
+    this.setState({ selectedOptionRecipientName: selectedOptionRecipientName.target.value });
+  };
+
+  handleChangeYokiLoveMessage = selectedOptionYokiLoveMessage => {
+    this.setState({ selectedOptionYokiLoveMessage: selectedOptionYokiLoveMessage.target.value });
+  };
+
   render(){
     return (
       <div className="container-center-horizontal">
@@ -396,6 +459,65 @@ class ConnectedKaraoke extends Component {
               onClick={()=>{this.setState({openSuggestionModal: false})}}
             />
             <Suggest />
+          </div>
+        }
+        {this.state.openYokiLoveModel &&
+          <div className="Karaoke-openYokiLoveModel">
+            <CloseIcon
+              fontSize={'large'}
+              className={"Karaoke-openYokiLoveModel-close"}
+              style={{ color: '#e2a130' }}
+              onClick={()=>{this.setState({openYokiLoveModel: false})}}
+            />
+            <div className="Karaoke-openYokiLoveModel-content">
+              <div className="poppins-medium-martinique-16px">
+                send yokilove to someone special
+              </div>
+              <br/>
+              <div className="poppins-normal-martinique-12px">
+                line selected - {CleanLine(this.state.yokiLoveLine)}
+              </div>
+
+              <TextField
+                value={this.state.senderName}
+                className="Karaoke-input Karaoke-gameOption"
+                label={"your name?"}
+                onChange={this.handleChangeSenderName}
+                inputProps={{maxLength :20}}
+              />
+              <TextField
+                value={this.state.recipientName}
+                className="Karaoke-input Karaoke-gameOption"
+                label={"recipient name?"}
+                onChange={this.handleChangeRecipientName}
+                inputProps={{maxLength :20}}
+              />
+              <TextField
+                value={this.state.yokiLoveMessage}
+                onChange={this.handleChangeYokiLoveMessage}
+                label="yokilove message"
+                multiline
+                inputProps={{maxLength :140}}
+                rows={4}
+              />
+              <div>
+                <span
+                  className="poppins-normal-martinique-12px"
+                  style={{ color: this.state.yokiLoveResponseMsgColor }}
+                >
+                  {this.state.yokiLoveResponseMsg}
+                </span>
+              </div>
+              <br/>
+              <br/>
+              <div className="buttons-10" onClick={() => {this.createYokiLove()}}>
+                <div className="text-53 valign-text-middle poppins-medium-pine-green-20px">
+                  <span>
+                    <span className="poppins-medium-pine-green-20px">create yokilove</span>
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
         }
         {this.state.openSearcherModal &&
@@ -440,6 +562,7 @@ class ConnectedKaraoke extends Component {
                         title={this.state.singer.title}
                         smileyToSet={this.state.smileyToSet}
                         annotationObj={this.state.annotationObj}
+                        openYokiLoveModel={this.openYokiLove}
                       />
                         :
                       <span className="Lyrics-container Lyrics-nonParsedLyrics">

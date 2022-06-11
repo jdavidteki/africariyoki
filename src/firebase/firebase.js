@@ -222,6 +222,47 @@ class Firebase {
     })
   }
 
+  createYokiLove = (yokilove) => {
+    return new Promise(resolve => {
+      console.log("yokilove", yokilove)
+      firebase.database()
+      .ref('/yokilove/'+yokilove.id)
+      .update(
+        {
+          id: yokilove.id,
+          senderName: yokilove.senderName,
+          recipientName: yokilove.recipientName,
+          message: yokilove.message,
+          expiryDate: yokilove.expiryDate,
+          yokiSongId: yokilove.yokiSongId,
+          yokiLoveLine: yokilove.yokiLoveLine,
+        }
+      )
+      .then((response) => {
+        console.log("response", response)
+        resolve(true)
+      })
+      .catch(error => {
+        console.log("error", error)
+      })
+    })
+  }
+
+  getYokiLoveById = (id) =>{
+    return new Promise(resolve => {
+      firebase.database()
+      .ref('/yokilove/'+id)
+      .once('value')
+      .then(snapshot => {
+        if (snapshot.val()){
+          resolve(Object(snapshot.val()))
+        }else{
+          resolve({})
+        }
+      })
+    })
+  }
+
   getSBTAs = () => {
     return new Promise(resolve => {
       firebase.database()

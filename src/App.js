@@ -13,7 +13,8 @@ import Homepage3 from "./components/Homepage3";
 import Karaoke from "./components/Karaoke";
 import GuessTheSong from "./components/GuessTheSong";
 import PopularLines from "./components/PopularLines";
-import NextLine from "./components/NextLine"
+import NextLine from "./components/NextLine";
+import YokiLove from "./components/YokiLove";
 
 import "./App.css";
 
@@ -45,6 +46,7 @@ class App extends Component {
         <Route path="/guess-the-song" component={GuessTheSong} />
         <Route path="/popular-lines" component={PopularLines} />
         <Route path="/next-line" component={NextLine} />
+        <Route path="/yokilove/:id" component={YokiLove} />
         <Route component={ForOFor}/>
       </Switch>
     );

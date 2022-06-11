@@ -49,6 +49,7 @@
     "react-activity": "^2.1.1",
     "react-animations": "^1.0.0",
     "react-bootstrap": "^0.32.4",
+    "react-confetti": "^6.1.0",
     "react-credit-cards": "^0.8.2",
     "react-data-grid": "5.0.1",
     "react-data-grid-addons": "5.0.4-2",

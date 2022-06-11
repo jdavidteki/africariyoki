@@ -6,7 +6,7 @@ function Section3() {
   return (
     <div className="section-5">
       <div className="trending-9 poppins-normal-white-20px">
-        <span className="poppins-normal-white-20px">karaoke 🎤 </span>
+        <span className="poppins-normal-white-20px">karaoke🎤</span>
       </div>
       <img className="vector-18-3" src={trendingLine} />
     </div>

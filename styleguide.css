@@ -254,6 +254,15 @@
   font-weight: 500;
 }
 
+.poppins-medium-martinique-16px {
+  color: var(--martinique);
+  font-family: var(--font-family-poppins);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 500;
+}
+
+
 .segoeui-semi-bold-martinique-25px {
   color: var(--martinique);
   font-family: var(--font-family-segoe_ui-semibold);

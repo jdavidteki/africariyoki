@@ -1,0 +1,173 @@
+.YokiLove-container
+{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.YokiLove-wrapper
+{
+  width: 100%;
+}
+
+.pop-lines2 {
+  align-items: flex-start;
+  background-color: var(--white);
+  display: flex;
+  height: 900px;
+  overflow: hidden;
+  width: 1440px;
+}
+
+.overlap-group1-17 {
+  align-items: flex-start;
+  background-size: 100% 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 1024px;
+  position: relative;
+  width: 1440px;
+}
+
+.section2-7 {
+  align-items: flex-start;
+  display: flex;
+  height: 715px;
+  padding: 32px 361.5px;
+  width: 1440px;
+}
+
+.pop-lines-5 {
+  align-items: center;
+  background-color: var(--white-2);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  padding-bottom: 32px;
+}
+
+.pop-linesheader-1 {
+  align-items: flex-start;
+  background-color: var(--sea-serpent);
+  display: flex;
+  width: 100%;
+}
+
+.overlap-group-45 {
+  height: 200px;
+  position: relative;
+  width: 100%;
+}
+
+.progress-1 {
+  background-color: var(--deep-sapphire);
+  height: 200px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 2px;
+}
+
+.playing-start {
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  left: 0;
+  padding: 32px;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.top-section{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.bottom-section{
+  margin-top: 16px;
+  text-align: center;
+}
+
+.playing-start.for-poplines{
+  flex-direction: column;
+}
+
+.left-2 {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 92px;
+  position: relative;
+}
+
+.YokiLove-container
+.right-3 {
+  align-items: center;
+  justify-content: center;
+}
+
+.buttons1 {
+  align-items: center;
+  background-color: var(--pine-green);
+  transition: background-color 1s ease;
+  border-radius: 6px;
+  display: flex;
+  height: 48px;
+  min-width: 48px;
+  padding: 0 12px;
+}
+
+
+.buttons1:hover {
+  cursor: pointer;
+  background-color: var(--faded-jade);
+  transition: background-color 1s ease;
+}
+
+.play,
+.pause {
+  height: 32px;
+  width: 32px;
+}
+
+.YokiLove-options{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 16px 0;
+  width: 90%;
+}
+
+@media only screen and (max-width: 600px) {
+  .playing-start
+  {
+    padding: 16px;
+  }
+
+  .playing-start.for-poplines{
+    flex-direction: column;
+  }
+
+  .YokiLove-options{
+    flex-direction: column;
+    width: 90%;
+  }
+
+}
+
+@media only screen and (min-width: 600px) {
+  .PopularLine-lyricInQuestion.bottom-section
+  {
+    font-size: 20px;
+  }
+}
