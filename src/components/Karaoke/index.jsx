@@ -282,6 +282,7 @@ class ConnectedKaraoke extends Component {
 
       let expiryDate = new Date(new Date().getTime()+(5*24*60*60*1000));
       let id = this.state.selectedOptionSenderName + this.state.selectedOptionRecipientName + Date.now()
+      id = id.replace(/\s+/g, '');
 
       let yokiLoveObj = {
         "id": id,
