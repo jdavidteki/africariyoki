@@ -46,6 +46,7 @@ class ConnectedKaraoke extends Component {
       yokiLoveResponseMsg: "",
       yokiLoveResponseMsgColor: "black",
       yokiLoveLine: "",
+      yokiLoveURL: "",
       singer: {
         audiourl: '',
         singer: '',
@@ -297,17 +298,19 @@ class ConnectedKaraoke extends Component {
       Firebase.createYokiLove(yokiLoveObj)
       .then(() => {
         let textToCopy = `https://www.africariyoki.com/yokilove/${id}`
-        navigator.clipboard.writeText(textToCopy)
         this.setState({
           yokiLoveResponseMsg: 'yokilove created! link has been copied to your clipboard. feel free to share',
-          yokiLoveResponseMsgColor: 'green'
+          yokiLoveResponseMsgColor: 'green',
+          yokiLoveURL: textToCopy,
         })
+        navigator.clipboard.writeText(textToCopy)
       })
 
     }else{
       this.setState({
         yokiLoveResponseMsg: 'please make sure no field is empty',
-        yokiLoveResponseMsgColor: 'red'
+        yokiLoveResponseMsgColor: 'red',
+        yokiLoveURL: '',
       })
     }
   }
@@ -468,7 +471,12 @@ class ConnectedKaraoke extends Component {
               fontSize={'large'}
               className={"Karaoke-openYokiLoveModel-close"}
               style={{ color: '#e2a130' }}
-              onClick={()=>{this.setState({openYokiLoveModel: false})}}
+              onClick={()=>{this.setState({
+                openYokiLoveModel: false,
+                yokiLoveResponseMsg: '',
+                yokiLoveResponseMsgColor: '',
+                yokiLoveURL: '',
+              })}}
             />
             <div className="Karaoke-openYokiLoveModel-content">
               <div className="poppins-medium-martinique-16px">
@@ -509,6 +517,8 @@ class ConnectedKaraoke extends Component {
                   {this.state.yokiLoveResponseMsg}
                 </span>
               </div>
+              <br />
+              <div className="Karaoke-yokiLoveURL poppins-normal-black-12px">{this.state.yokiLoveURL}</div>
               <br/>
               <br/>
               <div className="buttons-10" onClick={() => {this.createYokiLove()}}>

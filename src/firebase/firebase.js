@@ -224,7 +224,6 @@ class Firebase {
 
   createYokiLove = (yokilove) => {
     return new Promise(resolve => {
-      console.log("yokilove", yokilove)
       firebase.database()
       .ref('/yokilove/'+yokilove.id)
       .update(

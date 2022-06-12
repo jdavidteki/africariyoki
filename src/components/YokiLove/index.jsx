@@ -54,7 +54,6 @@ class ConnectedYokiLove extends Component{
         }, () => {
           Firebase.getLyricsById(val.yokiSongId)
           .then(val => {
-            console.log("val.audiourl", val.audiourl)
             this.setState(
               {
                 yokiLoveSongSrc: val.audiourl,
