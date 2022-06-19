@@ -404,7 +404,7 @@ class ConnectedPopularLine extends Component {
             return (
                 <div className="PopularLine">
                     <MetaTags>
-                      <title>africariyoki - play with africa!</title>
+                      <title>africariyoki - play with afrobeats!</title>
                       <meta name="description" content="sing along to your favourite afro beat songs - guess the song" />
                       <meta property="og:title" content="africariyoki" />
                       <meta http-equiv='cache-control' content='no-cache' />

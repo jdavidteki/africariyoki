@@ -314,8 +314,8 @@ class Searcher extends Component {
           </div>
         }
         <MetaTags>
-          <title>africariyoki - play with africa!</title>
-          <meta name="description" content={this.getSongDetails()} />
+          <title>africariyoki - play with afrobeats!</title>
+          <meta name="description" content="play with afrobeats. sing along, play #yokigames, make #yokilove, or just vibe on #yokithoughts." />
           <meta property="og:title" content="africariyoki" />
           <meta http-equiv='cache-control' content='no-cache' />
           <meta http-equiv='expires' content='0' />

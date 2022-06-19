@@ -166,22 +166,12 @@ class Searcher extends Component {
     })
   }
 
-  getSongDetails(){
-    let metaDes = "sing along to your favourite afrobeat songs --- "
-
-    for (var i = 0; i < this.state.songs.length; i++) {
-      metaDes += `${this.state.songs[i].title}, ${this.state.songs[i].singer}, `
-    }
-
-    return metaDes
-  }
-
   render() {
     return (
       <div className="Searcher">
         <MetaTags>
-          <title>africariyoki - play with africa!</title>
-          <meta name="description" content={this.getSongDetails()} />
+          <title>africariyoki - play with afrobeats!</title>
+          <meta name="description" content="play with afrobeats. sing along, play #yokigames, make #yokilove, or just vibe on #yokithoughts." />
           <meta property="og:title" content="africariyoki" />
           <meta httpEquiv="cache-control" content="no-cache" />
           <meta httpEquiv="expires" content="0" />
@@ -189,7 +179,7 @@ class Searcher extends Component {
         </MetaTags>
 
         {/* these will remain for SEO purposes */}
-          <h1 itemProp="headline" style={{ display: "none" }}>#karaokewithafrica - #karaoke, african karaoke, #nigeriankaraoke, #lagoskaraoke, #ghanaian karaoke, #afrobeatskaraoke, afrobeatskaraoke, afro a.i playhouse</h1>
+          <h1 itemProp="headline" style={{ display: "none" }}>afrobeats ai playhouse</h1>
         {/* ******** */}
 
         <div className="Searcher-container">

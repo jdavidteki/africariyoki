@@ -162,8 +162,8 @@ class Homepage3 extends Component{
     return (
       <div className="container-center-horizontal">
         <MetaTags>
-          <title>africariyoki - play with africa!</title>
-          <meta name="description" content={this.getSongDetails()} />
+          <title>africariyoki - play with afrobeats!</title>
+          <meta name="description" content="play with afrobeats. sing along, play #yokigames, make #yokilove, or just vibe on #yokithoughts." />
           <meta property="og:title" content="africariyoki" />
           <meta httpEquiv="cache-control" content="no-cache" />
           <meta httpEquiv="expires" content="0" />
@@ -171,7 +171,7 @@ class Homepage3 extends Component{
         </MetaTags>
 
         {/* these will remain for SEO purposes */}
-          <h1 itemProp="headline" style={{ display: "none" }}>#karaokewithafrica - #karaoke, african karaoke, #nigeriankaraoke, #lagoskaraoke, #ghanaian karaoke, #afrobeatskaraoke, afrobeatskaraoke, afro a.i playhouse</h1>
+          <h1 itemProp="headline" style={{ display: "none" }}>afrobeats ai playhouse</h1>
         {/* ******** */}
 
         <div className="homepage3 screen">
