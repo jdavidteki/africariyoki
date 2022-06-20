@@ -524,7 +524,7 @@ class ConnectedKaraoke extends Component {
               <div className="buttons-10" onClick={() => {this.createYokiLove()}}>
                 <div className="text-53 valign-text-middle poppins-medium-pine-green-20px">
                   <span>
-                    <span className="poppins-medium-pine-green-20px">create yokilove</span>
+                    <span className="poppins-medium-pine-green-20px">make yokilove</span>
                   </span>
                 </div>
               </div>
