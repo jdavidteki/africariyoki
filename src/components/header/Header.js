@@ -23,7 +23,7 @@ class Header extends Component {
 
             if (localVersion == null || val > localVersion){
               localStorage.setItem('version', val);
-              window.location.href = window.location.href + `?hardrefresh=${val}`
+              window.location.href = window.location.href
             }
           }
         )
