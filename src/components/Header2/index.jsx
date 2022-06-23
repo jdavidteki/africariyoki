@@ -36,26 +36,23 @@ class Header extends Component{
       }
     })
 
-    if(window.location.pathname == "/" || window.location.pathname == "/africariyoki"){
-      Firebase.getVersion().then(
-        val => {
-          let localVersion = localStorage.getItem('version')
+    setTimeout(()=>{
+      if(window.location.pathname == "/" || window.location.pathname == "/africariyoki"){
+        Firebase.getVersion().then(
+          val => {
+            let localVersion = localStorage.getItem('version')
 
-          if (localVersion == null || val > localVersion){
-            localStorage.setItem('version', val);
+            if (localVersion == null || val > localVersion){
+              localStorage.setItem('version', val);
 
-            if(caches) {
-              // Service worker cache should be cleared with caches.delete()
-              caches.keys().then(function(names) {
-                for (let name of names) caches.delete(name);
-              });
+              //when there is a new version, the service workers should sense it
+              //and load new css/js but trigger a reload for changes to reflect
+              window.location.href = window.location.href
             }
-
-            window.location.href = window.location.href + `?version=${val}`
           }
-        }
-      )
-    }
+        )
+      }
+    },2000); //give the cache two seconds to load before refreshing page
   }
 
   render(){
