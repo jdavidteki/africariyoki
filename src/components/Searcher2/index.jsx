@@ -122,7 +122,8 @@ class Searcher extends Component {
       thisSong.title != undefined && thisSong.singer != undefined ?
         (
           thisSong.title.replace(' ', '').toLowerCase().includes(song.replace(' ', '').toLowerCase()) ||
-          thisSong.singer.replace(' ', '').toLowerCase().includes(song.replace(' ', '').toLowerCase())
+          thisSong.singer.replace(' ', '').toLowerCase().includes(song.replace(' ', '').toLowerCase()) ||
+          thisSong.lyrics.toLowerCase().includes(song.toLowerCase())
         )
         &&
         (

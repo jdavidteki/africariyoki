@@ -11,7 +11,6 @@ import pauseLogo from '../../../static/img/pause-1@2x.png'
 import TempBackground from "../../../static/img/whitebackground.png"
 import Header from "../Header2";
 import FooterMenuFooterDefault from "../FooterMenuFooterDefault";
-import FuzzySet from 'fuzzyset.js'
 import Confetti from 'react-confetti'
 
 import "./YokiLove.css";
@@ -80,28 +79,6 @@ class ConnectedYokiLove extends Component{
         runLoop: false,
       })
     }, 10000);
-  }
-
-  getPopLineTime(yokiLoveLine){
-    let secTime = 0
-
-    let lyricsArray = this.state.songlyrics.split("\n")
-    let poplineFuzzySet = FuzzySet(lyricsArray).get(yokiLoveLine)
-
-    if (poplineFuzzySet!= null && poplineFuzzySet.length > 0){
-        if (poplineFuzzySet[0].length > 0){
-            secTime = HmsToSecondsOnly(poplineFuzzySet[0][1].substring(1, 9)) + parseInt(poplineFuzzySet[0][1].substring(7, 9), 10)
-        }
-    }
-
-    if (isNaN(secTime) || secTime == 0){
-      let midLyrics = lyricsArray[Math.round(lyricsArray.length / 2)]
-      if(midLyrics != undefined){
-        secTime = HmsToSecondsOnly(midLyrics.substring(1, 9)) + parseInt(midLyrics.substring(7, 9), 10)
-      }
-    }
-
-    return Math.round(secTime/1000)
   }
 
   playVocal(){
