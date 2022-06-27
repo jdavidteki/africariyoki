@@ -52,7 +52,7 @@ class Header extends Component{
           }
         )
       }
-    },2000); //give the cache two seconds to load before refreshing page
+    },5000); //give the cache two seconds to load before refreshing page
   }
 
   render(){
