@@ -7,6 +7,7 @@ import MetaTags from 'react-meta-tags';
 import { ShuffleArray } from "../helpers/Helpers";
 
 import './Searcher.css';
+import FuzzySet from 'fuzzyset.js';
 
 //you can just come here and add a language
 const allPrompts=[
@@ -136,6 +137,21 @@ class Searcher extends Component {
       :
       false
     )
+
+    // order search results based on what's closest to the searched text
+    let highPriority = []
+    let midPriority = []
+    let lowPriority = []
+    for (let i = 0; i < typeSong.length; i++) {
+      if (typeSong[i].title.replace(' ', '').toLowerCase() == song.replace(' ', '').toLowerCase()){
+        highPriority.push(typeSong[i])
+      }else if(typeSong[i].title.replace(' ', '').toLowerCase().includes(song.replace(' ', '').toLowerCase())){
+        midPriority.push(typeSong[i])
+      } else{
+        lowPriority.push(typeSong[i])
+      }
+    }
+    typeSong = highPriority.concat(midPriority).concat(lowPriority)
 
     if (song == ''){
       this.setState({
