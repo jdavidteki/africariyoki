@@ -6,7 +6,7 @@ import Text from "../Text";
 import Firebase from "../../firebase/firebase.js";
 import PopularSongs  from '../PopularSongs2/PopularSongs2.js';
 import FooterMenuFooterDefault from "../FooterMenuFooterDefault";
-import { GetParameterByName, GetRandomBackground, GetCodeFromCountryName, CleanLine } from "../helpers/Helpers";
+import { GetParameterByName, GetRandomBackground, GetCodeFromCountryName, CleanLine, HmsToSecondsOnly } from "../helpers/Helpers";
 import LRCParser from '../LrcParser2';
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -81,7 +81,6 @@ class ConnectedKaraoke extends Component {
     //   .then(() => console.log("google analytics on searcher"))
     //   .catch(e => console.log(e.message));
 
-
     setTimeout( () => {
       this.setState({
         overlapGroup: GetRandomBackground(""),
@@ -129,20 +128,36 @@ class ConnectedKaraoke extends Component {
 
     Firebase.getLyricsById(this.props.match.params.id)
     .then(val => {
-        if (!isNaN(val.numPlays)){
-          Firebase.updateNumPlays(this.props.match.params.id, val.numPlays+1)
-        }
+      if (!isNaN(val.numPlays)){
+        Firebase.updateNumPlays(this.props.match.params.id, val.numPlays+1)
+      }
 
-        this.setState(
-          {
-            singer: val,
-            animatedTexts: [
-              val.title,
-              val.singer,
-              val.album,
-            ],
+      this.setState(
+        {
+          singer: val,
+          animatedTexts: [
+            val.title,
+            val.singer,
+            val.album,
+          ],
+        }
+      )
+
+      //open yokilove model if we even suspect they are searching for a particular line
+      let urlParams = new URLSearchParams(window.location.search);
+      let curTime = urlParams.get('curtime')
+      if(curTime != null && curTime != 0){
+        //TODO: has to be a better way of doing this
+        let lyricsArray = val.lyrics.split("\n")
+        for (let i = 0; i < lyricsArray.length; i++) {
+          let thisLine = lyricsArray[i]
+          let songHms = HmsToSecondsOnly(thisLine.substring(1, 9)) + parseInt(thisLine.substring(7, 9), 10)
+          if(Math.round(songHms/1000) == curTime){
+            this.openYokiLove(thisLine)
+            break
           }
-        )
+        }
+      }
       }
     )
 
@@ -180,7 +195,6 @@ class ConnectedKaraoke extends Component {
       }
     )
   }
-
 
   playSong = (songId) => {
     let chooseSong = this.state.songs.filter(song => songId === song.id)
@@ -592,7 +606,7 @@ class ConnectedKaraoke extends Component {
                         className={"Karaoke-audio"}
                         onEnded={this.playAnotherSong}
                         onPause={ () => {this.setState({pauseSong: true})}}
-                        onPlay = {() => {this.setState({pauseSong: false})}}
+                        onPlay = {this.continueToPlay}
                         listenInterval = {1}
                         ref={ref => this.player = ref}
                         onCanPlay={this.onCanPlay}

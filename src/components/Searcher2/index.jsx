@@ -4,10 +4,9 @@ import Firebase from "../../firebase/firebase.js";
 import TextField from "@material-ui/core/TextField";
 import codeToCountries from "./codeToCountry.js";
 import MetaTags from 'react-meta-tags';
-import { ShuffleArray } from "../helpers/Helpers";
+import {ShuffleArray, HmsToSecondsOnly } from "../helpers/Helpers.js";
 
 import './Searcher.css';
-import FuzzySet from 'fuzzyset.js';
 
 //you can just come here and add a language
 const allPrompts=[
@@ -143,12 +142,18 @@ class Searcher extends Component {
     let midPriority = []
     let lowPriority = []
     for (let i = 0; i < typeSong.length; i++) {
-      if (typeSong[i].title.replace(' ', '').toLowerCase() == song.replace(' ', '').toLowerCase()){
-        highPriority.push(typeSong[i])
-      }else if(typeSong[i].title.replace(' ', '').toLowerCase().includes(song.replace(' ', '').toLowerCase())){
-        midPriority.push(typeSong[i])
+      let thisSong = typeSong[i]
+      thisSong["isLowPriority"] = false
+
+      if (thisSong.title.replace(' ', '').toLowerCase() == song.replace(' ', '').toLowerCase()){
+        highPriority.push(thisSong)
+      }else if(thisSong.title.replace(' ', '').toLowerCase().includes(song.replace(' ', '').toLowerCase())){
+        midPriority.push(thisSong)
       } else{
-        lowPriority.push(typeSong[i])
+        if (!thisSong.singer.replace(' ', '').toLowerCase().includes(song.replace(' ', '').toLowerCase())){
+          thisSong["isLowPriority"] = true
+        }
+        lowPriority.push(thisSong)
       }
     }
     typeSong = highPriority.concat(midPriority).concat(lowPriority)
@@ -164,16 +169,42 @@ class Searcher extends Component {
     }
   }
 
+  getPopLineTime(choosenSong){
+    let secTime = 0
+    let popularLine = this.state.query
+    let foundLine = ""
+    let lyricsArray = choosenSong.lyrics.split("\n")
+
+    for (let i = 0; i < lyricsArray.length; i++) {
+      if(lyricsArray[i].includes(popularLine)){
+        foundLine = lyricsArray[i]
+        break
+      }
+    }
+
+    secTime = HmsToSecondsOnly(foundLine.substring(1, 9)) + parseInt(foundLine.substring(7, 9), 10)
+    if (isNaN(secTime)){
+      secTime = 0
+    }
+
+    return Math.round(secTime/1000)
+  }
+
   playSong = (songId) => {
     let chooseSong = this.state.songs.filter(song => songId === song.id)
+    let timeOfSearchedString = 0
+
+    if (chooseSong.length > 0) {
+      timeOfSearchedString = this.getPopLineTime(chooseSong[0])
+    }
 
     if(this.props.history == undefined){
       //TODO: figure out if it's possible to not have to do this
-      window.location.href = "/karaoke/" + songId
+      window.location.href = "/karaoke/" + songId + "?curtime=" + timeOfSearchedString
     }else{
       this.props.history.push({
         pathname: "/karaoke/" + songId,
-        state: { chooseSong: chooseSong, songs: this.state.songsCopy}
+        state: { chooseSong: chooseSong, songs: this.state.songsCopy, timeOfSearchedString: timeOfSearchedString}
       });
     }
 
