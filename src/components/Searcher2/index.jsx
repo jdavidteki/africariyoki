@@ -194,7 +194,7 @@ class Searcher extends Component {
     let chooseSong = this.state.songs.filter(song => songId === song.id)
     let timeOfSearchedString = 0
 
-    if (chooseSong.length > 0) {
+    if (chooseSong.length > 0 && chooseSong[0].isLowPriority) {
       timeOfSearchedString = this.getPopLineTime(chooseSong[0])
     }
 
