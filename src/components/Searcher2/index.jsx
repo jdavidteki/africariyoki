@@ -121,13 +121,13 @@ class Searcher extends Component {
     let typeSong = this.state.songsCopy.filter(thisSong =>
       thisSong.title != undefined && thisSong.singer != undefined ?
         (
-          thisSong.title.replace(' ', '').toLowerCase().includes(song.replace(' ', '').toLowerCase()) ||
-          thisSong.singer.replace(' ', '').toLowerCase().includes(song.replace(' ', '').toLowerCase()) ||
-          thisSong.lyrics.toLowerCase().includes(song.toLowerCase())
+          thisSong.title.replaceAll(' ', '').toLowerCase().includes(song.replaceAll(' ', '').toLowerCase()) ||
+          thisSong.singer.replaceAll(' ', '').toLowerCase().includes(song.replaceAll(' ', '').toLowerCase()) ||
+          thisSong.lyrics.replaceAll(' ', '').toLowerCase().includes(song.replaceAll(' ', '').toLowerCase())
         )
         &&
         (
-          thisSong.countries.replace(' ', '').toLowerCase().includes(selectedCountry.replace(' ', '').toLowerCase())
+          thisSong.countries.replaceAll(' ', '').toLowerCase().includes(selectedCountry.replaceAll(' ', '').toLowerCase())
         )
         &&
         (
@@ -145,12 +145,12 @@ class Searcher extends Component {
       let thisSong = typeSong[i]
       thisSong["isLowPriority"] = false
 
-      if (thisSong.title.replace(' ', '').toLowerCase() == song.replace(' ', '').toLowerCase()){
+      if (thisSong.title.replaceAll(' ', '').toLowerCase() == song.replaceAll(' ', '').toLowerCase()){
         highPriority.push(thisSong)
-      }else if(thisSong.title.replace(' ', '').toLowerCase().includes(song.replace(' ', '').toLowerCase())){
+      }else if(thisSong.title.replaceAll(' ', '').toLowerCase().includes(song.replaceAll(' ', '').toLowerCase())){
         midPriority.push(thisSong)
       } else{
-        if (!thisSong.singer.replace(' ', '').toLowerCase().includes(song.replace(' ', '').toLowerCase())){
+        if (!thisSong.singer.replaceAll(' ', '').toLowerCase().includes(song.replaceAll(' ', '').toLowerCase())){
           thisSong["isLowPriority"] = true
         }
         lowPriority.push(thisSong)
@@ -176,7 +176,7 @@ class Searcher extends Component {
     let lyricsArray = choosenSong.lyrics.split("\n")
 
     for (let i = 0; i < lyricsArray.length; i++) {
-      if(lyricsArray[i].replace(' ', '').toLowerCase().includes(popularLine.replace(' ', '').toLowerCase())){
+      if(lyricsArray[i].replaceAll(' ', '').toLowerCase().includes(popularLine.replaceAll(' ', '').toLowerCase())){
         foundLine = lyricsArray[i]
         break
       }
@@ -198,15 +198,15 @@ class Searcher extends Component {
       timeOfSearchedString = this.getPopLineTime(chooseSong[0])
     }
 
-    if(this.props.history == undefined){
-      //TODO: figure out if it's possible to not have to do this
-      window.location.href = "/karaoke/" + songId + "?curtime=" + timeOfSearchedString
-    }else{
-      this.props.history.push({
-        pathname: "/karaoke/" + songId,
-        state: { chooseSong: chooseSong, songs: this.state.songsCopy, timeOfSearchedString: timeOfSearchedString}
-      });
-    }
+    // if(this.props.history == undefined){
+    //   //TODO: figure out if it's possible to not have to do this
+    //   window.location.href = "/karaoke/" + songId + "?curtime=" + timeOfSearchedString
+    // }else{
+    //   this.props.history.push({
+    //     pathname: "/karaoke/" + songId,
+    //     state: { chooseSong: chooseSong, songs: this.state.songsCopy, timeOfSearchedString: timeOfSearchedString}
+    //   });
+    // }
 
     this.setState({
       songs: chooseSong,
