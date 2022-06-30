@@ -198,7 +198,6 @@ class Searcher extends Component {
       timeOfSearchedString = this.getPopLineTime(chooseSong[0])
     }
 
-    console.log("timeOfSearchedString", timeOfSearchedString, chooseSong[0])
     if(this.props.history == undefined){
       //TODO: figure out if it's possible to not have to do this
       window.location.href = "/karaoke/" + songId + "?curtime=" + timeOfSearchedString
