@@ -198,15 +198,15 @@ class Searcher extends Component {
       timeOfSearchedString = this.getPopLineTime(chooseSong[0])
     }
 
-    // if(this.props.history == undefined){
-    //   //TODO: figure out if it's possible to not have to do this
-    //   window.location.href = "/karaoke/" + songId + "?curtime=" + timeOfSearchedString
-    // }else{
-    //   this.props.history.push({
-    //     pathname: "/karaoke/" + songId,
-    //     state: { chooseSong: chooseSong, songs: this.state.songsCopy, timeOfSearchedString: timeOfSearchedString}
-    //   });
-    // }
+    if(this.props.history == undefined){
+      //TODO: figure out if it's possible to not have to do this
+      window.location.href = "/karaoke/" + songId + "?curtime=" + timeOfSearchedString
+    }else{
+      this.props.history.push({
+        pathname: "/karaoke/" + songId,
+        state: { chooseSong: chooseSong, songs: this.state.songsCopy, timeOfSearchedString: timeOfSearchedString}
+      });
+    }
 
     this.setState({
       songs: chooseSong,
