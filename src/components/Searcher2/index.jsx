@@ -176,7 +176,7 @@ class Searcher extends Component {
     let lyricsArray = choosenSong.lyrics.split("\n")
 
     for (let i = 0; i < lyricsArray.length; i++) {
-      if(lyricsArray[i].includes(popularLine)){
+      if(lyricsArray[i].replace(' ', '').toLowerCase().includes(popularLine.replace(' ', '').toLowerCase())){
         foundLine = lyricsArray[i]
         break
       }
@@ -198,6 +198,7 @@ class Searcher extends Component {
       timeOfSearchedString = this.getPopLineTime(chooseSong[0])
     }
 
+    console.log("timeOfSearchedString", timeOfSearchedString, chooseSong[0])
     if(this.props.history == undefined){
       //TODO: figure out if it's possible to not have to do this
       window.location.href = "/karaoke/" + songId + "?curtime=" + timeOfSearchedString
