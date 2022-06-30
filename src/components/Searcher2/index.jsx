@@ -123,7 +123,7 @@ class Searcher extends Component {
         (
           thisSong.title.replaceAll(' ', '').toLowerCase().includes(song.replaceAll(' ', '').toLowerCase()) ||
           thisSong.singer.replaceAll(' ', '').toLowerCase().includes(song.replaceAll(' ', '').toLowerCase()) ||
-          thisSong.lyrics.replaceAll(' ', '').toLowerCase().includes(song.replaceAll(' ', '').toLowerCase())
+          thisSong.lyrics.toLowerCase().includes(song.toLowerCase())
         )
         &&
         (
@@ -176,7 +176,7 @@ class Searcher extends Component {
     let lyricsArray = choosenSong.lyrics.split("\n")
 
     for (let i = 0; i < lyricsArray.length; i++) {
-      if(lyricsArray[i].replaceAll(' ', '').toLowerCase().includes(popularLine.replaceAll(' ', '').toLowerCase())){
+      if(lyricsArray[i].toLowerCase().includes(popularLine.toLowerCase())){
         foundLine = lyricsArray[i]
         break
       }
