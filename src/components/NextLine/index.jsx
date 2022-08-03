@@ -362,7 +362,7 @@ class ConnectedNextLine extends Component {
             <div className="section2-2">
               {this.state.setGameModel ?
                 <SetGameModal
-                  setGameTitle = {"next line"}
+                  setGameTitle = {"nextyoki"}
                   handleChangePlayerName = {this.handleChangePlayerName}
                   selectLevel = {this.selectLevel}
                   selectedOptionDifficulty = {this.state.selectedOptionDifficulty}

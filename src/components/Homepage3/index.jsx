@@ -202,20 +202,20 @@ class Homepage3 extends Component{
                 <Game1
                   icon={this.state.game11Props.icon}
                   spanText1={"guess the song"}
-                  spanText2={"choose from snippets"}
+                  spanText2={"listen for snippets"}
                   className={this.state.game11Props.className}
                   hreflink={"guess-the-song"}
                 />
                 <Game1
                   icon={this.state.game12Props.icon}
-                  spanText1={"pop lines"}
-                  spanText2={"recognise catch-phrases"}
+                  spanText1={"yokigains"}
+                  spanText2={"recognize popular lines"}
                   className={this.state.game12Props.className}
                   hreflink={"popular-lines"}
                 />
                 <Game1
                   icon={this.state.game11Props.icon}
-                  spanText1={"next line"}
+                  spanText1={"nextyoki"}
                   spanText2={"what is the next line?"}
                   className={this.state.game12Props.className}
                   hreflink={"next-line"}

@@ -8,7 +8,7 @@ function Menu2(props) {
   return (
     <div className={props.callerComponent + " menu-6"}>
       <DropDown
-        className="Header-navLink" title="games" options={['guess the song', 'popular lines', 'next line']}
+        className="Header-navLink" title="games" options={['guess the song', 'yokigains', 'nextyoki']}
       />
     </div>
   );

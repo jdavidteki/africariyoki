@@ -243,7 +243,6 @@ class ConnectedPopularLines extends Component {
 
               if ((randomTruePopLine.length <= 25) && (truePopLines.length > (randomLineIndex + 1))){
                 randomTruePopLine += " " + truePopLines[randomLineIndex + 1]
-                console.log("randomTruePopLine", randomTruePopLine)
               }
           }
       }
@@ -432,7 +431,7 @@ class ConnectedPopularLines extends Component {
             <div className="section2-2">
               {this.state.setGameModel ?
                 <SetGameModal
-                  setGameTitle = {"popular lines"}
+                  setGameTitle = {"yokigains"}
                   handleChangePlayerName = {this.handleChangePlayerName}
                   selectLevel = {this.selectLevel}
                   selectedOptionDifficulty = {this.state.selectedOptionDifficulty}
