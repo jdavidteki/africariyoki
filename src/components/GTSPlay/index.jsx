@@ -24,6 +24,8 @@ function GTSPlay(props) {
               <PlayerScore
                 score={props.score}
                 playerName = {props.playerName}
+                answerCorrect = {props.answerCorrect}
+                answerClicked={props.answerClicked}
               />
             </div>
             <div className="right-3">

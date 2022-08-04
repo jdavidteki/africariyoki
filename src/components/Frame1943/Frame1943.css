@@ -6,8 +6,7 @@
 }
 
 .score-5 {
-  height: 20px;
-  width: 20px;
+  margin-top: -4px;
 }
 
 .number-10 {
@@ -20,4 +19,24 @@
 
 .frame-194-4.frame-194-6 {
   margin-left: 24px;
+}
+
+.wrongAnswerStar{
+  animation: animateHeartOut .6s linear forwards;
+}
+
+.correctAnswerStar{
+  animation: animateHeart .6s linear forwards;
+}
+
+@keyframes animateHeart{
+  0%{transform:scale(.2);}
+  40%{transform:scale(1.2);}
+  100%{transform:scale(1);}
+}
+
+@keyframes animateHeartOut{
+  0%{transform:scale(.3);}
+  40%{transform:scale(1.4);}
+  100%{transform:scale(1);}
 }

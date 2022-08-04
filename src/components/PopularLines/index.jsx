@@ -53,6 +53,7 @@ class ConnectedPopularLines extends Component {
       poplineObj: {},
       randomTruePopLine: "",
       prevTimeoutID: 0,
+      answerClicked: false,
       songInQuestion: {
         audiourl: '',
         singer: '',
@@ -265,6 +266,10 @@ class ConnectedPopularLines extends Component {
   }
 
   checkAnswer = (songId) => {
+    this.setState(prevState => ({
+      answerClicked: !prevState.answerClicked
+    }));
+
     if(songId == this.state.songInQuestion.id){
       this.setState({score: this.state.score+=1, answerCorrect: true})
       document.getElementById(songId).classList.add('correct-answer') //TODO: figure out a better way of doing this
@@ -467,6 +472,8 @@ class ConnectedPopularLines extends Component {
                         songsInOption = {this.state.songsInOption}
                         optionBackground = {"#f5fffe"}
                         checkAnswer={this.checkAnswer}
+                        answerCorrect={this.state.answerCorrect}
+                        answerClicked={this.state.answerClicked}
                         audioPaused={this.state.audioPaused}
                         randomTruePopLine = {this.state.randomTruePopLine}
                         nthLongestLineToShow = {this.state.nthLongestLineToShow}

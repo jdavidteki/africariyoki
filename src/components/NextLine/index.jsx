@@ -48,6 +48,7 @@ class ConnectedNextLine extends Component {
       answerCorrect: true,
       audioPaused: true,
       overlapGroup: TempBackground,
+      answerClicked: false,
       songInQuestion: {
           audiourl: '',
           singer: '',
@@ -231,6 +232,10 @@ class ConnectedNextLine extends Component {
   };
 
   checkAnswer = (lyricOption) => {
+    this.setState(prevState => ({
+      answerClicked: !prevState.answerClicked
+    }));
+
     if(lyricOption == this.state.lyricAndOptionObj["answer"]){
       document.getElementById(lyricOption.replaceAll(' ', '')).classList.add('correct-answer') //TODO: figure out a better way of doing this
       this.setState({
@@ -397,6 +402,8 @@ class ConnectedNextLine extends Component {
                         songsInOption = {this.state.songsInOption}
                         optionBackground = {"#f5fffe"}
                         checkAnswer={this.checkAnswer}
+                        answerCorrect={this.state.answerCorrect}
+                        answerClicked={this.state.answerClicked}
                         songInQuestion = {this.state.songInQuestion}
                         lyricAndOptionObj = {this.state.lyricAndOptionObj}
                         audioPaused = {this.state.audioPaused}

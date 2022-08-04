@@ -4,7 +4,6 @@ import "./PlayerScore.css";
 
 function PlayerScore(props) {
   const { className } = props;
-
   return (
     <div className={`player-score ${className || ""}`}>
       <div className="player-1-3 valign-text-middle poppins-normal-martinique-20px">
@@ -14,6 +13,8 @@ function PlayerScore(props) {
       </div>
       <Frame1943
         score={props.score}
+        answerCorrect={props.answerCorrect}
+        answerClicked={props.answerClicked}
       />
     </div>
   );
