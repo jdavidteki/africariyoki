@@ -20,7 +20,7 @@ function Frame1943(props) {
 
       <div className="number-10 valign-text-middle poppins-medium-martinique-20px">
         <span>
-          <span className="span4cmxd poppins-medium-martinique-20px">{props.score}</span>
+          <span className={`span4cmxd poppins-medium-martinique-20px ${answerClicked ? "animateScoreIn" : "animateScoreOut"}`}>{props.score}</span>
         </span>
       </div>
     </div>

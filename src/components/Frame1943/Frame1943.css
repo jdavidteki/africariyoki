@@ -40,3 +40,23 @@
   40%{transform:scale(1.4);}
   100%{transform:scale(1);}
 }
+
+.animateScoreIn{
+  animation: animateScoreIn .6s linear forwards;
+}
+
+.animateScoreOut{
+  animation: animateScoreOut .6s linear forwards;
+}
+
+@keyframes animateScoreIn{
+  0%{font-size: var(--font-size-s)}
+  40%{font-size: var(--font-size-l);}
+  100%{font-size: var(--font-size-s);}
+}
+
+@keyframes animateScoreOut{
+  0%{font-size: var(--font-size-s)}
+  40%{font-size: var(--font-size-l);}
+  100%{font-size: var(--font-size-s);}
+}
