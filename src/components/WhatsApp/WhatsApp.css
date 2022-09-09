@@ -1,0 +1,16 @@
+.WhatsApp
+{
+    display: inline-flex;
+    align-items: center;
+    margin: 16px 0;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.WhatsApp-img
+{
+    height: 20px;
+    width: 20px;
+    border-radius: 3px;
+    margin-left: 8px;
+}

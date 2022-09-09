@@ -18,6 +18,7 @@ import NoSleep from 'nosleep.js';
 import { Emoji } from 'emoji-mart'
 import CloseIcon from '@material-ui/icons/Close';
 import Searcher from "../Searcher2/index.jsx";
+import WhatsApp from "../WhatsApp/index.jsx";
 import Suggest from "../Suggest";
 import Header from "../Header2";
 import { Analytics, PageHit } from 'expo-analytics';
@@ -47,6 +48,7 @@ class ConnectedKaraoke extends Component {
       yokiLoveResponseMsgColor: "black",
       yokiLoveLine: "",
       yokiLoveURL: "",
+      shareWhatsAppURL: "",
       singer: {
         audiourl: '',
         singer: '',
@@ -417,7 +419,10 @@ class ConnectedKaraoke extends Component {
   copyURL = () => {
     let textToCopy = `vibe to ${this.state.singer.title.toLowerCase()} by ${this.state.singer.singer.toLowerCase()} on africariyoki ::: ${window.location.href}`
     navigator.clipboard.writeText(textToCopy)
-    this.setState({openCopyCliboardModal:true})
+    this.setState({
+      openCopyCliboardModal: true,
+      shareWhatsAppURL: textToCopy,
+    })
   }
 
   onCanPlay = () => {
@@ -464,7 +469,8 @@ class ConnectedKaraoke extends Component {
               onClick={()=>{this.setState({openCopyCliboardModal: false})}}
             />
             <div className="Karaoke-openCopyCliboardModal-content">
-              yoki copied to clipboard. goan and share!
+              <span>yoki copied to clipboard. goan and share.</span>
+              <WhatsApp showWhatsAppText={true} messageToSend={this.state.shareWhatsAppURL}/>
             </div>
           </div>
         }
@@ -532,7 +538,13 @@ class ConnectedKaraoke extends Component {
                 </span>
               </div>
               <br />
-              <div className="Karaoke-yokiLoveURL poppins-normal-black-12px">{this.state.yokiLoveURL}</div>
+              <div className="Karaoke-yokiLoveURL poppins-normal-black-12px">
+                {this.state.yokiLoveURL}
+
+                {this.state.yokiLoveURL != "" &&
+                  <span><WhatsApp messageToSend={`i've made you yokilove❤️! check it out here ${this.state.yokiLoveURL}`} /></span>
+                }
+              </div>
               <br/>
               <br/>
               <div className="buttons-10" onClick={() => {this.createYokiLove()}}>

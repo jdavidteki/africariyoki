@@ -580,6 +580,8 @@
     font-weight: bold;
     color: var(--cinder);
     border-radius: 4px;
+    display: flex;
+    flex-direction: column;
   }
 
   .Karaoke-openYokiLoveModel,
