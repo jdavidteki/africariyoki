@@ -1,11 +1,11 @@
 {
   "files": {
-    "app.js": "/static/js/app.7f209bb4.chunk.js",
-    "app.js.map": "/static/js/app.7f209bb4.chunk.js.map",
+    "app.js": "/static/js/app.92a3f347.chunk.js",
+    "app.js.map": "/static/js/app.92a3f347.chunk.js.map",
     "runtime~app.js": "/static/js/runtime~app.2e9f1821.js",
     "runtime~app.js.map": "/static/js/runtime~app.2e9f1821.js.map",
-    "static/js/2.65b6d472.chunk.js": "/static/js/2.65b6d472.chunk.js",
-    "static/js/2.65b6d472.chunk.js.map": "/static/js/2.65b6d472.chunk.js.map",
+    "static/js/2.de4ba410.chunk.js": "/static/js/2.de4ba410.chunk.js",
+    "static/js/2.de4ba410.chunk.js.map": "/static/js/2.de4ba410.chunk.js.map",
     "fonts/Comic Sans MS Bold.ttf": "/./fonts/Comic Sans MS Bold.ttf",
     "fonts/Comic Sans MS.ttf": "/./fonts/Comic Sans MS.ttf",
     "fonts/segoe-ui-semibold.ttf": "/./fonts/segoe-ui-semibold.ttf",
@@ -17,7 +17,7 @@
     "manifest.json": "/manifest.json",
     "serve.json": "/serve.json",
     "service-worker.js.map": "/service-worker.js.map",
-    "static/js/2.65b6d472.chunk.js.LICENSE.txt": "/static/js/2.65b6d472.chunk.js.LICENSE.txt",
+    "static/js/2.de4ba410.chunk.js.LICENSE.txt": "/static/js/2.de4ba410.chunk.js.LICENSE.txt",
     "static/media/embarrassingyourself.png": "/static/media/embarrassingyourself.015f69eb.png",
     "static/media/fantabulous.png": "/static/media/fantabulous.a902571f.png",
     "static/media/logo-1-2@2x.png": "/static/media/logo-1-2@2x.52ca1927.png",
@@ -25,6 +25,7 @@
     "static/media/logo-2@2x.png": "/static/media/logo-2@2x.693bf367.png",
     "static/media/toomuchpride.png": "/static/media/toomuchpride.e21daadd.png",
     "static/media/welovetoseeit.png": "/static/media/welovetoseeit.b7152028.png",
+    "static/media/whatsapp.gif": "/static/media/whatsapp.a4045c75.gif",
     "static/media/whitebackground.png": "/static/media/whitebackground.f894163e.png",
     "static/media/youareafailure.png": "/static/media/youareafailure.d1a17e40.png",
     "static/media/youaredoingwell.png": "/static/media/youaredoingwell.a8fbb188.png",
@@ -32,7 +33,7 @@
   },
   "entrypoints": [
     "static/js/runtime~app.2e9f1821.js",
-    "static/js/2.65b6d472.chunk.js",
-    "static/js/app.7f209bb4.chunk.js"
+    "static/js/2.de4ba410.chunk.js",
+    "static/js/app.92a3f347.chunk.js"
   ]
 }
