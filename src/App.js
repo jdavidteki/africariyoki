@@ -39,15 +39,15 @@ class App extends Component {
         <Route path="/popularline" exact component={PopularLines} />
         <Route path="/cls" exact component={NextLine}/>
         <Route path="/annotationfixer/:id" component={AnnotationFixer} />
-        {/* <Route path="/scoreboardguesssong" component={ScoreboardGuessSong} />
+        <Route path="/scoreboardguesssong" component={ScoreboardGuessSong} />
         <Route path="/scoreboardnextline" component={ScoreboardNextLine} />
-        <Route path="/scoreboardguesssongline" component={ScoreboardGuessSongLine} /> */}
+        <Route path="/scoreboardguesssongline" component={ScoreboardGuessSongLine} />
         <Route path="/updatepopline" component={UpdatePopline} />
         <Route path="/karaoke/:id" component={Karaoke} />
         <Route path="/guess-the-song" component={GuessTheSong} />
         <Route path="/popular-lines" component={PopularLines} />
         <Route path="/next-line" component={NextLine} />
-        <Route path="/yokitweets" exact component={YokiTweets} />
+        {/* <Route path="/yokitweets" exact component={YokiTweets} /> */}
         <Route path="/yokilove/:id" component={YokiLove} />
         <Route component={ForOFor}/>
       </Switch>
