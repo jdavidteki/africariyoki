@@ -88,10 +88,14 @@ export function HmsToSecondsOnly(totalSecs) {
 }
 
 
-export function GetRandomBackground(selectedCountry){
-  let randomNumber =  Math.floor(Math.random() * (11 - 1 + 1) + 1)
+export function GetRandomBackground(selectedBackground){
+  var randomNumber =  Math.floor(Math.random() * (11 - 1 + 1) + 1)
   let backgroundToReturn = ""
   let bckImageNum = ""
+
+  if (selectedBackground != ""){
+    randomNumber = parseInt(selectedBackground);
+  }
 
   switch(randomNumber) {
     case 1:
@@ -138,13 +142,6 @@ export function GetRandomBackground(selectedCountry){
       bckImageNum = 11
       backgroundToReturn =  "https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/searchBackgrounds%2Fbck11bck.jpeg?alt=media"
       break
-  }
-
-  if( selectedCountry != ""){
-    if (this.state.countryToBackgroundImage[selectedCountry].bckUrl != undefined &&
-        this.state.countryToBackgroundImage[selectedCountry].bckUrl != ""){
-      backgroundToReturn =  this.state.countryToBackgroundImage[selectedCountry].bckUrl
-    }
   }
 
   return backgroundToReturn
