@@ -47,7 +47,7 @@ class App extends Component {
         <Route path="/guess-the-song" component={GuessTheSong} />
         <Route path="/popular-lines" component={PopularLines} />
         <Route path="/next-line" component={NextLine} />
-        {/* <Route path="/yokitweets" exact component={YokiTweets} /> */}
+        <Route path="/yokitweets" exact component={YokiTweets} />
         <Route path="/yokilove/:id" component={YokiLove} />
         <Route component={ForOFor}/>
       </Switch>
