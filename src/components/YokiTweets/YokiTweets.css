@@ -32,6 +32,7 @@
 
 .YokiTweets-display
 {
+  width: 500px;
   margin-top: 64px;
 }
 
@@ -124,6 +125,14 @@
 }
 
 @media only screen and (max-width: 600px) {
+
+  .YokiTweets-display
+  {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .about-3 {
     flex-direction: column;
   }
