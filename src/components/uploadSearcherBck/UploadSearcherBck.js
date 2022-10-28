@@ -22,9 +22,10 @@ class ConnectedUploadSeacherBck extends Component {
         isUploading: false,
         progress: 0,
         downloadURL: null,
-        countryName: "",
-        countryCode: "",
+        bckIimageID: "",
+        bckImageCode: "",
         isUploading: false,
+        artistIGUsername: "",
     };
 
     handleUploadStart = () => this.setState({ isUploading: true, progress: 0 })
@@ -42,7 +43,8 @@ class ConnectedUploadSeacherBck extends Component {
         .getDownloadURL()
         .then(url => {
             this.setState({ downloadURL: url, avatarOnFile: true });
-            Firebase.updateSearcherBck(this.state.countryCode , url);
+            Firebase.updateSearcherBck(this.state.bckImageCode , url);
+            Firebase.updateArtsIGByBckId(this.state.bckIimageID, this.state.artistIGUsername)
         })
     };
 
@@ -82,31 +84,41 @@ class ConnectedUploadSeacherBck extends Component {
                     </div>
 
                     <TextField
-                        value={this.state.countryName}
-                        placeholder="Country name in order to upload fil"
+                        value={this.state.bckIimageID}
+                        placeholder="Enter bckImage Number to upload image"
                         onChange={e => {
-                            this.setState({ countryName: e.target.value, countryCode: getCodeFromCountryName(e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1)) });
+                            this.setState({ bckIimageID: e.target.value, bckImageCode: getCodeFrombckIimageID(e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1)) });
                         }}
                     />
 
-                    { this.state.countryName != "" && this.state.countryCode != "" &&
-                        <form>
-                            {this.state.isUploading && <p>Progress: {this.state.progress}</p>}
-                            updating background image for  -- { this.state.countryName}, {this.state.countryCode}
-                            <label style={{color: '#1a4e8e', padding: 10, borderRadius: 4, cursor: 'pointer', }}>
-                                <span className="Profile-image-label">Update Background Image</span>
-                                <FileUploader
-                                    hidden
-                                    accept="image/jpeg"
-                                    filename={this.state.countryName.toLowerCase() + "bck"}
-                                    storageRef={Firebase.storage().ref('searchBackgrounds/')}
-                                    onUploadStart={this.handleUploadStart}
-                                    onUploadError={this.handleUploadError}
-                                    onUploadSuccess={this.handleUploadSuccess}
-                                    onProgress={this.handleProgress}
-                                />
-                            </label>
-                        </form>
+                    { this.state.bckIimageID != "" && this.state.bckImageCode != "" &&
+                        <div>
+                            <form>
+                                {this.state.isUploading && <p>Progress: {this.state.progress}</p>}
+                                updating background image for  -- { this.state.bckIimageID}, {this.state.bckImageCode}
+                                <label style={{color: '#1a4e8e', padding: 10, borderRadius: 4, cursor: 'pointer', }}>
+                                    <span className="Profile-image-label">Update Background Image</span>
+                                    <FileUploader
+                                        hidden
+                                        accept="image/jpeg"
+                                        filename={this.state.bckIimageID.toLowerCase() + "bck"}
+                                        storageRef={Firebase.storage().ref('searchBackgrounds/')}
+                                        onUploadStart={this.handleUploadStart}
+                                        onUploadError={this.handleUploadError}
+                                        onUploadSuccess={this.handleUploadSuccess}
+                                        onProgress={this.handleProgress}
+                                    />
+                                </label>
+                            </form>
+                            <TextField
+                                value={this.state.artistIGUsername}
+                                placeholder="Enter artist's IG username"
+                                onChange={e => {
+                                    this.setState({ artistIGUsername: e.target.value});
+                                }}
+                            />
+                        </div>
+
                     }
 
                     <img
@@ -124,7 +136,7 @@ class ConnectedUploadSeacherBck extends Component {
     }
 }
 
-function getCodeFromCountryName(value) {
+function getCodeFrombckIimageID(value) {
 
     switch(value) {
       case "Bck1":

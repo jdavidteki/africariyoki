@@ -75,6 +75,13 @@ class YokiThoughts extends Component {
       this.setState({
         imageBck: `https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/searchBackgrounds%2Fbck${randomNumber}bck.jpeg?alt=media`,
       })
+
+      Firebase.getArtsIGByBckId(randomNumber).
+      then((val) => {
+        this.setState({
+          artistIG: val,
+        })
+      })
     }
 
     openModal(){
@@ -124,6 +131,12 @@ class YokiThoughts extends Component {
                         <span className="lightfont poppins-normal-martinique-20px">created by: </span>
                         <span className="lightfont poppins-medium-martinique-20px">{this.state.storyAuthor}</span>
                       </div>
+                      {this.state.artistIG &&
+                        <div className="poppins-normal-martinique-20px">
+                          <span className="lightfont poppins-normal-martinique-20px">art by: </span>
+                          <span className="lightfont poppins-medium-martinique-20px"><a className="YokiThoughts-artByLink" href={`https://www.instagram.com/${this.state.artistIG}/?hl=en`}>@{this.state.artistIG}</a></span>
+                        </div>
+                      }
                       <div className="poppins-normal-martinique-20px">
                         <span className="lightfont poppins-normal-martinique-20px">content id: </span>
                         <span className="lightfont poppins-medium-martinique-20px">{this.state.storyId}</span>

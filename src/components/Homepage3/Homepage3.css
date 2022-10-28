@@ -17,6 +17,20 @@
   height: 100%;
 }
 
+.homepage3-artBy{
+  display: flex;
+  color: var(--fire-bush);
+  font-weight: bolder;
+  padding: 2px;
+  background-color: var(--black-haze);
+  border-radius: 4px;
+  margin-top: 4px;
+}
+
+.homepage3-artistIG{
+  color: var(--sea-serpent);
+}
+
 .overlap-group-40 {
   position: absolute;
   height: 100%;

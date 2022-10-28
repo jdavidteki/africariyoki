@@ -8,6 +8,11 @@
   z-index: 999;
 }
 
+.YokiThoughts-artByLink{
+  color: var(--concord-2);
+  text-decoration: none;
+}
+
 .about-3 {
   -webkit-backdrop-filter: blur(15px) brightness(100%);
   align-items: flex-start;

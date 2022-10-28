@@ -16,6 +16,38 @@ class Firebase {
     })
   }
 
+  getArtsIGByBckId = (id) => {
+    return new Promise(resolve => {
+      firebase.database()
+      .ref('/bckArtIG/bck' + id)
+      .once('value')
+      .then(snapshot => {
+        if (snapshot.val()){
+          resolve(snapshot.val())
+        }else{
+          resolve({})
+        }
+      })
+    })
+  }
+
+
+  updateArtsIGByBckId = (id, username) =>{
+    return new Promise(resolve => {
+      firebase.database()
+      .ref('/bckArtIG/bck' + id + '/')
+      .set(
+        username
+      )
+      .then((response) => {
+        resolve(true)
+      })
+      .catch(error => {
+        console.warn("error", error)
+      })
+    })
+  }
+
   getVersion = () =>{
     return new Promise(resolve => {
       firebase.database()
