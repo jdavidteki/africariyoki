@@ -94,7 +94,7 @@ export function GetRandomBackground(selectedBackground){
   let backgroundToReturn = ""
   let bckImageNum = ""
 
-  if (selectedBackground != ""){
+  if (selectedBackground != "" && selectedBackground != null){
     randomNumber = parseInt(selectedBackground);
   }
 
