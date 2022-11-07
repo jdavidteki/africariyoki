@@ -15,6 +15,9 @@ import game16DataImage from "../../../static/img/icon-2@2x.png";
 import TempBackground from "../../../static/img/whitebackground.png"
 import MetaTags from 'react-meta-tags';
 import { Analytics, PageHit } from 'expo-analytics';
+import orphans from "../../../static/img/orphans-muzi.png";
+import Bck11imagn from "../../../static/img/bck11imagn.png"
+import Bck11originalimgn from "../../../static/img/bck11originalimgn.png"
 
 import "./Homepage3.css";
 
@@ -70,10 +73,34 @@ class Homepage3 extends Component{
     }, 9000);
 
     setTimeout( () => {
-      this.setState({
-        overlapGroup: GetRandomBackground(""),
-      })
-    }, 500);
+      const urlParams = new URLSearchParams(window.location.search);
+
+      console.log("urlParams.get('bckNum')", urlParams.get("bckNum"))
+
+      let randomBckSelected = GetRandomBackground(urlParams.get('bckNum'))
+      if (randomBckSelected == "itseleven"){
+        console.log("we are here")
+
+        setInterval(() => {
+            function randomIntFromInterval(min, max) { // min and max included
+              return Math.floor(Math.random() * (max - min + 1) + min)
+            }
+
+            const rndInt = randomIntFromInterval(1, 2)
+            let imagnToUse = Bck11imagn
+            if(rndInt == 2){
+              imagnToUse = Bck11originalimgn
+            }
+            this.setState({
+              overlapGroup: imagnToUse,
+            })
+          }, 1000)
+      } else {
+        this.setState({
+          overlapGroup: randomBckSelected,
+        })
+      }
+    }, 500)
 
     // const analytics = new Analytics('UA-187038287-1');
     // analytics.hit(new PageHit('HomePage'))

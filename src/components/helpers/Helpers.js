@@ -89,6 +89,7 @@ export function HmsToSecondsOnly(totalSecs) {
 
 
 export function GetRandomBackground(selectedBackground){
+  console.log("selectedBackground", selectedBackground, "selectedBackground")
   var randomNumber =  Math.floor(Math.random() * (11 - 1 + 1) + 1)
   let backgroundToReturn = ""
   let bckImageNum = ""
@@ -138,8 +139,13 @@ export function GetRandomBackground(selectedBackground){
       bckImageNum = 10
       backgroundToReturn =  "https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/searchBackgrounds%2Fbck10bck.jpeg?alt=media"
       break
-    default:
+    case 11:
+      console.log("bck11")
       bckImageNum = 11
+      backgroundToReturn =  "itseleven"
+      break
+    default:
+      bckImageNum = 12
       backgroundToReturn =  "https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/searchBackgrounds%2Fbck11bck.jpeg?alt=media"
       break
   }
