@@ -1,11 +1,11 @@
 {
   "files": {
-    "app.js": "/static/js/app.817edf79.chunk.js",
-    "app.js.map": "/static/js/app.817edf79.chunk.js.map",
+    "app.js": "/static/js/app.434e4abd.chunk.js",
+    "app.js.map": "/static/js/app.434e4abd.chunk.js.map",
     "runtime~app.js": "/static/js/runtime~app.27401809.js",
     "runtime~app.js.map": "/static/js/runtime~app.27401809.js.map",
-    "static/js/2.036f76e9.chunk.js": "/static/js/2.036f76e9.chunk.js",
-    "static/js/2.036f76e9.chunk.js.map": "/static/js/2.036f76e9.chunk.js.map",
+    "static/js/2.2e46a3cd.chunk.js": "/static/js/2.2e46a3cd.chunk.js",
+    "static/js/2.2e46a3cd.chunk.js.map": "/static/js/2.2e46a3cd.chunk.js.map",
     "fonts/Comic Sans MS Bold.ttf": "/./fonts/Comic Sans MS Bold.ttf",
     "fonts/Comic Sans MS.ttf": "/./fonts/Comic Sans MS.ttf",
     "fonts/segoe-ui-semibold.ttf": "/./fonts/segoe-ui-semibold.ttf",
@@ -17,12 +17,15 @@
     "manifest.json": "/manifest.json",
     "serve.json": "/serve.json",
     "service-worker.js.map": "/service-worker.js.map",
-    "static/js/2.036f76e9.chunk.js.LICENSE.txt": "/static/js/2.036f76e9.chunk.js.LICENSE.txt",
+    "static/js/2.2e46a3cd.chunk.js.LICENSE.txt": "/static/js/2.2e46a3cd.chunk.js.LICENSE.txt",
+    "static/media/bck11imagn.png": "/static/media/bck11imagn.fb2823d2.png",
+    "static/media/bck11originalimgn.png": "/static/media/bck11originalimgn.4b45ed3d.png",
     "static/media/embarrassingyourself.png": "/static/media/embarrassingyourself.015f69eb.png",
     "static/media/fantabulous.png": "/static/media/fantabulous.a902571f.png",
     "static/media/logo-1-2@2x.png": "/static/media/logo-1-2@2x.52ca1927.png",
     "static/media/logo-1@2x.png": "/static/media/logo-1@2x.8da5f4a3.png",
     "static/media/logo-2@2x.png": "/static/media/logo-2@2x.693bf367.png",
+    "static/media/orphans-muzi.png": "/static/media/orphans-muzi.90abb1cf.png",
     "static/media/toomuchpride.png": "/static/media/toomuchpride.e21daadd.png",
     "static/media/toxicauntieslogo.png": "/static/media/toxicauntieslogo.99e59693.png",
     "static/media/welovetoseeit.png": "/static/media/welovetoseeit.b7152028.png",
@@ -34,7 +37,7 @@
   },
   "entrypoints": [
     "static/js/runtime~app.27401809.js",
-    "static/js/2.036f76e9.chunk.js",
-    "static/js/app.817edf79.chunk.js"
+    "static/js/2.2e46a3cd.chunk.js",
+    "static/js/app.434e4abd.chunk.js"
   ]
 }
