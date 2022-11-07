@@ -140,7 +140,6 @@ export function GetRandomBackground(selectedBackground){
       backgroundToReturn =  "https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/searchBackgrounds%2Fbck10bck.jpeg?alt=media"
       break
     case 11:
-      console.log("bck11")
       bckImageNum = 11
       backgroundToReturn =  "itseleven"
       break

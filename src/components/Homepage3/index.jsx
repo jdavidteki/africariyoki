@@ -40,6 +40,7 @@ class Homepage3 extends Component{
   int1 = null
   int2 = null
   int3 = null
+  int4 = null
 
   componentDidMount(){
     //hack: use this to fix github pages doing ?/ on pages
@@ -75,13 +76,10 @@ class Homepage3 extends Component{
     setTimeout( () => {
       const urlParams = new URLSearchParams(window.location.search);
 
-      console.log("urlParams.get('bckNum')", urlParams.get("bckNum"))
-
       let randomBckSelected = GetRandomBackground(urlParams.get('bckNum'))
       if (randomBckSelected == "itseleven"){
-        console.log("we are here")
 
-        setInterval(() => {
+        this.int4 = setInterval(() => {
             function randomIntFromInterval(min, max) { // min and max included
               return Math.floor(Math.random() * (max - min + 1) + min)
             }
@@ -154,6 +152,7 @@ class Homepage3 extends Component{
     clearInterval(this.int1)
     clearInterval(this.int2)
     clearInterval(this.int3)
+    clearInterval(this.int4)
   }
 
   getSongDetails(){
