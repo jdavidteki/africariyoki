@@ -85,14 +85,14 @@ class Homepage3 extends Component{
             }
 
             const rndInt = randomIntFromInterval(1, 2)
-            let imagnToUse = Bck11imagn
+            let imagnToUse = Bck11originalimgn
             if(rndInt == 2){
-              imagnToUse = Bck11originalimgn
+              imagnToUse = Bck11imagn
             }
             this.setState({
               overlapGroup: imagnToUse,
             })
-          }, 1000)
+          }, 2500)
       } else {
         this.setState({
           overlapGroup: randomBckSelected,
