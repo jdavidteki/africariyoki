@@ -542,7 +542,7 @@ class ConnectedKaraoke extends Component {
                 {this.state.yokiLoveURL}
 
                 {this.state.yokiLoveURL != "" &&
-                  <span><WhatsApp messageToSend={`i've made you yokilove❤️! check it out here ${this.state.yokiLoveURL}`} /></span>
+                  <span><WhatsApp messageToSend={`hello ${this.state.selectedOptionRecipientName}, i've made you yokilove❤️! check it out here ${this.state.yokiLoveURL}`} /></span>
                 }
               </div>
               <br/>
