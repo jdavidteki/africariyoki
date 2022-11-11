@@ -179,11 +179,6 @@
     flex-direction: column;
   }
 
-  .YokiRadePlay-options{
-    flex-direction: column;
-    width: 90%;
-  }
-
   .YokiRadePlay-options .Song{
     flex-basis: 90%;
   }

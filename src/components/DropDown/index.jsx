@@ -35,6 +35,9 @@ class Dropdown extends Component {
           path = "/popular-lines"
           break
         case 2:
+          path = "/yokirade"
+          break
+        case 3:
           path = "/next-line"
           break
       }

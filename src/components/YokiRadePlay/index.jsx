@@ -76,8 +76,8 @@ function returnLineBasedOnDifficulty(lineToReturn, difficulty){
     if (lineToReturn.length > 2){
       return lineToReturnArray.splice(0, 2).join(" ")
     }
-  } else if (difficulty == "master"){
-    return lineToReturnArray[Math.floor(Math.random()*lineToReturnArray.length)]
+  } else if (difficulty == "ancestor"){
+    return lineToReturnArray.splice(0, 1).join(" ")
   }
 }
 

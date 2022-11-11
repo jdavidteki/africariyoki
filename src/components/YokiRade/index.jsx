@@ -269,7 +269,7 @@ class ConnectedYokiRade extends Component {
     if(value == "correct"){
       this.setState({score: this.state.score+=1, answerCorrect: true})
       if(document.getElementById("YokiRadePlay-wrong") && document.getElementById("YokiRadePlay-correct")){
-        document.getElementById("YokiRadePlay-wronsg").classList.remove('blink')
+        document.getElementById("YokiRadePlay-wrong").classList.remove('blink')
         document.getElementById("YokiRadePlay-correct").classList.add('blink')
       }
     }else{
