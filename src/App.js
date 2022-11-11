@@ -16,6 +16,7 @@ import PopularLines from "./components/PopularLines";
 import NextLine from "./components/NextLine";
 import YokiTweets from "./components/YokiTweets/index.js";
 import YokiLove from "./components/YokiLove";
+import YokiRade from "./components/YokiRade";
 
 import "./App.css";
 
@@ -46,6 +47,7 @@ class App extends Component {
         <Route path="/karaoke/:id" component={Karaoke} />
         <Route path="/guess-the-song" component={GuessTheSong} />
         <Route path="/popular-lines" component={PopularLines} />
+        <Route path="/yokirade" component={YokiRade} />
         <Route path="/next-line" component={NextLine} />
         <Route path="/yokitweets" exact component={YokiTweets} />
         <Route path="/yokilove/:id" component={YokiLove} />

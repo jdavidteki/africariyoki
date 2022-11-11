@@ -14,8 +14,6 @@ import game15DataImage from "../../../static/img/icon-1@2x.png";
 import game16DataImage from "../../../static/img/icon-2@2x.png";
 import TempBackground from "../../../static/img/whitebackground.png"
 import MetaTags from 'react-meta-tags';
-import { Analytics, PageHit } from 'expo-analytics';
-import orphans from "../../../static/img/orphans-muzi.png";
 import Bck11imagn from "../../../static/img/bck11imagn.png"
 import Bck11originalimgn from "../../../static/img/bck11originalimgn.png"
 
@@ -238,6 +236,13 @@ class Homepage3 extends Component{
                   spanText2={"recognize popular lines"}
                   className={this.state.game12Props.className}
                   hreflink={"popular-lines"}
+                />
+                <Game1
+                  icon={this.state.game11Props.icon}
+                  spanText1={"yokirade"}
+                  spanText2={"afrobeats lyrics charade"}
+                  className={this.state.game12Props.className}
+                  hreflink={"yokirade"}
                 />
                 <Game1
                   icon={this.state.game11Props.icon}

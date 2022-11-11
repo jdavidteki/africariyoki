@@ -89,7 +89,6 @@ export function HmsToSecondsOnly(totalSecs) {
 
 
 export function GetRandomBackground(selectedBackground){
-  console.log("selectedBackground", selectedBackground, "selectedBackground")
   var randomNumber =  Math.floor(Math.random() * (11 - 1 + 1) + 1)
   let backgroundToReturn = ""
   let bckImageNum = ""
