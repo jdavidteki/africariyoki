@@ -1,11 +1,11 @@
 {
   "files": {
-    "app.js": "/static/js/app.0d947581.chunk.js",
-    "app.js.map": "/static/js/app.0d947581.chunk.js.map",
+    "app.js": "/static/js/app.2490beac.chunk.js",
+    "app.js.map": "/static/js/app.2490beac.chunk.js.map",
     "runtime~app.js": "/static/js/runtime~app.27401809.js",
     "runtime~app.js.map": "/static/js/runtime~app.27401809.js.map",
-    "static/js/2.9a346bb9.chunk.js": "/static/js/2.9a346bb9.chunk.js",
-    "static/js/2.9a346bb9.chunk.js.map": "/static/js/2.9a346bb9.chunk.js.map",
+    "static/js/2.dd6e12d6.chunk.js": "/static/js/2.dd6e12d6.chunk.js",
+    "static/js/2.dd6e12d6.chunk.js.map": "/static/js/2.dd6e12d6.chunk.js.map",
     "fonts/Comic Sans MS Bold.ttf": "/./fonts/Comic Sans MS Bold.ttf",
     "fonts/Comic Sans MS.ttf": "/./fonts/Comic Sans MS.ttf",
     "fonts/segoe-ui-semibold.ttf": "/./fonts/segoe-ui-semibold.ttf",
@@ -17,7 +17,7 @@
     "manifest.json": "/manifest.json",
     "serve.json": "/serve.json",
     "service-worker.js.map": "/service-worker.js.map",
-    "static/js/2.9a346bb9.chunk.js.LICENSE.txt": "/static/js/2.9a346bb9.chunk.js.LICENSE.txt",
+    "static/js/2.dd6e12d6.chunk.js.LICENSE.txt": "/static/js/2.dd6e12d6.chunk.js.LICENSE.txt",
     "static/media/bck11imagn.png": "/static/media/bck11imagn.fb2823d2.png",
     "static/media/bck11originalimgn.png": "/static/media/bck11originalimgn.4b45ed3d.png",
     "static/media/embarrassingyourself.png": "/static/media/embarrassingyourself.015f69eb.png",
@@ -36,7 +36,7 @@
   },
   "entrypoints": [
     "static/js/runtime~app.27401809.js",
-    "static/js/2.9a346bb9.chunk.js",
-    "static/js/app.0d947581.chunk.js"
+    "static/js/2.dd6e12d6.chunk.js",
+    "static/js/app.2490beac.chunk.js"
   ]
 }
