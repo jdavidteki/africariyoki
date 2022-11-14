@@ -31,11 +31,42 @@ class Firebase {
     })
   }
 
+  getPopWords = () => {
+    return new Promise(resolve => {
+      firebase.database()
+      .ref('/popwords/')
+      .once('value')
+      .then(snapshot => {
+        if (snapshot.val()){
+          resolve(snapshot.val())
+        }else{
+          resolve({})
+        }
+      })
+    })
+  }
+
+  addPopWord = (popword) => {
+    return new Promise(resolve => {
+      firebase.database()
+      .ref('/popwords/')
+      .set(
+        popword
+      )
+      .then((response) => {
+        resolve(true)
+      })
+      .catch(error => {
+        console.warn("error", error)
+      })
+    })
+  }
+
 
   updateArtsIGByBckId = (id, username) =>{
     return new Promise(resolve => {
       firebase.database()
-      .ref('/bckArtIG/bck' + id + '/')
+      .ref('/bckArtIG/' + id + '/')
       .set(
         username
       )

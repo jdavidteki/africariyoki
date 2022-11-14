@@ -76,6 +76,9 @@ class Homepage3 extends Component{
 
       let randomBckSelected = GetRandomBackground(urlParams.get('bckNum'))
       if (randomBckSelected == "itseleven"){
+        this.setState({
+          overlapGroup: Bck11originalimgn,
+        })
 
         this.int4 = setInterval(() => {
             function randomIntFromInterval(min, max) { // min and max included

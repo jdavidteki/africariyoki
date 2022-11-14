@@ -7,21 +7,13 @@ import GameResult from "../GameResult";
 import YokiRadePlay from "../YokiRadePlay";
 import Header from "../Header2";
 import FooterMenuFooterDefault from "../FooterMenuFooterDefault";
-import { ShuffleArray, GetRandomBackground, HmsToSecondsOnly } from "../helpers/Helpers";
+import { ShuffleArray, GetRandomBackground, CleanLine } from "../helpers/Helpers";
 import Firebase from "../../firebase/firebase.js";
 import { Analytics, PageHit } from 'expo-analytics';
 import moment from "moment"
 import TempBackground from "../../../static/img/whitebackground.png"
 
 import "./YokiRade.css";
-
-const levelToPlaySec = {
-  "beginner": 5,
-  "amateur": 4,
-  "ancestor": 2.5
-}
-
-const startTimes = [0.25, 0.5, 0.75, 0.8];
 
 class ConnectedYokiRade extends Component {
   constructor(props){
@@ -48,9 +40,9 @@ class ConnectedYokiRade extends Component {
       answerCorrect: true,
       nthLongestLineToShow: 0,
       db: null,
+      popwords: [],
       optionBackground: '#d5c0f0',
       overlapGroup: TempBackground,
-      poplineObj: {},
       randomTruePopLine: "",
       prevTimeoutID: 0,
       answerClicked: false,
@@ -128,83 +120,76 @@ class ConnectedYokiRade extends Component {
   }
 
   componentDidMount(){
-      //hack: use this to fix github pages doing ?/ on pages
-      if (window.location.href.includes("?/")){
-        let actualDestination = window.location.href.split("?/")[1]
-        if(this.props.history == undefined){
-          //TODO: figure out if it's possible to not have to do this
-          window.location.href = "/" + actualDestination
-        }else{
-          this.props.history.push({
-            pathname: "/" + actualDestination
-          });
-          window.location.reload(false);
-        }
-      }
-
-      // const analytics = new Analytics('UA-187038287-1');
-      // analytics.hit(new PageHit('YokiRade'))
-      //     .then(() => console.log("google analytics on game"))
-      //     .catch(e => console.log(e.message));
-
-      setTimeout( () => {
-        this.setState({
-          overlapGroup: GetRandomBackground(""),
-        })
-      }, 500);
-
-      Firebase.getPopularLines().then(
-        val => {
-          if (val != undefined){
-              this.setState({poplineObj: val})
-          }
-        }
-      )
-
-      //try to load local songs file first
-      let localSongs = JSON.parse(localStorage.getItem('lyrics'));
-      if (localSongs != null){
-          let localLyrics = localSongs['lyrics']
-          let songInQuestionIndex = Math.floor(Math.random() * (localLyrics.length - 0) + 0);
-
-          this.setState({
-            randomTruePopLine: this.findRandomTruePopLine(localLyrics[songInQuestionIndex].id),
-            songs: localLyrics,
-            songInQuestionIndex: songInQuestionIndex,
-            songInQuestion: localLyrics[songInQuestionIndex],
-            songsInOption: this.generateSongsInOptions(localLyrics, localLyrics[songInQuestionIndex])
-          })
-      }
-
-      //if there are atleast ten yokis downloaded
-      let localYokis = JSON.parse(localStorage.getItem('yokis'));
-      if (localYokis != null && localYokis['yokis'].length >=  10){
-          let localYokisArray = Object.values(localYokis['yokis'])
-          let songInQuestionIndex = Math.floor(Math.random() * (localYokisArray.length - 0) + 0);
-
-          this.setState({
-            randomTruePopLine: this.findRandomTruePopLine(localYokisArray[songInQuestionIndex].id),
-            songs: localYokisArray,
-            songInQuestionIndex: songInQuestionIndex,
-            songInQuestion: localYokisArray[songInQuestionIndex],
-            songsInOption: this.generateSongsInOptions(localYokisArray, localYokisArray[songInQuestionIndex])
-          })
+    //hack: use this to fix github pages doing ?/ on pages
+    if (window.location.href.includes("?/")){
+      let actualDestination = window.location.href.split("?/")[1]
+      if(this.props.history == undefined){
+        //TODO: figure out if it's possible to not have to do this
+        window.location.href = "/" + actualDestination
       }else{
-          Firebase.getLyrics().then(
-              val => {
-                  val = val.filter(v => v.useForGames == 1);
-                  let songInQuestionIndex = Math.floor(Math.random() * (val.length - 0) + 0);
-
-                  this.setState({
-                    randomTruePopLine: this.findRandomTruePopLine(val[songInQuestionIndex].id),
-                    songs: val,
-                    songInQuestionIndex: songInQuestionIndex,
-                    songInQuestion: val[songInQuestionIndex],
-                    songsInOption: this.generateSongsInOptions(val, val[songInQuestionIndex])
-                  })
-              }
-          )
+        this.props.history.push({
+          pathname: "/" + actualDestination
+        });
+        window.location.reload(false);
       }
+    }
+
+    // const analytics = new Analytics('UA-187038287-1');
+    // analytics.hit(new PageHit('YokiRade'))
+    //     .then(() => console.log("google analytics on game"))
+    //     .catch(e => console.log(e.message));
+
+    setTimeout( () => {
+      this.setState({
+        overlapGroup: GetRandomBackground(""),
+      })
+    }, 500);
+
+    //try to load local songs file first
+    let localSongs = JSON.parse(localStorage.getItem('lyrics'));
+    if (localSongs != null){
+        let localLyrics = localSongs['lyrics']
+        let songInQuestionIndex = Math.floor(Math.random() * (localLyrics.length - 0) + 0);
+
+        this.setState({
+          songs: localLyrics,
+          songInQuestionIndex: songInQuestionIndex,
+          songInQuestion: localLyrics[songInQuestionIndex],
+        })
+    }
+
+    //if there are atleast ten yokis downloaded
+    let localYokis = JSON.parse(localStorage.getItem('yokis'));
+    if (localYokis != null && localYokis['yokis'].length >=  10){
+        let localYokisArray = Object.values(localYokis['yokis'])
+        let songInQuestionIndex = Math.floor(Math.random() * (localYokisArray.length - 0) + 0);
+
+        this.setState({
+          songs: localYokisArray,
+          songInQuestionIndex: songInQuestionIndex,
+          songInQuestion: localYokisArray[songInQuestionIndex],
+        })
+    }else{
+        Firebase.getLyrics().then(
+            val => {
+                val = val.filter(v => v.useForGames == 1);
+                let songInQuestionIndex = Math.floor(Math.random() * (val.length - 0) + 0);
+
+                this.setState({
+                  songs: val,
+                  songInQuestionIndex: songInQuestionIndex,
+                  songInQuestion: val[songInQuestionIndex],
+                })
+            }
+        )
+    }
+
+    Firebase.getPopWords().
+    then(val => {
+      this.setState({popwords: val.popword.split(",")}, () => {
+        this.getPopWord()
+      })
+    })
   }
 
   handleChangePlayerName = selectedOptionPlayerName => {
@@ -217,78 +202,76 @@ class ConnectedYokiRade extends Component {
   };
 
   handleChangeDifficulty = selectedOptionDifficulty => {
-      this.setState({ selectedOptionDifficulty });
+    this.setState({ selectedOptionDifficulty });
   };
 
   handleChangeDuration = selectedOptionDuration => {
       this.setState({ selectedOptionDuration });
   };
 
-  findRandomTruePopLine = (songInQuestionId) => {
-      let randomTruePopLine = ""
+  getPopWord = () => {
 
-      if (this.state.poplineObj[songInQuestionId]){
-          if (this.state.poplineObj[songInQuestionId].content){
-              let content = this.state.poplineObj[songInQuestionId].content
-              let popularLinesObj = JSON.parse(content.replaceAll("'", ""));
+    let songInQuestionIndex = Math.floor(Math.random() * (this.state.songs.length - 0) + 0);
 
-              let truePopLines = []
-              for (const [key, value] of Object.entries(popularLinesObj)) {
-                  if (value == true){
-                      truePopLines.push(key)
-                  }
-              }
+    let lyricsArray = this.state.songs[songInQuestionIndex].lyrics.split("\n");
+    let eachWordInLyrics = []
 
-              let randomLineIndex = Math.floor(Math.random()*truePopLines.length)
-              randomTruePopLine = truePopLines[randomLineIndex];
+    if(this.state.selectedOptionDifficulty == "beginner"){
+      let lineToChoose = Math.floor(Math.random() * (lyricsArray.length - 0) + 0);
+      this.setState({yokiRadeWord: CleanLine(lyricsArray[lineToChoose])})
+    } else {
+      for (var i = 0; i < lyricsArray.length; i++){
+        var lyricLineArray = CleanLine(lyricsArray[i]).split(" ")
 
-              if ((randomTruePopLine.length <= 25) && (truePopLines.length > (randomLineIndex + 1))){
-                randomTruePopLine += " " + truePopLines[randomLineIndex + 1]
-              }
+        for (var j = 0; j < lyricLineArray.length; j++){
+          if(lyricLineArray[j] != ''){
+            eachWordInLyrics.push(lyricLineArray[j])
           }
+        }
       }
-      return randomTruePopLine
-  }
 
-  generateSongsInOptions(allSongs, songInQuestion){
-      let songsInOptions = [songInQuestion]
+      let yokiRadeWordFound = false
 
-      for(var i=0; i<3; i++){
-          let random = Math.floor(Math.random() * (allSongs.length - 0) + 0);
+      for (var i = 0; i < ShuffleArray(this.state.popwords).length; i++){
+        let popword = this.state.popwords[i]
 
-          if(!songsInOptions.includes(allSongs[random])){
-              songsInOptions.push(allSongs[random])
-          }else{
-              i-=1
-          }
+        if(eachWordInLyrics.includes(popword.toLowerCase())){
+          yokiRadeWordFound = true
+          this.setState({yokiRadeWord: popword})
+        }
       }
-      return ShuffleArray(songsInOptions)
+
+      if (!yokiRadeWordFound){
+        let wordToChoose = Math.floor(Math.random() * (eachWordInLyrics.length - 0) + 0);
+        this.setState({yokiRadeWord: eachWordInLyrics[wordToChoose]})
+      }
+    }
   }
 
   checkAnswer = (value) => {
     if(value == "correct"){
       this.setState({score: this.state.score+=1, answerCorrect: true})
-      if(document.getElementById("YokiRadePlay-wrong") && document.getElementById("YokiRadePlay-correct")){
-        document.getElementById("YokiRadePlay-wrong").classList.remove('blink')
+
+      if(document.getElementById("YokiRadePlay-correct")){
         document.getElementById("YokiRadePlay-correct").classList.add('blink')
+
+        setTimeout(() => {
+          document.getElementById("YokiRadePlay-correct").classList.remove('blink')
+        }, 500)
       }
     }else{
       this.setState({score: this.state.score-=1, answerCorrect: false})
-      if(document.getElementById("YokiRadePlay-wrong") && document.getElementById("YokiRadePlay-correct")){
-        document.getElementById("YokiRadePlay-correct").classList.remove('blink')
+
+      if(document.getElementById("YokiRadePlay-wrong")){
         document.getElementById("YokiRadePlay-wrong").classList.add('blink')
+
+        setTimeout(() => {
+          document.getElementById("YokiRadePlay-wrong").classList.remove('blink')
+        }, 500)
       }
     }
 
-    let songInQuestionIndex = Math.floor(Math.random() * (this.state.songs.length - 0) + 0);
-    let nthLongestLineToShow = Math.floor(Math.random() * 5);
-
-    this.setState({
-      randomTruePopLine: this.findRandomTruePopLine(this.state.songs[songInQuestionIndex].id),
-      nthLongestLineToShow: nthLongestLineToShow,
-      songInQuestionIndex: songInQuestionIndex,
-      songInQuestion: this.state.songs[songInQuestionIndex],
-    });
+    this.getPopWord()
   }
 
   startGame = () => {
@@ -306,7 +289,9 @@ class ConnectedYokiRade extends Component {
     setTimeout(()=>{
         Firebase.getScoreBoardPopularLine()
         .then(val => {
+          if (this.state.selectedOptionDifficulty != "ancestor"){
             this.setState({highestscore: val[this.state.selectedOptionDifficulty][0].averageScore})
+          }
         })
 
         this.updateTimer()
@@ -323,21 +308,23 @@ class ConnectedYokiRade extends Component {
   restartGame = () => {
     let songInQuestionIndex = Math.floor(Math.random() * (this.state.songs.length - 0) + 0);
     this.setState({
-        count:0,
-        eventDate: moment.duration().add({days:0,hours:0,minutes:0,seconds:0}),
-        secs:0,
-        mins:0,
-        score: 0,
-        pauseSetGameModal: true,
-        setGameModel: true,
-        printResult: false,
-        audioPaused: true,
-        answerCorrect: true,
-        songInQuestionIndex: songInQuestionIndex,
-        songInQuestion: this.state.songs[songInQuestionIndex],
-        randomTruePopLine: this.findRandomTruePopLine(this.state.songs[songInQuestionIndex].id),
-        songsInOption: this.generateSongsInOptions(this.state.songs, this.state.songs[songInQuestionIndex])
+      count:0,
+      eventDate: moment.duration().add({days:0,hours:0,minutes:0,seconds:0}),
+      secs:0,
+      mins:0,
+      score: 0,
+      pauseSetGameModal: true,
+      setGameModel: true,
+      printResult: false,
+      audioPaused: true,
+      answerCorrect: true,
+      songInQuestionIndex: songInQuestionIndex,
+      songInQuestion: this.state.songs[songInQuestionIndex],
     })
+  }
+
+  componentWillUnmount(){
+    this.setState({yokiRadeWord: ""})
   }
 
   render(){
@@ -399,10 +386,7 @@ class ConnectedYokiRade extends Component {
                         checkAnswer={this.checkAnswer}
                         answerCorrect={this.state.answerCorrect}
                         answerClicked={this.state.answerClicked}
-                        audioPaused={this.state.audioPaused}
-                        randomTruePopLine = {this.state.randomTruePopLine}
-                        nthLongestLineToShow = {this.state.nthLongestLineToShow}
-                        songInQuestion = {this.state.songInQuestion}
+                        yokiRadeWord = {this.state.yokiRadeWord}
                       />
                     </div>
                   }

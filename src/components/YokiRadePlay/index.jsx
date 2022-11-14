@@ -32,53 +32,21 @@ function YokiRadePlay(props) {
               </div>
             </div>
             <div className="bottom-section poppins-medium-martinique-24px YokiRade-lyricInQuestion">
-              {getPopularLine(props.randomTruePopLine, props.songInQuestion, props.nthLongestLineToShow, props.selectedOptionDifficulty) }
+              {props.yokiRadeWord}
             </div>
           </div>
         </div>
       </div>
       <div className="YokiRadePlay-options">
-          <div id="YokiRadePlay-correct" className="YokiRadePlay-check YokiRadePlay-correct" onClick={ () => props.checkAnswer("correct")}>
-            +
-          </div>
-          <div id="YokiRadePlay-wrong" className="YokiRadePlay-check YokiRadePlay-wrong" onClick={() => props.checkAnswer("wrong")}>
-            -
-          </div>
+        <div id="YokiRadePlay-correct" className="YokiRadePlay-check YokiRadePlay-correct" onClick={ () => props.checkAnswer("correct")}>
+          +
         </div>
+        <div id="YokiRadePlay-wrong" className="YokiRadePlay-check YokiRadePlay-wrong" onClick={() => props.checkAnswer("wrong")}>
+          -
+        </div>
+      </div>
     </div>
   );
-}
-
-function getPopularLine(randomTruePopLine, songObject, nthLongestLineToShow, difficulty){
-
-  if(randomTruePopLine != ""){
-    return returnLineBasedOnDifficulty(randomTruePopLine, difficulty)
-  }
-
-  let lyricsArray = songObject.lyrics.split("\n").sort((a, b) => b.length - a.length);
-  let lineToReturn = lyricsArray[nthLongestLineToShow]
-
-  return returnLineBasedOnDifficulty(CleanLine(lineToReturn), difficulty)
-}
-
-
-function returnLineBasedOnDifficulty(lineToReturn, difficulty){
-  let lineToReturnArray = lineToReturn.split(" ")
-
-  if (difficulty == "beginner"){
-    return lineToReturn
-  } else if (difficulty == "amateur"){
-    if (lineToReturn.length > 3){
-      return lineToReturnArray.splice(0, 3).join(" ")
-    }
-
-  } else if (difficulty == "professional"){
-    if (lineToReturn.length > 2){
-      return lineToReturnArray.splice(0, 2).join(" ")
-    }
-  } else if (difficulty == "ancestor"){
-    return lineToReturnArray.splice(0, 1).join(" ")
-  }
 }
 
 export default YokiRadePlay;

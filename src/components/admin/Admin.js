@@ -10,6 +10,7 @@ import UploadSearcherBck from '../uploadSearcherBck/UploadSearcherBck.js'
 import UploadImgStory from '../uploadImgStory/UploadImgStory.js'
 import { Analytics, PageHit } from 'expo-analytics';
 import Header from "../Header2";
+import UploadPopWord from "../UploadPopWord/UploadPopWord.js";
 
 import 'bootstrap/dist/css/bootstrap.css';
 import "./Admin.css"
@@ -322,6 +323,7 @@ class ConnectedAdmin extends Component {
                         )
                     }
                 </div>
+                <UploadPopWord />
                 <UploadContent />
                 <UploadSearcherBck />
                 <UploadImgStory />
