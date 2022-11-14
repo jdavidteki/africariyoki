@@ -63,7 +63,7 @@ class ConnectedYokiRade extends Component {
       let { eventDate} = this.state
 
     if(eventDate <=0){
-      this.updateFirebaseScoreBoard()
+      // this.updateFirebaseScoreBoard()
 
       this.setState({
         count:0,
@@ -88,36 +88,36 @@ class ConnectedYokiRade extends Component {
     },1000)
   }
 
-  updateFirebaseScoreBoard(){
-      Firebase.getScoreBoardPopularLine()
-      .then(val => {
-          let playerName = this.state.selectedOptionPlayerName === "" ? "yokibot" : this.state.selectedOptionPlayerName
+  // updateFirebaseScoreBoard(){
+  //     Firebase.getScoreBoardPopularLine()
+  //     .then(val => {
+  //         let playerName = this.state.selectedOptionPlayerName === "" ? "yokibot" : this.state.selectedOptionPlayerName
 
-          val[this.state.selectedOptionDifficulty].push({
-              "rank": 1,
-              "name": playerName,
-              "score": this.state.score,
-              "duration": this.state.selectedOptionDuration,
-              "averageScore": Number((this.state.score/this.state.selectedOptionDuration).toFixed(2)),
-          });
+  //         val[this.state.selectedOptionDifficulty].push({
+  //             "rank": 1,
+  //             "name": playerName,
+  //             "score": this.state.score,
+  //             "duration": this.state.selectedOptionDuration,
+  //             "averageScore": Number((this.state.score/this.state.selectedOptionDuration).toFixed(2)),
+  //         });
 
-          val[this.state.selectedOptionDifficulty].sort((a, b) => (a.averageScore < b.averageScore) ? 1 : -1)
+  //         val[this.state.selectedOptionDifficulty].sort((a, b) => (a.averageScore < b.averageScore) ? 1 : -1)
 
-          for (let step = 0; step < val[this.state.selectedOptionDifficulty].length; step++) {
-              if(val[this.state.selectedOptionDifficulty][step]){
-                  if(step > 0 && val[this.state.selectedOptionDifficulty][step].averageScore == val[this.state.selectedOptionDifficulty][step-1].averageScore){
-                      val[this.state.selectedOptionDifficulty][step].rank = val[this.state.selectedOptionDifficulty][step-1].rank
-                  }else{
-                      val[this.state.selectedOptionDifficulty][step].rank = step + 1
-                  }
-              }
-          }
+  //         for (let step = 0; step < val[this.state.selectedOptionDifficulty].length; step++) {
+  //             if(val[this.state.selectedOptionDifficulty][step]){
+  //                 if(step > 0 && val[this.state.selectedOptionDifficulty][step].averageScore == val[this.state.selectedOptionDifficulty][step-1].averageScore){
+  //                     val[this.state.selectedOptionDifficulty][step].rank = val[this.state.selectedOptionDifficulty][step-1].rank
+  //                 }else{
+  //                     val[this.state.selectedOptionDifficulty][step].rank = step + 1
+  //                 }
+  //             }
+  //         }
 
-          val[this.state.selectedOptionDifficulty] = val[this.state.selectedOptionDifficulty].slice(0, 10)
+  //         val[this.state.selectedOptionDifficulty] = val[this.state.selectedOptionDifficulty].slice(0, 10)
 
-          Firebase.updateScoreBoardPopularLine(val)
-      })
-  }
+  //         Firebase.updateScoreBoardPopularLine(val)
+  //     })
+  // }
 
   componentDidMount(){
     //hack: use this to fix github pages doing ?/ on pages
@@ -238,6 +238,14 @@ class ConnectedYokiRade extends Component {
         if(eachWordInLyrics.includes(popword.toLowerCase())){
           yokiRadeWordFound = true
           this.setState({yokiRadeWord: popword})
+
+          //remove the popword so that it doesnt keep coming up
+          const array = this.state.popwords
+          const index = array.indexOf(popword);
+          if (index > -1) {
+            array.splice(index, 1);
+            this.setState({popwords: array})
+          }
         }
       }
 
