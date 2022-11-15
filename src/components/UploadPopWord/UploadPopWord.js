@@ -18,10 +18,14 @@ class ConnectedUploadPopWord extends Component {
     uploadToFirebase(){
         Firebase.getPopWords()
         .then(val => {
-            console.log("we are here", val)
+            let newWord = val.popword + "," + this.state.popword
+
+            let uniqueListString = newWord.split(',').filter(function(item, i, allItems){
+                return i==allItems.indexOf(item);
+            }).join(',');
 
             Firebase.addPopWord({
-                popword: val.popword + "," + this.state.popword,
+                popword: uniqueListString,
             })
         })
     }

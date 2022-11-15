@@ -5,7 +5,7 @@ function Time(props) {
   const { timer, spanText, className } = props;
 
   return (
-    <div className={`time-6 ${className || ""}${spanText.slice(-2) < '10' ? ' blinkTimer' : ''}`}>
+    <div className={`time-6 ${className || ""}${spanText.slice(-2) < '10' && spanText[0] == '0' ? ' blinkTimer' : ''}`}>
       <img className="timer-5" src={timer} />
       <div className="text-10-1 valign-text-middle poppins-medium-martinique-24px">
         <span>
