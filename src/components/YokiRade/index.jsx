@@ -46,6 +46,7 @@ class ConnectedYokiRade extends Component {
       randomTruePopLine: "",
       prevTimeoutID: 0,
       answerClicked: false,
+      userSelectedSongs: [],
       songInQuestion: {
         audiourl: '',
         singer: '',
@@ -210,10 +211,14 @@ class ConnectedYokiRade extends Component {
   };
 
   getPopWord = () => {
+    var songsToUse = this.state.userSelectedSongs
+    if (songsToUse.length == 0 ){
+      songsToUse = this.state.songs
+    }
 
-    let songInQuestionIndex = Math.floor(Math.random() * (this.state.songs.length - 0) + 0);
+    let songInQuestionIndex = Math.floor(Math.random() * (songsToUse.length - 0) + 0);
 
-    let lyricsArray = this.state.songs[songInQuestionIndex].lyrics.split("\n");
+    let lyricsArray = songsToUse[songInQuestionIndex].lyrics.split("\n");
     let eachWordInLyrics = []
 
     if(this.state.selectedOptionDifficulty == "beginner"){
@@ -314,7 +319,12 @@ class ConnectedYokiRade extends Component {
   }
 
   restartGame = () => {
-    let songInQuestionIndex = Math.floor(Math.random() * (this.state.songs.length - 0) + 0);
+    var songsToUse = this.state.userSelectedSongs
+    if (songsToUse.length == 0 ){
+      songsToUse = this.state.songs
+    }
+
+    let songInQuestionIndex = Math.floor(Math.random() * (songsToUse.length - 0) + 0);
     this.setState({
       count:0,
       eventDate: moment.duration().add({days:0,hours:0,minutes:0,seconds:0}),
@@ -327,9 +337,13 @@ class ConnectedYokiRade extends Component {
       audioPaused: true,
       answerCorrect: true,
       songInQuestionIndex: songInQuestionIndex,
-      songInQuestion: this.state.songs[songInQuestionIndex],
+      songInQuestion: songsToUse[songInQuestionIndex],
     })
   }
+
+  handleSelectedSongs = userSelectedSongs => {
+    this.setState({ userSelectedSongs });
+  };
 
   componentWillUnmount(){
     this.setState({yokiRadeWord: ""})
@@ -367,6 +381,8 @@ class ConnectedYokiRade extends Component {
                   selectedOptionDuration = {this.state.selectedOptionDuration}
                   handleChangeDuration = {this.handleChangeDuration}
                   startGame = {this.startGame}
+                  handleSelectedSongs = {this.handleSelectedSongs}
+                  songs = {this.state.songs}
                 />
               :
                 <div className="section2-3">

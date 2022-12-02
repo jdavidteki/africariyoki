@@ -146,10 +146,15 @@
   transition: background-color ease 1s;
 }
 
+.multiSelectContainer input
+{
+  width: 300px;
+}
+
 .frame-206-player-input.MuiFormControl-root
 {
   width: 100%;
-  margin-top: 16px;
+  margin-top: 8px;
 }
 
 .overlap-group-43
@@ -176,6 +181,12 @@
   cursor: pointer;
   background-color: var(--sea-serpent);
   transition: background-color ease 1s;
+}
+
+.multiSelectContainer.songs-select-title
+{
+  width: 300px;
+  margin-top: 8px;
 }
 
 @media only screen and (max-width: 600px) {

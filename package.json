@@ -43,6 +43,7 @@
     "is-verb": "^1.0.1",
     "jquery": "^3.6.0",
     "moment": "^2.29.1",
+    "multiselect-react-dropdown": "^2.0.25",
     "node-fetch": "^2.6.1",
     "nosleep.js": "^0.12.0",
     "popper.js": "^1.16.1",

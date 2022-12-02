@@ -7,8 +7,11 @@ import vector19DataImage from "../../../static/img/vector-18-10@2x.png";
 import beginnerImage from "../../../static/img/-level-1@2x.png";
 import amateurImage from "../../../static/img/-level-2@2x.png";
 import vector18Image from "../../../static/img/vector-18-11@2x.png";
+import Multiselect from "multiselect-react-dropdown";
+
 
 function Frame206(props) {
+  let multiselectRef = React.createRef();
 
   return (
     <div className="frame-206">
@@ -28,6 +31,16 @@ function Frame206(props) {
           onChange={props.handleChangePlayerName}
         />
       </div>
+      <Multiselect
+        options={props.songs} // Options to display in the dropdown
+        displayValue="title" // Property name to display in the dropdown options
+        placeholder="Select songs you want to play with"
+        closeOnSelect={true}
+        className={"songs-select-title"}
+        selectionLimit={20}
+        onSelect={() => props.handleSelectedSongs(multiselectRef.current.getSelectedItems())}
+        ref={multiselectRef}
+      />
       <div className="frame-204">
         <div className="frame-2">
           <img className="vector-19-5" src={vector19DataImage} />

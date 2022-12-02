@@ -58,6 +58,7 @@ class ConnectedGuessTheSong extends Component {
           id: '',
       },
       overlapGroup: TempBackground,
+      userSelectedSongs: [],
     }
   }
 
@@ -315,11 +316,18 @@ class ConnectedGuessTheSong extends Component {
       document.getElementById(songId).classList.add('wrong-answer')
     }
 
-    let songInQuestionIndex = Math.floor(Math.random() * (this.state.songs.length - 0) + 0);
+    var songsToUse = this.state.userSelectedSongs
+    if (songsToUse.length == 0 ){
+      songsToUse = this.state.songs
+    }
+
+    let songInQuestionIndex = Math.floor(Math.random() * (songsToUse.length - 0) + 0);
+    let nthLongestLineToShow = Math.floor(Math.random() * 5);
+
     this.setState({
         audioPaused: true,
         songInQuestionIndex: songInQuestionIndex,
-        songInQuestion: this.state.songs[songInQuestionIndex],
+        songInQuestion: songsToUse[songInQuestionIndex],
     }, () => {
       setTimeout( () => {
         if( document.getElementById(songId) != undefined){
@@ -329,7 +337,7 @@ class ConnectedGuessTheSong extends Component {
 
         //make it so that if they dont have the song locally, they can still fetch from the network
         this.setState({
-            songsInOption: this.generateSongsInOptions(this.state.songs, this.state.songs[songInQuestionIndex])
+            songsInOption: this.generateSongsInOptions(songsToUse, songsToUse[songInQuestionIndex])
         },() => {
             this.play() //play next song immediately after old song
         });
@@ -372,7 +380,12 @@ class ConnectedGuessTheSong extends Component {
   }
 
   restartGame = () => {
-    let songInQuestionIndex = Math.floor(Math.random() * (this.state.songs.length - 0) + 0);
+    var songsToUse = this.state.userSelectedSongs
+    if (songsToUse.length == 0 ){
+      songsToUse = this.state.songs
+    }
+
+    let songInQuestionIndex = Math.floor(Math.random() * (songsToUse.length - 0) + 0);
     this.setState({
       count:0,
       eventDate: moment.duration().add({days:0,hours:0,minutes:0,seconds:0}),
@@ -385,10 +398,14 @@ class ConnectedGuessTheSong extends Component {
       audioPaused: true,
       answerCorrect: true,
       songInQuestionIndex: songInQuestionIndex,
-      songInQuestion: this.state.songs[songInQuestionIndex],
-      songsInOption: this.generateSongsInOptions(this.state.songs, this.state.songs[songInQuestionIndex])
+      songInQuestion: songsToUse[songInQuestionIndex],
+      songsInOption: this.generateSongsInOptions(songsToUse, songsToUse[songInQuestionIndex])
     })
   }
+
+  handleSelectedSongs = userSelectedSongs => {
+    this.setState({ userSelectedSongs });
+  };
 
   render(){
     if (this.state.songInQuestion.title != "") {
@@ -422,6 +439,8 @@ class ConnectedGuessTheSong extends Component {
                   selectedOptionDuration = {this.state.selectedOptionDuration}
                   handleChangeDuration = {this.handleChangeDuration}
                   startGame = {this.startGame}
+                  handleSelectedSongs = {this.handleSelectedSongs}
+                  songs = {this.state.songs}
                 />
               :
                 <div className="section2-3">

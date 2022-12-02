@@ -49,6 +49,7 @@ class ConnectedNextLine extends Component {
       audioPaused: true,
       overlapGroup: TempBackground,
       answerClicked: false,
+      userSelectedSongs: [],
       songInQuestion: {
           audiourl: '',
           singer: '',
@@ -231,6 +232,10 @@ class ConnectedNextLine extends Component {
       this.setState({ selectedOptionDuration });
   };
 
+  handleSelectedSongs = userSelectedSongs => {
+    this.setState({ userSelectedSongs });
+  };
+
   checkAnswer = (lyricOption) => {
     this.setState(prevState => ({
       answerClicked: !prevState.answerClicked
@@ -251,7 +256,12 @@ class ConnectedNextLine extends Component {
     }
 
     setTimeout( () => {
-      let songInQuestionIndex = Math.floor(Math.random() * (this.state.songs.length - 0) + 0);
+      var songsToUse = this.state.userSelectedSongs
+      if (songsToUse.length == 0 ){
+        songsToUse = this.state.songs
+      }
+
+      var songInQuestionIndex = Math.floor(Math.random() * (songsToUse.length - 0) + 0);
 
       if(document.getElementById(lyricOption) != undefined){
         document.getElementById(lyricOption.replaceAll(' ', '')).classList.remove('correct-answer')
@@ -260,8 +270,8 @@ class ConnectedNextLine extends Component {
 
       this.setState({
         songInQuestionIndex: songInQuestionIndex,
-        songInQuestion: this.state.songs[songInQuestionIndex],
-        lyricAndOptionObj: this.getLyricAndOptionObj(this.state.songs, songInQuestionIndex)
+        songInQuestion: songsToUse[songInQuestionIndex],
+        lyricAndOptionObj: this.getLyricAndOptionObj(songsToUse, songInQuestionIndex)
       })
     }, 500)
   }
@@ -294,7 +304,12 @@ class ConnectedNextLine extends Component {
   }
 
   restartGame = () => {
-    let songInQuestionIndex = Math.floor(Math.random() * (this.state.songs.length - 0) + 0);
+    var songsToUse = this.state.userSelectedSongs
+    if (songsToUse.length == 0 ){
+      songsToUse = this.state.songs
+    }
+
+    let songInQuestionIndex = Math.floor(Math.random() * (songsToUse.length - 0) + 0);
     this.setState({
       count:0,
       eventDate: moment.duration().add({days:0,hours:0,minutes:0,seconds:0}),
@@ -305,8 +320,8 @@ class ConnectedNextLine extends Component {
       setGameModel: true,
       printResult: false,
       songInQuestionIndex: songInQuestionIndex,
-      songInQuestion: this.state.songs[songInQuestionIndex],
-      lyricAndOptionObj: this.getLyricAndOptionObj(this.state.songs, songInQuestionIndex),
+      songInQuestion: songsToUse[songInQuestionIndex],
+      lyricAndOptionObj: this.getLyricAndOptionObj(songsToUse, songInQuestionIndex),
     })
   }
 
@@ -375,6 +390,8 @@ class ConnectedNextLine extends Component {
                   selectedOptionDuration = {this.state.selectedOptionDuration}
                   handleChangeDuration = {this.handleChangeDuration}
                   startGame = {this.startGame}
+                  handleSelectedSongs = {this.handleSelectedSongs}
+                  songs = {this.state.songs}
                 />
               :
                 <div className="section2-3">

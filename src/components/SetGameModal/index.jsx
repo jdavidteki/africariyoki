@@ -22,6 +22,8 @@ function SetGameModal(props) {
           handleChangeDifficulty = {props.handleChangeDifficulty}
           selectedOptionDuration = {props.selectedOptionDuration}
           handleChangeDuration = {props.handleChangeDuration}
+          handleSelectedSongs = {props.handleSelectedSongs}
+          songs = {props.songs}
         />
         <Trending2
           trigger = {props.startGame}
