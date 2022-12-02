@@ -189,6 +189,11 @@
   margin-top: 8px;
 }
 
+.optionListContainer .option
+{
+  text-transform: lowercase;
+}
+
 @media only screen and (max-width: 600px) {
   .frame-206,
   .frame-206-1 {

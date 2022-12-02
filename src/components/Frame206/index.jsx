@@ -34,7 +34,7 @@ function Frame206(props) {
       <Multiselect
         options={props.songs} // Options to display in the dropdown
         displayValue="title" // Property name to display in the dropdown options
-        placeholder="Select songs you want to play with"
+        placeholder="select songs you want to play with"
         closeOnSelect={true}
         className={"songs-select-title"}
         selectionLimit={20}
