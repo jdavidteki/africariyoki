@@ -43,8 +43,9 @@
 
 .logo-4,
 .logo-5 {
-  height: 35px;
-  width: 55px;
+  height: 40px;
+  width: 45px;
+  border-radius: 50%;
 }
 
 .menu-4:hover,

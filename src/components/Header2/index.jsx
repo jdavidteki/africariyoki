@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Menu2 from "../Menu2";
 import Section1 from "../Section1";
-import HomePageLogo from "../../../static/img/logo-2@2x.png";
-import EveryOtherLogo from "../../../static/img/logo-1-2@2x.png";
+import HomePageLogo from "../../../static/img/newlogohome.png";
+import EveryOtherLogo from "../../../static/img/newlogoother.png";
 import Firebase from "../../firebase/firebase.js";
 
 import "./Header.css";
