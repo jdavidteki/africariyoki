@@ -87,7 +87,6 @@ export function HmsToSecondsOnly(totalSecs) {
   return s *1000 + ((parseInt(totalSecs.substr(6, 9), 10))/100);
 }
 
-
 export function GetRandomBackground(selectedBackground){
   var randomNumber =  Math.floor(Math.random() * (11 - 1 + 1) + 1)
   let backgroundToReturn = ""
@@ -149,6 +148,107 @@ export function GetRandomBackground(selectedBackground){
   }
 
   return backgroundToReturn
+}
+
+export function GetRandomBackgroundImaigin(){
+  let randomNumber =  Math.floor(Math.random() * (11 - 1 + 1) + 1)
+  let backgroundToReturn = ""
+
+  switch(randomNumber) {
+    case 1:
+      backgroundToReturn = "https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/imaigin%2Fimaigin.jpeg?alt=media&token=68efc455-382f-449e-a512-f19ee47a42f5"
+      break
+    case 2:
+      backgroundToReturn =  "https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/imaigin%2Fimaigin1.jpeg?alt=media&token=96f9bd4f-3be5-4bc0-9847-45b98deeb0af"
+      break
+    case 3:
+      backgroundToReturn =  "https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/imaigin%2Fimaigin2.jpeg?alt=media&token=c7792582-81bc-41e9-807c-6ab5c7719c0c"
+      break
+    case 4:
+      backgroundToReturn =  "https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/imaigin%2Fimaigin3.jpeg?alt=media&token=e4fcc6a5-3e8c-401b-b654-e85f92e62792"
+      break
+    case 5:
+      backgroundToReturn =  "https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/imaigin%2Fimaigin4.jpeg?alt=media&token=fb82205d-4568-4e78-94b3-34d5ae494cd3"
+      break
+    case 6:
+      backgroundToReturn =  "https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/imaigin%2Fimaigin5.jpeg?alt=media&token=c46ab898-31b2-4da1-9004-4d0c951100cb"
+      break
+    case 7:
+      backgroundToReturn =  "https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/imaigin%2Fimaigin6.jpeg?alt=media&token=8ce0194d-0456-4fa8-86c9-d82dc36ee4b4"
+      break
+    case 8:
+      backgroundToReturn =  "https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/imaigin%2Fimaigin7.jpeg?alt=media&token=a9f86c91-c9e3-45f2-b3ac-69ff66b8fab1"
+      break
+    case  9:
+      backgroundToReturn =  "https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/imaigin%2Fimaigin8.jpeg?alt=media&token=beff28b9-2b99-46f5-96ad-f9ade2a9e732"
+      break
+    case 10:
+      backgroundToReturn =  "https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/imaigin%2Fimaigin9.jpeg?alt=media&token=fbf4a49e-c070-41d1-a83c-728417a0e8a7"
+      break
+    default:
+      backgroundToReturn =  "https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/imaigin%2Fimaigin.jpeg?alt=media&token=68efc455-382f-449e-a512-f19ee47a42f5"
+      break
+  }
+
+  return backgroundToReturn
+}
+
+export function GrabAllImaiginBcksUponInitialize(){
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow',
+    mode: 'no-cors'
+  };
+
+  fetch(`https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/imaigin%2Fimaigin.jpeg?alt=media&token=68efc455-382f-449e-a512-f19ee47a42f5`, requestOptions)
+  .then(response => response.text())
+  .then(result => console.log("result", result))
+  .catch(error => console.log('error',error));
+
+  fetch(`https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/imaigin%2Fimaigin1.jpeg?alt=media&token=96f9bd4f-3be5-4bc0-9847-45b98deeb0af`, requestOptions)
+  .then(response => response.text())
+  .then(result => console.log("result", result))
+  .catch(error => console.log('error',error));
+
+  fetch(`https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/imaigin%2Fimaigin2.jpeg?alt=media&token=c7792582-81bc-41e9-807c-6ab5c7719c0c`, requestOptions)
+  .then(response => response.text())
+  .then(result => console.log("result", result))
+  .catch(error => console.log('error',error));
+
+  fetch(`https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/imaigin%2Fimaigin3.jpeg?alt=media&token=e4fcc6a5-3e8c-401b-b654-e85f92e62792"`, requestOptions)
+  .then(response => response.text())
+  .then(result => console.log("result", result))
+  .catch(error => console.log('error',error));
+
+  fetch(`https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/imaigin%2Fimaigin4.jpeg?alt=media&token=fb82205d-4568-4e78-94b3-34d5ae494cd3`, requestOptions)
+  .then(response => response.text())
+  .then(result => console.log("result", result))
+  .catch(error => console.log('error',error));
+
+  fetch(`https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/imaigin%2Fimaigin5.jpeg?alt=media&token=c46ab898-31b2-4da1-9004-4d0c951100cb`, requestOptions)
+  .then(response => response.text())
+  .then(result => console.log("result", result))
+  .catch(error => console.log('error',error));
+
+  fetch(`https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/imaigin%2Fimaigin6.jpeg?alt=media&token=8ce0194d-0456-4fa8-86c9-d82dc36ee4b4`, requestOptions)
+  .then(response => response.text())
+  .then(result => console.log("result", result))
+  .catch(error => console.log('error',error));
+
+  fetch(`https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/imaigin%2Fimaigin7.jpeg?alt=media&token=a9f86c91-c9e3-45f2-b3ac-69ff66b8fab1`, requestOptions)
+  .then(response => response.text())
+  .then(result => console.log("result", result))
+  .catch(error => console.log('error',error));
+
+  fetch(`https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/imaigin%2Fimaigin8.jpeg?alt=media&token=beff28b9-2b99-46f5-96ad-f9ade2a9e732`, requestOptions)
+  .then(response => response.text())
+  .then(result => console.log("result", result))
+  .catch(error => console.log('error',error));
+
+  fetch(`https://firebasestorage.googleapis.com/v0/b/africariyoki-4b634.appspot.com/o/imaigin%2Fimaigin9.jpeg?alt=media&token=fbf4a49e-c070-41d1-a83c-728417a0e8a7`, requestOptions)
+  .then(response => response.text())
+  .then(result => console.log("result", result))
+  .catch(error => console.log('error',error));
 }
 
 export function GetParameterByName(name, url = window.location.href) {

@@ -7,15 +7,13 @@ import FooterMenuFooterDefault from "../FooterMenuFooterDefault";
 import Searcher  from "../Searcher2";
 import PopularSongs  from '../PopularSongs2/PopularSongs2.js';
 import Firebase from "../../firebase/firebase.js";
-import { GetRandomBackground } from "../helpers/Helpers";
+import { GetRandomBackground, GetRandomBackgroundImaigin, GrabAllImaiginBcksUponInitialize } from "../helpers/Helpers";
 import Header from "../Header2";
 import section12DataImage from "../../../static/img/logo-1@2x.png";
 import game15DataImage from "../../../static/img/icon-1@2x.png";
 import game16DataImage from "../../../static/img/icon-2@2x.png";
 import TempBackground from "../../../static/img/whitebackground.png"
 import MetaTags from 'react-meta-tags';
-import Bck11imagn from "../../../static/img/bck11imagn.png"
-import Bck11originalimgn from "../../../static/img/bck11originalimgn.png"
 
 import "./Homepage3.css";
 
@@ -41,6 +39,8 @@ class Homepage3 extends Component{
   int4 = null
 
   componentDidMount(){
+    GrabAllImaiginBcksUponInitialize()
+
     //hack: use this to fix github pages doing ?/ on pages
     if (window.location.href.includes("?/")){
       let actualDestination = window.location.href.split("?/")[1]
@@ -76,24 +76,11 @@ class Homepage3 extends Component{
 
       let randomBckSelected = GetRandomBackground(urlParams.get('bckNum'))
       if (randomBckSelected == "itseleven"){
-        this.setState({
-          overlapGroup: Bck11originalimgn,
-        })
-
         this.int4 = setInterval(() => {
-            function randomIntFromInterval(min, max) { // min and max included
-              return Math.floor(Math.random() * (max - min + 1) + min)
-            }
-
-            const rndInt = randomIntFromInterval(1, 2)
-            let imagnToUse = Bck11originalimgn
-            if(rndInt == 2){
-              imagnToUse = Bck11imagn
-            }
-            this.setState({
-              overlapGroup: imagnToUse,
-            })
-          }, 2500)
+          this.setState({
+            overlapGroup: GetRandomBackgroundImaigin(),
+          })
+        }, 1000)
       } else {
         this.setState({
           overlapGroup: randomBckSelected,
