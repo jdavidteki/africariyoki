@@ -80,7 +80,7 @@ class Homepage3 extends Component{
           this.setState({
             overlapGroup: GetRandomBackgroundImaigin(),
           })
-        }, 1000)
+        }, 2500)
       } else {
         this.setState({
           overlapGroup: randomBckSelected,
